@@ -24,9 +24,7 @@ help(package="phisWSClientR")
 
 # Citation
 
-As a lot of time and effort were spent in creating the **phisWSClientR** method, please cite it when using it for data analysis:
-
-You should also cite the **phisWSClientR** package:
+You should cite the **phisWSClientR** package:
 
 ```R
 citation("phisWSClientR")
