@@ -10,7 +10,7 @@ To install the **phisWSClientR** package, the easiest is to install it directly 
 
 ```R
 library(devtools) 
-install_github("pmgrollemund/bliss", build_vignettes=TRUE)
+install_github("sanchezi/phisWSClientR", build_vignettes=TRUE)
 ```
 
 # Usage
