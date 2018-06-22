@@ -7,7 +7,7 @@
 
 ## ----echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE-------------------
 #    # If you want to access to a private web service, you have to insert the address of the WS and the port
-#    initializeClientConnection(apiID="ws_private",url = "147.99.XX.XX", port = "XXXX")
+#    initializeClientConnection(apiID="ws_private",url = "XX.XX.XX.XX:XXXX/aPathToWS")
 
 ## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
   aToken<-getToken("guestphis@supagro.inra.fr","guestphis")

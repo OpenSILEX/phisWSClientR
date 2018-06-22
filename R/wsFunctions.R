@@ -3,26 +3,27 @@
 # Objective: functions to facilitate requests on web service Phenomeapi
 # Author: A. Charleroy
 # Creation: 19/03/2018
-# Update: 27/03/2018 by I.Sanchez
+# Update: 22/06/2018 by I.Sanchez
 #-------------------------------------------------------------------------------
 
 
 ##' @title initializeClientConnection
 ##' @param apiID character, a character name of an API ("ws_public" or "ws_private")
-##' @param url character, if apiID is private add the url of the chosen API
-##' @param port character, if apiID is private add the port of the chosen API
+##' @param url character, if apiID is private add the url of the chosen API, containing the IP,
+##'            the port and the path of the WS
 ##'
 ##' @description load name space and connexion parameters of the webservice.
 ##' Execute only once at the beginning of the requests.
 ##' In the case of a WebService change of address or a renaming of services, please edit this list.
 ##' and execute the function.
 ##' @export
-initializeClientConnection<-function(apiID,url = "", port = ""){
+initializeClientConnection<-function(apiID,url = ""){
   # if apiID is public then we use the public configWS given by the package
   if (apiID != "ws_public") {
-    if(url != "" && port != ""){
+    if(url != ""){
       # configWS is an environment with specific variables to phenomeapi web service
-      assign("BASE_PATH",paste0("http://",url,":",port,"/phenomeapi/resources/"),configWS)
+      #old version assign("BASE_PATH",paste0("http://",url,":",port,"/phenomeapi/resources/"),configWS)
+      assign("BASE_PATH",paste0("http://",url),configWS)
     } else {
       print("Please, you have to give an URL and port adress")
     }
