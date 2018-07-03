@@ -4,14 +4,13 @@
 \alias{initializeClientConnection}
 \title{initializeClientConnection}
 \usage{
-initializeClientConnection(apiID, url = "", port = "")
+initializeClientConnection(apiID, url = "")
 }
 \arguments{
 \item{apiID}{character, a character name of an API ("ws_public" or "ws_private")}
 
-\item{url}{character, if apiID is private add the url of the chosen API}
-
-\item{port}{character, if apiID is private add the port of the chosen API}
+\item{url}{character, if apiID is private add the url of the chosen API, containing the IP,
+the port and the path of the WS}
 }
 \description{
 load name space and connexion parameters of the webservice.

@@ -44,7 +44,7 @@ configWS<-new.env(emptyenv())
   assign("WATERING", "watering", configWS)
 
   # WS phis2
-  assign("BRAPITOKEN", "brapiv1token", configWS)
+  assign("BRAPITOKEN", "brapi/v1/token", configWS)
   assign("AGROOBJECTS", "agronomicalObjects", configWS)
   assign("DATASETS", "datasets", configWS)
 
