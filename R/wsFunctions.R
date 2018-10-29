@@ -19,14 +19,17 @@
 ##' @export
 initializeClientConnection<-function(apiID,url = ""){
   # if apiID is public then we use the public configWS given by the package
-  if (apiID != "ws_public") {
+  # else if apiID is private, we use the url procided by the user
+  if (apiID == "ws_private") {
     if(url != ""){
       # configWS is an environment with specific variables to phenomeapi web service
       assign("BASE_PATH",paste0("http://",url),configWS)
     } else {
-      print("Please, you have to give an URL and port adress")
+      print("Please, you have to give an URL and port address")
     }
-  }
+  } else if (apiID == "ws_public") {
+      assign("BASE_PATH",get("PUBLIC_PATH",configWS),configWS)
+    }
 }
 
 ##' @title getTokenResponseWS

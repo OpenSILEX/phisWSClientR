@@ -18,7 +18,7 @@ Author   : I.Sanchez (MISTEA)
 Objective: a vignette for phisWSClientR library
            an introduction to requesting the phenomeapi (phis web service)
 Creation : 19/03/2018
-Update   : 22/06/2018
+Update   : 29/10/2018
 -->
 
 ***
@@ -42,7 +42,7 @@ Ask permission to request to the web service:
 
 ```{r,echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE}
   # If you want to access to a private web service, you have to insert the address of the WS and the port
-  initializeClientConnection(apiID="ws_private",url = "147.99.7.5:8080/phenomeapi/ressources/")
+  initializeClientConnection(apiID="ws_private",url = "147.99.7.5:8080/phenomeapi/resources/")
 ```
 
 

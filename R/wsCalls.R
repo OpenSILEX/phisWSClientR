@@ -3,7 +3,7 @@
 # Objective: functions called by the user on the web service Phenomeapi
 # Author: A. Charleroy
 # Creation: 12/08/2016
-# Update: 03/07/2018 (by I.Sanchez) - 30/10/2016 (by  A. Charleroy)
+# Update: 29/10/2018 (by I.Sanchez) - 30/10/2016 (by  A. Charleroy)
 #-------------------------------------------------------------------------------
 
 ##' @title retrieves a user identifier for connexion to the web service
@@ -59,13 +59,17 @@ getToken<-function(login,password,verbose=FALSE){
        print("WebService internal error")
   } else if(tokenResp1$status_code == 401 || tokenResp2$status_code == 401){
     print("User not authorized")
-  } else if((tokenResp1$status_code >= 400 && tokenResp1$status_code != 401 && tokenResp1$status_code < 500) ||
-            (tokenResp2$status_code >= 400 && tokenResp2$status_code != 401 && tokenResp2$status_code < 500)){
+  } else if(tokenResp1$status_code == 404 || tokenResp2$status_code == 404){
+    print("Not found")
+  } else if((tokenResp1$status_code >= 400 && tokenResp1$status_code != 401 &&
+             tokenResp1$status_code != 404 && tokenResp1$status_code < 500) &&
+            (tokenResp2$status_code >= 400 && tokenResp2$status_code != 401 &&
+             tokenResp2$status_code != 404 && tokenResp2$status_code < 500)){
     print("Bad user request")
   }
 
   if (tokenResp1$status_code != 200 && tokenResp2$status_code != 200){
-      print("No web service available! Check your login/password")
+      print("No web service available! Check your login/password and/or your url...")
   }
 
   # define class S3 and return the list if exists

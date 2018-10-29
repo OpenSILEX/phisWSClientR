@@ -33,7 +33,9 @@ configWS<-new.env(emptyenv())
 
 .onLoad <- function(libname, pkgname){
 
-  assign("BASE_PATH","http://147.100.179.156:8080/phenomeapi/resources/", configWS)
+  assign("PUBLIC_PATH","http://147.100.179.156:8080/phenomeapi/resources/", configWS)
+  assign("BASE_PATH","", configWS)
+
   # WS phis1
   assign("TOKEN", "token", configWS)
   assign("EXPERIMENT", "experiments", configWS)
