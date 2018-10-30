@@ -68,7 +68,7 @@ getToken<-function(login,password,verbose=FALSE){
     print("Bad user request")
   }
 
-  if (tokenResp1$status_code != 200 && tokenResp2$status_code != 200){
+  if (tokenResp1$status_code > 250 && tokenResp2$status_code > 250){
       print("No web service available! Check your login/password and/or your url...")
   }
 
