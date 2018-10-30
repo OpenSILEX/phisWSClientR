@@ -5,6 +5,8 @@ PHIS client R
 A set of functions to connect R to the phenomeapi web service in PHIS-SILEX. You can retrieve phenotypic data from the greenhouse platforms (GET imagery, environment, watering and weighing) or the field platforms. Public access is allowed with specific login as well as private access if the user has an account on an instance of the PHIS system information.
 
 in progress...
+
+You can find a shinydashboard app to document this phenomeapi web service using the phisWSClientR package [here](https://github.com/sanchezi/docAppPhisWSClientR).
    
 # Installation
 
