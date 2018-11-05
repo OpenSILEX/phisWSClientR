@@ -29,7 +29,7 @@ initializeClientConnection<-function(apiID,url = ""){
     }
   } else if (apiID == "ws_public") {
       assign("BASE_PATH",get("PUBLIC_PATH",configWS),configWS)
-  }
+    }
 }
 
 ##' @title getTokenResponseWS
