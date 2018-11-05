@@ -28,7 +28,7 @@ initializeClientConnection<-function(apiID,url = ""){
       print("Please, you have to give an URL and port address")
     }
   } else if (apiID == "ws_public") {
-    assign("BASE_PATH",get("PUBLIC_PATH",configWS),configWS)
+      assign("BASE_PATH",get("PUBLIC_PATH",configWS),configWS)
   }
 }
 
