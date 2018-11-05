@@ -33,16 +33,27 @@ configWS<-new.env(emptyenv())
 
 .onLoad <- function(libname, pkgname){
 
-  assign("BASE_PATH","http://147.100.179.156:8080/phenomeapi/resources/", configWS)
+  assign("PUBLIC_PATH","http://147.100.179.156:8080/phenomeapi/resources/", configWS)
+  assign("BASE_PATH","", configWS)
+
+  # WS phis1
   assign("TOKEN", "token", configWS)
   assign("EXPERIMENT", "experiments", configWS)
   assign("VARIABLES", "variables", configWS)
-  assign("ENVIRONMENT", "environment", configWS)
-  assign("PROJECTS", "projects", configWS)
   assign("PLANTS", "plants", configWS)
   assign("IMAGESANALYSIS", "imagesAnalysis", configWS)
   assign("PHENOTYPES", "phenotypes", configWS)
   assign("WATERING", "watering", configWS)
+
+  # WS phis2
+  assign("BRAPITOKEN", "brapi/v1/token", configWS)
+  assign("AGROOBJECTS", "agronomicalObjects", configWS)
+  assign("DATASETS", "datasets", configWS)
+
+  # commun
+  assign("VARIABLES", "variables", configWS)
+  assign("ENVIRONMENT", "environment", configWS)
+  assign("PROJECTS", "projects", configWS)
   assign("DEFAULT_PAGE", 0, configWS)
   assign("DEFAULT_PAGESIZE", 100, configWS)
 

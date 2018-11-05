@@ -120,7 +120,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Requests on the web service</h1>
 <h4 class="author"><em>I.Sanchez &amp; A. Charleroy (INRA MISTEA)</em></h4>
-<h4 class="date"><em>juin 22, 2018</em></h4>
+<h4 class="date"><em>novembre 05, 2018</em></h4>
 
 </div>
 
@@ -147,7 +147,7 @@ Author   : I.Sanchez (MISTEA)
 Objective: a vignette for phisWSClientR library
            an introduction to requesting the phenomeapi (phis web service)
 Creation : 19/03/2018
-Update   : 22/06/2018
+Update   : 29/10/2018
 -->
 <hr />
 <div style="background-color:rgba(0, 255, 0,0.1); text-align:left; vertical-align: center; padding:10px 0;">
@@ -160,10 +160,10 @@ Update   : 22/06/2018
 <pre class="r"><code>  # If you want to access to the public web service 
   initializeClientConnection(apiID=&quot;ws_public&quot;)</code></pre>
 <pre class="r"><code>  # If you want to access to a private web service, you have to insert the address of the WS and the port
-  initializeClientConnection(apiID=&quot;ws_private&quot;,url = &quot;XX.XX.XX.XX:XXXX/aPathToWS&quot;)</code></pre>
+  initializeClientConnection(apiID=&quot;ws_private&quot;,url = &quot;147.99.7.5:8080/phenomeapi/resources/&quot;)</code></pre>
 <p><em>aToken</em> will be used in all the requests to the web service.</p>
 <pre class="r"><code>  aToken&lt;-getToken(&quot;guestphis@supagro.inra.fr&quot;,&quot;guestphis&quot;)</code></pre>
-<pre><code>## [1] &quot;Query executed and data recovered&quot;</code></pre>
+<pre><code>## [1] &quot;Query executed and data recovered - WS1&quot;</code></pre>
 </div>
 <div id="retrieves-the-available-projects" class="section level1">
 <h1><span class="header-section-number">2</span> Retrieves the available projects</h1>
@@ -402,14 +402,14 @@ Update   : 22/06/2018
 <div id="retrieves-the-imagery-data-of-an-experiment" class="section level1">
 <h1><span class="header-section-number">4</span> Retrieves the imagery data of an experiment</h1>
 <pre class="r"><code>  # first we count the number of observation in the dataset
-  tpCount&lt;-getImagesAnalysis(token=aToken$data, experimentURI=myExp, 
+  tpCount&lt;-getImagesAnalysis(token=aToken$data, experimentURI=myExp,
                              variablesName = list(&quot;plantHeight&quot;),
                              labelView =&quot;side0&quot;,
                              verbose=FALSE)$totalCount</code></pre>
 <pre><code>## [1] &quot;Query executed and data recovered&quot;</code></pre>
 <pre class="r"><code>  # we retrieve this number with $totalcount
   # In this example, we set the pageSize to 10 for speed purpose but in real example, please use tpCount
-  requetManip&lt;-getImagesAnalysis(token=aToken$data, experimentURI=myExp, 
+  requetManip&lt;-getImagesAnalysis(token=aToken$data, experimentURI=myExp,
                              variablesName = list(&quot;plantHeight&quot;),
                              labelView =&quot;side0&quot;,
                              pageSize=10,verbose=FALSE)$data</code></pre>
@@ -535,19 +535,19 @@ Update   : 22/06/2018
   myMeteoHumidity&lt;-getEnvironment(token = aToken$data,experimentURI=myExp,
                      facility=myFacility,
                      variables=&quot;air humidity_weather station_percentage&quot;,
-                     pageSize=10,verbose=FALSE)$data </code></pre>
+                     pageSize=10,verbose=FALSE)$data</code></pre>
 <pre><code>## [1] &quot;Query executed and data recovered&quot;</code></pre>
 </div>
 <div id="retrieves-the-watering-data-of-an-experiment" class="section level1">
 <h1><span class="header-section-number">6</span> Retrieves the watering data of an experiment</h1>
 <p>try the following code and explore the dataset</p>
-<pre class="r"><code>  tpCount&lt;-getWatering(token=aToken$data,experimentURI=myExp, 
+<pre class="r"><code>  tpCount&lt;-getWatering(token=aToken$data,experimentURI=myExp,
                        variablesName = list(&quot;weightAfter&quot;),
                        verbose=FALSE)$totalCount</code></pre>
 <pre><code>## [1] &quot;Query executed and data recovered&quot;</code></pre>
 <pre class="r"><code>  # we retrieve this number with $totalcount
   # In this example, we set the pageSize to 10 for speed purpose but in real example, please use tpCount
-  requetIrrig&lt;-getWatering(token=aToken$data,experimentURI=myExp, 
+  requetIrrig&lt;-getWatering(token=aToken$data,experimentURI=myExp,
                            variablesName = list(&quot;weightAfter&quot;),
                            pageSize=10,verbose=FALSE)$data</code></pre>
 <pre><code>## [1] &quot;Query executed and data recovered&quot;</code></pre>
@@ -556,7 +556,7 @@ Update   : 22/06/2018
 <h1><span class="header-section-number">7</span> Session info</h1>
 <pre><code>## R version 3.3.2 (2016-10-31)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 14.04.5 LTS
+## Running under: Ubuntu 16.04.5 LTS
 ## 
 ## locale:
 ##  [1] LC_CTYPE=fr_FR.UTF-8       LC_NUMERIC=C              
@@ -570,14 +570,20 @@ Update   : 22/06/2018
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] phisWSClientR_0.1.0
+## [1] openssl_1.0.1       urltools_1.6.0      httr_1.3.1         
+## [4] jsonlite_1.5        lubridate_1.7.1     dplyr_0.7.4        
+## [7] tidyr_0.7.2         ggplot2_3.0.0       phisWSClientR_1.0.0
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.14    digest_0.6.12   withr_2.1.0     rprojroot_1.2  
-##  [5] R6_2.2.2        jsonlite_1.5    backports_1.1.1 magrittr_1.5   
-##  [9] evaluate_0.10.1 httr_1.3.1      stringi_1.1.6   curl_3.0       
-## [13] rmarkdown_1.8   devtools_1.13.4 tools_3.3.2     stringr_1.2.0  
-## [17] yaml_2.1.14     memoise_1.1.0   htmltools_0.3.6 knitr_1.17</code></pre>
+##  [1] Rcpp_0.12.19     pillar_1.0.1     plyr_1.8.4       bindr_0.1       
+##  [5] tools_3.3.2      digest_0.6.12    memoise_1.1.0    evaluate_0.10.1 
+##  [9] tibble_1.4.1     gtable_0.2.0     pkgconfig_2.0.1  rlang_0.2.2     
+## [13] curl_3.0         yaml_2.1.14      bindrcpp_0.2     withr_2.1.0     
+## [17] stringr_1.2.0    knitr_1.17       devtools_1.13.4  rprojroot_1.2   
+## [21] triebeard_0.3.0  grid_3.3.2       glue_1.2.0       R6_2.2.2        
+## [25] rmarkdown_1.8    purrr_0.2.4      magrittr_1.5     backports_1.1.1 
+## [29] scales_0.5.0     htmltools_0.3.6  assertthat_0.2.0 mime_0.5        
+## [33] colorspace_1.3-2 stringi_1.1.6    lazyeval_0.2.1   munsell_0.4.3</code></pre>
 </div>
 <div id="references" class="section level1">
 <h1><span class="header-section-number">8</span> References</h1>

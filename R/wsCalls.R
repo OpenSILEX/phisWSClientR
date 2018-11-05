@@ -3,7 +3,7 @@
 # Objective: functions called by the user on the web service Phenomeapi
 # Author: A. Charleroy
 # Creation: 12/08/2016
-# Update: 20/03/2018 (by I.Sanchez) - 30/10/2016 (by  A. Charleroy)
+# Update: 29/10/2018 (by I.Sanchez) - 30/10/2016 (by  A. Charleroy)
 #-------------------------------------------------------------------------------
 
 ##' @title retrieves a user identifier for connexion to the web service
@@ -21,53 +21,62 @@
 ##' }
 ##' @export
 getToken<-function(login,password,verbose=FALSE){
-  attributes = list(username = login, password = password)
-  tokenResponse <- getTokenResponseWS(resource = get("TOKEN",configWS), attributes = attributes,verbose=verbose)
-  status = NULL
-  json = jsonlite::fromJSON(httr::content(tokenResponse, as = "text", encoding = "UTF-8"))
-  if (tokenResponse$status_code >= 400){
-    if (!is.null(json$metadata$status) && length(json$metadata$status) > 0){
-      print("Additional Request information :")
-      print(json$metadata$status)
-      status = json$metadata$status
-    }
-    if (tokenResponse$status_code >= 500){
-      msg = "WebService internal error"
-    }
-    if (tokenResponse$status_code == 401){
-      msg = "User not authorized"
-    }
-    if (tokenResponse$status_code >= 400 && tokenResponse$status_code != 401 &&  tokenResponse$status_code < 500){
-      msg = "Bad user request"
-    }
-    response <- list(
-      currentPage = NULL,
-      totalCount = NULL,
-      totalPages = NULL,
-      codeHttp = tokenResponse$status_code,
-      codeHttpMessage = msg,
-      codeStatusMessage = status,
-      data = NULL)
-  } else {
-    if (!is.null(json$metadata$status) && length(json$metadata$status) > 0){
-      print("Additional Request information :")
-      print(json$metadata$status)
-      status = json$metadata$status
-    }
-    if (tokenResponse$status_code >= 200 && tokenResponse$status_code < 300){
-      msg = "Query executed and data recovered"
-    }
+  attributes<-list(username = login, password = password)
+
+  # Try 1 on first web service
+  tokenResp1<-getTokenResponseWS(resource = get("TOKEN",configWS), attributes = attributes,verbose=verbose)
+
+  # Try 2 on second web service
+  tokenResp2<-getTokenResponseWS2(resource = get("BRAPITOKEN",configWS), attributes = attributes,verbose=verbose)
+
+  # Test which WS is OK
+  if (tokenResp1$status_code >= 200 && tokenResp1$status_code < 300 && tokenResp2$status_code >=400){
+    json = jsonlite::fromJSON(httr::content(tokenResp1, as = "text", encoding = "UTF-8"))
     response <- list(
       currentPage = json$metadata$pagination$currentPage,
       totalCount = json$metadata$pagination$totalCount,
       totalPages = json$metadata$pagination$totalPages,
-      codeHttp = tokenResponse$status_code,
-      codeHttpMessage = msg,
-      codeStatusMessage = status,
-      data = json$session_token)
+      codeHttp = tokenResp1$status_code,
+      codeHttpMessage = "Query executed and data recovered - WS1",
+      codeStatusMessage = json$metadata$status,
+      data = json$session_token,
+      ws="WS1")
+    print("Query executed and data recovered - WS1")
+  } else if (tokenResp2$status_code >= 200 && tokenResp2$status_code < 300 && tokenResp1$status_code >=400){
+    json = jsonlite::fromJSON(httr::content(tokenResp2, as = "text", encoding = "UTF-8"))
+    response <- list(
+      #currentPage = json$metadata$pagination$currentPage,
+      #totalCount = json$metadata$pagination$totalCount,
+      #totalPages = json$metadata$pagination$totalPages,
+      codeHttp = tokenResp2$status_code,
+      codeHttpMessage = "Query executed and data recovered - WS2",
+      codeStatusMessage = json$metadata$status,
+      data = json$access_token,
+      ws="WS2")
+
+    print("Query executed and data recovered - WS2")
+  } else if(tokenResp1$status_code == 500 || tokenResp2$status_code == 500){
+    print("WebService internal error")
+  } else if(tokenResp1$status_code == 401 || tokenResp2$status_code == 401){
+    print("User not authorized")
+  } else if(tokenResp1$status_code == 404 || tokenResp2$status_code == 404){
+    print("Not found")
+  } else if((tokenResp1$status_code >= 400 && tokenResp1$status_code != 401 &&
+             tokenResp1$status_code != 404 && tokenResp1$status_code < 500) &&
+            (tokenResp2$status_code >= 400 && tokenResp2$status_code != 401 &&
+             tokenResp2$status_code != 404 && tokenResp2$status_code < 500)){
+    print("Bad user request")
   }
-  class(response) <- append(class(response),"WSResponse")
-  return(response)
+
+  if (tokenResp1$status_code > 250 && tokenResp2$status_code > 250){
+    print("No web service available! Check your login/password and/or your url...")
+  }
+
+  # define class S3 and return the list if exists
+  if (exists("response")){
+    class(response) <- append(class(response),"WSResponse")
+    return(response)
+  }
 }
 
 ##' @title retrieves the list of projects from the web service
@@ -350,7 +359,7 @@ getPlants <- function(token, plantAlias ="", experimentURI = "", germplasmURI = 
 ##' # test$data
 ##' @keywords internal
 getPlantsContextByID<-function(token, plantURI ="",experimentURI="",page = NULL,
-                                 pageSize = NULL,verbose=FALSE){
+                               pageSize = NULL,verbose=FALSE){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
   attributes = list(sessionId = token, page = page, pageSize = pageSize)
@@ -364,7 +373,7 @@ getPlantsContextByID<-function(token, plantURI ="",experimentURI="",page = NULL,
     # AC 28/10/2016 Suppress double URL encoding. Update tomcat allowed encoded slash security parameter
     plantURIEncoded = utils::URLencode(plantURI,reserved = TRUE)
     plantByIDResponse<-getResponseFromWS(resource = get("PLANTS",configWS),
-                                        paramPath=plantURIEncoded,attributes=attributes,verbose=verbose)
+                                         paramPath=plantURIEncoded,attributes=attributes,verbose=verbose)
     return(plantByIDResponse)
   }
 }

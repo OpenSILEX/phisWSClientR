@@ -7,7 +7,7 @@
 
 ## ----echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE-------------------
 #    # If you want to access to a private web service, you have to insert the address of the WS and the port
-#    initializeClientConnection(apiID="ws_private",url = "XX.XX.XX.XX:XXXX/aPathToWS")
+#    initializeClientConnection(apiID="ws_private",url = "147.99.7.5:8080/phenomeapi/resources/")
 
 ## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
   aToken<-getToken("guestphis@supagro.inra.fr","guestphis")
@@ -37,18 +37,18 @@
 
 ## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
   # first we count the number of observation in the dataset
-  tpCount<-getImagesAnalysis(token=aToken$data, experimentURI=myExp, 
+  tpCount<-getImagesAnalysis(token=aToken$data, experimentURI=myExp,
                              variablesName = list("plantHeight"),
                              labelView ="side0",
                              verbose=FALSE)$totalCount
   # we retrieve this number with $totalcount
   # In this example, we set the pageSize to 10 for speed purpose but in real example, please use tpCount
-  requetManip<-getImagesAnalysis(token=aToken$data, experimentURI=myExp, 
+  requetManip<-getImagesAnalysis(token=aToken$data, experimentURI=myExp,
                              variablesName = list("plantHeight"),
                              labelView ="side0",
                              pageSize=10,verbose=FALSE)$data
   head(requetManip)
-  
+
   # getPlants function allows the user to retrieve all the information for all the plants of an experiment
   # In this example, we set the pageSize to 10 for speed purpose but in real example, please use tpCount
   idManip<-getPlants(token=aToken$data, experimentURI=myExp,
@@ -67,15 +67,15 @@
   myMeteoHumidity<-getEnvironment(token = aToken$data,experimentURI=myExp,
                      facility=myFacility,
                      variables="air humidity_weather station_percentage",
-                     pageSize=10,verbose=FALSE)$data 
+                     pageSize=10,verbose=FALSE)$data
 
 ## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
-  tpCount<-getWatering(token=aToken$data,experimentURI=myExp, 
+  tpCount<-getWatering(token=aToken$data,experimentURI=myExp,
                        variablesName = list("weightAfter"),
                        verbose=FALSE)$totalCount
   # we retrieve this number with $totalcount
   # In this example, we set the pageSize to 10 for speed purpose but in real example, please use tpCount
-  requetIrrig<-getWatering(token=aToken$data,experimentURI=myExp, 
+  requetIrrig<-getWatering(token=aToken$data,experimentURI=myExp,
                            variablesName = list("weightAfter"),
                            pageSize=10,verbose=FALSE)$data
 

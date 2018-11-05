@@ -3,7 +3,7 @@
 # Objective: functions to facilitate requests on web service Phenomeapi
 # Author: A. Charleroy
 # Creation: 19/03/2018
-# Update: 22/06/2018 by I.Sanchez
+# Update: 03/07/2018 by I.Sanchez
 #-------------------------------------------------------------------------------
 
 
@@ -19,14 +19,16 @@
 ##' @export
 initializeClientConnection<-function(apiID,url = ""){
   # if apiID is public then we use the public configWS given by the package
-  if (apiID != "ws_public") {
+  # else if apiID is private, we use the url procided by the user
+  if (apiID == "ws_private") {
     if(url != ""){
       # configWS is an environment with specific variables to phenomeapi web service
-      #old version assign("BASE_PATH",paste0("http://",url,":",port,"/phenomeapi/resources/"),configWS)
       assign("BASE_PATH",paste0("http://",url),configWS)
     } else {
-      print("Please, you have to give an URL and port adress")
+      print("Please, you have to give an URL and port address")
     }
+  } else if (apiID == "ws_public") {
+    assign("BASE_PATH",get("PUBLIC_PATH",configWS),configWS)
   }
 }
 
@@ -34,8 +36,13 @@ initializeClientConnection<-function(apiID,url = ""){
 ##'
 ##' @description Create a token to call the webservice for authentication and
 ##' returns a formatted response of WSResponse class.
-##' @param responseObject an object HTTP httr
+##' @param resource character, an resource from the web service api
+##' @param attributes a list containing a login and a password
 ##' @param verbose logical FALSE by default, if TRUE display information about the progress
+##' @details This function is OK for the first version of the web service
+##'  (a GET call with a visible request)
+##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @return responseObject an object HTTP httr
 ##' @keywords internal
 getTokenResponseWS<-function(resource,paramPath=NULL,attributes,type = "application/json",verbose=FALSE){
   webserviceBaseUrl <- get("BASE_PATH",configWS)
@@ -65,20 +72,60 @@ getTokenResponseWS<-function(resource,paramPath=NULL,attributes,type = "applicat
     print(r)
   }
 
-  if (r$status_code >= 500){
-    print("WebService internal error")
-  }
-  if (r$status_code == 401){
-    print("User not authorized")
-  }
-  if (r$status_code >= 400 && r$status_code != 401 &&  r$status_code < 500){
-    print("Bad user request")
-  }
-  if (r$status_code >= 200 && r$status_code < 300){
-    print("Query executed and data recovered")
-  }
   return(r)
 }
+
+
+##' @title getTokenResponseWS2
+##'
+##' @description Create a token to call the webservice for authentication and
+##' returns a formatted response of WSResponse class.
+##' @param resource character, an resource from the web service api
+##' @param attributes a list containing a login and a password
+##' @param verbose logical FALSE by default, if TRUE display information about the progress
+##' @details This function is OK for the second version of the web service
+##'  (a POST call with an invisible request using a correct JSON list in a body)
+##' @seealso https://brapi.docs.apiary.io/#introduction/structure-of-the-response-object
+##' @return responseObject an object HTTP httr
+##' @importFrom openssl md5
+##' @keywords internal
+getTokenResponseWS2<-function(resource,attributes,type = "application/json",verbose=FALSE){
+  # create the URL
+  #finalurl <- paste0(get("BASE_PATH",configWS),"brapi/v1/token")
+  finalurl <- paste0(get("BASE_PATH",configWS),resource)
+
+  # Create the body JSON list with the attributes
+  # take care that httr::POST function doesn't allow to md5 object
+  # I had to convert the md5 object into a string one with the toString() function
+  finalbody<-list(grant_type="password",
+                  username= attributes[[1]],
+                  password=toString(md5(attributes[[2]])))
+
+  # call
+  ptm <- proc.time()
+  r <- httr::POST(url=finalurl,body = finalbody,encode="json")
+  if (verbose) {
+    print("Request Time : " )
+    print(proc.time() - ptm)
+    print(r)
+  }
+
+  # if (r$status_code >= 500){
+  #   print("WebService internal error")
+  # }
+  # if (r$status_code == 401){
+  #   print("User not authorized")
+  # }
+  # if (r$status_code >= 400 && r$status_code != 401 &&  r$status_code < 500){
+  #   print("Bad user request")
+  # }
+  # if (r$status_code >= 200 && r$status_code < 300){
+  #   print("Query executed and data recovered")
+  # }
+  return(r)
+}
+
+
 
 ##' @title getResponseFromWS
 ##'
@@ -259,4 +306,3 @@ getDataAndShowStatus<-function(responseObject){
 ObjectType<-function(obj){
   return(utils::capture.output(str(obj)))
 }
-
