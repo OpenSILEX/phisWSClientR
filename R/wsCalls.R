@@ -56,7 +56,7 @@ getToken<-function(login,password,verbose=FALSE){
 
     print("Query executed and data recovered - WS2")
   } else if(tokenResp1$status_code == 500 || tokenResp2$status_code == 500){
-      print("WebService internal error")
+       print("WebService internal error")
   } else if(tokenResp1$status_code == 401 || tokenResp2$status_code == 401){
     print("User not authorized")
   } else if(tokenResp1$status_code == 404 || tokenResp2$status_code == 404){
