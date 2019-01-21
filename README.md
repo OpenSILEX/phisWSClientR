@@ -1,3 +1,0 @@
-# phisWSClientR
-
-R package  - request to the web service phis-OpenSILEX - in progress...
