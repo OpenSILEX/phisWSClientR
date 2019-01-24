@@ -59,6 +59,7 @@ getResponseFromWS<-function(resource,paramPath = NULL,attributes,type="applicati
   if(r$status_code >= 200 && r$status_code < 300){
     print("Query executed and data recovered")
   }
+  
   return(getDataAndShowStatus(r))
 }
 
@@ -68,12 +69,12 @@ getResponseFromWS<-function(resource,paramPath = NULL,attributes,type="applicati
 ##' @description Create an URL to call the WS and retrun a formatted response of WSResponse class.
 ##' @param resource character, the name of the service to call
 ##' @param paramPath character, the extension of the service to call, default to NULL
-##' @param attributes character, The list of attributes to give to the GET request
-##' @param type character, The type of the output, default to application/json
+##' @param attributes character, the list of attributes to give to the GET request
+##' @param type character, the type of the output, default to application/json
 ##' @param verbose logical FALSE by default, if TRUE display information about the progress
 ##' @keywords internal
 getResponseFromWS2 <- function(resource, paramPath = NULL, attributes, type = "application/json", verbose = FALSE){
-  webserviceBaseUrl <- get("BASE_PATH", phisWSClientR:::configWS)
+  webserviceBaseUrl <- get("BASE_PATH", configWS)
   urlParams <- ""
   # url concatenation
   for (attribut in names(attributes)) {
@@ -121,5 +122,6 @@ getResponseFromWS2 <- function(resource, paramPath = NULL, attributes, type = "a
   if(r$status_code >= 200 && r$status_code < 300){
     print("Query executed and data recovered")
   }
-  return(phisWSClientR:::getDataAndShowStatus(r))
+  
+  return(getDataAndShowStatus(r))
 }
