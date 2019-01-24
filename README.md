@@ -10,11 +10,11 @@ You can find a shinydashboard app to document this phenomeapi web service using 
    
 # Installation
 
-To install the **phisWSClientR** package, the easiest is to install it directly from GitHub. Open an R session and run the following commands:
+To install the **phisWSClientR** package, the easiest is to install it directly from Gitlab. Open an R session and run the following commands:
 
 ```R
-library(devtools) 
-install_github("sanchezi/phisWSClientR", build_vignettes=TRUE)
+library(remotes) 
+install_gitlab("OpenSILEX/data-analysis-visualisation/phisWSClientR", build_vignettes=TRUE)
 ```
 
 # Usage
