@@ -4,8 +4,9 @@
 \alias{getExperiments}
 \title{retrieves the experiments from the web service}
 \usage{
-getExperiments(token, projectName = "", season = "", sortOrder = "DESC",
-  page = NULL, pageSize = NULL, verbose = FALSE)
+getExperiments(token, projectName = "", season = "",
+  sortOrder = "DESC", page = NULL, pageSize = NULL,
+  verbose = FALSE)
 }
 \arguments{
 \item{token}{a token}

@@ -4,8 +4,8 @@
 \alias{getExperimentById}
 \title{getExperimentById}
 \usage{
-getExperimentById(token, experimentURI = "", page = NULL, pageSize = NULL,
-  verbose = FALSE)
+getExperimentById(token, experimentURI = "", page = NULL,
+  pageSize = NULL, verbose = FALSE)
 }
 \arguments{
 \item{token}{a token}

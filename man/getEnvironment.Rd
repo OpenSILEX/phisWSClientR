@@ -4,9 +4,9 @@
 \alias{getEnvironment}
 \title{retrieves the environmental mesures of an experiment from the web service}
 \usage{
-getEnvironment(token, variableCategory = "", startDate = "", endDate = "",
-  variables = "", facility = "", experimentURI = "", page = NULL,
-  pageSize = NULL, verbose = FALSE)
+getEnvironment(token, variableCategory = "", startDate = "",
+  endDate = "", variables = "", facility = "", experimentURI = "",
+  page = NULL, pageSize = NULL, verbose = FALSE)
 }
 \arguments{
 \item{token}{a token}

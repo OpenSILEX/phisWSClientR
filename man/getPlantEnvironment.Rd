@@ -6,7 +6,8 @@
 \usage{
 getPlantEnvironment(token, plantURI = "", variableCategory = "",
   startDate = "", endDate = "", variables = "", facility = "",
-  experimentURI = "", page = NULL, pageSize = NULL, verbose = FALSE)
+  experimentURI = "", page = NULL, pageSize = NULL,
+  verbose = FALSE)
 }
 \arguments{
 \item{token}{a token}

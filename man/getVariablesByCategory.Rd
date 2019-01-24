@@ -5,7 +5,8 @@
 \title{getVariablesByCategory}
 \usage{
 getVariablesByCategory(token, category = "", experimentURI = "",
-  imageryProvider = "", page = NULL, pageSize = NULL, verbose = FALSE)
+  imageryProvider = "", page = NULL, pageSize = NULL,
+  verbose = FALSE)
 }
 \arguments{
 \item{token}{a token}
