@@ -66,13 +66,13 @@ getResponseFromWS<-function(resource,paramPath = NULL,attributes,type="applicati
 ##' @title getResponseFromWS2 retrieves the data of a service from the WS2
 ##'
 ##' @description Create an URL to call the WS and retrun a formatted response of WSResponse class.
-##' @param ressource character, the name of the service to call
+##' @param resource character, the name of the service to call
 ##' @param paramPath character, the extension of the service to call, default to NULL
 ##' @param attributes character, The list of attributes to give to the GET request
 ##' @param type character, The type of the output, default to application/json
 ##' @param verbose logical FALSE by default, if TRUE display information about the progress
 ##' @keywords internal
-getResponseFromWS2 <- function(ressource, paramPath = NULL, attributes, type = "application/json", verbose = FALSE){
+getResponseFromWS2 <- function(resource, paramPath = NULL, attributes, type = "application/json", verbose = FALSE){
   webserviceBaseUrl <- get("BASE_PATH", phisWSClientR:::configWS)
   urlParams <- ""
   # url concatenation
@@ -92,13 +92,13 @@ getResponseFromWS2 <- function(ressource, paramPath = NULL, attributes, type = "
     }
   }
   if (is.null(paramPath)){
-    finalurl <- paste0(webserviceBaseUrl, ressource , "?", urlParams)
+    finalurl <- paste0(webserviceBaseUrl, resource , "?", urlParams)
   } else {
-    finalurl <- paste0(webserviceBaseUrl, ressource , "/", paramPath, "?", urlParams)
+    finalurl <- paste0(webserviceBaseUrl, resource , "/", paramPath, "?", urlParams)
   }
   
   ptm <- proc.time()
-  r <- httr::GET(finalurl, config = httr::add_headers(Authorization=paste("Bearer " ,attributes$Authorization, sep = "")))
+  r <- httr::GET(finalurl, config = httr::add_headers(Authorization=paste("Bearer ",attributes$Authorization, sep = "")))
   if (verbose) {
     print("API request : ")
     print(finalurl)

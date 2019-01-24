@@ -4,11 +4,11 @@
 \alias{getResponseFromWS2}
 \title{getResponseFromWS2 retrieves the data of a service from the WS2}
 \usage{
-getResponseFromWS2(ressource, paramPath = NULL, attributes,
+getResponseFromWS2(resource, paramPath = NULL, attributes,
   type = "application/json", verbose = FALSE)
 }
 \arguments{
-\item{ressource}{character, the name of the service to call}
+\item{resource}{character, the name of the service to call}
 
 \item{paramPath}{character, the extension of the service to call, default to NULL}
 
