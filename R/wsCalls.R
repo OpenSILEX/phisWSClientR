@@ -80,66 +80,6 @@ getToken<-function(login,password,verbose=FALSE){
 }
 
 
-##' @title retrieves the environmental mesures of an experiment from the web service
-##'
-##' @description Retrieves environmental mesures of an experiment or by dates
-##' @param token a token
-##' @param variableCategory character, a category of variables
-##' @param startDate data > startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )
-##' @param endDate data < startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )
-##' @param variables list of variables for the request (Ex : "wind speed_weather station_meter per second")
-##' @param facility place of the experiment (Ex : "http://www.phenome-fppn.fr/m3p/ec3")
-##' @param experimentURI URI of the experiment
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
-##' @return WSResponse object
-##' @details You have to execute the getToken() function first to have access to the web
-##' service
-##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @examples
-##' \donttest{
-##' initializeClientConnection(apiID="ws_public")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  getEnvironment(aToken$data,page=3,pageSize=100,startDate="2012-02-21",endDate = "2012-03-21")
-##'  test<-getEnvironment(aToken$data,
-##'        experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
-##'  test$data
-##'  getEnvironment(aToken$data,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
-##'  startDate="2012-02-21",endDate="2012-02-15 19:20:30")
-##'  getEnvironment(aToken$data,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
-##'     facility="http://www.phenome-fppn.fr/m3p/ec3",
-##'     variables="wind speed_weather station_meter per second")
-##' }
-##' @export
-getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = "" ,variables = "",facility = "",
-                           experimentURI ="", page = NULL, pageSize = NULL,verbose=FALSE){
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-
-  attributes = list(sessionId = token, page = page, pageSize=pageSize)
-  if (startDate != ""){
-    attributes <- c(attributes, startDate = startDate)
-  }
-  if (endDate != ""){
-    attributes <- c(attributes, endDate = endDate)
-  }
-  if (facility != ""){
-    attributes <- c(attributes, facility = facility)
-  }
-  if (experimentURI != ""){
-    attributes <- c(attributes, experimentURI = experimentURI)
-  }
-  if (variableCategory != ""){
-    attributes <- c(attributes, variableCategory = variableCategory)
-  }
-  if (variables != ""){
-    attributes <- c(attributes, variables = utils::URLencode(variables))
-  }
-  environmentResponse <- getResponseFromWS(resource = get("ENVIRONMENT",configWS),
-                                           attributes = attributes,verbose=verbose)
-  return(environmentResponse)
-}
 
 ##' @title retrieves the context of plant linked to an experiment from the web service
 ##'
