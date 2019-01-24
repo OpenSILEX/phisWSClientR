@@ -2,6 +2,7 @@
 
 export(getEnvironment)
 export(getExperiments)
+export(getExperiments2)
 export(getImagesAnalysis)
 export(getPlants)
 export(getProjects)

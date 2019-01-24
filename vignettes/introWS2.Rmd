@@ -1,0 +1,55 @@
+---
+title: "Requests on the web service 2"
+author: "I.Sanchez & A. Charleroy (INRA MISTEA)"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+vignette: >
+  %\VignetteIndexEntry{Requests on the web service}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<!---
+Program  : introWS2.Rmd
+Author   : I.Sanchez (MISTEA)
+Objective: a vignette for phisWSClientR library
+           an introduction to requesting the phenomeapi (phis web service) WS2
+Creation : 24/01/2019
+Update   : 24/01/2019
+-->
+
+***
+
+<div style="background-color:rgba(0, 255, 0,0.1); text-align:left; vertical-align: center; padding:10px 0;">
+This tutorial explains how to access to the **phenomeapi** web service (PHIS system information).
+</div>
+
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  library(phisWSClientR)
+```
+
+# Creation of an identifier
+Ask permission to request to the web service:
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  # If you want to access to a private web service, you have to insert the address of the WS and the port
+  initializeClientConnection(apiID="ws_private",url = "138.102.159.36:8080/uesAPI/rest/")
+```
+
+*aToken* will be used in all the requests to the web service.
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  aToken<-getToken("guest@phis.fr","guest")
+```
+
+# Project
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  getProjects2(aToken$data, uri="http://www.phenome-fppn.fr/ues/PHENOME-FPPN")
+```
+
+
