@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-# Program: wsFunctions.R
+# Program: wsCalls.R
 # Objective: functions called by the user on the web service Phenomeapi
 # Author: A. Charleroy
 # Creation: 12/08/2016
@@ -76,50 +76,6 @@ getToken<-function(login,password,verbose=FALSE){
   if (exists("response")){
     class(response) <- append(class(response),"WSResponse")
     return(response)
-  }
-}
-
-
-##' @title getVariablesByCategory
-##'
-##' @description Retrieves the variable by categories (environment or setpoint...)
-##' @param token a token
-##' @param category Name of the category to search
-##' @param imageryProvider character, provider of the images
-##' @param experimentURI URI of the experiment
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
-##' @return WSResponse object
-##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
-##' service
-##' @examples
-##' \donttest{
-##'  initializeClientConnection(apiID="ws_public")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  vars <- getVariablesByCategory(aToken$data,category="imagery",
-##'           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
-##'  vars$data
-##' }
-##' @export
-getVariablesByCategory<-function(token,category ="",experimentURI ="",imageryProvider="",
-                                 page=NULL,pageSize=NULL,verbose=FALSE){
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  attributes = list(sessionId=token, page=page, pageSize = pageSize)
-  if (category  == ""){
-    stop("no category selected")
-  } else {
-    if (experimentURI != ""){
-      attributes <- c(attributes, experimentURI = experimentURI)
-    }
-    if (imageryProvider != ""){
-      attributes <- c(attributes, imageryProvider = imageryProvider)
-    }
-    variableResponse <- getResponseFromWS(resource=paste0(get("VARIABLES",configWS),"/category/",category),
-                                          attributes = attributes,verbose=verbose)
-    return(variableResponse)
   }
 }
 

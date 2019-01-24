@@ -4,6 +4,7 @@
 #             * getExperimentById: for WS1, experiment by id
 #             * getExperiments: for WS1, experiment
 #             * getExperiments2: for WS2
+# Do we have to join getExperiments and getExperiments2????
 # Authors: A. Charleroy, I.Sanchez, J.E.Hollebecq, E.Chourrout
 # Creation: 24/01/2019
 # Update: 24/01/2019 (by I.Sanchez)
