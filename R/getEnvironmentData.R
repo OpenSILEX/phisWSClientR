@@ -77,7 +77,7 @@ getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = 
 ##'
 ##' @description retrieves the environmental data from a variable or a sensor
 ##' @param token character, a token from getToken function
-##' @param variable character, search by the uri of a variable (optional)
+##' @param variable character, search by the uri of a variable
 ##' @param startDate character, search from start date (optional)
 ##' @param endDate character, search to end date (optional)
 ##' @param sensor character, search by the uri of a sensor (optional)

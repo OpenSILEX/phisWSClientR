@@ -3,7 +3,7 @@
 # Objective:
 # Author: I. Sanchez
 # Creation: 19/03/2018
-# Update: 24/01/2019
+# Update: 25/01/2019
 #-------------------------------------------------------------------------------
 
 ## title defines a public configuration for the web service access
@@ -62,6 +62,7 @@ configWS<-new.env(emptyenv())
   assign("INFRASTRUCTURES", "infrastructures", configWS)
   assign("IMAGES", "images", configWS)
   assign("RADIOMETRIC_TARGETS", "radiometricTargets", configWS)
+  assign("METHODS", "methods", configWS)
   
   # commun
   assign("VARIABLES", "variables", configWS)
