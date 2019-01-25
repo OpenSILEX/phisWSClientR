@@ -92,10 +92,14 @@ getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = 
 ##' @examples
 ##' \donttest{
 ##'  initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
-##'  aToken = getToken("guest@phis.fr","guest")
-##'  envirodata=getEnvironmentData(token=aToken$data, 
-##'       variable = "http://www.phenome-fppn.fr/ues/id/variables/v005")
-##'  envirodata$data
+##'  aToken <- getToken("guest@phis.fr","guest")
+##'  # Retrieve the number of available data
+##'  mycount<-getEnvironmentData(token=aToken$data, 
+##'       variable = "http://www.phenome-fppn.fr/ues/id/variables/v005")$totalCount
+##'  # Retrieve the environmental data
+##'  myenvir<-getEnvironmentData(token=aToken$data, pageSize=mycount,
+##'          variable = "http://www.phenome-fppn.fr/ues/id/variables/v005")
+##'  str(myenvir$data)
 ##' }
 ##' @export
 getEnvironmentData <- function(token,
