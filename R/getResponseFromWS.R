@@ -101,10 +101,6 @@ getResponseFromWS2 <- function(resource, paramPath = NULL, attributes, type = "a
   ptm <- proc.time()
   r <- httr::GET(finalurl, config = httr::add_headers(Authorization=paste("Bearer ",attributes$Authorization, sep = "")))
   if (verbose) {
-    print("API request : ")
-    print(finalurl)
-    print("API request : ")
-    print(finalurl)
     print("Request Time : " )
     print(proc.time() - ptm)
     print(r)
