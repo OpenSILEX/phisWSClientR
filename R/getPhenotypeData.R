@@ -62,5 +62,14 @@ getPhenotypeData <- function(token,
   variableResponse <- getResponseFromWS2(resource = paste0(get("DATASETS", configWS)),
                                          attributes = attributes,
                                          verbose = verbose)
-  return(variableResponse)
+  output <- data.frame()
+  jsonData <- data.frame(variableResponse$data[[1]])
+  AO=jsonData$agronomicalObject
+  for(l in 1:length(jsonData$data)){
+    AgronomicalObject <- AO[l]
+    tmp_dat <- jsonData$data[[l]]
+    AOl <- data.frame(AgronomicalObject=AgronomicalObject, tmp_dat)
+    output=rbind(output, AOl)
+  }
+  return(output)
 }
