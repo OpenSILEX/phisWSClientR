@@ -36,7 +36,7 @@ service
 }
 \examples{
 \donttest{
-initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
+initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 aToken = getToken("guest@opensilex.org","guest")
 infrastructures <- getInfrastructures(aToken$data,
                    uri = "https://emphasis.plant-phenotyping.eu")

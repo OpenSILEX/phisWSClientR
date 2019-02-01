@@ -29,27 +29,27 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
+##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ##' aToken = getToken("guest@opensilex.org","guest")
-##' sensors <- getSensors(aToken$data, uri = "http://www.opensilex.org/demo/2018/s18001")
-##' sensors <- getSensors(aToken$data, type = "http://www.phenome-fppn.fr/vocabulary/2017#PrecipitationSensor")
+##' sensors <- getSensors(aToken$data,
+##'  uri = "http://www.opensilex.org/demo/2018/s18001")
 ##' sensors <- getSensors(aToken$data, brand = "Cimel")
 ##' sensors$data
 ##' }
 ##' @export
 getSensors <- function(token,
-                         uri = "",
-                         rdfType = "",
-                         label = "",
-                         brand = "",
-                         serialNumber = "",
-                         inServiceDate = "",
-                         dateOfPurchase = "",
-                         dateOfLastCalibration = "",
-                         personInCharge = "",
-                         page = NULL,
-                         pageSize = NULL,
-                         verbose = FALSE){
+                       uri = "",
+                       rdfType = "",
+                       label = "",
+                       brand = "",
+                       serialNumber = "",
+                       inServiceDate = "",
+                       dateOfPurchase = "",
+                       dateOfLastCalibration = "",
+                       personInCharge = "",
+                       page = NULL,
+                       pageSize = NULL,
+                       verbose = FALSE){
   if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   

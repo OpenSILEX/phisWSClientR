@@ -25,10 +25,10 @@ getResponseFromWS<-function(resource,paramPath = NULL,attributes,type="applicati
     # chaines de caractere
     if (is.character(attributes[[attribut]])){
       urlParams <- paste0(urlParams,attribut,"=",utils::URLencode(attributes[[attribut]],reserved = TRUE))
-    # nombres
+      # nombres
     } else if (is.numeric(attributes[[attribut]])){
       urlParams <- paste0(urlParams,attribut,"=",format(attributes[[attribut]], scientific=FALSE))
-    # autres
+      # autres
     } else {
       urlParams <- paste0(urlParams,attribut,"=",attributes[[attribut]])
     }

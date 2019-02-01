@@ -27,30 +27,33 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
+##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ##'  aToken = getToken("guest@opensilex.org","guest")
-##'  phenodata <- getPhenotypeData(aToken$data, variable = "http://www.opensilex.org/demo/id/variables/v010")
-##'  phenodata <- getPhenotypeData(aToken$data, variable = "http://www.opensilex.org/demo/id/variables/v010", startDate="2012-02-21", endDate="2012-02-15 19:20:30")
+##'  phenodata <- getPhenotypeData(aToken$data,
+##'   variable = "http://www.opensilex.org/demo/id/variables/v001")
+##'  phenodata <- getPhenotypeData(aToken$data,
+##'   variable = "http://www.opensilex.org/demo/id/variables/v001",
+##'    startDate="2017-06-16", endDate="2017-07-16")
 ##'  phenodata$data
 ##' }
 ##' @export
 getPhenotypeData <- function(token,
-                         variable = "",
-                         experiment = "",
-                         agroObject = "",
-                         startDate = "",
-                         endDate = "",
-                         sensor = "",
-                         incertitude = "",
-                         page = NULL,
-                         pageSize = NULL,
-                         verbose = FALSE){
+                             variable = "",
+                             experiment = "",
+                             agroObject = "",
+                             startDate = "",
+                             endDate = "",
+                             sensor = "",
+                             incertitude = "",
+                             page = NULL,
+                             pageSize = NULL,
+                             verbose = FALSE){
   if (is.null(page)) page <- get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE",configWS)
-
+  
   attributes <- list(pageSize=pageSize,
-                    page = page,
-                    Authorization=token)
+                     page = page,
+                     Authorization=token)
   if (experiment!="")  attributes <- c(attributes, experiment = experiment)
   if (variable!="")    attributes <- c(attributes, variable = variable)
   if (agroObject!="")  attributes <- c(attributes, agroObject = agroObject)
@@ -58,7 +61,7 @@ getPhenotypeData <- function(token,
   if (endDate!="")     attributes <- c(attributes, endDate = endDate)
   if (sensor!="")      attributes <- c(attributes, sensor = sensor)
   if (incertitude!="") attributes <- c(attributes, incertitude = incertitude)
-
+  
   variableResponse <- getResponseFromWS2(resource = paste0(get("DATASETS", configWS)),
                                          attributes = attributes,
                                          verbose = verbose)

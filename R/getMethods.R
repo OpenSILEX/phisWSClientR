@@ -22,7 +22,7 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
+##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ##' aToken = getToken("guest@opensilex.org","guest")
 ##' methods <- getMethods2(aToken$data,
 ##'                    uri = "http://www.opensilex.org/demo/id/methods/m010")
@@ -30,11 +30,11 @@
 ##' }
 ##' @export
 getMethods2 <- function(token,
-                     uri = "",
-                     label = "",
-                     page = NULL,
-                     pageSize = NULL,
-                     verbose = FALSE){
+                        uri = "",
+                        label = "",
+                        page = NULL,
+                        pageSize = NULL,
+                        verbose = FALSE){
   if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   

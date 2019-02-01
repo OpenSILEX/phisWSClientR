@@ -112,25 +112,25 @@ getExperiments <- function(token, projectName ="", season = "", sortOrder = "DES
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ##' aToken = getToken("guest@opensilex.org","guest")
 ##' myexp <- getExperiments2(aToken$data,
-##'                    uri = "http://www.phenome-fppn.fr/ues/DIA2017-1")
+##'                    uri = "http://www.opensilex.org/demo/DIA2017-1")
 ##' myexp$data
 ##' }
 ##' @export
 getExperiments2 <- function(token,
-                           uri = "",
-                           startDate = "",
-                           endDate = "",
-                           field = "",
-                           campaign = "",
-                           place = "",
-                           alias = "",
-                           keywords = "",
-                           page = NULL,
-                           pageSize = NULL,
-                           verbose = FALSE){
+                            uri = "",
+                            startDate = "",
+                            endDate = "",
+                            field = "",
+                            campaign = "",
+                            place = "",
+                            alias = "",
+                            keywords = "",
+                            page = NULL,
+                            pageSize = NULL,
+                            verbose = FALSE){
   if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   

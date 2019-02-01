@@ -24,7 +24,7 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
+##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ##'  aToken = getToken("guest@opensilex.org","guest")
 ##'  scientificObjects <- getScientificObjects(aToken$data,
 ##'                               uri = "http://www.opensilex.org/demo/2018/o18000076")
@@ -32,19 +32,19 @@
 ##' }
 ##' @export
 getScientificObjects <- function(token,
-                         uri = "",
-                         experiment = "",
-                         alias = "",
-                         rdfType = "",
-                         page = NULL,
-                         pageSize = NULL,
-                         verbose = FALSE){
+                                 uri = "",
+                                 experiment = "",
+                                 alias = "",
+                                 rdfType = "",
+                                 page = NULL,
+                                 pageSize = NULL,
+                                 verbose = FALSE){
   if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   
   attributes <- list(pageSize=pageSize,
-                    page = page,
-                    Authorization=token)
+                     page = page,
+                     Authorization=token)
   if (uri!="")        attributes <- c(attributes, uri = uri)
   if (experiment!="") attributes <- c(attributes, experiment = experiment)
   if (alias!="")      attributes <- c(attributes, alias = alias)

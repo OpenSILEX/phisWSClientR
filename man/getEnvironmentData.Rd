@@ -39,19 +39,19 @@ service
 }
 \examples{
 \donttest{
- initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+ initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
  aToken = getToken("guest@opensilex.org","guest")
  # Retrieve the number of available data
  mycount <- getEnvironmentData(token=aToken$data, 
-      variable = "http://www.opensilex.org/demo/id/variables/v001")$totalCount
+      variable = "http://www.opensilex.org/demo/id/variables/v004")$totalCount
  # Retrieve the environmental data
  myenvir <- getEnvironmentData(token=aToken$data, pageSize=mycount,
-         variable = "http://www.opensilex.org/demo/id/variables/v001")
+         variable = "http://www.opensilex.org/demo/id/variables/v004")
  myenvir <- getEnvironmentData(token=aToken$data,
   pageSize=mycount,
-  variable = "http://www.opensilex.org/demo/id/variables/v001", 
- startDate="2012-02-21",
- endDate="2012-02-15 19:20:30")
+  variable = "http://www.opensilex.org/demo/id/variables/v004", 
+ startDate="2017-06-15T10:51:00+0200",
+ endDate="2017-06-17T10:51:00+0200")
  str(myenvir$data)
  head(myenvir$data)
 }

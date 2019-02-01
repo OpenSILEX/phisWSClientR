@@ -24,7 +24,7 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
+##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ##' aToken = getToken("guest@opensilex.org","guest")
 ##' infrastructures <- getInfrastructures(aToken$data,
 ##'                    uri = "https://emphasis.plant-phenotyping.eu")
@@ -32,13 +32,13 @@
 ##' }
 ##' @export
 getInfrastructures <- function(token,
-                      uri = "",
-                      rdfType = "",
-                      label = "",
-                      language = "en",
-                      page = NULL,
-                      pageSize = NULL,
-                      verbose = FALSE){
+                               uri = "",
+                               rdfType = "",
+                               label = "",
+                               language = "en",
+                               page = NULL,
+                               pageSize = NULL,
+                               verbose = FALSE){
   if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   

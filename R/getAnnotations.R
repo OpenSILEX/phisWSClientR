@@ -25,10 +25,11 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
+##'  initializeClientConnection(apiID="ws_private",
+##'   url = "www.opensilex.org/openSilexAPI/rest/")
 ##'  aToken = getToken("guest@opensilex.org","guest")
-##'  annotations <- getAnnotations(aToken$data, comment = "Ustilago maydis infection" , pageSize=10)
-##'  annotations <- getAnnotations(aToken$data, creator = "http://www.phenome-fppn.fr/diaphen/id/agent/guest_phis", pageSize=10)
+##'  annotations <- getAnnotations(aToken$data,
+##'   comment = "Ustilago maydis infection" , pageSize=10)
 ##'  annotations$data
 ##' }
 ##' @export
@@ -43,16 +44,16 @@ getAnnotations <- function(token,
                            verbose = FALSE){
   if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
-
+  
   attributes <- list(pageSize=pageSize,
-                    page = page,
-                    Authorization=token)
+                     page = page,
+                     Authorization=token)
   if (uri!="")         attributes <- c(attributes, uri = uri)
   if (creator!="")     attributes <- c(attributes, creator = creator)
   if (motivatedBy!="") attributes <- c(attributes, motivatedBy = motivatedBy)
   if (comment!="")     attributes <- c(attributes, comment = comment)
   if (target!="")      attributes <- c(attributes, target = target)
-
+  
   variableResponse <- getResponseFromWS2(resource = paste0(get("ANNOTATIONS", configWS)),
                                          attributes = attributes,
                                          verbose = verbose)

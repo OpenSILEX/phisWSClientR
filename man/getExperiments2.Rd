@@ -45,10 +45,10 @@ service
 }
 \examples{
 \donttest{
-initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 aToken = getToken("guest@opensilex.org","guest")
 myexp <- getExperiments2(aToken$data,
-                   uri = "http://www.phenome-fppn.fr/ues/DIA2017-1")
+                   uri = "http://www.opensilex.org/demo/DIA2017-1")
 myexp$data
 }
 }

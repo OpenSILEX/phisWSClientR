@@ -23,19 +23,19 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
+##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ##' aToken = getToken("guest@opensilex.org","guest")
 ##' species <- getSpecies(aToken$data)
 ##' species$data
 ##' }
 ##' @export
 getSpecies <- function(token,
-                           uri = "",
-                           label = "",
-                           language = "",
-                           page = NULL,
-                           pageSize = NULL,
-                           verbose = FALSE){
+                       uri = "",
+                       label = "",
+                       language = "",
+                       page = NULL,
+                       pageSize = NULL,
+                       verbose = FALSE){
   if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   
@@ -45,7 +45,7 @@ getSpecies <- function(token,
   if (uri!="")      attributes <- c(attributes, uri = uri)
   if (label!="")    attributes <- c(attributes, label = label)
   if (language!="") attributes <- c(attributes, language = language)
-
+  
   
   variableResponse <- getResponseFromWS2(resource = paste0(get("SPECIES", configWS)),
                                          attributes = attributes,
