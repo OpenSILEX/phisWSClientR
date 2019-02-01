@@ -5,7 +5,7 @@
 #             * getProjects2: for WS2
 # Authors: A. Charleroy, I.Sanchez, J.E.Hollebecq, E.Chourrout
 # Creation: 24/01/2019
-# Update: 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getProjects retrieves the list of projects from the web service
@@ -67,9 +67,10 @@ getProjects<-function(token, projectName = "",page=NULL,pageSize=NULL,verbose=FA
 ##' service
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
 ##'  aToken = getToken("guest@phis.fr","guest")
-##'  getProjects2(aToken$data, uri="http://www.phenome-fppn.fr/ues/PHENOME-FPPN")
+##'  projects <- getProjects2(aToken$data, uri="http://www.opensilex.org/demo/PHENOME-FPPN")
+##'  projects$data
 ##' }
 ##' @export
 

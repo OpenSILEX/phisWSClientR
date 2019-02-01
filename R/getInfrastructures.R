@@ -4,7 +4,7 @@
 #            * getInfrastructures
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/01/2019
-# Update: 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getInfrastructures
@@ -24,11 +24,11 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
 ##' aToken = getToken("guest@phis.fr","guest")
-##' vars <- getInfrastructures(aToken$data,
+##' infrastructures <- getInfrastructures(aToken$data,
 ##'                    uri = "https://emphasis.plant-phenotyping.eu")
-##' vars$data
+##' infrastructures$data
 ##' }
 ##' @export
 getInfrastructures <- function(token,

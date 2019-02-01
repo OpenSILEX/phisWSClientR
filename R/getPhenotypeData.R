@@ -4,7 +4,7 @@
 #            * getPhenotypeData
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/01/2019
-# Update: 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getPhenotypeData
@@ -27,11 +27,11 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
 ##'  aToken = getToken("guest@phis.fr","guest")
-##'  vars <- getPhenotypeData(aToken$data,
-##'           variable = "http://www.phenome-fppn.fr/ues/id/variables/v001")
-##'  vars$data
+##'  phenodata <- getPhenotypeData(aToken$data, variable = "http://www.opensilex.org/demo/id/variables/v010")
+##'  phenodata <- getPhenotypeData(aToken$data, variable = "http://www.opensilex.org/demo/id/variables/v010", startDate="2012-02-21", endDate="2012-02-15 19:20:30")
+##'  phenodata$data
 ##' }
 ##' @export
 getPhenotypeData <- function(token,
@@ -62,14 +62,15 @@ getPhenotypeData <- function(token,
   variableResponse <- getResponseFromWS2(resource = paste0(get("DATASETS", configWS)),
                                          attributes = attributes,
                                          verbose = verbose)
-  output <- data.frame()
+  outputData <- data.frame()
   jsonData <- data.frame(variableResponse$data[[1]])
   AO=jsonData$agronomicalObject
   for(l in 1:length(jsonData$data)){
     AgronomicalObject <- AO[l]
     tmp_dat <- jsonData$data[[l]]
     AOl <- data.frame(AgronomicalObject=AgronomicalObject, tmp_dat)
-    output=rbind(output, AOl)
+    outputData=rbind(outputData, AOl)
   }
-  return(output)
+  variableResponse$data <- outputData
+  return(variableResponse)
 }

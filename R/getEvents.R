@@ -4,7 +4,7 @@
 #            * getEvents
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/01/2019
-# Update: 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getEvents
@@ -26,11 +26,12 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
 ##' aToken = getToken("guest@phis.fr","guest")
-##' vars <- getEvents(aToken$data,
-##'         uri = "http://www.phenome-fppn.fr/id/event/c6f1da9e-01c4-4771-a8b0-334932d44a51")
-##' vars$data
+##' events <- getEvents(aToken$data,
+##'  type = "http://www.opensilex.org/vocabulary/oeev#Fertilization",
+##'   pageSize=10)
+##' events$data
 ##' }
 ##' @export
 getEvents <- function(token,

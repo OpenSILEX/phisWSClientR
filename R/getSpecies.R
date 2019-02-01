@@ -4,7 +4,7 @@
 #            * getSpecies
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/01/2019
-# Update: 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getSpecies
@@ -23,10 +23,10 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
 ##' aToken = getToken("guest@phis.fr","guest")
-##' vars <- getSpecies(aToken$data)
-##' vars$data
+##' species <- getSpecies(aToken$data)
+##' species$data
 ##' }
 ##' @export
 getSpecies <- function(token,

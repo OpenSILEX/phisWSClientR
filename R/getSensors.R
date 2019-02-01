@@ -4,7 +4,7 @@
 #            * getSensors
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/01/2019
-# Update: 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getSensors
@@ -29,10 +29,12 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
 ##' aToken <- getToken("guest@phis.fr","guest")
-##' vars <- getSensors(aToken$data, uri = "http://www.phenome-fppn.fr/ues/2018/s18001")
-##' vars$data
+##' sensors <- getSensors(aToken$data, uri = "http://www.opensilex.org/demo/2018/s18001")
+##' sensors <- getSensors(aToken$data, type = "http://www.phenome-fppn.fr/vocabulary/2017#PrecipitationSensor")
+##' sensors <- getSensors(aToken$data, brand = "Cimel")
+##' sensors$data
 ##' }
 ##' @export
 getSensors <- function(token,

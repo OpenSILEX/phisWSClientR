@@ -4,7 +4,7 @@
 #            * getUnits
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/01/2019
-# Update: 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getUnits
@@ -22,11 +22,11 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
 ##' aToken = getToken("guest@phis.fr","guest")
-##' vars <- getUnits(aToken$data,
-##'                    uri = "http://www.phenome-fppn.fr/ues/id/units/u001")
-##' vars$data
+##' units <- getUnits(aToken$data,
+##'                    uri="http://www.opensilex.org/demo/id/units/u007")
+##' units$data
 ##' }
 ##' @export
 getUnits <- function(token,

@@ -5,7 +5,7 @@
 #            * getEnvironmentData for WS2
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/01/2019
-# Update: 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 
@@ -34,9 +34,12 @@
 ##'  test<-getEnvironment(aToken$data,
 ##'        experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##'  test$data
-##'  getEnvironment(aToken$data,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
-##'  startDate="2012-02-21",endDate="2012-02-15 19:20:30")
-##'  getEnvironment(aToken$data,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
+##'  getEnvironment(aToken$data,
+##'  experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
+##'  startDate="2012-02-21",
+##'  endDate="2012-02-15 19:20:30")
+##'  
+##'  getEnvironment(aToken$data, experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
 ##'     facility="http://www.phenome-fppn.fr/m3p/ec3",
 ##'     variables="wind speed_weather station_meter per second")
 ##' }
@@ -94,12 +97,18 @@ getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = 
 ##'  initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
 ##'  aToken <- getToken("guest@phis.fr","guest")
 ##'  # Retrieve the number of available data
-##'  mycount<-getEnvironmentData(token=aToken$data, 
-##'       variable = "http://www.phenome-fppn.fr/ues/id/variables/v005")$totalCount
+##'  mycount <- getEnvironmentData(token=aToken$data, 
+##'       variable = "http://www.opensilex.org/demo/id/variables/v001")$totalCount
 ##'  # Retrieve the environmental data
-##'  myenvir<-getEnvironmentData(token=aToken$data, pageSize=mycount,
-##'          variable = "http://www.phenome-fppn.fr/ues/id/variables/v005")
+##'  myenvir <- getEnvironmentData(token=aToken$data, pageSize=mycount,
+##'          variable = "http://www.opensilex.org/demo/id/variables/v001")
+##'  myenvir <- getEnvironmentData(token=aToken$data,
+##'   pageSize=mycount,
+##'   variable = "http://www.opensilex.org/demo/id/variables/v001", 
+##'  startDate="2012-02-21",
+##'  endDate="2012-02-15 19:20:30")
 ##'  str(myenvir$data)
+##'  head(myenvir$data)
 ##' }
 ##' @export
 getEnvironmentData <- function(token,

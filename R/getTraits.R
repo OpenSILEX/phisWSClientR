@@ -4,7 +4,7 @@
 #            * getTraits
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/01/2019
-# Update: 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getTraits
@@ -22,11 +22,11 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
 ##' aToken = getToken("guest@phis.fr","guest")
-##' vars <- getTraits(aToken$data,
-##'                    uri = "http://www.phenome-fppn.fr/ues/id/traits/t001")
-##' vars$data
+##' traits <- getTraits(aToken$data,
+##'                    uri = "http://www.opensilex.org/demo/id/traits/t010")
+##' traits$data
 ##' }
 ##' @export
 getTraits <- function(token,
