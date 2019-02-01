@@ -71,7 +71,7 @@ getVariablesByCategory<-function(token,category ="",experimentURI ="",imageryPro
 ##' @examples
 ##' \donttest{
 ##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
-##'  aToken <- getToken("guest@phis.fr","guest")
+##'  aToken = getToken("guest@opensilex.org","guest")
 ##'  vars <- getVariables2(aToken$data, uri = "http://www.phenome-fppn.fr/ues/id/variables/v001")
 ##'  vars <- getVariables2(aToken$data,label = "Leaf-Area_LAI-Computation_LAI")
 ##'  vars$data

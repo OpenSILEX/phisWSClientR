@@ -49,7 +49,7 @@ service
 \examples{
 \donttest{
 initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
-aToken <- getToken("guest@phis.fr","guest")
+aToken = getToken("guest@opensilex.org","guest")
 sensors <- getSensors(aToken$data, uri = "http://www.opensilex.org/demo/2018/s18001")
 sensors <- getSensors(aToken$data, type = "http://www.phenome-fppn.fr/vocabulary/2017#PrecipitationSensor")
 sensors <- getSensors(aToken$data, brand = "Cimel")

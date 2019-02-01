@@ -23,7 +23,7 @@
 ##' @examples
 ##' \donttest{
 ##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
-##' aToken = getToken("guest@phis.fr","guest")
+##' aToken = getToken("guest@opensilex.org","guest")
 ##' traits <- getTraits(aToken$data,
 ##'                    uri = "http://www.opensilex.org/demo/id/traits/t010")
 ##' traits$data

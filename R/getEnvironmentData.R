@@ -95,7 +95,7 @@ getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = 
 ##' @examples
 ##' \donttest{
 ##'  initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
-##'  aToken <- getToken("guest@phis.fr","guest")
+##'  aToken = getToken("guest@opensilex.org","guest")
 ##'  # Retrieve the number of available data
 ##'  mycount <- getEnvironmentData(token=aToken$data, 
 ##'       variable = "http://www.opensilex.org/demo/id/variables/v001")$totalCount

@@ -46,7 +46,7 @@ service
 \examples{
 \donttest{
 initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
-aToken <- getToken("guest@phis.fr","guest")
+aToken = getToken("guest@opensilex.org","guest")
 myexp <- getExperiments2(aToken$data,
                    uri = "http://www.phenome-fppn.fr/ues/DIA2017-1")
 myexp$data

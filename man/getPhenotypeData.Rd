@@ -44,7 +44,7 @@ service
 \examples{
 \donttest{
  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
- aToken = getToken("guest@phis.fr","guest")
+ aToken = getToken("guest@opensilex.org","guest")
  phenodata <- getPhenotypeData(aToken$data, variable = "http://www.opensilex.org/demo/id/variables/v010")
  phenodata <- getPhenotypeData(aToken$data, variable = "http://www.opensilex.org/demo/id/variables/v010", startDate="2012-02-21", endDate="2012-02-15 19:20:30")
  phenodata$data

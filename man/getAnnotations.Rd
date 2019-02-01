@@ -40,7 +40,7 @@ service
 \examples{
 \donttest{
  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
- aToken = getToken("guest@phis.fr","guest")
+ aToken = getToken("guest@opensilex.org","guest")
  annotations <- getAnnotations(aToken$data, comment = "Ustilago maydis infection" , pageSize=10)
  annotations <- getAnnotations(aToken$data, creator = "http://www.phenome-fppn.fr/diaphen/id/agent/guest_phis", pageSize=10)
  annotations$data
