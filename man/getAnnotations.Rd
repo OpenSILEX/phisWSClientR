@@ -39,11 +39,11 @@ service
 }
 \examples{
 \donttest{
- initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+ initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
  aToken = getToken("guest@phis.fr","guest")
- vars <- getAnnotations(aToken$data,
-          uri = "http://www.phenome-fppn.fr/ues/id/annotation/f3ddc6c5-076c-4593-9bce-9efbd4bb7f87")
- vars$data
+ annotations <- getAnnotations(aToken$data, comment = "Ustilago maydis infection" , pageSize=10)
+ annotations <- getAnnotations(aToken$data, creator = "http://www.phenome-fppn.fr/diaphen/id/agent/guest_phis", pageSize=10)
+ annotations$data
 }
 }
 \seealso{

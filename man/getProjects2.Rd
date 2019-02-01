@@ -53,9 +53,10 @@ service
 }
 \examples{
 \donttest{
- initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+ initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
  aToken = getToken("guest@phis.fr","guest")
- getProjects2(aToken$data, uri="http://www.phenome-fppn.fr/ues/PHENOME-FPPN")
+ projects <- getProjects2(aToken$data, uri="http://www.opensilex.org/demo/PHENOME-FPPN")
+ projects$data
 }
 }
 \seealso{

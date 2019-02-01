@@ -47,9 +47,12 @@ initializeClientConnection(apiID="ws_public")
  test<-getEnvironment(aToken$data,
        experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
  test$data
- getEnvironment(aToken$data,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
- startDate="2012-02-21",endDate="2012-02-15 19:20:30")
- getEnvironment(aToken$data,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
+ getEnvironment(aToken$data,
+ experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
+ startDate="2012-02-21",
+ endDate="2012-02-15 19:20:30")
+ 
+ getEnvironment(aToken$data, experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
     facility="http://www.phenome-fppn.fr/m3p/ec3",
     variables="wind speed_weather station_meter per second")
 }

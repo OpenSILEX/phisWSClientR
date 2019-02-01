@@ -46,10 +46,12 @@ service
 }
 \examples{
 \donttest{
-initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
 aToken <- getToken("guest@phis.fr","guest")
-vars <- getVectors(aToken$data, uri = "http://www.phenome-fppn.fr/ues/2018/v1801")
-vars$data
+vectors <- getVectors(aToken$data, uri = "http://www.opensilex.org/demo/2018/v1801")
+vectors <- getVectors(aToken$data, serialNumber = "01BD1DD71500001")
+vectors <- getVectors(aToken$data, rdfType = "http://www.phenome-fppn.fr/vocabulary/2017#UAV")
+vectors$data
 }
 }
 \seealso{

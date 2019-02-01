@@ -32,11 +32,11 @@ service
 }
 \examples{
 \donttest{
-initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
 aToken = getToken("guest@phis.fr","guest")
-vars <- getMethods2(aToken$data,
-                   uri = "http://www.phenome-fppn.fr/ues/id/traits/m001")
-vars$data
+methods <- getMethods2(aToken$data,
+                   uri = "http://www.opensilex.org/demo/id/methods/m010")
+methods$data
 }
 }
 \seealso{

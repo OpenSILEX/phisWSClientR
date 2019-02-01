@@ -42,12 +42,18 @@ service
  initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
  aToken <- getToken("guest@phis.fr","guest")
  # Retrieve the number of available data
- mycount<-getEnvironmentData(token=aToken$data, 
-      variable = "http://www.phenome-fppn.fr/ues/id/variables/v005")$totalCount
+ mycount <- getEnvironmentData(token=aToken$data, 
+      variable = "http://www.opensilex.org/demo/id/variables/v001")$totalCount
  # Retrieve the environmental data
- myenvir<-getEnvironmentData(token=aToken$data, pageSize=mycount,
-         variable = "http://www.phenome-fppn.fr/ues/id/variables/v005")
+ myenvir <- getEnvironmentData(token=aToken$data, pageSize=mycount,
+         variable = "http://www.opensilex.org/demo/id/variables/v001")
+ myenvir <- getEnvironmentData(token=aToken$data,
+  pageSize=mycount,
+  variable = "http://www.opensilex.org/demo/id/variables/v001", 
+ startDate="2012-02-21",
+ endDate="2012-02-15 19:20:30")
  str(myenvir$data)
+ head(myenvir$data)
 }
 }
 \seealso{

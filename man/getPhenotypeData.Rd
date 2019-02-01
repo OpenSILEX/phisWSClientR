@@ -43,11 +43,11 @@ service
 }
 \examples{
 \donttest{
- initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+ initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest")
  aToken = getToken("guest@phis.fr","guest")
- vars <- getPhenotypeData(aToken$data,
-          variable = "http://www.phenome-fppn.fr/ues/id/variables/v001")
- vars$data
+ phenodata <- getPhenotypeData(aToken$data, variable = "http://www.opensilex.org/demo/id/variables/v010")
+ phenodata <- getPhenotypeData(aToken$data, variable = "http://www.opensilex.org/demo/id/variables/v010", startDate="2012-02-21", endDate="2012-02-15 19:20:30")
+ phenodata$data
 }
 }
 \seealso{
