@@ -1,6 +1,6 @@
 Package: phisWSClientR
 Title: PHIS client R
-Version: 1.1.0
+Version: 1.2.0
 Authors@R: c(person("Pascal", "Neveu", email = "pascal.neveu@supagro.inra.fr", role = "aut"),
     person("Anne", "Tireau", email = "anne.tireau@supagro.inra.fr", role = "aut"),
     person("Arnaud", "Charleroy", email = "arnaud.charleroy@inra.fr", role = "aut"),
