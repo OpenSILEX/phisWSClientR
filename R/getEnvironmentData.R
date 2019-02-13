@@ -79,18 +79,18 @@ getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = 
 ##' @title getEnvironmentData
 ##'
 ##' @description retrieves the environmental data from a variable or a sensor
-##' @param token character, a token from getToken function
-##' @param variable character, search by the uri of a variable
+##' @param token character, a token from \code{\link{getToken}} function
+##' @param variable character, search by the uri of a variable. You can access the list of variables through the \code{\link{getVariables2}} function.
 ##' @param startDate character, search from start date (optional)
 ##' @param endDate character, search to end date (optional)
-##' @param sensor character, search by the uri of a sensor (optional)
+##' @param sensor character, search by the uri of a sensor (optional). You can access the list of sensors through the \code{\link{getSensors}} function.
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @param dateSortAsc logical, sort date in ascending order if TRUE
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{

@@ -5,23 +5,23 @@
 \title{getPhenotypeData}
 \usage{
 getPhenotypeData(token, variable = "", experiment = "",
-  agroObject = "", startDate = "", endDate = "", sensor = "",
+  scientificObject = "", startDate = "", endDate = "", sensor = "",
   incertitude = "", page = NULL, pageSize = NULL, verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from getToken function}
+\item{token}{character, a token from \code{\link{getToken}} function}
 
-\item{variable}{character, search by the uri of a variable (optional)}
+\item{variable}{character, search by the uri of a variable (optional). You can access the list of variables through \code{\link{getVariables2}} function.}
 
-\item{experiment}{character, search by the uri of an experiment (optional)}
+\item{experiment}{character, search by the uri of an experiment (optional). You can access the list of experiments through \code{\link{getExperiments}} function.}
 
-\item{agroObject}{character, search by the uri of an agronomical object (optional)}
+\item{scientificObject}{character, search by the uri of an scientific object (optional). You can access the list of scientific objects through \code{\link{getScientificObjects}} function.}
 
 \item{startDate}{character, search from start date (optional)}
 
 \item{endDate}{character, search to end date (optional)}
 
-\item{sensor}{character, search by the uri of a sensor (optional)}
+\item{sensor}{character, search by the uri of a sensor (optional). you can access the list of sensors through the \code{\link{getSensors}} function.}
 
 \item{incertitude}{character, search by incertitude ???????????????????? (optional)}
 
@@ -38,7 +38,7 @@ WSResponse object
 Retrieves the phenotype measures data from a variable, an experiment or a sensor
 }
 \details{
-You have to execute the getToken() function first to have access to the web
+You have to execute the \code{\link{getToken}} function first to have access to the web
 service
 }
 \examples{

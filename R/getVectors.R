@@ -10,7 +10,7 @@
 ##' @title getVectors
 ##'
 ##' @description retrieves the vectors based on search criterion
-##' @param token character, a token from getToken function
+##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of an annotation (optional)
 ##' @param rdfType character, search by the rdf type of a sensor (optional)
 ##' @param label character, search by the label of the measure (optional)

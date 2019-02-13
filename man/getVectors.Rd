@@ -10,7 +10,7 @@ getVectors(token, uri = "", rdfType = "", label = "", brand = "",
   verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from getToken function}
+\item{token}{character, a token from \code{\link{getToken}} function}
 
 \item{uri}{character, search by the uri of an annotation (optional)}
 

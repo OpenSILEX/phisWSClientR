@@ -94,7 +94,7 @@ getExperiments <- function(token, projectName ="", season = "", sortOrder = "DES
 ##' @title getExperiments2
 ##'
 ##' @description retrieves the experiments based on search criterion
-##' @param token character, a token from getToken function
+##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of an experiment (optional)
 ##' @param startDate character, search from the start date of experiment (optional)
 ##' @param endDate character, search to the end date of experiment (optional)
@@ -108,8 +108,7 @@ getExperiments <- function(token, projectName ="", season = "", sortOrder = "DES
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
-##' service
+##' @details You have to execute the \code{\link{getToken}}
 ##' @examples
 ##' \donttest{
 ##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")

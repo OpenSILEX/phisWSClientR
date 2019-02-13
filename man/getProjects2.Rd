@@ -11,7 +11,7 @@ getProjects2(token, page = NULL, pageSize = NULL, uri = "",
   verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from getToken function}
+\item{token}{character, a token from \code{\link{getToken}} function}
 
 \item{page}{numeric, displayed page (pagination Plant Breeding API) (optional)}
 
@@ -48,7 +48,7 @@ WSResponse object
 Retrieves the list of projects in the WS2 with the selected filters
 }
 \details{
-You have to execute the getToken() function first to have access to the web
+You have to execute the \code{\link{getToken}} function first to have access to the web
 service
 }
 \examples{

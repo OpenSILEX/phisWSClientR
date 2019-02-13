@@ -9,7 +9,7 @@ getExperiments2(token, uri = "", startDate = "", endDate = "",
   keywords = "", page = NULL, pageSize = NULL, verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from getToken function}
+\item{token}{character, a token from \code{\link{getToken}} function}
 
 \item{uri}{character, search by the uri of an experiment (optional)}
 
@@ -40,8 +40,7 @@ WSResponse object
 retrieves the experiments based on search criterion
 }
 \details{
-You have to execute the getToken() function first to have access to the web
-service
+You have to execute the \code{\link{getToken}}
 }
 \examples{
 \donttest{

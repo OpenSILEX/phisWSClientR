@@ -8,7 +8,7 @@ getInfrastructures(token, uri = "", rdfType = "", label = "",
   language = "en", page = NULL, pageSize = NULL, verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from getToken function}
+\item{token}{character, a token from \code{\link{getToken}} function}
 
 \item{uri}{character, search by the uri of an infrastructure (optional)}
 
@@ -31,7 +31,7 @@ WSResponse object
 retrieves the infrastructures based on search criterion
 }
 \details{
-You have to execute the getToken() function first to have access to the web
+You have to execute the \code{\link{getToken}} function first to have access to the web
 service
 }
 \examples{

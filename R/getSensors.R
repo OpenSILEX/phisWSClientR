@@ -10,7 +10,7 @@
 ##' @title getSensors
 ##'
 ##' @description Retrieves the sensors based on search criterion
-##' @param token character, a token from getToken function
+##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of a sensor (optional)
 ##' @param rdfType character, search by the rdf type of a sensor (optional)
 ##' @param label character, search by the label of the measure (optional)
@@ -25,7 +25,7 @@
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{

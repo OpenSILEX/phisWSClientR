@@ -10,7 +10,7 @@
 ##' @title getScientificObjects
 ##'
 ##' @description retrieves the scientific objects based on search criterion
-##' @param token character, a token from getToken function
+##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of an annotation (optional)
 ##' @param experiment character, search by the uri of an experiment (optional)
 ##' @param alias character, search by an alias (optional)
@@ -20,7 +20,7 @@
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{

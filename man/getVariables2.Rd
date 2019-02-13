@@ -8,7 +8,7 @@ getVariables2(token, uri = "", label = "", trait = "", method = "",
   unit = "", pageSize = NULL, page = NULL, verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from getToken function}
+\item{token}{character, a token from \code{\link{getToken}} function}
 
 \item{uri}{character, search by the uri of an experiment (optional)}
 
@@ -33,7 +33,7 @@ WSResponse object
 Retrieves the variable descriptions, trait, method and unit covered by the variable
 }
 \details{
-You have to execute the getToken() function first to have access to the web
+You have to execute the \code{\link{getToken}} function first to have access to the web
 service
 }
 \examples{

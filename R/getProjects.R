@@ -46,7 +46,7 @@ getProjects<-function(token, projectName = "",page=NULL,pageSize=NULL,verbose=FA
 ##' @title getProjects2
 ##'
 ##' @description Retrieves the list of projects in the WS2 with the selected filters
-##' @param token character, a token from getToken function
+##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the URI of a project (optional)
 ##' @param name character, search by the name of a project (optional)
 ##' @param acronyme character, search by the acronyme of a project (optional)
@@ -63,7 +63,7 @@ getProjects<-function(token, projectName = "",page=NULL,pageSize=NULL,verbose=FA
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{

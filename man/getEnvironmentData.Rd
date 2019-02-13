@@ -9,15 +9,15 @@ getEnvironmentData(token, variable = "", startDate = "",
   dateSortAsc = TRUE, verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from getToken function}
+\item{token}{character, a token from \code{\link{getToken}} function}
 
-\item{variable}{character, search by the uri of a variable}
+\item{variable}{character, search by the uri of a variable. You can access the list of variables through the \code{\link{getVariables2}} function.}
 
 \item{startDate}{character, search from start date (optional)}
 
 \item{endDate}{character, search to end date (optional)}
 
-\item{sensor}{character, search by the uri of a sensor (optional)}
+\item{sensor}{character, search by the uri of a sensor (optional). You can access the list of sensors through the \code{\link{getSensors}} function.}
 
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
@@ -34,7 +34,7 @@ WSResponse object
 retrieves the environmental data from a variable or a sensor
 }
 \details{
-You have to execute the getToken() function first to have access to the web
+You have to execute the \code{\link{getToken}} function first to have access to the web
 service
 }
 \examples{
