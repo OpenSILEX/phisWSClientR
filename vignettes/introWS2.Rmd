@@ -1,0 +1,147 @@
+---
+title: "Requests on the web service 2 - OpenSILEX"
+author: "I.Sanchez, A. Charleroy, Jean-Eudes Hollebecq (INRA MISTEA)"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+vignette: >
+  %\VignetteIndexEntry{Requests on the web service}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<!---
+Program  : introWS2.Rmd
+Author   : I.Sanchez (MISTEA)
+Objective: a vignette for phisWSClientR library
+           an introduction to requesting the phenomeapi (phis web service) WS2
+Creation : 24/01/2019
+Update   : 24/01/2019
+-->
+
+***
+
+<div style="background-color:rgba(0, 255, 0,0.1); text-align:left; vertical-align: center; padding:10px 0;">
+This tutorial explains how to access to the **OpenSILEX** web service (OpenSILEX PHIS system information).
+</div>
+
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  library(phisWSClientR)
+```
+
+# Creation of an identifier
+
+Ask permission to request to the web service:
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  # If you want to access to a private web service, you have to insert the address of the WS and the port
+  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+```
+
+*aToken* will be used in all the requests to the web service. This is your identification and grants the acces to some data according to your login informations.
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  aToken <- getToken("guest@opensilex.org","guest")
+```
+
+# Fetch informations about elements in the web service
+
+## Projects
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  getProjects2(aToken$data, uri="http://www.opensilex.org/demo/PHENOME-FPPN")
+```
+
+## Experiments
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  getExperiments2(aToken$data, uri="http://www.opensilex.org/demo/DIA2017-1")
+```
+## Scientific Object
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  getScientificObjects(aToken$data, uri="http://www.opensilex.org/demo/2018/o18000076")
+```
+
+##Infrastructures
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  getInfrastructures(aToken$data, uri="https://emphasis.plant-phenotyping.eu")
+```
+
+## Variables 
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  getVariables2(aToken$data, uri="http://www.opensilex.org/demo/id/variables/v010")
+```
+
+## Traits
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  getTraits(aToken$data, uri="http://www.opensilex.org/demo/id/traits/t010")
+```
+
+## Methods
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  getMethods2(aToken$data, uri="http://www.opensilex.org/demo/id/methods/m010")
+```
+
+## Units
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  getUnits(aToken$data, uri="http://www.opensilex.org/demo/id/units/u007")
+```
+
+## Species
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  getSpecies(aToken$data, uri="http://www.opensilex.org/id/species/helianthusannuus", language = "en")
+```
+
+## Sensors
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  getSensors(aToken$data, uri="http://www.opensilex.org/demo/2018/s18001")
+```
+
+## Vectors
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  getVectors(aToken$data, serialNumber = "01BD1DD71500001")
+```
+
+## Events
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+# Where to find the "type" URL ?
+# Where is the ontology access ?
+  getEvents(aToken$data, type = "http://www.opensilex.org/vocabulary/oeev#Fertilization", pageSize=10)
+```
+
+## Annotations
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+# Where to find the "type" URL ?
+# Where is the ontology access ?
+  getAnnotations(aToken$data, comment = "Ustilago maydis infection" , pageSize=10)
+```
+
+# Fetch Data from the webservice
+
+## Environment data
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  getEnvironmentData(aToken$data, variable = "http://www.opensilex.org/demo/id/variables/v010", pageSize=50)
+```
+
+## Phenotypic data
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  head(getPhenotypeData(aToken$data, variable = "http://www.opensilex.org/demo/id/variables/v001", pageSize=10))
+```
+
+
