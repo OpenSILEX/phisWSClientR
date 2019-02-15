@@ -18,13 +18,31 @@ Author   : I.Sanchez (MISTEA)
 Objective: a vignette for phisWSClientR library
            an introduction to requesting the phenomeapi (phis web service) WS2
 Creation : 24/01/2019
-Update   : 24/01/2019
+Update   : 14/02/2019
 -->
 
 ***
 
 <div style="background-color:rgba(0, 255, 0,0.1); text-align:left; vertical-align: center; padding:10px 0;">
-This tutorial explains how to access to the **OpenSILEX** web service (OpenSILEX PHIS system information).
+This tutorial explains how to access to the second **phenomeapi** web service (PHIS system information).
+
+For this second web service, the available functions are:
+
+* getAnnotations()
+* getEnvironmentData()
+* getEvents()
+* getExperiments2()
+* getInfrastructures()
+* getMethods2()
+* getPhenotypeData()
+* getProjects2()
+* getScientificObjects()
+* getSensors()
+* getSpecies()
+* getTraits()
+* getUnits()
+* getVariables2()
+* getVectors()
 </div>
 
 
@@ -41,7 +59,7 @@ Ask permission to request to the web service:
   initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ```
 
-*aToken* will be used in all the requests to the web service. This is your identification and grants the acces to some data according to your login informations.
+*aToken* will be used in all the requests to the web service. This is your identification and grants the access to some data according to your login information.
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
   aToken <- getToken("guest@opensilex.org","guest")
@@ -141,7 +159,18 @@ Ask permission to request to the web service:
 ## Phenotypic data
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  head(getPhenotypeData(aToken$data, variable = "http://www.opensilex.org/demo/id/variables/v001", pageSize=10))
+  head(getPhenotypeData(aToken$data, 
+                        variable = "http://www.opensilex.org/demo/id/variables/v001", 
+                        pageSize=10)$data)
 ```
 
+# Session info
+
+```{r session,echo=FALSE,message=FALSE, warning=FALSE}
+  sessionInfo()
+```
+
+# References
+1. R Development Core Team (2018). R: A language and environment for statistical computing. R Foundation for
+      Statistical Computing, Vienna, Austria. ISBN 3-900051-07-0, URL http://www.R-project.org.
 

@@ -18,13 +18,22 @@ Author   : I.Sanchez (MISTEA)
 Objective: a vignette for phisWSClientR library
            an introduction to requesting the phenomeapi (phis web service)
 Creation : 19/03/2018
-Update   : 29/10/2018
+Update   : 14/02/2019
 -->
 
 ***
 
 <div style="background-color:rgba(0, 255, 0,0.1); text-align:left; vertical-align: center; padding:10px 0;">
-This tutorial explains how to access to the **phenomeapi** web service (PHIS system information).
+This tutorial explains how to access to the first **phenomeapi** web service (PHIS system information).
+
+For this first web service, the available functions are:
+
+* getEnvironment()
+* getExperiments()
+* getImageAnalysis()
+* getProjects()
+* getVariableByCategory()
+* getWatering()
 </div>
 
 

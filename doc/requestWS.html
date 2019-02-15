@@ -97,6 +97,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -104,14 +107,74 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -123,7 +186,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Requests on the web service</h1>
 <h4 class="author"><em>I.Sanchez &amp; A. Charleroy (INRA MISTEA)</em></h4>
-<h4 class="date"><em>janvier 25, 2019</em></h4>
+<h4 class="date"><em>février 14, 2019</em></h4>
 
 </div>
 
@@ -150,11 +213,20 @@ Author   : I.Sanchez (MISTEA)
 Objective: a vignette for phisWSClientR library
            an introduction to requesting the phenomeapi (phis web service)
 Creation : 19/03/2018
-Update   : 29/10/2018
+Update   : 14/02/2019
 -->
 <hr />
 <div style="background-color:rgba(0, 255, 0,0.1); text-align:left; vertical-align: center; padding:10px 0;">
-<p>This tutorial explains how to access to the <strong>phenomeapi</strong> web service (PHIS system information).</p>
+<p>This tutorial explains how to access to the first <strong>phenomeapi</strong> web service (PHIS system information).</p>
+<p>For this first web service, the available functions are:</p>
+<ul>
+<li>getEnvironment()</li>
+<li>getExperiments()</li>
+<li>getImageAnalysis()</li>
+<li>getProjects()</li>
+<li>getVariableByCategory()</li>
+<li>getWatering()</li>
+</ul>
 </div>
 <pre class="r"><code>  library(phisWSClientR)</code></pre>
 <div id="creation-of-an-identifier" class="section level1">
@@ -173,17 +245,23 @@ Update   : 29/10/2018
 <pre class="r"><code>  getProjects(aToken$data)$data</code></pre>
 <pre><code>## [1] &quot;Query executed and data recovered&quot;</code></pre>
 <pre><code>##                   id               name
-## 1       PHENOME-FPPN       PHENOME-FPPN
-## 2 Progress_Genetique Progress_Genetique
-## 3                XYZ                XYZ
-##                                objective  crop
-## 1                                        maize
-## 2                                        maize
-## 3 To follow ear and silk growth in maize maize
-##                         leadPerson
-## 1 francois.tardieu@supagro.inra.fr
-## 2 francois.tardieu@supagro.inra.fr
-## 3  nicolas.brichet@supagro.inra.fr</code></pre>
+## 1           Amaizing           Amaizing
+## 2              DROPS              DROPS
+## 3       PHENOME-FPPN       PHENOME-FPPN
+## 4 Progress_Genetique Progress_Genetique
+## 5                XYZ                XYZ
+##                                                                                                                                                 objective
+## 1                                                                                                                                                        
+## 2 DROPS aims at developing novel methods and strategies for genetic yield improvement under dry environments and for enhanced plant water-use efficiency.
+## 3                                                                                                                                                        
+## 4                                                                                                                                                        
+## 5                                                                                                                  To follow ear and silk growth in maize
+##    crop                       leadPerson
+## 1 maize francois.tardieu@supagro.inra.fr
+## 2 maize francois.tardieu@supagro.inra.fr
+## 3 maize francois.tardieu@supagro.inra.fr
+## 4 maize francois.tardieu@supagro.inra.fr
+## 5 maize  nicolas.brichet@supagro.inra.fr</code></pre>
 <pre class="r"><code>  getExperiments(aToken$data,projectName = &quot;XYZ&quot;)</code></pre>
 <pre><code>## [1] &quot;Query executed and data recovered&quot;</code></pre>
 <pre><code>## $currentPage
@@ -577,23 +655,23 @@ Update   : 29/10/2018
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] phisWSClientR_1.1.0
+## [1] phisWSClientR_1.2.0
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.0          rstudioapi_0.8      knitr_1.20         
-##  [4] magrittr_1.5        usethis_1.4.0       devtools_2.0.1     
-##  [7] pkgload_1.0.2       R6_2.3.0            rlang_0.3.0.1      
-## [10] httr_1.4.0          stringr_1.3.1       tools_3.5.2        
-## [13] pkgbuild_1.0.2.9000 sessioninfo_1.1.1   cli_1.0.1          
-## [16] withr_2.1.2         htmltools_0.3.6     remotes_2.0.2      
-## [19] openssl_1.1         yaml_2.2.0          assertthat_0.2.0   
-## [22] digest_0.6.18       rprojroot_1.3-2     crayon_1.3.4       
-## [25] processx_3.2.1      callr_3.1.0         fs_1.2.6           
-## [28] ps_1.2.1            curl_3.2            testthat_2.0.1     
-## [31] evaluate_0.12       memoise_1.1.0       glue_1.3.0         
-## [34] rmarkdown_1.10      stringi_1.2.4       compiler_3.5.2     
-## [37] desc_1.2.0          backports_1.1.3     prettyunits_1.0.2  
-## [40] jsonlite_1.6</code></pre>
+##  [1] Rcpp_1.0.0        compiler_3.5.2    prettyunits_1.0.2
+##  [4] remotes_2.0.2     tools_3.5.2       testthat_2.0.1   
+##  [7] digest_0.6.18     pkgbuild_1.0.2    pkgload_1.0.2    
+## [10] jsonlite_1.6      memoise_1.1.0     evaluate_0.12    
+## [13] rlang_0.3.1       cli_1.0.1         rstudioapi_0.9.0 
+## [16] curl_3.3          yaml_2.2.0        xfun_0.4         
+## [19] withr_2.1.2       stringr_1.3.1     httr_1.4.0       
+## [22] knitr_1.21        desc_1.2.0        fs_1.2.6         
+## [25] askpass_1.1       devtools_2.0.1    rprojroot_1.3-2  
+## [28] glue_1.3.0        R6_2.3.0          processx_3.2.1   
+## [31] rmarkdown_1.11    sessioninfo_1.1.1 callr_3.1.1      
+## [34] magrittr_1.5      backports_1.1.3   ps_1.3.0         
+## [37] htmltools_0.3.6   usethis_1.4.0     assertthat_0.2.0 
+## [40] stringi_1.2.4     openssl_1.2.1     crayon_1.3.4</code></pre>
 </div>
 <div id="references" class="section level1">
 <h1><span class="header-section-number">8</span> References</h1>
