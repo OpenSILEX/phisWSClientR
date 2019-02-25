@@ -24,7 +24,7 @@ initializeClientConnection<-function(apiID,url = "", http_scheme = "http"){
     if(url != ""){
       # configWS is an environment with specific variables to phenomeapi web service
       # full url if protocol has been sent
-      if(grepl("http", url){
+      if(grepl("http", url)){
         assign("BASE_PATH", url, configWS)
       }else{
         # short url 
