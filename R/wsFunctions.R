@@ -11,19 +11,26 @@
 ##' @param apiID character, a character name of an API ("ws_public" or "ws_private")
 ##' @param url character, if apiID is private add the url of the chosen API, containing the IP,
 ##'            the port and the path of the WS
-##'
+##' @param http_scheme character, permits to swtich between http, https or other protocols
 ##' @description load name space and connexion parameters of the webservice.
 ##' Execute only once at the beginning of the requests.
 ##' In the case of a WebService change of address or a renaming of services, please edit this list.
 ##' and execute the function.
 ##' @export
-initializeClientConnection<-function(apiID,url = ""){
+initializeClientConnection<-function(apiID,url = "", http_scheme = "http"){
   # if apiID is public then we use the public configWS given by the package
   # else if apiID is private, we use the url procided by the user
   if (apiID == "ws_private") {
     if(url != ""){
       # configWS is an environment with specific variables to phenomeapi web service
-      assign("BASE_PATH",paste0("http://",url),configWS)
+      # full url if protocol has been sent
+      if(grepl("http", url){
+        assign("BASE_PATH", url, configWS)
+      }else{
+        # short url 
+        assign("BASE_PATH",paste0(http_scheme, "://", url), configWS)
+      }
+
     } else {
       print("Please, you have to give an URL and port address")
     }
