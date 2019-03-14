@@ -3,27 +3,43 @@
 # Objective: functions to facilitate requests on web service Phenomeapi
 # Author: A. Charleroy
 # Creation: 19/03/2018
+<<<<<<< HEAD
 # Update: 03/07/2018 by I.Sanchez
+=======
+# Update: 24/01/2019 by I.Sanchez
+>>>>>>> niio972/master
 #-------------------------------------------------------------------------------
 
 
 ##' @title initializeClientConnection
 ##' @param apiID character, a character name of an API ("ws_public" or "ws_private")
 ##' @param url character, if apiID is private add the url of the chosen API, containing the IP,
-##'            the port and the path of the WS
-##'
+##'            the port and the path of the WS resources 'www.opensilex.org/openSilexAPI/rest/'
+##'            or the full url with the protocol 'http://www.opensilex.org/openSilexAPI/rest/'
+##' @param http_scheme character, permits to swtich between http, https or other protocols
 ##' @description load name space and connexion parameters of the webservice.
 ##' Execute only once at the beginning of the requests.
 ##' In the case of a WebService change of address or a renaming of services, please edit this list.
 ##' and execute the function.
 ##' @export
-initializeClientConnection<-function(apiID,url = ""){
+initializeClientConnection<-function(apiID,url = "", http_scheme = "http"){
   # if apiID is public then we use the public configWS given by the package
   # else if apiID is private, we use the url procided by the user
   if (apiID == "ws_private") {
     if(url != ""){
       # configWS is an environment with specific variables to phenomeapi web service
+<<<<<<< HEAD
       assign("BASE_PATH",paste0("http://",url),configWS)
+=======
+      # full url if protocol has been sent
+      if(grepl("http", url)){
+        assign("BASE_PATH", url, configWS)
+      }else{
+        # short url 
+        assign("BASE_PATH",paste0(http_scheme, "://", url), configWS)
+      }
+
+>>>>>>> niio972/master
     } else {
       print("Please, you have to give an URL and port address")
     }
@@ -72,6 +88,7 @@ getTokenResponseWS<-function(resource,paramPath=NULL,attributes,type = "applicat
     print(r)
   }
 
+<<<<<<< HEAD
   return(r)
 }
 
@@ -122,63 +139,64 @@ getTokenResponseWS2<-function(resource,attributes,type = "application/json",verb
   # if (r$status_code >= 200 && r$status_code < 300){
   #   print("Query executed and data recovered")
   # }
+=======
+>>>>>>> niio972/master
   return(r)
 }
 
 
+<<<<<<< HEAD
 
 ##' @title getResponseFromWS
+=======
+##' @title getTokenResponseWS2
+>>>>>>> niio972/master
 ##'
-##' @description Create an URL to call the WS and retrun a formatted response of WSResponse class.
-##' @param responseObject object HTTP httr
+##' @description Create a token to call the webservice for authentication and
+##' returns a formatted response of WSResponse class.
+##' @param resource character, an resource from the web service api
+##' @param attributes a list containing a login and a password
 ##' @param verbose logical FALSE by default, if TRUE display information about the progress
+##' @details This function is OK for the second version of the web service
+##'  (a POST call with an invisible request using a correct JSON list in a body)
+##' @seealso https://brapi.docs.apiary.io/#introduction/structure-of-the-response-object
+##' @return responseObject an object HTTP httr
+##' @importFrom openssl md5
 ##' @keywords internal
-getResponseFromWS<-function(resource,paramPath = NULL,attributes,type="application/json",verbose=FALSE){
-  webserviceBaseUrl <- get("BASE_PATH",configWS)
-  urlParams <- ""
-  # creation de l'url
-  for (attribut in names(attributes)) {
-    if (urlParams != ""){
-      urlParams <- paste0(urlParams,"&")
-    }
-    #     chaines de caractere
-    if (is.character(attributes[[attribut]])){
-      urlParams <- paste0(urlParams,attribut,"=",utils::URLencode(attributes[[attribut]],reserved = TRUE))
-      #       nombres
-    } else if (is.numeric(attributes[[attribut]])){
-      urlParams <- paste0(urlParams,attribut,"=",format(attributes[[attribut]], scientific=FALSE))
-      # autres
-    } else {
-      urlParams <- paste0(urlParams,attribut,"=",attributes[[attribut]])
-    }
-  }
-  if (is.null(paramPath)){
-    finalurl <- paste0(webserviceBaseUrl, resource , "?", urlParams)
-  } else {
-    finalurl <- paste0(webserviceBaseUrl, resource ,"/",paramPath, "?", urlParams)
-  }
+getTokenResponseWS2<-function(resource,attributes,type = "application/json",verbose=FALSE){
+  # create the URL
+  #finalurl <- paste0(get("BASE_PATH",configWS),"brapi/v1/token")
+  finalurl <- paste0(get("BASE_PATH",configWS),resource)
 
+  # Create the body JSON list with the attributes
+  # take care that httr::POST function doesn't allow to md5 object
+  # I had to convert the md5 object into a string one with the toString() function
+  finalbody<-list(grant_type="password",
+                  username= attributes[[1]],
+                  password=toString(md5(attributes[[2]])))
+
+  # call
   ptm <- proc.time()
-  r <- httr::GET(finalurl)
+  r <- httr::POST(url=finalurl,body = finalbody,encode="json")
   if (verbose) {
     print("Request Time : " )
     print(proc.time() - ptm)
     print(r)
   }
 
-  if(r$status_code >= 500){
-    print("WebService internal error")
-  }
-  if(r$status_code == 401){
-    print("User not authorized")
-  }
-  if(r$status_code >= 400 && r$status_code != 401 &&  r$status_code < 500){
-    print("Bad user request")
-  }
-  if(r$status_code >= 200 && r$status_code < 300){
-    print("Query executed and data recovered")
-  }
-  return(getDataAndShowStatus(r))
+  # if (r$status_code >= 500){
+  #   print("WebService internal error")
+  # }
+  # if (r$status_code == 401){
+  #   print("User not authorized")
+  # }
+  # if (r$status_code >= 400 && r$status_code != 401 &&  r$status_code < 500){
+  #   print("Bad user request")
+  # }
+  # if (r$status_code >= 200 && r$status_code < 300){
+  #   print("Query executed and data recovered")
+  # }
+  return(r)
 }
 
 # ##' @title postResponseFromWS

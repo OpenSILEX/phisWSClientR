@@ -3,7 +3,7 @@
 # Objective:
 # Author: I. Sanchez
 # Creation: 19/03/2018
-# Update: 29/05/2018
+# Update: 25/01/2019
 #-------------------------------------------------------------------------------
 
 ## title defines a public configuration for the web service access
@@ -49,7 +49,21 @@ configWS<-new.env(emptyenv())
   assign("BRAPITOKEN", "brapi/v1/token", configWS)
   assign("AGROOBJECTS", "agronomicalObjects", configWS)
   assign("DATASETS", "datasets", configWS)
-
+  assign("ANNOTATIONS", "annotations", configWS)
+  assign("ENVIRONMENTS", "environments", configWS)
+  assign("SCIENTIFIC_OBJECTS", "scientificObjects", configWS)
+  assign("SENSORS", "sensors", configWS)
+  assign("VECTORS", "vectors", configWS)
+  assign("SPECIES", "species", configWS)
+  assign("TRAITS", "traits", configWS)
+  assign("UNITS", "units", configWS)
+  assign("EVENTS", "events", configWS)
+  assign("EXPERIMENTS", "experiments", configWS)
+  assign("INFRASTRUCTURES", "infrastructures", configWS)
+  assign("IMAGES", "images", configWS)
+  assign("RADIOMETRIC_TARGETS", "radiometricTargets", configWS)
+  assign("METHODS", "methods", configWS)
+  
   # commun
   assign("VARIABLES", "variables", configWS)
   assign("ENVIRONMENT", "environment", configWS)

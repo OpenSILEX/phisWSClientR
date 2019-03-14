@@ -1,13 +1,15 @@
 Package: phisWSClientR
 Title: PHIS client R
-Version: 1.0.0
+Version: 1.2.0
 Authors@R: c(person("Pascal", "Neveu", email = "pascal.neveu@supagro.inra.fr", role = "aut"),
     person("Anne", "Tireau", email = "anne.tireau@supagro.inra.fr", role = "aut"),
     person("Arnaud", "Charleroy", email = "arnaud.charleroy@inra.fr", role = "aut"),
     person("Morgane", "Vidal", email = "morgane.vidal@inra.fr", role = "aut"),
+    person("Elise", "Chourrout", email = "elise.chourrout@supagro.fr", role = "aut"),
+    person("Jean-Eudes", "Hollebecq", email = "jean-eudes.hollebecq@inra.fr", role = "aut"),
     person("Isabelle", "Sanchez", email = "isabelle.sanchez@inra.fr", role = c("aut", "cre")))
 Maintainer: Isabelle Sanchez <isabelle.sanchez@inra.fr>
-Description: a set of functions to connect R to the phenomeapi web service in PHIS-SILEX. You can retrieve phenotypic data 
+Description: a set of functions to connect R to the phenomeapi web service in phis OpenSILEX. You can retrieve phenotypic data 
    from the greenhouse platforms (GET imagery, environment, watering and weighing) or the field platforms. Public access is allowed
    with specific login as well as private access if the user has an account on an instance of the PHIS system information.
 Depends:
@@ -28,5 +30,5 @@ Suggests:
     knitr,
     rmarkdown
 Author: Isabelle Sanchez [aut, cre]
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr
