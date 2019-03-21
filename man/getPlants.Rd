@@ -4,8 +4,8 @@
 \alias{getPlants}
 \title{retrieves the context of plant linked to an experiment from the web service}
 \usage{
-getPlants(token, plantAlias = "", experimentURI = "", germplasmURI = "",
-  page = NULL, pageSize = NULL, verbose = FALSE)
+getPlants(token, plantAlias = "", experimentURI = "",
+  germplasmURI = "", page = NULL, pageSize = NULL, verbose = FALSE)
 }
 \arguments{
 \item{token}{a token}

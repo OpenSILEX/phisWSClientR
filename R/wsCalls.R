@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-# Program: wsFunctions.R
+# Program: wsCalls.R
 # Objective: functions called by the user on the web service Phenomeapi
 # Author: A. Charleroy
 # Creation: 12/08/2016
@@ -79,224 +79,7 @@ getToken<-function(login,password,verbose=FALSE){
   }
 }
 
-##' @title retrieves the list of projects from the web service
-##'
-##' @description Retrieves the list of projects in the WS
-##' @param token a token
-##' @param projectName Name of the project to search
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
-##' @return WSResponse object
-##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
-##' service
-##' @examples
-##' \donttest{
-##'  initializeClientConnection(apiID="ws_public")
-##'  accesToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  getProjects(accesToken$data)
-##'  getProjects(accesToken$data, page = 1)
-##'  getProjects(accesToken$data, page = 3, pageSize = 100)
-##'  getProjects(accesToken$data, projectName = "PHIS_Publi")
-##' }
-##' @export
-getProjects<-function(token, projectName = "",page=NULL,pageSize=NULL,verbose=FALSE){
-  if(is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
 
-  attributes = list(sessionId = token, page = page, pageSize = pageSize)
-  if (projectName != ""){
-    attributes <- c(attributes, projectName = projectName)
-  }
-  projectResponse<-getResponseFromWS(resource = get("PROJECTS",configWS),attributes=attributes,verbose=verbose)
-  return(projectResponse)
-}
-
-##' @title getVariablesByCategory
-##'
-##' @description Retrieves the variable by categories (environment or setpoint...)
-##' @param token a token
-##' @param category Name of the category to search
-##' @param imageryProvider character, provider of the images
-##' @param experimentURI URI of the experiment
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
-##' @return WSResponse object
-##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
-##' service
-##' @examples
-##' \donttest{
-##'  initializeClientConnection(apiID="ws_public")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  vars <- getVariablesByCategory(aToken$data,category="imagery",
-##'           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
-##'  vars$data
-##' }
-##' @export
-getVariablesByCategory<-function(token,category ="",experimentURI ="",imageryProvider="",
-                                 page=NULL,pageSize=NULL,verbose=FALSE){
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  attributes = list(sessionId=token, page=page, pageSize = pageSize)
-  if (category  == ""){
-    stop("no category selected")
-  } else {
-    if (experimentURI != ""){
-      attributes <- c(attributes, experimentURI = experimentURI)
-    }
-    if (imageryProvider != ""){
-      attributes <- c(attributes, imageryProvider = imageryProvider)
-    }
-    variableResponse <- getResponseFromWS(resource=paste0(get("VARIABLES",configWS),"/category/",category),
-                                          attributes = attributes,verbose=verbose)
-    return(variableResponse)
-  }
-}
-
-
-##' @title retrieves the environmental mesures of an experiment from the web service
-##'
-##' @description Retrieves environmental mesures of an experiment or by dates
-##' @param token a token
-##' @param variableCategory character, a category of variables
-##' @param startDate data > startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )
-##' @param endDate data < startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )
-##' @param variables list of variables for the request (Ex : "wind speed_weather station_meter per second")
-##' @param facility place of the experiment (Ex : "http://www.phenome-fppn.fr/m3p/ec3")
-##' @param experimentURI URI of the experiment
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
-##' @return WSResponse object
-##' @details You have to execute the getToken() function first to have access to the web
-##' service
-##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @examples
-##' \donttest{
-##' initializeClientConnection(apiID="ws_public")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  getEnvironment(aToken$data,page=3,pageSize=100,startDate="2012-02-21",endDate = "2012-03-21")
-##'  test<-getEnvironment(aToken$data,
-##'        experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
-##'  test$data
-##'  getEnvironment(aToken$data,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
-##'  startDate="2012-02-21",endDate="2012-02-15 19:20:30")
-##'  getEnvironment(aToken$data,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
-##'     facility="http://www.phenome-fppn.fr/m3p/ec3",
-##'     variables="wind speed_weather station_meter per second")
-##' }
-##' @export
-getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = "" ,variables = "",facility = "",
-                           experimentURI ="", page = NULL, pageSize = NULL,verbose=FALSE){
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-
-  attributes = list(sessionId = token, page = page, pageSize=pageSize)
-  if (startDate != ""){
-    attributes <- c(attributes, startDate = startDate)
-  }
-  if (endDate != ""){
-    attributes <- c(attributes, endDate = endDate)
-  }
-  if (facility != ""){
-    attributes <- c(attributes, facility = facility)
-  }
-  if (experimentURI != ""){
-    attributes <- c(attributes, experimentURI = experimentURI)
-  }
-  if (variableCategory != ""){
-    attributes <- c(attributes, variableCategory = variableCategory)
-  }
-  if (variables != ""){
-    attributes <- c(attributes, variables = utils::URLencode(variables))
-  }
-  environmentResponse <- getResponseFromWS(resource = get("ENVIRONMENT",configWS),
-                                           attributes = attributes,verbose=verbose)
-  return(environmentResponse)
-}
-
-##' @title getExperimentById
-##'
-##' @description retrieves the informations for one experiment
-##' @param token a token
-##' @param experimentURI URI of the experiment
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
-##' @return WSResponse object
-##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
-##' service
-##' @examples
-##' \donttest{
-##' initializeClientConnection(apiID="ws_public")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  publicExp<-getExperimentById(aToken$data,
-##'         experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
-##'  publicExp$data
-##' }
-##' @keywords internal
-getExperimentById <- function(token, experimentURI ="", page = NULL,pageSize = NULL,verbose=FALSE){
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  attributes = list(sessionId = token, page = page, pageSize = pageSize)
-  if (experimentURI  == ""){
-    stop("no experimentURI selected")
-  } else {
-    # IS 03/11/2016 Suppress double URL encoding. Update tomcat allowed encoded slash security parameter
-    expUrlEncoded<-paste0(utils::URLencode(experimentURI,  reserved = TRUE),"/details")
-    experimentResponse<-getResponseFromWS(resource = get("EXPERIMENT",configWS),
-                                          paramPath=expUrlEncoded,attributes=attributes,verbose=verbose)
-    return(experimentResponse)
-  }
-}
-
-##' @title retrieves the experiments from the web service
-##'
-##' @description Retrieves the available experiments and/or linked to a project
-##' @param token a token
-##' @param projectName  project name
-##' @param season character, a year when the experiment was conducted
-##' @param sortOrder ordering "ASC" or "DESC"
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
-##' @return WSResponse object
-##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
-##' service
-##' @examples
-##' \donttest{
-##' initializeClientConnection(apiID="ws_public")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")$data
-##'  getExperiments(aToken,page=3,pageSize=100,startDate="2012-02-21",endDate="2012-03-21")
-##'  getExperiments(aToken,projectName = "PHIS_Publi")
-##'  getExperiments(aToken,sortOrder = "ASC")
-##'  getExperiments(aToken,season = 2012 )
-##' }
-##' @export
-getExperiments <- function(token, projectName ="", season = "", sortOrder = "DESC" ,
-                           page = NULL,pageSize = NULL,verbose=FALSE){
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  attributes = list(sessionId = token, page = page, pageSize = pageSize)
-
-  if (projectName != ""){
-    attributes <- c(attributes, projectName = projectName)
-  }
-  if (season != ""){
-    attributes <- c(attributes, season = season)
-  }
-  if (sortOrder != ""){
-    attributes <- c(attributes, sortOrder = sortOrder)
-  }
-  experimentResponse<-getResponseFromWS(resource = get("EXPERIMENT",configWS),
-                                        attributes = attributes,verbose=verbose)
-  return(experimentResponse)
-}
 
 ##' @title retrieves the context of plant linked to an experiment from the web service
 ##'
@@ -359,7 +142,7 @@ getPlants <- function(token, plantAlias ="", experimentURI = "", germplasmURI = 
 ##' # test$data
 ##' @keywords internal
 getPlantsContextByID<-function(token, plantURI ="",experimentURI="",page = NULL,
-                               pageSize = NULL,verbose=FALSE){
+                                 pageSize = NULL,verbose=FALSE){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
   attributes = list(sessionId = token, page = page, pageSize = pageSize)
@@ -373,7 +156,7 @@ getPlantsContextByID<-function(token, plantURI ="",experimentURI="",page = NULL,
     # AC 28/10/2016 Suppress double URL encoding. Update tomcat allowed encoded slash security parameter
     plantURIEncoded = utils::URLencode(plantURI,reserved = TRUE)
     plantByIDResponse<-getResponseFromWS(resource = get("PLANTS",configWS),
-                                         paramPath=plantURIEncoded,attributes=attributes,verbose=verbose)
+                                        paramPath=plantURIEncoded,attributes=attributes,verbose=verbose)
     return(plantByIDResponse)
   }
 }
