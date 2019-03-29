@@ -18,7 +18,7 @@ Author   : I.Sanchez (MISTEA)
 Objective: a vignette for phisWSClientR library
            an introduction to requesting the phenomeapi (phis web service) WS2
 Creation : 24/01/2019
-Update   : 14/02/2019
+Update   : 14/02/2019 ; 15/03/2019
 -->
 
 ***
@@ -29,6 +29,7 @@ This tutorial explains how to access to the second **phenomeapi** web service (P
 For this second web service, the available functions are:
 
 * getAnnotations()
+* getData()
 * getEnvironmentData()
 * getEvents()
 * getExperiments2()
@@ -162,6 +163,17 @@ Ask permission to request to the web service:
   head(getPhenotypeData(aToken$data, 
                         variable = "http://www.opensilex.org/demo/id/variables/v001", 
                         pageSize=10)$data)
+```
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+vars = getVariables2(token = aToken$data)$data$uri
+totalCount <- getData(token = aToken$data, variable = vars[4])$totalCount
+data <- getData(token,
+  variable = vars[4], pageSize = totalCount)
+head(data <- getData(aToken$data,
+  variable = vars[5],
+  startDate = "2017-05-01", endDate = "2017-06-01", pageSize = totalCount))
+data$data
 ```
 
 # Session info
