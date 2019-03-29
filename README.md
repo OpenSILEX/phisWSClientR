@@ -44,13 +44,11 @@ You can find a shinydashboard app to document the first phenomeapi web service u
    
 # Installation
 
-To install the **phisWSClientR** package, the easiest is to install it directly from Gitlab. Open an R session and run the following commands:
+To install the **phisWSClientR** package, the easiest is to install it directly from Github. Open an R session and run the following commands:
 
 ```R
 library(remotes) 
-install_gitlab("OpenSILEX/data-analysis-visualisation/phisWSClientR", 
-                host = "forgemia.inra.fr",
-                build_vignettes=TRUE)
+install_github("OpenSILEX/phisWSClientR",build_vignettes=TRUE)
 ```
 
 You can also download a tar.gz archive and install it with *install_packages()*.
@@ -65,7 +63,10 @@ help(package="phisWSClientR")
 ```
 
 # Test
-You can give a test to the package using the available vignettes (/doc directory) and use the documentation.
+You can give a test to the package using the available vignettes (/doc directory) and use the documentation. if you have some difficulties to retrieve the html vignettes, you can use https://rawgit.com on the github file paths:
+
+* https://github.com/OpenSILEX/phisWSClientR/blob/master/doc/introWS2.html
+* https://github.com/OpenSILEX/phisWSClientR/blob/master/doc/requestWS.html
 
 # Citation
 
