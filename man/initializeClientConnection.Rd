@@ -4,13 +4,16 @@
 \alias{initializeClientConnection}
 \title{initializeClientConnection}
 \usage{
-initializeClientConnection(apiID, url = "")
+initializeClientConnection(apiID, url = "", http_scheme = "http")
 }
 \arguments{
 \item{apiID}{character, a character name of an API ("ws_public" or "ws_private")}
 
 \item{url}{character, if apiID is private add the url of the chosen API, containing the IP,
-the port and the path of the WS}
+the port and the path of the WS resources 'www.opensilex.org/openSilexAPI/rest/'
+or the full url with the protocol 'http://www.opensilex.org/openSilexAPI/rest/'}
+
+\item{http_scheme}{character, permits to switch between http, https or other protocols}
 }
 \description{
 load name space and connexion parameters of the webservice.

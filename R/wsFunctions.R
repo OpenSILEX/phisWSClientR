@@ -3,7 +3,7 @@
 # Objective: functions to facilitate requests on web service Phenomeapi
 # Author: A. Charleroy
 # Creation: 19/03/2018
-# Update: 24/01/2019 by I.Sanchez
+# Update: 04/04/2019 by I.Sanchez
 #-------------------------------------------------------------------------------
 
 
@@ -12,7 +12,7 @@
 ##' @param url character, if apiID is private add the url of the chosen API, containing the IP,
 ##'            the port and the path of the WS resources 'www.opensilex.org/openSilexAPI/rest/'
 ##'            or the full url with the protocol 'http://www.opensilex.org/openSilexAPI/rest/'
-##' @param http_scheme character, permits to swtich between http, https or other protocols
+##' @param http_scheme character, permits to switch between http, https or other protocols
 ##' @description load name space and connexion parameters of the webservice.
 ##' Execute only once at the beginning of the requests.
 ##' In the case of a WebService change of address or a renaming of services, please edit this list.

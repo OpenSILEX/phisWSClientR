@@ -7,7 +7,7 @@
 # Do we have to join getExperiments and getExperiments2????
 # Authors: A. Charleroy, I.Sanchez, J.E.Hollebecq, E.Chourrout
 # Creation: 24/01/2019
-# Update: 24/01/2019 (by I.Sanchez)
+# Update: 04/04/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getExperimentById
