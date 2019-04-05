@@ -5,8 +5,8 @@
 \title{getEvents}
 \usage{
 getEvents(token, uri = "", type = "", concernsUri = "",
-  concernsLabel = "", dateRangeStart = "", dateRangeEnd = "",
-  page = NULL, pageSize = NULL, verbose = FALSE)
+  concernsLabel = "", startDate = "", endDate = "", page = NULL,
+  pageSize = NULL, verbose = FALSE)
 }
 \arguments{
 \item{token}{character, a token from \code{\link{getToken}} function}
@@ -19,9 +19,9 @@ getEvents(token, uri = "", type = "", concernsUri = "",
 
 \item{concernsLabel}{character, search by the label concerned by the event (optional)}
 
-\item{dateRangeStart}{character, search from the start of range (optional)}
+\item{startDate}{character, search from the start of range (optional)}
 
-\item{dateRangeEnd}{character, search to the end of range (optional)}
+\item{endDate}{character, search to the end of range (optional)}
 
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 

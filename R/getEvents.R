@@ -15,8 +15,8 @@
 ##' @param type character, search by the type of an event (optional)
 ##' @param concernsUri character, search by the URI concerned by the event (optional)
 ##' @param concernsLabel character, search by the label concerned by the event (optional)
-##' @param dateRangeStart character, search from the start of range (optional)
-##' @param dateRangeEnd character, search to the end of range (optional)
+##' @param startDate character, search from the start of range (optional)
+##' @param endDate character, search to the end of range (optional)
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
@@ -39,8 +39,8 @@ getEvents <- function(token,
                       type = "",
                       concernsUri = "",
                       concernsLabel = "",
-                      dateRangeStart = "",
-                      dateRangeEnd = "",
+                      startDate = "",
+                      endDate = "",
                       page = NULL,
                       pageSize = NULL,
                       verbose = FALSE){
@@ -54,8 +54,8 @@ getEvents <- function(token,
   if (type!="")           attributes <- c(attributes, type = type)
   if (concernsUri!="")    attributes <- c(attributes, concernsUri = concernsUri)
   if (concernsLabel!="")  attributes <- c(attributes, concernsLabel = concernsLabel)
-  if (dateRangeStart!="") attributes <- c(attributes, dateRangeStart = dateRangeStart)
-  if (dateRangeEnd!="")   attributes <- c(attributes, dateRangeEnd = dateRangeEnd)
+  if (startDate!="")      attributes <- c(attributes, startDate = startDate)
+  if (endDate!="")        attributes <- c(attributes, endDate = endDate)
   
   variableResponse <- getResponseFromWS2(resource = paste0(get("EVENTS", configWS)),
                                          attributes = attributes,
