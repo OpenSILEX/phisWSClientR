@@ -27,7 +27,14 @@ getVariables2(token, uri = "", label = "", trait = "", method = "",
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
 }
 \value{
-WSResponse object
+a WSResponse object. In the 'data' part of the returned object, a data.frame is
+   given, containing:
+\describe{
+\item{trait informations:}{uri, label, comment, ontologiesReferences, properties}
+\item{method informations:}{uri, label, comment, ontologiesReferences, properties}
+\item{unit informations:}{uri, label, comment, ontologiesReferences, properties}
+\item{and uri, label and comment}{for each variable}
+}
 }
 \description{
 Retrieves the variable descriptions, trait, method and unit covered by the variable

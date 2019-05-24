@@ -5,7 +5,7 @@
 #             * getVariables2: for WS2
 # Authors: A. Charleroy, I.Sanchez, J.E.Hollebecq, E.Chourrout
 # Creation: 24/01/2019
-# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/05/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getVariablesByCategory
@@ -64,7 +64,14 @@ getVariablesByCategory<-function(token,category ="",experimentURI ="",imageryPro
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize character, number of elements by page (pagination Plant Breeding API)
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
-##' @return WSResponse object
+##' @return a WSResponse object. In the 'data' part of the returned object, a data.frame is
+##'    given, containing:
+##' \describe{
+##' \item{trait informations:}{uri, label, comment, ontologiesReferences, properties}
+##' \item{method informations:}{uri, label, comment, ontologiesReferences, properties}
+##' \item{unit informations:}{uri, label, comment, ontologiesReferences, properties}
+##' \item{and uri, label and comment}{for each variable}
+##' }
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
 ##' service
@@ -101,5 +108,17 @@ getVariables2 <- function(token,
   variableResponse <- getResponseFromWS2(resource = paste0(get("VARIABLES", configWS)),
                                          attributes = attributes,
                                          verbose = verbose)
+  
+  # Convert the JSON data.frame in real R data.frame
+  tmp<-variableResponse$data
+  variableResponse$data<-cbind.data.frame(as.data.frame(tmp$trait),
+                         as.data.frame(tmp$method),
+                         as.data.frame(tmp$unit),
+                         tmp[,4:6])
+  colnames(variableResponse$data)<-c(paste("trait",colnames(tmp$trait),sep="."),
+                    paste("method",colnames(tmp$method),sep="."),
+                    paste("unit",colnames(tmp$unit),sep="."),
+                    colnames(tmp)[4:6])
+  
   return(variableResponse)
 }
