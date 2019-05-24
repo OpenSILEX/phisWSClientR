@@ -61,5 +61,9 @@ getData <- function(token,
   variableResponse <- getResponseFromWS2(resource = paste0(get("DATA", configWS)),
                                          attributes = attributes,
                                          verbose = verbose)
+  
+  # convert value column from character to numeric
+  variableResponse$data[,"value"]<-as.numeric(variableResponse$data[,"value"])
+  
   return(variableResponse)
 }
