@@ -23,6 +23,7 @@ For the first web service, the available functions are:
 For the second web service, the available functions are:
 
 * getAnnotations()
+* getData()
 * getEnvironmentData()
 * getEvents()
 * getExperiments2()
