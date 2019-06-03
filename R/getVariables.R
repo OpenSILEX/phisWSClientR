@@ -3,9 +3,10 @@
 # Objective: functions to get the variables service from WS1 or WS2
 #             * getVariablesByCategory: for WS1
 #             * getVariables2: for WS2
+#             * getVariablesByExperiment: for WS2
 # Authors: A. Charleroy, I.Sanchez, J.E.Hollebecq, E.Chourrout
 # Creation: 24/01/2019
-# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/05/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 03/06/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getVariablesByCategory
@@ -56,7 +57,7 @@ getVariablesByCategory<-function(token,category ="",experimentURI ="",imageryPro
 ##'
 ##' @description Retrieves the variable descriptions, trait, method and unit covered by the variable
 ##' @param token character, a token from \code{\link{getToken}} function
-##' @param uri character, search by the uri of an experiment (optional)
+##' @param uri character, search by the uri of a variable (optional)
 ##' @param label character, search by label (optional)
 ##' @param trait character, search by trait uri (optional)
 ##' @param method character, search by method uri (optional)
@@ -121,4 +122,89 @@ getVariables2 <- function(token,
                     colnames(tmp)[4:6])
   
   return(variableResponse)
+}
+
+#----------------------------------------------------------------------------
+##' @title getVariablesByExperiment
+##'
+##' @description Retrieves the variable descriptions, trait, method and unit covered by the variable
+##'       for a given experiment URI
+##' @param token character, a token from \code{\link{getToken}} function
+##' @param uri character, search by the uri of an experiment
+##' @param page numeric, displayed page (pagination Plant Breeding API)
+##' @param pageSize character, number of elements by page (pagination Plant Breeding API)
+##' @param verbose logical, FALSE by default, if TRUE display information about the progress
+##' @return a WSResponse object. In the 'data' part of the returned object, a data.frame is
+##'    given, containing:
+##' \describe{
+##' \item{trait informations:}{uri, label, comment, ontologiesReferences, properties}
+##' \item{method informations:}{uri, label, comment, ontologiesReferences, properties}
+##' \item{unit informations:}{uri, label, comment, ontologiesReferences, properties}
+##' \item{and uri, label and comment}{for each variable}
+##' }
+##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
+##' service
+##' @importFrom dplyr select starts_with bind_rows
+##' @importFrom tidyr gather
+##' @examples
+##' \donttest{
+##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+##'  aToken = getToken("guest@opensilex.org","guest")
+##'  varExp<- getVariablesByExperiment(aToken$data, uri = "http://www.opensilex.org/demo/DIA2017-1")
+##'  varExp$data
+##' }
+##' @export
+getVariablesByExperiment <- function(token,
+                          uri = "",
+                          pageSize = NULL,
+                          page = NULL,
+                          verbose = FALSE){
+  if (is.null(page)) page <- get("DEFAULT_PAGE",configWS)
+  if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE",configWS)
+  
+  attributes <- list(pageSize=pageSize,
+                     page = page,
+                     Authorization=token)
+  # Retrieve the information of the given experiment URI
+  tmpExp<-getExperiments2(token,uri = uri)
+  
+  # Some datamanagement to retrieve the names of the variables
+  # in THIS experiment
+  tmp<-select(tmpExp$data,starts_with("variables"))
+  tmp<-tmp[[1]]
+  tmp<-gather(tmp,"Name","label",1:ncol(tmp))
+  # We need only the uri of the variables: a vector
+  inputVar<-tmp[,1]
+  
+  # Request on VARIABLES service to retrieve all the information
+  # of the variables for THIS experiment
+  # boucle temporary??
+  
+  tmpVar<-list()
+  if (length(inputVar)!= 0){
+    for (i in 1:length(inputVar)){
+      tmpVar[[i]]<-getVariables2(token, uri = inputVar[i])
+    }
+    
+    # Format the output list into a data.frame
+    tmpData<-lapply(tmpVar, function (x) x[['data']])
+    tmpData<-bind_rows(tmpData)
+    
+    varResponse<-list(tmpVar[[1]]$currentPage,tmpVar[[1]]$totalCount,
+                      tmpVar[[1]]$totalPages,tmpVar[[1]]$codeHttp,
+                      tmpVar[[1]]$codeHttpMessage,tmpVar[[1]]$codeStatusMessage,
+                      tmpData)
+    names(varResponse)<-c("currentPage","totalCount","totalPages","codeHttp",
+                          "codeHttpMessage","codeStatusMessage","data")
+    
+  } else {
+    varResponse<-list(currentPage=NULL,totalCount=NULL,
+                      totalPages=NULL,codeHttp=200,
+                      codeHttpMessage="No variable available for this experiment",
+                      codeStatusMessage=NULL,
+                      data=NULL)
+  }
+  
+  return(varResponse)
 }
