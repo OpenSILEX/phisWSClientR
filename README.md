@@ -37,11 +37,11 @@ For the second web service, the available functions are:
 * getTraits()
 * getUnits()
 * getVariables2()
+* getVariablesByExperiment()
 * getVectors()
 
 
-
-You can find a shinydashboard app to document the first phenomeapi web service using the phisWSClientR package [here](https://github.com/sanchezi/docAppPhisWSClientR).
+You can find a shinydashboard app to document the first phenomeapi web service using the phisWSClientR package [here](https://github.com/sanchezi/docAppPhisWSClientR). 
    
 # Installation
 
