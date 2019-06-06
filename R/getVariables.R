@@ -6,7 +6,7 @@
 #             * getVariablesByExperiment: for WS2
 # Authors: A. Charleroy, I.Sanchez, J.E.Hollebecq, E.Chourrout
 # Creation: 24/01/2019
-# Update: 01/02/2019 (by J-E.Hollebecq) ; 03/06/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 06/06/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getVariablesByCategory
@@ -145,7 +145,7 @@ getVariables2 <- function(token,
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
 ##' service
-##' @importFrom dplyr select starts_with bind_rows
+##' @importFrom dplyr select starts_with
 ##' @importFrom tidyr gather
 ##' @examples
 ##' \donttest{
@@ -178,23 +178,18 @@ getVariablesByExperiment <- function(token,
   inputVar<-tmp[,1]
   
   # Request on VARIABLES service to retrieve all the information
-  # of the variables for THIS experiment
-  # boucle temporary??
+  # of the variables of ALL experiments
+  tmpCountVar<-getVariables2(token)$totalCount
+  tmpVar<-getVariables2(token,pageSize = tmpCountVar)$data
+
+  # Filtering variables on THIS experiment
+  tmpFilterData<-tmpVar[tmpVar[,"uri"] %in% inputVar,]
   
-  tmpVar<-list()
-  if (length(inputVar)!= 0){
-    for (i in 1:length(inputVar)){
-      tmpVar[[i]]<-getVariables2(token, uri = inputVar[i])
-    }
-    
-    # Format the output list into a data.frame
-    tmpData<-lapply(tmpVar, function (x) x[['data']])
-    tmpData<-bind_rows(tmpData)
-    
-    varResponse<-list(tmpVar[[1]]$currentPage,tmpVar[[1]]$totalCount,
-                      tmpVar[[1]]$totalPages,tmpVar[[1]]$codeHttp,
-                      tmpVar[[1]]$codeHttpMessage,tmpVar[[1]]$codeStatusMessage,
-                      tmpData)
+  # create the formatted output response
+  if (nrow(tmpFilterData)!= 0){
+    varResponse<-list(1,nrow(tmpFilterData),1,200,
+                      "Query executed and data recovered",NULL,
+                      tmpFilterData)
     names(varResponse)<-c("currentPage","totalCount","totalPages","codeHttp",
                           "codeHttpMessage","codeStatusMessage","data")
     
