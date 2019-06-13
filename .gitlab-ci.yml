@@ -6,9 +6,9 @@ image: debian:9
 before_script:
   - apt update
   - apt install r-base -y
-  - R -e 'install.packages("devtools")'
-  - R -e 'install.packages("remotes")'
-  - R -e 'install.packages("covr")'
+  - R -e 'install.packages("devtools",repos="https://cloud.r-project.org/")'
+  - R -e 'install.packages("remotes",repos="https://cloud.r-project.org/")'
+  - R -e 'install.packages("covr",repos="https://cloud.r-project.org/")'
  
 after_script:
   - R -e  "covr::codecov()"
