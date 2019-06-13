@@ -2,25 +2,32 @@
 # you can delete this line if you're not using Docker
 image: debian:9
 
+# install R
 before_script:
-  - echo "Before script section"
-  - echo "For example you might run an update here or install a build dependency"
-  - echo "Or perhaps you might print out some debugging details"
-
+  - apt update
+  - apt install dirmngr --install-recommends -y
+  - apt install software-properties-common -y
+  - apt install apt-transport-https -y
+  - apt-key adv --keyserver keys.gnupg.net --recv-key 'E19F5F87128899B192B1A2C2AD5F960A256A04AF'
+  - add-apt-repository 'deb https://cloud.r-project.org/bin/linux/debian stretch-cran35/'
+  - apt update
+  - apt install r-base -y
+  - R -e 'install.packages("devtools")'
+  - R -e 'install.packages("remotes")'
+  - R -e 'install.packages("covr")'
+ 
 after_script:
-  - echo "After script section"
-  - echo "For example you might do some cleanup here"
-
+  - R -e  "covr::codecov()"
+  
 build1:
   stage: build
   script:
-    - echo "Do your build here"
+    - R -e 'devtools::build()'
 
-test1:
+test_install_from_github:
   stage: test
   script:
-    - echo "Do a test here"
-    - echo "For example run a test suite"
+    - R -e 'remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref="v1.3.0",upgrade ="always")'
 
 test2:
   stage: test
@@ -31,4 +38,9 @@ test2:
 deploy1:
   stage: deploy
   script:
-    - echo "Do your deploy here"
+    - git remote add upstream https://github.com/niio972/phisWSClientR
+    - git fetch upstream
+    - git push upstream master
+  when: manual
+  only:
+    - master
