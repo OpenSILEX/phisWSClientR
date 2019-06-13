@@ -5,12 +5,6 @@ image: debian:9
 # install R
 before_script:
   - apt update
-  - apt install dirmngr --install-recommends -y
-  - apt install software-properties-common -y
-  - apt install apt-transport-https -y
-  - apt-key adv --keyserver keys.gnupg.net --recv-key 'E19F5F87128899B192B1A2C2AD5F960A256A04AF'
-  - add-apt-repository 'deb https://cloud.r-project.org/bin/linux/debian stretch-cran35/'
-  - apt update
   - apt install r-base -y
   - R -e 'install.packages("devtools")'
   - R -e 'install.packages("remotes")'
