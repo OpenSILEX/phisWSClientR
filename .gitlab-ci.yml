@@ -1,4 +1,3 @@
-
 # you can delete this line if you're not using Docker
 image: debian:9
 
@@ -6,28 +5,29 @@ image: debian:9
 before_script:
   - apt update
   - apt install r-base -y
+
+ 
+after_script:
   - R -e 'install.packages("devtools")'
   - R -e 'install.packages("remotes")'
   - R -e 'install.packages("covr")'
- 
-after_script:
-  - R -e  "covr::codecov()"
   
 build1:
   stage: build
   script:
     - R -e 'devtools::build()'
 
-test_install_from_github:
+install_from_github:
   stage: test
   script:
     - R -e 'remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref="v1.3.0",upgrade ="always")'
 
-test2:
+code_coverage:
   stage: test
   script:
-    - echo "Do another parallel test here"
-    - echo "For example run a lint test"
+    - echo "Code coverage"
+    - R -e  "covr::codecov()"
+
 
 deploy1:
   stage: deploy
