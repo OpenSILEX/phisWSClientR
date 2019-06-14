@@ -1,35 +1,79 @@
-
 # you can delete this line if you're not using Docker
-image: debian:9
+image: r-base
 
-# install R
+stages:
+  - build
+  - document
+  - check
+  - test
+  - deploy
+
+
+variables:
+  R_REPOS: "http://cloud.R-project.org/"
+
+# install R and http dependencies
 before_script:
-  - apt update
-  - apt install r-base -y
-  - R -e 'install.packages("devtools",repos="https://cloud.r-project.org/")'
-  - R -e 'install.packages("remotes",repos="https://cloud.r-project.org/")'
-  - R -e 'install.packages("covr",repos="https://cloud.r-project.org/")'
- 
-after_script:
-  - R -e  "covr::codecov()"
-  
-build1:
+   - apt-get update
+   - apt-get install libssl-dev libcurl4-openssl-dev libgit2-dev -y
+   - R -e 'install.packages("devtools", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("remotes", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("covr", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("knitr", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("ggplot2", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("tidyr", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("dplyr", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("lubridate", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("urltools", repos="http://cloud.R-project.org/")'
+   
+# Cache packages in between jobs
+cache:
+    paths:
+      - /usr/local/lib/R
+      - /usr/bin
+      - usr/local/lib/R
+
+buildbinary:
   stage: build
   script:
-    - R -e 'devtools::build()'
+    - R -e 'devtools::build(binary = TRUE)'
 
-test_install_from_github:
+checkerrors:
+  stage: check
+  script:
+    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) stop("Check with Errors"), silent = TRUE)'
+
+checkwarnings:
+  stage: check
+  script:
+    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) stop("Check with Warnings"), silent = TRUE)'
+
+checknotes:
+  stage: check
+  script:
+    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) stop("Check with Notes"), silent = TRUE)'
+
+unittests:
   stage: test
+  script:
+    - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
+
+codecov:
+  stage: test
+  script:
+    - R -e 'covr::codecov()'
+
+install_from_github:
+  stage: deploy
   script:
     - R -e 'remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref="v1.3.0",upgrade ="always")'
 
-test2:
-  stage: test
+install:
+  stage: deploy
   script:
-    - echo "Do another parallel test here"
-    - echo "For example run a lint test"
+    - R -e 'devtools::install()'
 
-deploy1:
+deployonotherrepository:
   stage: deploy
   script:
     - git remote add upstream https://github.com/niio972/phisWSClientR
