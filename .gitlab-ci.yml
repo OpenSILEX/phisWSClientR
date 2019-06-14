@@ -1,10 +1,10 @@
 # you can delete this line if you're not using Docker
 image: debian:9
 
-# install R
+# install R and http dependencies
 before_script:
   - apt update
-  - apt install libssl-dev -y
+  - apt install libssl-dev libcurl4-openssl-dev -y
   - apt install r-base -y
 
  
