@@ -4,7 +4,7 @@ image: debian:9
 # install R
 before_script:
   - apt update
-  - apt install libssl-dev
+  - apt install libssl-dev -y
   - apt install r-base -y
 
  
