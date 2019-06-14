@@ -9,6 +9,7 @@ before_script:
   - R -e 'install.packages("devtools", repos="http://cloud.r-project.org/")'
   - R -e 'install.packages("remotes", repos="http://cloud.r-project.org/")'
   - R -e 'install.packages("covr", repos="http://cloud.r-project.org/")'
+  - R -e 'install.packages("knitr", repos="http://cloud.r-project.org/")'
   
 build1:
   stage: build
