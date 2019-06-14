@@ -6,9 +6,6 @@ before_script:
   - apt update
   - apt install libssl-dev libcurl4-openssl-dev -y
   - apt install r-base -y
-
- 
-after_script:
   - R -e 'install.packages("devtools", repos="http://cloud.r-project.org/")'
   - R -e 'install.packages("remotes", repos="http://cloud.r-project.org/")'
   - R -e 'install.packages("covr", repos="http://cloud.r-project.org/")'
