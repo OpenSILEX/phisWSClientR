@@ -16,7 +16,6 @@ variables:
 before_script:
    - apt-get update
    - apt-get install libssl-dev libcurl4-openssl-dev libgit2-dev -y
-   - apt-get install r-base -y
    - R -e 'install.packages("devtools", repos="http://cloud.R-project.org/")'
    - R -e 'install.packages("remotes", repos="http://cloud.R-project.org/")'
    - R -e 'install.packages("covr", repos="http://cloud.R-project.org/")'
@@ -32,8 +31,8 @@ cache:
     paths:
       - /usr/local/lib/R
       - /usr/bin
-   
-    
+      - usr/local/lib/R
+
 buildbinary:
   stage: build
   script:
