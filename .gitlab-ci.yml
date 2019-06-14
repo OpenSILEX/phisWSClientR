@@ -14,6 +14,10 @@ before_script:
 build1:
   stage: build
   script:
+    - R -e 'install.packages("ggplot2", repos="http://cloud.r-project.org/")'
+    - R -e 'install.packages("tidyr", repos="http://cloud.r-project.org/")'
+    - R -e 'install.packages("dplyr", repos="http://cloud.r-project.org/")'
+    - R -e 'install.packages("lubridate", repos="http://cloud.r-project.org/")'
     - R -e 'devtools::build()'
 
 install_from_github:
