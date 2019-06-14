@@ -1,13 +1,6 @@
 # you can delete this line if you're not using Docker
 image: debian:9
 
-stages:
-  - build
-  - document
-  - check
-  - test
-  - deploy
-
 variables:
   R_REPOS: "http://cloud.r-project.org/"
 
