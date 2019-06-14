@@ -2,7 +2,6 @@
 image: debian:9
 
 stages:
-  - before_script
   - build
   - document
   - check
@@ -11,52 +10,52 @@ stages:
 
 
 variables:
-  R_REPOS: "http://cloud.r-project.org/"
+  R_REPOS: "http://cloud.R-project.org/"
 
 # install R and http dependencies
 before_script:
    - apt update
    - apt install libssl-dev libcurl4-openssl-dev -y
    - apt install r-base -y
-   - R -e 'install.packages("devtools", repos="http://cloud.r-project.org/")'
-   - R -e 'install.packages("remotes", repos="http://cloud.r-project.org/")'
-   - R -e 'install.packages("covr", repos="http://cloud.r-project.org/")'
-   - R -e 'install.packages("knitr", repos="http://cloud.r-project.org/")'
-   - R -e 'install.packages("ggplot2", repos="http://cloud.r-project.org/")'
-   - R -e 'install.packages("tidyr", repos="http://cloud.r-project.org/")'
-   - R -e 'install.packages("dplyr", repos="http://cloud.r-project.org/")'
-   - R -e 'install.packages("lubridate", repos="http://cloud.r-project.org/")'
-   - R -e 'install.packages("urltools", repos="http://cloud.r-project.org/")'
+   - R -e 'install.packages("devtools", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("remotes", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("covr", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("knitr", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("ggplot2", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("tidyr", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("dplyr", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("lubridate", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("urltools", repos="http://cloud.R-project.org/")'
   
 buildbinary:
   stage: build
   script:
-    - r -e 'devtools::build(binary = TRUE)'
+    - R -e 'devtools::build(binary = TRUE)'
     
 checkerrors:
   stage: check
   script:
-    - r -e 'if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) stop("Check with Errors")'
+    - R -e 'if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) stop("Check with Errors")'
 
 checkwarnings:
   stage: check
   script:
-    - r -e 'if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) stop("Check with Warnings")'
+    - R -e 'if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) stop("Check with Warnings")'
 
 checknotes:
   stage: check
   script:
-    - r -e 'if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) stop("Check with Notes")'
+    - R -e 'if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) stop("Check with Notes")'
 
 unittests:
   stage: test
   script:
-    - r -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
+    - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
 
 codecov:
   stage: test
   script:
-    - r -e 'covr::codecov()'
+    - R -e 'covr::codecov()'
 
 install_from_github:
   stage: deploy
@@ -66,7 +65,7 @@ install_from_github:
 install:
   stage: deploy
   script:
-    - r -e 'devtools::install()'
+    - R -e 'devtools::install()'
 
 deployonotherrepository:
   stage: deploy
