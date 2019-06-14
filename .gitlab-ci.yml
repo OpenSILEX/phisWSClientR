@@ -26,6 +26,13 @@ before_script:
    - R -e 'install.packages("dplyr", repos="http://cloud.R-project.org/")'
    - R -e 'install.packages("lubridate", repos="http://cloud.R-project.org/")'
    - R -e 'install.packages("urltools", repos="http://cloud.R-project.org/")'
+   
+# Cache packages in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - /usr/local/lib/R/site-library
+
   
 buildbinary:
   stage: build
