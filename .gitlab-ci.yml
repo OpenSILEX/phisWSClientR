@@ -1,5 +1,5 @@
 # you can delete this line if you're not using Docker
-image: debian:9
+image: r-base
 
 stages:
   - build
