@@ -17,10 +17,7 @@ variables:
 before_script:
    - apt-get update
    - apt-get install libssl-dev libcurl4-openssl-dev libgit2-dev -y
-   - echo $R_REPOS
-   - echo R_LIBS_USER
-   - R -e 'print( Sys.getenv("R_LIBS_USER"))'
-   - R -e 'print( Sys.getenv("$R_LIBS_USER"))'
+   - chmod -R 770 $R_LIBS_USER
    - R -e 'install.packages("devtools", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
    - R -e 'install.packages("remotes", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
    - R -e 'install.packages("covr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
