@@ -41,21 +41,25 @@ buildbinary:
 checkerrors:
   stage: check
   script:
+    - R -e 'options(warn=-1)'
     - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) stop("Check with Errors"), silent = TRUE)'
 
 checkwarnings:
   stage: check
   script:
+    - R -e 'options(warn=-1)'
     - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) stop("Check with Warnings"), silent = TRUE)'
 
 checknotes:
   stage: check
   script:
+    - R -e 'options(warn=-1)'
     - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) stop("Check with Notes"), silent = TRUE)'
 
 unittests:
   stage: test
   script:
+    - R -e 'options(warn=-1)'
     - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
 
 codecov:
