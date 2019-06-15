@@ -18,10 +18,10 @@ before_script:
    - mkdir -p $R_LIBS_USER
    - apt-get update
    - apt-get install libssl-dev libcurl4-openssl-dev libgit2-dev -y
-   - R -e 'if (!require("devtools")) install.packages("devtools", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
-   - R -e 'if (!require("remotes")) install.packages("remotes", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
-   - R -e 'if (!require("covr")) install.packages("covr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
-   - R -e 'if (!require("knitr")) install.packages("knitr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'install.packages("devtools", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'install.packages("remotes", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'install.packages("covr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'install.packages("knitr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
  
    
 # Cache packages in between jobs
