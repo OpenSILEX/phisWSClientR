@@ -11,27 +11,26 @@ stages:
 
 variables:
   R_REPOS: "http://cloud.R-project.org/"
+  R_LIBS_USER: "$CI_PROJECT_DIR/ci/lib"
 
 # install R and http dependencies
 before_script:
    - apt-get update
    - apt-get install libssl-dev libcurl4-openssl-dev libgit2-dev -y
-   - R -e 'install.packages("devtools", repos="http://cloud.R-project.org/")'
-   - R -e 'install.packages("remotes", repos="http://cloud.R-project.org/")'
-   - R -e 'install.packages("covr", repos="http://cloud.R-project.org/")'
-   - R -e 'install.packages("knitr", repos="http://cloud.R-project.org/")'
-   - R -e 'install.packages("ggplot2", repos="http://cloud.R-project.org/")'
-   - R -e 'install.packages("tidyr", repos="http://cloud.R-project.org/")'
-   - R -e 'install.packages("dplyr", repos="http://cloud.R-project.org/")'
-   - R -e 'install.packages("lubridate", repos="http://cloud.R-project.org/")'
-   - R -e 'install.packages("urltools", repos="http://cloud.R-project.org/")'
+   - R -e 'install.packages("devtools", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'install.packages("remotes", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'install.packages("covr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'install.packages("knitr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'install.packages("ggplot2", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'install.packages("tidyr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'install.packages("dplyr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'install.packages("lubridate", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'install.packages("urltools", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
    
 # Cache packages in between jobs
 cache:
     paths:
-      - /usr/local/lib/R/site-library
-      - /var/lib/R
-      - /root/R
+      - $R_LIBS_USER
 
 buildbinary:
   stage: build
