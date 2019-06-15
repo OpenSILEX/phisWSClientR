@@ -15,9 +15,9 @@ variables:
 
 # install R and http dependencies
 before_script:
+    - mkdir -p 770 $R_LIBS_USER
    - apt-get update
    - apt-get install libssl-dev libcurl4-openssl-dev libgit2-dev -y
-   - chmod -R 770 $R_LIBS_USER
    - R -e 'install.packages("devtools", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
    - R -e 'install.packages("remotes", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
    - R -e 'install.packages("covr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
