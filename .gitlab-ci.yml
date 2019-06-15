@@ -18,10 +18,10 @@ before_script:
    - mkdir -p $R_LIBS_USER
    - apt-get update
    - apt-get install libssl-dev libcurl4-openssl-dev libgit2-dev -y
-   - R -e 'install.packages("devtools", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
-   - R -e 'install.packages("remotes", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
-   - R -e 'install.packages("covr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
-   - R -e 'install.packages("knitr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'if (!require("devtools")) install.packages("devtools", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'if (!require("remotes")) install.packages("remotes", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'if (!require("covr")) install.packages("covr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e 'if (!require("knitr")) install.packages("knitr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
  
    
 # Cache packages in between jobs
@@ -32,11 +32,7 @@ cache:
 buildbinary:
   stage: build
   script:
-    - R -e 'install.packages("ggplot2", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
-    - R -e 'install.packages("tidyr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
-    - R -e 'install.packages("dplyr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
-    - R -e 'install.packages("lubridate", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
-    - R -e 'install.packages("urltools", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+    - R -e 'devtools::install_deps(dep = T, lib = Sys.getenv("R_LIBS_USER"))'
     - R -e 'devtools::build(binary = TRUE)'
 
 checkerrors:
