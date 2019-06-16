@@ -26,6 +26,7 @@ before_script:
 cache:
     paths:
       - $R_LIBS_USER
+      - '/usr/local/lib/R/site-library'
 
 buildbinary:
   stage: build
