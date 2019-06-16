@@ -32,7 +32,7 @@ cache:
 buildbinary:
   stage: build
   script:
-    - R -e 'library("devtools", lib.loc=Sys.getenv("R_LIBS_USER"));devtools::install_deps(dep = T, lib = Sys.getenv("R_LIBS_USER"))'
+    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"));devtools::install_deps(dep = T, lib = Sys.getenv("R_LIBS_USER"))'
     - R -e 'library("devtools", lib.loc=Sys.getenv("R_LIBS_USER"));devtools::build(binary = TRUE)'
 
 checkerrors:
