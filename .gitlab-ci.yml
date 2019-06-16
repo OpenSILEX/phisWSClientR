@@ -1,5 +1,5 @@
 # you can delete this line if you're not using Docker
-image: rocker/r-ver:3.4.4
+image: rocker/verse:3.4.4
 
 stages:
   - build
@@ -18,7 +18,6 @@ before_script:
    - mkdir -p $R_LIBS_USER
    - apt-get update
    #- apt-get install libssl-dev libcurl4-openssl-dev libgit2-dev libxml2-dev -y
-   - R -e 'if(!require("devtools")) install.packages("devtools", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
    - R -e 'if(!require("covr")) install.packages("covr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
    - R -e 'if(!require("knitr"))install.packages("knitr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
    
@@ -26,12 +25,11 @@ before_script:
 cache:
     paths:
       - $R_LIBS_USER
-      - '/usr/local/lib/R/site-library'
 
 buildbinary:
   stage: build
   script:
-    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"));installed.packages();devtools::install_deps(dep = T, lib = Sys.getenv("R_LIBS_USER"))'
+    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"));devtools::install_deps(dep = T, lib = Sys.getenv("R_LIBS_USER"))'
     - R -e 'library("devtools", lib.loc=Sys.getenv("R_LIBS_USER"));devtools::build(binary = TRUE)'
 
 checkerrors:
