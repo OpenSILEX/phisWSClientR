@@ -21,6 +21,7 @@ before_script:
    - R -e 'if(!require("devtools")) install.packages("devtools", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
    - R -e 'if(!require("covr")) install.packages("covr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
    - R -e 'if(!require("knitr"))install.packages("knitr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
+   - R -e '.libPaths(Sys.getenv("R_LIBS_USER"))'
  
    
 # Cache packages in between jobs
