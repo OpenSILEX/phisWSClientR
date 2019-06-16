@@ -31,9 +31,8 @@ cache:
 buildbinary:
   stage: build
   script:
-    - R -e 'require("devtools"))'
-    - R -e 'devtools::install_deps(dep = T, lib = Sys.getenv("R_LIBS_USER"))'
-    - R -e 'devtools::build(binary = TRUE)'
+    - R -e 'library("devtools");devtools::install_deps(dep = T, lib = Sys.getenv("R_LIBS_USER"))'
+    - R -e 'library("devtools");devtools::build(binary = TRUE)'
 
 checkerrors:
   stage: check
