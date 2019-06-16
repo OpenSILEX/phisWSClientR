@@ -17,6 +17,7 @@ variables:
 before_script:
    - mkdir -p $R_LIBS_USER
    - apt-get update
+   - R -e 'devtools::install_deps(dep=TRUE)'
    
 # Cache packages in between jobs
 cache:
@@ -28,7 +29,6 @@ cache:
 buildbinary:
   stage: build
   script:
-    - R -e 'devtools::install_deps(dep = T)'
     - R -e 'devtools::build(binary = TRUE)'
 
 checkerrors:
@@ -54,7 +54,6 @@ unittests:
 codecov:
   stage: test
   script:
-    - R -e 'install.packages("testthat", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
     - R -e 'covr::codecov()'
 
 install_from_github:
