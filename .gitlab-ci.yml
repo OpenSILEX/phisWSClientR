@@ -1,5 +1,5 @@
 # you can delete this line if you're not using Docker
-image: r-base:3.4.0
+image: r-base:3.4.4
 
 stages:
   - build
