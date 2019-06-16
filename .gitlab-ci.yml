@@ -21,8 +21,6 @@ before_script:
    - R -e 'if(!require("devtools")) install.packages("devtools", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
    - R -e 'if(!require("covr")) install.packages("covr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
    - R -e 'if(!require("knitr"))install.packages("knitr", repos=Sys.getenv("R_REPOS"), lib= Sys.getenv("R_LIBS_USER"))'
-   - R -e '.libPaths(Sys.getenv("R_LIBS_USER"))'
- 
    
 # Cache packages in between jobs
 cache:
@@ -32,7 +30,7 @@ cache:
 buildbinary:
   stage: build
   script:
-    - R -e '.libPaths();installed.packages();devtools::install_deps(dep = T, lib = Sys.getenv("R_LIBS_USER"))'
+    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"));installed.packages();devtools::install_deps(dep = T, lib = Sys.getenv("R_LIBS_USER"))'
     - R -e 'library("devtools", lib.loc=Sys.getenv("R_LIBS_USER"));devtools::build(binary = TRUE)'
 
 checkerrors:
