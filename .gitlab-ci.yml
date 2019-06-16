@@ -1,5 +1,5 @@
 # you can delete this line if you're not using Docker
-image: r-base:3.4.4
+image: r-ver:3.4.4
 
 stages:
   - build
@@ -32,7 +32,7 @@ cache:
 buildbinary:
   stage: build
   script:
-    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"));devtools::install_deps(dep = T, lib = Sys.getenv("R_LIBS_USER"))'
+    - R -e '.libPaths();installed.pacages();devtools::install_deps(dep = T, lib = Sys.getenv("R_LIBS_USER"))'
     - R -e 'library("devtools", lib.loc=Sys.getenv("R_LIBS_USER"));devtools::build(binary = TRUE)'
 
 checkerrors:
