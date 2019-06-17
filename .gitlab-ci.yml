@@ -17,6 +17,7 @@ variables:
 before_script:
    - mkdir -p $R_LIBS_USER
    - apt-get update
+   - R -e '.libPaths()'
    - R -e 'devtools::install_deps(dep=TRUE)'
    
 # Cache packages in between jobs
