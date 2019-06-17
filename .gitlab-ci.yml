@@ -23,8 +23,6 @@ before_script:
 cache:
     paths:
       - $R_LIBS_USER
-      - '/usr/local/lib/R/site-library'
-      
       
 buildbinary:
   stage: build
@@ -32,26 +30,31 @@ buildbinary:
     - R -e 'devtools::build(binary = TRUE)'
 
 checkerrors:
+  when: manual
   stage: check
   script:
     - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) stop("Check with Errors"), silent = TRUE)'
 
 checkwarnings:
+  when: manual
   stage: check
   script:
     - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) stop("Check with Warnings"), silent = TRUE)'
 
 checknotes:
+  when: manual
   stage: check
   script:
     - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) stop("Check with Notes"), silent = TRUE)'
 
 unittests:
+  when: manual
   stage: test
   script:
     - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
 
 codecov:
+  when: manual
   stage: test
   script:
     - R -e 'covr::codecov()'
@@ -62,6 +65,7 @@ install_from_github:
     - R -e 'remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref="v1.3.0",upgrade ="always")'
 
 install:
+  when: manual
   stage: deploy
   script:
     - R -e 'devtools::install()'
