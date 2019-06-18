@@ -1,4 +1,7 @@
+# you can delete this line if you're not using Docker
+image: rocker/verse:3.4.4
 
+# order of the different steps
 stages:
   - build
   - document
@@ -6,19 +9,17 @@ stages:
   - test
   - deploy
 
-
+# define system envrionment variables
 variables:
   R_REPOS: "http://cloud.R-project.org/"
   R_LIBS_USER: "$CI_PROJECT_DIR/ci/lib"
 
-# install R and http dependencies
+# install R dependencies
 before_script:
    - mkdir -p $R_LIBS_USER
-   - apt-get update
-   - R -e '.libPaths()'
    - R -e 'devtools::install_deps(dep=TRUE)'
    
-# Cache packages in between jobs
+# Cache R directories in between jobs
 cache:
     paths:
       - $R_LIBS_USER
@@ -32,19 +33,19 @@ checkerrors:
   when: manual
   stage: check
   script:
-    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) stop("Check with Errors"), silent = TRUE)'
+    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) stop("Check with Errors") else print("No Errors"), silent = TRUE)'
 
 checkwarnings:
   when: manual
   stage: check
   script:
-    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) stop("Check with Warnings"), silent = TRUE)'
+    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) stop("Check with Warnings") else print("No Warnings"), silent = TRUE)'
 
 checknotes:
   when: manual
   stage: check
   script:
-    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) stop("Check with Notes"), silent = TRUE)'
+    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) stop("Check with Notes") else print("No Notes"), silent = TRUE)'
 
 unittests:
   when: manual
