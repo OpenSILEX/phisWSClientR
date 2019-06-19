@@ -13,7 +13,7 @@ stages:
 variables:
   R_REPOS: "http://cloud.R-project.org/"
   R_LIBS_USER: "$CI_PROJECT_DIR/ci/lib"
-  R_CHECK_NOTES : false
+  R_CHECK_NOTES : "false"
 
 # install R dependencies
 before_script:
