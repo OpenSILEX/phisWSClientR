@@ -13,12 +13,13 @@ stages:
 variables:
   R_REPOS: "http://cloud.R-project.org/"
   R_LIBS_USER: "$CI_PROJECT_DIR/ci/lib"
+  R_TMP_USER: "$CI_PROJECT_DIR/ci/tmp"
   R_CHECK_NOTES : "false"
 
 # install R dependencies
 before_script:
    - mkdir -p $R_LIBS_USER
-   - R -e '.libPaths(Sys.getenv("R_LIBS_USER"));devtools::install_deps(dep=TRUE,lib=Sys.getenv("R_LIBS_USER"))'
+   - R -e 'devtools::install_deps(dep=TRUE,lib=Sys.getenv("R_LIBS_USER"))'
    
 # Cache R directories in between jobs
 cache:
@@ -28,49 +29,49 @@ cache:
 buildbinary:
   stage: build
   script:
-    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"));devtools::build(binary = TRUE)'
+    - R -e 'devtools::build(binary = TRUE)'
 
 checkerrors:
   when: manual
   stage: check
   script:
-    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"));try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) stop("Check with Errors") else print("No Errors"), silent = TRUE)'
+    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) stop("Check with Errors") else print("No Errors"), silent = TRUE)'
 
 checkwarnings:
   when: manual
   stage: check
   script:
-    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"));try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) stop("Check with Warnings") else print("No Warnings"), silent = TRUE)'
+    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) stop("Check with Warnings") else print("No Warnings"), silent = TRUE)'
 
 checknotes:
   when: manual
   stage: check
   script:
-    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"));try(if (identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) print(Sys.setenv(R_CHECK_NOTES ="true")), silent = TRUE)'
+    - R -e 'try(if (identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system(\"R_CHECK_NOTES ="true"\"), silent = TRUE)'
     - echo $R_CHECK_NOTES 
-    - if [ $R_CHECK_NOTES = "true" ] ; exit 1 ; fi
+    - if [ $R_CHECK_NOTES = "true" ] ; then exit 1 ; fi
 unittests:
   when: manual
   stage: test
   script:
-    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"));if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
+    - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
 
 codecov:
   when: manual
   stage: test
   script:
-    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"));covr::codecov()'
+    - R -e 'covr::codecov()'
 
 install_from_github:
   stage: test
   script:
-    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"));remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref="v1.3.0")'
+    - R -e 'remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref="v1.3.0")'
 
 install:
   when: manual
   stage: deploy
   script:
-    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"));devtools::install()'
+    - R -e 'devtools::install()'
 
 deployonotherrepository:
   stage: deploy
