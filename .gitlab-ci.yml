@@ -13,6 +13,7 @@ stages:
 variables:
   R_REPOS: "http://cloud.R-project.org/"
   R_LIBS_USER: "$CI_PROJECT_DIR/ci/lib"
+  R_CHECK_NOTES = false
 
 # install R dependencies
 before_script:
@@ -45,8 +46,8 @@ checknotes:
   when: manual
   stage: check
   script:
-    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) quit(1) else print("No Notes"), silent = TRUE)'
-
+    - R -e 'try(if (identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) Sys.setenv(R_CHECK_NOTES ="true"), silent = TRUE)'
+    - if [R_CHECK_NOTES = true] ; then echo "Check notes"; exit 1 ; fi
 unittests:
   when: manual
   stage: test
