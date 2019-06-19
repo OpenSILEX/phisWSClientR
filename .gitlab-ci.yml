@@ -49,7 +49,7 @@ checknotes:
   script:
     - mkdir -p $R_TMP_USER 
     - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("touch $R_TMP_USER/notes"), silent = TRUE)'
-    - [ -f $R_TMP_USER/notes ] && echo "Found" || echo "Not found"
+    - if [ -f $R_TMP_USER/notes ]; then echo "Found"; exit 1 ; else echo "Not found"; fi
 unittests:
   when: manual
   stage: test
