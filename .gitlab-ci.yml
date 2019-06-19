@@ -47,7 +47,7 @@ checknotes:
   when: manual
   stage: check
   script:
-    - R -e 'try(if (identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system(\"R_CHECK_NOTES ="true"\"), silent = TRUE)'
+    - R -e 'try(if (identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("R_CHECK_NOTES =\"true\""), silent = TRUE)'
     - echo $R_CHECK_NOTES 
     - if [ $R_CHECK_NOTES = "true" ] ; then exit 1 ; fi
 unittests:
