@@ -47,9 +47,9 @@ checknotes:
   when: manual
   stage: check
   script:
-    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) Sys.setenv(R_CHECK_NOTES ="true"), silent = TRUE)'
-    - echo $R_CHECK_NOTES 
-    - if [ $R_CHECK_NOTES = "true" ] ; then exit 1 ; fi
+    - mkdir -p $R_TMP_USER 
+    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("touch $R_TMP_USER/notes"), silent = TRUE)'
+    - [ -f $R_TMP_USER/notes ] && echo "Found" || echo "Not found"
 unittests:
   when: manual
   stage: test
