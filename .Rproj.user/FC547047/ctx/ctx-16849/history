@@ -1,0 +1,449 @@
+qnorm(0.90)
+qnorm(0.95)
+qnorm(0.99)
+library("devtools", lib.loc="~/R/x86_64-pc-linux-gnu-library/3.5")
+library("roxygen2", lib.loc="~/R/x86_64-pc-linux-gnu-library/3.5")
+roxygenise()
+roxygenise()
+roxygenise()
+library("phisWSClientR", lib.loc="~/R/x86_64-pc-linux-gnu-library/3.5")
+library(phisWSClientR)
+initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+aToken = getToken("guest@opensilex.org","guest")
+scientificObjects <- getScientificObjects(aToken$data,
+uri = "http://www.opensilex.org/demo/2018/o18000076")
+scientificObjects$data
+phenodata <- getPhenotypeData(aToken$data,
+variable = "http://www.opensilex.org/demo/id/variables/v001")
+phenodata$data
+roxygenise()
+roxygenise()
+library(phisWSClientR)
+library(phisWSClientR)
+library(phisWSClientR)
+library(phisWSClientR)
+initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+library("phisWSClientR", lib.loc="~/R/x86_64-pc-linux-gnu-library/3.5")
+initializeClientConnection(apiID="ws_private", url = "138.102.159.37:8080/openSilexTestAPI/rest/")
+aToken = getToken("guest@opensilex.org","guest")
+phenodata <- getPhenotypeData(aToken$data,
+variable = "http://www.opensilex.org/demo/id/variables/v001")
+phenodata
+aToken$data
+phenodata <- getPhenotypeData(aToken$data,
+variable = "http://www.opensilex.org/demo/id/variables/v004")
+phenodata
+phenodata <- getPhenotypeData(aToken$data,
+variable = "http://www.opensilex.org/demo/id/variables/v005")
+phenodata
+source('~/Documents/PHISanalysis/phisWSClientR/R/getData.R')
+initializeClientConnection(apiID="ws_private", url = "138.102.159.37:8080/openSilexTestAPI/rest/")
+token = getToken("guest@opensilex.org","guest")$data
+vars = getVariables2(token = token)$data
+vars
+data <- getData(token,
+variable = vars[23])
+# Define an environment for the phenomeapi configuration
+configWS<-new.env(emptyenv())
+assign("PUBLIC_PATH","http://147.100.179.156:8080/phenomeapi/resources/", configWS)
+assign("BASE_PATH","", configWS)
+# WS phis1
+assign("TOKEN", "token", configWS)
+assign("EXPERIMENT", "experiments", configWS)
+assign("VARIABLES", "variables", configWS)
+assign("PLANTS", "plants", configWS)
+assign("IMAGESANALYSIS", "imagesAnalysis", configWS)
+assign("PHENOTYPES", "phenotypes", configWS)
+assign("WATERING", "watering", configWS)
+# WS phis2
+assign("BRAPITOKEN", "brapi/v1/token", configWS)
+assign("AGROOBJECTS", "agronomicalObjects", configWS)
+assign("DATASETS", "datasets", configWS)
+assign("ANNOTATIONS", "annotations", configWS)
+assign("ENVIRONMENTS", "environments", configWS)
+assign("SCIENTIFIC_OBJECTS", "scientificObjects", configWS)
+assign("SENSORS", "sensors", configWS)
+assign("VECTORS", "vectors", configWS)
+assign("SPECIES", "species", configWS)
+assign("TRAITS", "traits", configWS)
+assign("UNITS", "units", configWS)
+assign("EVENTS", "events", configWS)
+assign("EXPERIMENTS", "experiments", configWS)
+assign("INFRASTRUCTURES", "infrastructures", configWS)
+assign("IMAGES", "images", configWS)
+assign("RADIOMETRIC_TARGETS", "radiometricTargets", configWS)
+assign("METHODS", "methods", configWS)
+# commun
+assign("VARIABLES", "variables", configWS)
+assign("ENVIRONMENT", "environment", configWS)
+assign("PROJECTS", "projects", configWS)
+assign("DEFAULT_PAGE", 0, configWS)
+assign("DEFAULT_PAGESIZE", 100, configWS)
+assign("DATA", "data", configWS)
+data <- getData(token,
+variable = vars[23])
+source('~/Documents/PHISanalysis/phisWSClientR/R/getData.R')
+data <- getData(token,
+variable = vars[23])
+source('~/Documents/PHISanalysis/phisWSClientR/R/getData.R')
+vars
+vars[23]
+# Define an environment for the phenomeapi configuration
+configWS <- new.env(emptyenv())
+assign("PUBLIC_PATH", "http://147.100.179.156:8080/phenomeapi/resources/", configWS)
+assign("BASE_PATH", "", configWS)
+# WS phis1
+assign("TOKEN", "token", configWS)
+assign("EXPERIMENT", "experiments", configWS)
+assign("VARIABLES", "variables", configWS)
+assign("PLANTS", "plants", configWS)
+assign("IMAGESANALYSIS", "imagesAnalysis", configWS)
+assign("PHENOTYPES", "phenotypes", configWS)
+assign("WATERING", "watering", configWS)
+# WS phis2
+assign("BRAPITOKEN", "brapi/v1/token", configWS)
+assign("AGROOBJECTS", "agronomicalObjects", configWS)
+assign("DATASETS", "datasets", configWS)
+assign("DATA", "data", configWS)
+assign("ANNOTATIONS", "annotations", configWS)
+assign("ENVIRONMENTS", "environments", configWS)
+assign("SCIENTIFIC_OBJECTS", "scientificObjects", configWS)
+assign("SENSORS", "sensors", configWS)
+assign("VECTORS", "vectors", configWS)
+assign("SPECIES", "species", configWS)
+assign("TRAITS", "traits", configWS)
+assign("UNITS", "units", configWS)
+assign("EVENTS", "events", configWS)
+assign("EXPERIMENTS", "experiments", configWS)
+assign("INFRASTRUCTURES", "infrastructures", configWS)
+assign("IMAGES", "images", configWS)
+assign("RADIOMETRIC_TARGETS", "radiometricTargets", configWS)
+# commun
+assign("VARIABLES", "variables", configWS)
+assign("ENVIRONMENT", "environment", configWS)
+assign("PROJECTS", "projects", configWS)
+assign("DEFAULT_PAGE", 0, configWS)
+assign("DEFAULT_PAGESIZE", 100, configWS)
+library(phisWSClientR)
+library(openssl)
+library(httr)
+library(opencpu)
+library(plotly)
+#
+# initializeClientConnection(apiID="ws_private", url = "138.102.159.36:8080/uesAPI/rest/")
+# aToken <- getToken("jean-eudes.hollebecq@inra.fr","")
+# token=aToken$data
+# # b778bb07de5859eef4f3b72a3f964221
+initializeClientConnection(apiID="ws_private", url = "138.102.159.37:8080/openSilexTestAPI/rest/")
+aToken <- getToken("guest@opensilex.org","guest")
+token=aToken$data
+events <- getEvents(aToken$data,
+type = "http://www.opensilex.org/vocabulary/oeev#Fertilization",
+pageSize=10)
+events <- getEvents(aToken$data,
+pageSize=10)
+events$data
+# experiments
+myexp <- getExperiments2(aToken$data,
+uri = "http://www.opensilex.org/demo/DIA2017-1")
+# experiments
+myexp <- getExperiments2(aToken$data)
+myexp$data
+infrastructures$data$uri
+myexp$data$uri
+source('~/Documents/PHISanalysis/phisWSClientR/R/getData.R')
+tors <- getData(aToken$data)
+source('~/Documents/PHISanalysis/catchall-code/getResponseFromWS2.R')
+tors <- getData(aToken$data)
+getDataAndShowStatus<-function(responseObject){
+status = NULL
+json = jsonlite::fromJSON(httr::content(responseObject, as = "text", encoding = "UTF-8"))
+if (responseObject$status_code >= 400){
+if (!is.null(json$metadata$status) && length(json$metadata$status) > 0){
+print("Additional Request information :")
+print(json$metadata$status)
+status = json$metadata$status
+}
+if(responseObject$status_code >= 500){
+msg = "WebService internal error"
+}
+if(responseObject$status_code == 401){
+msg = "User not authorized"
+}
+if(responseObject$status_code >= 400 && responseObject$status_code != 401 &&  responseObject$status_code < 500){
+msg = "Bad user request"
+}
+response <- list(
+currentPage = NULL,
+totalCount = NULL,
+totalPages = NULL,
+codeHttp = responseObject$status_code,
+codeHttpMessage = msg,
+codeStatusMessage = status,
+data = NULL
+)
+} else {
+if (!is.null(json$metadata$status) && length(json$metadata$status) > 0){
+print("Additional Request information :")
+print(json$metadata$status)
+status = json$metadata$status
+}
+if (responseObject$status_code >= 200 && responseObject$status_code < 300){
+msg = "Query executed and data recovered"
+}
+response <- list(
+currentPage = json$metadata$pagination$currentPage,
+totalCount = json$metadata$pagination$totalCount,
+totalPages = json$metadata$pagination$totalPages,
+codeHttp = responseObject$status_code,
+codeHttpMessage = msg,
+codeStatusMessage = status,
+data = json$result$data
+)
+}
+class(response) <- append(class(response),"WSResponse")
+return(response)
+}
+tors <- getData(aToken$data)
+vars <- getVariables2("token")
+vars <- getVariables2(aToken$data)
+vars$data
+tors <- getData(token = aToken$data, variable = "http://www.phenome-fppn.fr/test/id/variables/v031")
+vectors$data
+tors$data
+initializeClientConnection(apiID="ws_private", url = "138.102.159.37:8080/openSilexTestAPI/rest/")
+#aToken <- getToken("admin@opensilex.org","admin")
+aToken <- getToken("guest@opensilex.org","guest")
+token=aToken$data
+tors <- getData(token = aToken$data, variable = "http://www.phenome-fppn.fr/test/id/variables/v031")
+tors$data
+class(tors$data)
+tors$totalCount
+tors <- getData(token = aToken$data, variable = "http://www.phenome-fppn.fr/test/id/variables/v031", pageSize = tors$totalCount)
+tors$data
+tors <- getData(token = aToken$data, variable = "http://www.phenome-fppn.fr/test/id/variables/v031", pageSize = tors$totalCount, startDate = "2017-05-01T01:06:00+0200", endDate = "2017-06-01T01:06:00+0200")
+tors$data
+tors <- getData(token = aToken$data, variable = "http://www.phenome-fppn.fr/test/id/variables/v031", pageSize = tors$totalCount, startDate = "2017-05-01", endDate = "2017-06-01")
+tors$data
+# Define an environment for the phenomeapi configuration
+configWS<-new.env(emptyenv())
+assign("PUBLIC_PATH","http://147.100.179.156:8080/phenomeapi/resources/", configWS)
+assign("BASE_PATH","", configWS)
+# WS phis1
+assign("TOKEN", "token", configWS)
+assign("EXPERIMENT", "experiments", configWS)
+assign("VARIABLES", "variables", configWS)
+assign("PLANTS", "plants", configWS)
+assign("IMAGESANALYSIS", "imagesAnalysis", configWS)
+assign("PHENOTYPES", "phenotypes", configWS)
+assign("WATERING", "watering", configWS)
+# WS phis2
+assign("BRAPITOKEN", "brapi/v1/token", configWS)
+assign("AGROOBJECTS", "agronomicalObjects", configWS)
+assign("DATASETS", "datasets", configWS)
+assign("DATA", "data", configWS)
+assign("ANNOTATIONS", "annotations", configWS)
+assign("ENVIRONMENTS", "environments", configWS)
+assign("SCIENTIFIC_OBJECTS", "scientificObjects", configWS)
+assign("SENSORS", "sensors", configWS)
+assign("VECTORS", "vectors", configWS)
+assign("SPECIES", "species", configWS)
+assign("TRAITS", "traits", configWS)
+assign("UNITS", "units", configWS)
+assign("EVENTS", "events", configWS)
+assign("EXPERIMENTS", "experiments", configWS)
+assign("INFRASTRUCTURES", "infrastructures", configWS)
+assign("IMAGES", "images", configWS)
+assign("RADIOMETRIC_TARGETS", "radiometricTargets", configWS)
+assign("METHODS", "methods", configWS)
+# commun
+assign("VARIABLES", "variables", configWS)
+assign("ENVIRONMENT", "environment", configWS)
+assign("PROJECTS", "projects", configWS)
+assign("DEFAULT_PAGE", 0, configWS)
+assign("DEFAULT_PAGESIZE", 100, configWS)
+getDataAndShowStatus<-function(responseObject){
+status = NULL
+json = jsonlite::fromJSON(httr::content(responseObject, as = "text", encoding = "UTF-8"))
+if (responseObject$status_code >= 400){
+if (!is.null(json$metadata$status) && length(json$metadata$status) > 0){
+print("Additional Request information :")
+print(json$metadata$status)
+status = json$metadata$status
+}
+if(responseObject$status_code >= 500){
+msg = "WebService internal error"
+}
+if(responseObject$status_code == 401){
+msg = "User not authorized"
+}
+if(responseObject$status_code >= 400 && responseObject$status_code != 401 &&  responseObject$status_code < 500){
+msg = "Bad user request"
+}
+response <- list(
+currentPage = NULL,
+totalCount = NULL,
+totalPages = NULL,
+codeHttp = responseObject$status_code,
+codeHttpMessage = msg,
+codeStatusMessage = status,
+data = NULL
+)
+} else {
+if (!is.null(json$metadata$status) && length(json$metadata$status) > 0){
+print("Additional Request information :")
+print(json$metadata$status)
+status = json$metadata$status
+}
+if (responseObject$status_code >= 200 && responseObject$status_code < 300){
+msg = "Query executed and data recovered"
+}
+response <- list(
+currentPage = json$metadata$pagination$currentPage,
+totalCount = json$metadata$pagination$totalCount,
+totalPages = json$metadata$pagination$totalPages,
+codeHttp = responseObject$status_code,
+codeHttpMessage = msg,
+codeStatusMessage = status,
+data = json$result$data
+)
+}
+class(response) <- append(class(response),"WSResponse")
+return(response)
+}
+source('~/Documents/PHISanalysis/phisWSClientR/R/getResponseFromWS.R')
+source('~/Documents/PHISanalysis/phisWSClientR/R/getData.R')
+## An example of tests for the new features for WS2 - DEMO VERSION OPENSILEX
+library(phisWSClientR)
+library(openssl)
+library(httr)
+library(opencpu)
+initializeClientConnection(apiID="ws_private", url = "138.102.159.37:8080/openSilexTestAPI/rest/")
+#aToken <- getToken("admin@opensilex.org","admin")
+aToken <- getToken("guest@opensilex.org","guest")
+token=aToken$data
+# DATA
+initializeClientConnection(apiID="ws_private", url = "138.102.159.37:8080/openSilexTestAPI/rest/")
+token = getToken("guest@opensilex.org","guest")$data
+vars = getVariables2(token = token)$data
+data <- getData(token,
+variable = vars[4])
+data <- getData(token, variable = vars[4])
+vars
+data <- getData(token, variable = vars[24])
+vars
+data <- getData(token, variable = vars[24]$uri)
+str(vars)
+head(vars)
+data <- getData(token, variable = vars$uri[24])
+data <- getData(token, variable = vars$uri[24])
+data <- getData(token, variable = vars$uri[24])
+data <- getData(token, variable = vars$uri[24])
+data <- getData(token, variable = vars$uri[15],  startDate = "2017-05-01", endDate = "2017-06-01")
+initializeClientConnection(apiID="ws_private", url = "138.102.159.37:8080/openSilexTestAPI/rest/")
+token = getToken("guest@opensilex.org","guest")$data
+vars = getVariables2(token = token)$data
+token
+vars$uri[24]
+vars
+vars$uri[24]
+data <- getData(token, variable = vars$uri[24])
+vars$uri[15]
+data <- getData(token, variable = vars$uri[15],  startDate = "2017-05-01", endDate = "2017-06-01")
+# Define an environment for the phenomeapi configuration
+configWS<-new.env(emptyenv())
+assign("PUBLIC_PATH","http://147.100.179.156:8080/phenomeapi/resources/", configWS)
+assign("BASE_PATH","", configWS)
+# WS phis1
+assign("TOKEN", "token", configWS)
+assign("EXPERIMENT", "experiments", configWS)
+assign("VARIABLES", "variables", configWS)
+assign("PLANTS", "plants", configWS)
+assign("IMAGESANALYSIS", "imagesAnalysis", configWS)
+assign("PHENOTYPES", "phenotypes", configWS)
+assign("WATERING", "watering", configWS)
+# WS phis2
+assign("BRAPITOKEN", "brapi/v1/token", configWS)
+assign("AGROOBJECTS", "agronomicalObjects", configWS)
+assign("DATASETS", "datasets", configWS)
+assign("DATA", "data", configWS)
+assign("ANNOTATIONS", "annotations", configWS)
+assign("ENVIRONMENTS", "environments", configWS)
+assign("SCIENTIFIC_OBJECTS", "scientificObjects", configWS)
+assign("SENSORS", "sensors", configWS)
+assign("VECTORS", "vectors", configWS)
+assign("SPECIES", "species", configWS)
+assign("TRAITS", "traits", configWS)
+assign("UNITS", "units", configWS)
+assign("EVENTS", "events", configWS)
+assign("EXPERIMENTS", "experiments", configWS)
+assign("INFRASTRUCTURES", "infrastructures", configWS)
+assign("IMAGES", "images", configWS)
+assign("RADIOMETRIC_TARGETS", "radiometricTargets", configWS)
+assign("METHODS", "methods", configWS)
+# commun
+assign("VARIABLES", "variables", configWS)
+assign("ENVIRONMENT", "environment", configWS)
+assign("PROJECTS", "projects", configWS)
+assign("DEFAULT_PAGE", 0, configWS)
+assign("DEFAULT_PAGESIZE", 100, configWS)
+configWS
+# DATA
+initializeClientConnection(apiID="ws_private", url = "138.102.159.37:8080/openSilexTestAPI/rest/")
+token = getToken("guest@opensilex.org","guest")$data
+vars = getVariables2(token = token)$data
+vars
+vars = getVariables2(token = token)$data$uri
+vars
+data <- getData(token, variable = vars[24])
+assign("BASE_PATH","http://138.102.159.37:8080/openSilexTestAPI/rest/", configWS)
+assign("BASE_PATH","http://138.102.159.37:8080/openSilexTestAPI/rest/", configWS)
+data <- getData(token, variable = vars[24])
+# DATA
+initializeClientConnection(apiID="ws_private", url = "138.102.159.37:8080/openSilexTestAPI/rest/")
+token = getToken("guest@opensilex.org","guest")$data
+vars = getVariables2(token = token)$data$uri
+ttlCount <- getData(token, variable = vars[24])$totalCount
+ttlCount
+library("roxygen2", lib.loc="~/R/x86_64-pc-linux-gnu-library/3.5")
+roxygenise()
+library(phisWSClientR)
+# If you want to access to a private web service, you have to insert the address of the WS and the port
+initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+aToken <- getToken("guest@opensilex.org","guest")
+getProjects2(aToken$data, uri="http://www.opensilex.org/demo/PHENOME-FPPN")
+getExperiments2(aToken$data, uri="http://www.opensilex.org/demo/DIA2017-1")
+getScientificObjects(aToken$data, uri="http://www.opensilex.org/demo/2018/o18000076")
+getInfrastructures(aToken$data, uri="https://emphasis.plant-phenotyping.eu")
+getVariables2(aToken$data, uri="http://www.opensilex.org/demo/id/variables/v010")
+getTraits(aToken$data, uri="http://www.opensilex.org/demo/id/traits/t010")
+getMethods2(aToken$data, uri="http://www.opensilex.org/demo/id/methods/m010")
+getUnits(aToken$data, uri="http://www.opensilex.org/demo/id/units/u007")
+getSpecies(aToken$data, uri="http://www.opensilex.org/id/species/helianthusannuus", language = "en")
+getSensors(aToken$data, uri="http://www.opensilex.org/demo/2018/s18001")
+getVectors(aToken$data, serialNumber = "01BD1DD71500001")
+getEnvironmentData(aToken$data, variable = "http://www.opensilex.org/demo/id/variables/v010", pageSize=50)
+head(getPhenotypeData(aToken$data,
+variable = "http://www.opensilex.org/demo/id/variables/v001",
+pageSize=10)$data)
+data <- getData(token,
+variable = vars[4], pageSize = totalCount)
+vars = getVariables2(token = token)$data
+totalCount <- getData(token, variable = vars[4])$totalCount
+vars = getVariables2(token = aToken)$data
+vars = getVariables2(token = aToken$data)$data
+totalCount <- getData(token, variable = vars[4])$totalCount
+totalCount <- getData(aToken$data, variable = vars[4])$totalCount
+vars
+vars = getVariables2(token = aToken$data)$data$uri
+vars
+totalCount <- getData(aToken$data, variable = vars[4])$totalCount
+initializeClientConnection(apiID="ws_private", url = "138.102.159.37:8080/openSilexTestAPI/rest/")
+token = getToken("guest@opensilex.org","guest")$data
+data <- getData(token,
+variable = vars[4], pageSize = totalCount)
+roxygenise()
+library(phisWSClientR)
+library("phisWSClientR", lib.loc="~/R/x86_64-pc-linux-gnu-library/3.5")
+library(roxygen2)
+roxygenise()

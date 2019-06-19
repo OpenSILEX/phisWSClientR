@@ -15,7 +15,9 @@
 ##' @param startDate character, search from start date (optional)
 ##' @param endDate character, search to end date (optional)
 ##' @param object character, search by object uri
+##' @param objectLabel character, search by object label
 ##' @param provenance character, search by provenance uri
+##' @param provenanceLabel character, search by provenance label
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
@@ -40,7 +42,9 @@
 getData <- function(token,
                    variable = "",
                    object = "",
+                   objectLabel = "",
                    provenance = "",
+                   provenanceLabel  = "",
                    startDate = "",
                    endDate = "",
                    page = NULL,
@@ -52,11 +56,13 @@ getData <- function(token,
   attributes <- list(pageSize=pageSize,
                      page = page,
                      Authorization=token)
-  if (variable!="")   attributes <- c(attributes, variable = variable)
-  if (object!="")     attributes <- c(attributes, object = object)
-  if (startDate!="")  attributes <- c(attributes, startDate = startDate)
-  if (endDate!="")    attributes <- c(attributes, endDate = endDate)
-  if (provenance!="") attributes <- c(attributes, provenance = provenance)
+  if (variable!="")    attributes <- c(attributes, variable = variable)
+  if (object!="")      attributes <- c(attributes, object = object)
+  if (objectLabel!="") attributes <- c(attributes, objectLabel = objectLabel)
+  if (startDate!="")   attributes <- c(attributes, startDate = startDate)
+  if (endDate!="")     attributes <- c(attributes, endDate = endDate)
+  if (provenance!="")  attributes <- c(attributes, provenance = provenance)
+  if (provenanceLabel!="") attributes <- c(attributes, provenanceLabel = provenanceLabel)
   
   variableResponse <- getResponseFromWS2(resource = paste0(get("DATA", configWS)),
                                          attributes = attributes,
