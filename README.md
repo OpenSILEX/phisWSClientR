@@ -23,6 +23,7 @@ For the first web service, the available functions are:
 For the second web service, the available functions are:
 
 * getAnnotations()
+* getData()
 * getEnvironmentData()
 * getEvents()
 * getExperiments2()
@@ -36,11 +37,11 @@ For the second web service, the available functions are:
 * getTraits()
 * getUnits()
 * getVariables2()
+* getVariablesByExperiment()
 * getVectors()
 
 
-
-You can find a shinydashboard app to document the first phenomeapi web service using the phisWSClientR package [here](https://github.com/sanchezi/docAppPhisWSClientR).
+You can find a shinydashboard app to document the first phenomeapi web service using the phisWSClientR package [here](https://github.com/sanchezi/docAppPhisWSClientR). 
    
 # Installation
 
@@ -48,10 +49,10 @@ To install the **phisWSClientR** package, the easiest is to install it directly 
 
 ```R
 library(remotes) 
-install_github("OpenSILEX/phisWSClientR",build_vignettes=TRUE)
+install_github("OpenSILEX/phisWSClientR",build_vignettes=TRUE,ref="v1.3.0")
 ```
 
-You can also download a tar.gz archive and install it with *install_packages()*.
+You can also download a tar.gz archive of "[v1.3.0](https://github.com/OpenSILEX/phisWSClientR/tree/v1.3.0)" version and install it with *install_packages()*. 
 
 # Usage
 

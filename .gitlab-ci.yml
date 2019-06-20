@@ -1,0 +1,102 @@
+# you can delete this line if you're not using a specific Docker image
+# get more information at https://hub.docker.com/r/rocker/verse/
+image: rocker/verse:3.4.4
+
+# order of the different jobs
+stages:
+  - build
+  - document
+  - check
+  - test
+  - deploy
+
+# define system environment variables
+variables:
+  R_REPOS: "http://cloud.R-project.org/"
+  R_LIBS : "$CI_PROJECT_DIR/install_deps" # dependencies cache
+  R_TMP_USER: "$CI_PROJECT_DIR/tmp"  # temporary directory
+
+before_script:
+  - mkdir -p $R_LIBS
+  - echo 'R_LIBS_USER="$R_LIBS"' > .Renviron
+  - R -e '.libPaths()'
+  - R -e 'devtools::install_deps(dep = TRUE,lib = Sys.getenv("R_LIBS"), upgrade = FALSE)'
+   
+# Cache R directories in between jobs
+cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - $R_LIBS
+
+
+# create an archive 
+buildBinary:
+  stage: build
+  script:
+    - R -e 'devtools::build(binary = TRUE)'
+
+checkErrors:
+  stage: check
+  script:
+    - mkdir -p $R_TMP_USER
+    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/errorsFail"), error = function(e) system("touch $R_TMP_USER/errorsFail"))'
+    - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
+
+checkWarnings:
+  allow_failure: true
+  stage: check
+  script:
+    - mkdir -p $R_TMP_USER
+    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/warningsFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
+    - if [ -f $R_TMP_USER/warningsFail ]; then echo "Check Warnings"; exit 1 ; else echo "No Warnings"; fi
+
+checkNotes:
+  allow_failure: true
+  stage: check
+  script:
+    - mkdir -p $R_TMP_USER
+    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
+    - if [ -f $R_TMP_USER/notesFail ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
+
+unitTests:
+  when: manual
+  stage: test
+  script:
+    - mkdir -p $R_TMP_USER
+    - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) system("touch $R_TMP_USER/notesFail")
+    - if [ -f $R_TMP_USER/testsFail ]; then echo "Check Tests"; exit 1 ; else echo "Tests passed"; fi
+codeCoverage:
+  when: manual
+  stage: test
+  script:
+    - R -e 'covr::codecov()'
+
+installFromGithub:
+  stage: test
+  script:
+    - R -e 'remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref="v1.3.0")'
+
+installLocally:
+  stage: deploy
+  script:
+    - R -e 'devtools::install(build_vignettes=TRUE)'
+
+deployOnTestRepository:
+  stage: deploy
+  script:
+    - git remote add upstream https://github.com/niio972/phisWSClientR
+    - git fetch upstream
+    - git push upstream HEAD:master
+  when: manual
+  only:
+    - master
+
+deployOnTestrepository2:
+  stage: deploy
+  script:
+    - git remote add upstream https://github.com/niio972/phisWSClientR
+    - git fetch upstream
+    - git push upstream master --force
+  when: manual
+  only:
+    - master
