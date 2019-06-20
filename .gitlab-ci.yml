@@ -98,6 +98,8 @@ deployOnTestrepository2:
     - git remote rm upstream
     - git remote add upstream https://github.com/niio972/phisWSClientR
     - git fetch upstream
+    - git config --global user.name "${GITHUB_USER_NAME}"
+    - git config --global user.email "${GITHUB_USER_EMAIL}"
     - git push upstream master --force
   when: manual
   only:
