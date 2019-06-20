@@ -1,2 +1,0 @@
-"0","  # If you want to access to a private web service, you have to insert the address of the WS and the port"
-"0","  initializeClientConnection(apiID=""ws_private"", url = ""www.opensilex.org/openSilexAPI/rest/"")"
