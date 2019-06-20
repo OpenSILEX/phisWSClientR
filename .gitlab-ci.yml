@@ -14,6 +14,7 @@ stages:
 variables:
   R_REPOS: "http://cloud.R-project.org/"
   R_REMOTES_UPGRADE : "never"
+  R_LIBS_USER : "/usr/local/lib/R/site-library"
   
 # install RR_TMP_USER: "$CI_PROJECT_DIR/ci/tmp" dependencies
 before_script:
