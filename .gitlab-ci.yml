@@ -13,8 +13,8 @@ stages:
 # define system environment variables
 variables:
   R_REPOS: "http://cloud.R-project.org/"
-  R_LIBS : "$CI_PROJECT_DIR/ci/lib" # dependencies cache
-  R_TMP_USER: "$CI_PROJECT_DIR/ci/tmp"  # temporary directory
+  R_LIBS : "$CI_PROJECT_DIR/../lib" # dependencies cache
+  R_TMP_USER: "$CI_PROJECT_DIR/../tmp"  # temporary directory
 
 before_script:
   - mkdir -p $R_LIBS
@@ -38,28 +38,31 @@ buildBinary:
 checkErrors:
   stage: check
   script:
-    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) system("touch $R_TMP_USER/errorscheck"), silent = TRUE)'
-    - if [ -f $R_TMP_USER/errors ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
+    - mkdir -p $R_TMP_USER
+    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/errorsFail"), error = function(e) system("touch $R_TMP_USER/errorsFail"))'
+    - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
 
 checkWarnings:
   stage: check
   script:
-    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) system("touch $R_TMP_USER/warningserror"), error = function(e) system("touch $R_TMP_USER/warningserror"))'
-    - if [ -f $R_TMP_USER/warningserror ]; then echo "Check Warnings"; exit 1 ; else echo "No Warnings"; fi
+    - mkdir -p $R_TMP_USER
+    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/warningsFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
+    - if [ -f $R_TMP_USER/warningsFail ]; then echo "Check Warnings"; exit 1 ; else echo "No Warnings"; fi
 
 checkNotes:
   stage: check
   script:
-    - mkdir -p $R_TMP_USER 
-    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("touch $R_TMP_USER/notescheck"), silent = TRUE)'
-    - if [ -f $R_TMP_USER/notescheck ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
-    
+    - mkdir -p $R_TMP_USER
+    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
+    - if [ -f $R_TMP_USER/notesFail ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
+
 unitTests:
   when: manual
   stage: test
   script:
-    - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
-
+    - mkdir -p $R_TMP_USER
+    - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) system("touch $R_TMP_USER/notesFail")
+    - if [ -f $R_TMP_USER/testsFail ]; then echo "Check Tests"; exit 1 ; else echo "Tests passed"; fi
 codeCoverage:
   when: manual
   stage: test
