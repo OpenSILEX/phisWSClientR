@@ -21,8 +21,7 @@ before_script:
   - echo 'R_LIBS="$R_LIBS"' > .Renviron
   - echo 'R_LIBS_USER="$R_LIBS"' >> .Renviron
   - echo 'R_LIBS_SITE="$R_LIBS"' >> .Renviron
-
-   - R -e 'devtools::install_deps(dep=TRUE)'
+  - R -e 'devtools::install_deps(dep=TRUE)'
    
 # Cache R directories in between jobs
 cache:
