@@ -4,18 +4,22 @@
 \alias{getData}
 \title{getData}
 \usage{
-getData(token, variable = "", object = "", provenance = "",
-  startDate = "", endDate = "", page = NULL, pageSize = NULL,
-  verbose = FALSE)
+getData(token, variableUri = "", objectUri = "", objectLabel = "",
+  provenanceUri = "", provenanceLabel = "", startDate = "",
+  endDate = "", page = NULL, pageSize = NULL, verbose = FALSE)
 }
 \arguments{
 \item{token}{character, a token from \code{\link{getToken}} function}
 
-\item{variable}{character, search by the uri of a variable (NOT optional). You can access the list of variables through \code{\link{getVariables2}} function.}
+\item{variableUri}{character, search by the uri of a variable (NOT optional). You can access the list of variables through \code{\link{getVariables2}} function.}
 
-\item{object}{character, search by object uri}
+\item{objectUri}{character, search by object uri}
 
-\item{provenance}{character, search by provenance uri}
+\item{objectLabel}{character, search by object label}
+
+\item{provenanceUri}{character, search by provenance uri}
+
+\item{provenanceLabel}{character, search by provenance label}
 
 \item{startDate}{character, search from start date (optional)}
 
