@@ -13,15 +13,13 @@ stages:
 # define system environment variables
 variables:
   R_REPOS: "http://cloud.R-project.org/"
-  R_REMOTES_UPGRADE : "never"
   R_LIBS : "$CI_PROJECT_DIR/ci/lib"
 # install R_TMP_USER: "$CI_PROJECT_DIR/ci/tmp" dependencies
 before_script:
   - mkdir -p $R_LIBS
-  - R -e '.libPaths()'
   - echo 'R_LIBS_USER="$R_LIBS"' > .Renviron
   - R -e '.libPaths()'
-  - R -e 'devtools::install_deps(dep=TRUE,lib=Sys.getenv("R_LIBS"))'
+  - R -e 'devtools::install_deps(dep = TRUE,lib = Sys.getenv("R_LIBS"), upgrade = FALSE)'
    
 # Cache R directories in between jobs
 cache:
