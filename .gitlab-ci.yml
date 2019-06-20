@@ -13,8 +13,8 @@ stages:
 # define system environment variables
 variables:
   R_REPOS: "http://cloud.R-project.org/"
-  R_LIBS : "$CI_PROJECT_DIR/../lib" # dependencies cache
-  R_TMP_USER: "$CI_PROJECT_DIR/../tmp"  # temporary directory
+  R_LIBS : "$CI_PROJECT_DIR/install_deps" # dependencies cache
+  R_TMP_USER: "$CI_PROJECT_DIR/tmp"  # temporary directory
 
 before_script:
   - mkdir -p $R_LIBS
