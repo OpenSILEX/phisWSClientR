@@ -43,6 +43,7 @@ checkErrors:
     - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
 
 checkWarnings:
+  allow_failure: true
   stage: check
   script:
     - mkdir -p $R_TMP_USER
@@ -50,6 +51,7 @@ checkWarnings:
     - if [ -f $R_TMP_USER/warningsFail ]; then echo "Check Warnings"; exit 1 ; else echo "No Warnings"; fi
 
 checkNotes:
+  allow_failure: true
   stage: check
   script:
     - mkdir -p $R_TMP_USER
@@ -79,7 +81,7 @@ installLocally:
   script:
     - R -e 'devtools::install(build_vignettes=TRUE)'
 
-deployOnTestrepository:
+deployOnTestRepository:
   stage: deploy
   script:
     - git remote add upstream https://github.com/niio972/phisWSClientR
