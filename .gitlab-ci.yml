@@ -17,7 +17,7 @@ variables:
   R_LIBS : "$CI_PROJECT_DIR/ci/lib"
 # install R_TMP_USER: "$CI_PROJECT_DIR/ci/tmp" dependencies
 before_script:
-  - mkdir -p installed_deps
+  - mkdir -p $R_LIBS
   - echo 'R_LIBS="$R_LIBS"' > .Renviron
   - echo 'R_LIBS_USER="$R_LIBS"' >> .Renviron
   - echo 'R_LIBS_SITE="$R_LIBS"' >> .Renviron
