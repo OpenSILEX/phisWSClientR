@@ -84,6 +84,7 @@ installLocally:
 deployOnTestRepository:
   stage: deploy
   script:
+    - git remote rm upstream
     - git remote add upstream https://github.com/niio972/phisWSClientR
     - git fetch upstream
     - git push upstream HEAD:master
@@ -94,6 +95,7 @@ deployOnTestRepository:
 deployOnTestrepository2:
   stage: deploy
   script:
+    - git remote rm upstream
     - git remote add upstream https://github.com/niio972/phisWSClientR
     - git fetch upstream
     - git push upstream master --force
