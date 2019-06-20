@@ -1,6 +1,7 @@
 # you can delete this line if you're not using Docker
 image: rocker/verse:3.4.4
 
+# order of the different steps
 stages:
   - build
   - document
@@ -8,19 +9,19 @@ stages:
   - test
   - deploy
 
-
+# define system envrionment variables
 variables:
   R_REPOS: "http://cloud.R-project.org/"
   R_LIBS_USER: "$CI_PROJECT_DIR/ci/lib"
+  R_TMP_USER: "$CI_PROJECT_DIR/ci/tmp"
+  R_CHECK_NOTES : "false"
 
-# install R and http dependencies
+# install R dependencies
 before_script:
    - mkdir -p $R_LIBS_USER
-   - apt-get update
-   - R -e '.libPaths()'
-   - R -e 'devtools::install_deps(dep=TRUE)'
+   - R -e 'devtools::install_deps(dep=TRUE,lib=Sys.getenv("R_LIBS_USER"))'
    
-# Cache packages in between jobs
+# Cache R directories in between jobs
 cache:
     paths:
       - $R_LIBS_USER
@@ -31,23 +32,24 @@ buildbinary:
     - R -e 'devtools::build(binary = TRUE)'
 
 checkerrors:
-  when: manual
   stage: check
   script:
-    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) stop("Check with Errors"), silent = TRUE)'
+    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) system("touch $R_TMP_USER/errorscheck"), silent = TRUE)'
+    - if [ -f $R_TMP_USER/errors ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
 
 checkwarnings:
-  when: manual
   stage: check
   script:
-    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) stop("Check with Warnings"), silent = TRUE)'
+    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) system("touch $R_TMP_USER/warningscheck"), silent = TRUE)'
+    - if [ -f $R_TMP_USER/warnings ]; then echo "Check Warnings"; exit 1 ; else echo "No Warnings"; fi
 
 checknotes:
-  when: manual
   stage: check
   script:
-    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) stop("Check with Notes"), silent = TRUE)'
-
+    - mkdir -p $R_TMP_USER 
+    - R -e 'try(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("touch $R_TMP_USER/notescheck"), silent = TRUE)'
+    - if [ -f $R_TMP_USER/notescheck ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
+    
 unittests:
   when: manual
   stage: test
