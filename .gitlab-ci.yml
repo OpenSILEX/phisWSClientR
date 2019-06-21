@@ -99,12 +99,19 @@ deployOnTestRepositoryTest:
   only: 
     - master
   script: 
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - git config --global user.email "$GITHUB_USER_NAME"
+    - git config --global user.name "$GITHUB_USER_EMAIL"
     - "mkdir -p ~/.ssh"
-    - "echo \"$SSH_PRIVATE_KEY\" | tr -d '\\r' > ~/.ssh/id_rsa"
-    - "chmod 600 ~/.ssh/id_rsa"
-    - "ssh-keyscan -H $ssh_port \"$ssh_host\" >> ~/.ssh/known_hosts"
+    - chmod 700 ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan github.com >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
     - "git remote add upstream https://github.com/niio972/phisWSClientR"
     - "git fetch upstream"
-    - "git push upstream HEAD:master"
+    - "git push upstream HEAD:master --force"
   stage: deploy
   when: manual
