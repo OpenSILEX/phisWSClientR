@@ -99,17 +99,17 @@ deployOnTestRepository:
   only:
     - master
     
-deployOnTestRepositoryTest:
-  when: manual
-  stage: deploy
+deployOnTestRepositoryTest: 
   image: ilyasemenov/gitlab-ci-git-push
-  script:
-    - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - ssh-keyscan -H $ssh_port "$ssh_host" >> ~/.ssh/known_hosts
-    - git remote add upstream https://github.com/niio972/phisWSClientR
-    - git fetch upstream
-    - git push upstream HEAD:master
-  only:
+  only: 
     - master
+  script: 
+    - "mkdir -p ~/.ssh"
+    - "echo \"$SSH_PRIVATE_KEY\" | tr -d '\\r' > ~/.ssh/id_rsa"
+    - "chmod 600 ~/.ssh/id_rsa"
+    - "ssh-keyscan -H $ssh_port \"$ssh_host\" >> ~/.ssh/known_hosts"
+    - "git remote add upstream https://github.com/niio972/phisWSClientR"
+    - "git fetch upstream"
+    - "git push upstream HEAD:master"
+  stage: deploy
+  when: manual
