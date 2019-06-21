@@ -86,14 +86,6 @@ deployOnTestRepository:
   stage: deploy
   image: ilyasemenov/gitlab-ci-git-push
   script:
-    - git config --global user.name "$GITHUB_USER_NAME"
-    - git config --global user.email "$GITHUB_USER_EMAIL"
-    - ssh git@github.com
-    - git remote rm upstream
-    - git remote add upstream https://github.com/niio972/phisWSClientR
-    - git fetch upstream
     - git-push niio972@github.com:niio972/phisWSClientR master
-    - git push upstream HEAD:master
-    #- git push upstream master --force
   only:
     - master
