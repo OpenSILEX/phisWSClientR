@@ -83,20 +83,15 @@ installLocally:
 
 deployOnTestRepository:
   stage: deploy
+  image: ilyasemenov/gitlab-ci-git-push
   script:
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - ssh-keyscan github.com >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
     - git config --global user.name "$GITHUB_USER_NAME"
     - git config --global user.email "$GITHUB_USER_EMAIL"
     - ssh git@github.com
     - git remote rm upstream
     - git remote add upstream https://github.com/niio972/phisWSClientR
     - git fetch upstream
+    - git-push niio972@github.com:niio972/phisWSClientR master
     - git push upstream HEAD:master
     #- git push upstream master --force
   only:
