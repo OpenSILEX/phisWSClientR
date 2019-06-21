@@ -84,6 +84,11 @@ installLocally:
   stage: test
   script:
     - R -e 'devtools::install(build_vignettes=TRUE)'
+script:
+    - git config --global user.name "$GITHUB_USER_NAME"
+    - git config --global user.email "$GITHUB_USER_EMAIL"
+
+  
 
 deployOnTestRepository:
   when: manual
@@ -91,5 +96,20 @@ deployOnTestRepository:
   image: ilyasemenov/gitlab-ci-git-push
   script:
     - git-push niio972@github.com:niio972/phisWSClientR master
+  only:
+    - master
+    
+deployOnTestRepositoryTest:
+  when: manual
+  stage: deploy
+  image: ilyasemenov/gitlab-ci-git-push
+  script:
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H $ssh_port "$ssh_host" >> ~/.ssh/known_hosts
+    - git remote add upstream https://github.com/niio972/phisWSClientR
+    - git fetch upstream
+    - git push upstream HEAD:master
   only:
     - master
