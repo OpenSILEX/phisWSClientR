@@ -69,6 +69,7 @@ configWS<-new.env(emptyenv())
   
   # commun
   assign("VARIABLES", "variables", configWS)
+  assign("VARIABLES_DETAILS", "variables/details", configWS)
   assign("ENVIRONMENT", "environment", configWS)
   assign("PROJECTS", "projects", configWS)
   assign("DEFAULT_PAGE", 0, configWS)
