@@ -76,7 +76,7 @@ codeCoverage:
 installFromGithub:
   stage: test
   script:
-    - R -e 'source("https://install-github.me/r-lib/desc");desc<-desc::description$new();remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref=desc$get("Version"))'
+    - R -e 'source("https://install-github.me/r-lib/desc");desc<-desc::description$new();remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref=desc$get("Version")[[1]])'
 
 installLocally:
   stage: test
