@@ -11,27 +11,45 @@
 ##' @param apiID character, a character name of an API ("ws_public" or "ws_private")
 ##' @param url character, if apiID is private add the url of the chosen API, containing the IP,
 ##'            the full url with the protocol 'http://www.opensilex.org/openSilexAPI/rest/'
+##' @param username login of the user to create the token
+##' @param password password of the user to create the token
 ##' @description load name space and connexion parameters of the webservice.
 ##' Execute only once at the beginning of the requests.
 ##' In the case of a WebService change of address or a renaming of services, please edit this list.
 ##' and execute the function.
 ##' @export
-connect<-function(apiID,userId = "guest@opensilex.org", password = "guest",url = ""){
+connect<-function(apiID, url = "", username = "guest@opensilex.org", password = "guest"){
   # if apiID is public then we use the public configWS given by the package
   # else if apiID is private, we use the url procided by the user
+  if (username == "") {
+    print("Please, you have to give an userId")
+    stop()
+  }
+  if (password == "") {
+    print("Please, you have to give an user password")
+    stop()
+  }  
+  
+  # configWS is an environment with specific variables to opensilex web service
+  # full url if protocol has been sent 
   if (apiID == "ws_private") {
-    if(url != ""){
-      # configWS is an environment with specific variables to phenomeapi web service
-      # full url if protocol has been sent
-        assign("BASE_PATH", url, configWS)
-    } else {
-      print("Please, you have to give an URL and port address")
+    if(url == ""){
+      print("Please, you have to give an URL")
       stop()
-    }
-  } else if (apiID == "ws_public") {
-      assign("BASE_PATH",get("PUBLIC_PATH",configWS),configWS)
-    }
-}
+    } 
+  }else{
+    assign("BASE_PATH", url, configWS)
+  }
+  
+  if (apiID == "ws_public") {
+    assign("BASE_PATH",get("PUBLIC_PATH",configWS),configWS)
+  }assign("BASE_PATH","", configWS)
+  assign("USERNAME", username, configWS)
+  assign("PASSWORD", password, configWS)
+  phisWSClientR::getToken(username,password)
+  
+} 
+ 
 
 ##' @title getTokenResponseWS
 ##'
@@ -252,3 +270,10 @@ ObjectType<-function(obj){
   return(utils::capture.output(str(obj)))
 }
 
+##'@title setDebugMode
+##'@description Activate or deactivate debug mode
+##'@param active a boolean to activate the debug instructions
+##'@export
+setDebugMode<-function(active=TRUE){
+  assign("VERBOSE", active, configWS)
+}
