@@ -63,7 +63,7 @@ connect<-function(apiID, url = "", username = "guest@opensilex.org", password = 
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @return responseObject an object HTTP httr
 ##' @keywords internal
-getTokenResponseWS<-function(resource,paramPath=NULL,attributes,type = "application/json",verbose=FALSE){
+getTokenResponseWS<-function(resource,paramPath=NULL,attributes,type = "application/json"){
   webserviceBaseUrl <- get("BASE_PATH",configWS)
   urlParams <- ""
   # create the URL
@@ -108,7 +108,7 @@ getTokenResponseWS<-function(resource,paramPath=NULL,attributes,type = "applicat
 ##' @return responseObject an object HTTP httr
 ##' @importFrom openssl md5
 ##' @keywords internal
-getTokenResponseWS2<-function(resource,attributes,type = "application/json",verbose=FALSE){
+getTokenResponseWS2<-function(resource,attributes,type = "application/json"){
   # create the URL
   #finalurl <- paste0(get("BASE_PATH",configWS),"brapi/v1/token")
   finalurl <- paste0(get("BASE_PATH",configWS),resource)
@@ -155,7 +155,7 @@ getTokenResponseWS2<-function(resource,attributes,type = "application/json",verb
 # ##' @param verbose logical FALSE by default, if TRUE display information about the progress
 # ##' @return WSResponse WSResponse class instance
 # ##' @keywords internal
-# postResponseFromWS<-function(resource, paramPath = NULL, attributes,  encode ="json", requestBody, verbose=FALSE){
+# postResponseFromWS<-function(resource, paramPath = NULL, attributes,  encode ="json", requestBody){
 #   #configWS<-connect()
 #   webserviceBaseUrl <- configWS[["BASE_PATH"]]
 #   urlParams = ""

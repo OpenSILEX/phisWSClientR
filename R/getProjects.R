@@ -30,7 +30,7 @@
 ##'  getProjects(aToken$data, projectName = "PHIS_Publi")
 ##' }
 ##' @export
-getProjects<-function(token, projectName = "",page=NULL,pageSize=NULL,verbose=FALSE){
+getProjects<-function(token, projectName = "",page=NULL,pageSize=NULL){
   if(is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
   
@@ -38,7 +38,7 @@ getProjects<-function(token, projectName = "",page=NULL,pageSize=NULL,verbose=FA
   if (projectName != ""){
     attributes <- c(attributes, projectName = projectName)
   }
-  projectResponse<-getResponseFromWS(resource = get("PROJECTS",configWS),attributes=attributes,verbose=verbose)
+  projectResponse<-getResponseFromWS(resource = get("PROJECTS",configWS),attributes=attributes)
   return(projectResponse)
 }
 

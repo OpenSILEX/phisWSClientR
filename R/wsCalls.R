@@ -20,14 +20,14 @@
 ##' aToken$data
 ##' }
 ##' @export
-getToken<-function(login,password,verbose=FALSE){
+getToken<-function(login,password){
   attributes<-list(username = login, password = password)
 
   # Try 1 on first web service
-  tokenResp1<-getTokenResponseWS(resource = get("TOKEN",configWS), attributes = attributes,verbose=verbose)
+  tokenResp1<-getTokenResponseWS(resource = get("TOKEN",configWS), attributes = attributes)
 
   # Try 2 on second web service
-  tokenResp2<-getTokenResponseWS2(resource = get("BRAPITOKEN",configWS), attributes = attributes,verbose=verbose)
+  tokenResp2<-getTokenResponseWS2(resource = get("BRAPITOKEN",configWS), attributes = attributes)
 
   # Test which WS is OK
   if (tokenResp1$status_code >= 200 && tokenResp1$status_code < 300 && tokenResp2$status_code >=400){
@@ -103,7 +103,7 @@ getToken<-function(login,password,verbose=FALSE){
 ##' }
 ##' @export
 getPlants <- function(token, plantAlias ="", experimentURI = "", germplasmURI = "" ,
-                      page = NULL,pageSize = NULL,verbose=FALSE){
+                      page = NULL,pageSize = NULL){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
   attributes = list(sessionId = token, page = page, pageSize = pageSize)
@@ -117,7 +117,7 @@ getPlants <- function(token, plantAlias ="", experimentURI = "", germplasmURI = 
   if (germplasmURI != ""){
     attributes <- c(attributes, germplasmURI = germplasmURI)
   }
-  plantsResponse<-getResponseFromWS(resource = get("PLANTS",configWS),attributes = attributes,verbose=verbose)
+  plantsResponse<-getResponseFromWS(resource = get("PLANTS",configWS),attributes = attributes)
   return(plantsResponse)
 }
 
@@ -142,7 +142,7 @@ getPlants <- function(token, plantAlias ="", experimentURI = "", germplasmURI = 
 ##' # test$data
 ##' @keywords internal
 getPlantsContextByID<-function(token, plantURI ="",experimentURI="",page = NULL,
-                                 pageSize = NULL,verbose=FALSE){
+                                 pageSize = NULL){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
   attributes = list(sessionId = token, page = page, pageSize = pageSize)
@@ -156,7 +156,7 @@ getPlantsContextByID<-function(token, plantURI ="",experimentURI="",page = NULL,
     # AC 28/10/2016 Suppress double URL encoding. Update tomcat allowed encoded slash security parameter
     plantURIEncoded = utils::URLencode(plantURI,reserved = TRUE)
     plantByIDResponse<-getResponseFromWS(resource = get("PLANTS",configWS),
-                                        paramPath=plantURIEncoded,attributes=attributes,verbose=verbose)
+                                        paramPath=plantURIEncoded,attributes=attributes)
     return(plantByIDResponse)
   }
 }
@@ -190,7 +190,7 @@ getPlantsContextByID<-function(token, plantURI ="",experimentURI="",page = NULL,
 ##' @keywords internal
 getPlantEnvironment <- function(token,plantURI ="",variableCategory ="",startDate = "",endDate = "",
                                 variables = "",facility = "", experimentURI ="",
-                                page = NULL,pageSize = NULL,verbose=FALSE){
+                                page = NULL,pageSize = NULL){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
   attributes = list(sessionId = token, page = page, pageSize = pageSize)
@@ -222,7 +222,7 @@ getPlantEnvironment <- function(token,plantURI ="",variableCategory ="",startDat
     plantURIEncoded =  utils::URLencode(plantURI, reserved = TRUE)
     plantEnvironmentResponse<-getResponseFromWS(resource = get("PLANTS",configWS),
                                                 paramPath = paste0(plantURIEncoded,"/environment"),
-                                                attributes =  attributes,verbose=verbose)
+                                                attributes =  attributes)
     return(plantEnvironmentResponse)
   }
 }
@@ -249,13 +249,13 @@ getPlantEnvironment <- function(token,plantURI ="",variableCategory ="",startDat
 ##'  aToken = getToken("guest@inra.fr","guest")
 ##'  myImages<-getImagesAnalysis(token = aToken$data,
 ##'            experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
-##'            variablesName = list("objAreaSum"),pageSize = 100000,verbose=FALSE)
+##'            variablesName = list("objAreaSum"),pageSize = 100000)
 ##'  head(myImages$data)
 ##' }
 ##' @export
 getImagesAnalysis <- function(token, experimentURI ="", variablesName = list(),
                               labelView ="", provider = "", date = "",
-                              page = NULL,pageSize = NULL,verbose=FALSE){
+                              page = NULL,pageSize = NULL){
 
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
@@ -280,7 +280,7 @@ getImagesAnalysis <- function(token, experimentURI ="", variablesName = list(),
     attributes <- c(attributes, experimentURI = experimentURI)
   }
   imagesAnalysisResponse <- getResponseFromWS(resource = get("IMAGESANALYSIS",configWS),
-                                              attributes = attributes,verbose=verbose)
+                                              attributes = attributes)
   return(imagesAnalysisResponse)
 }
 
@@ -306,12 +306,12 @@ getImagesAnalysis <- function(token, experimentURI ="", variablesName = list(),
 ##'  accesToken = getToken("guest@inra.fr","guest")
 ##'  mywater<-getWatering(token=accesToken$data,
 ##'          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
-##'          variablesName = list("weightBefore"),pageSize=100000,verbose=FALSE)
+##'          variablesName = list("weightBefore"),pageSize=100000)
 ##'  head(mywater$data)
 ##' }
 ##' @export
 getWatering <- function(token, experimentURI ="", variablesName = list(), provider = "", date = "",
-                        page = NULL,pageSize = NULL,verbose=FALSE){
+                        page = NULL,pageSize = NULL){
 
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
@@ -335,7 +335,7 @@ getWatering <- function(token, experimentURI ="", variablesName = list(), provid
   }
 
   wateringResponse <- getResponseFromWS(resource = get("WATERING",configWS),
-                                        attributes = attributes,verbose=verbose)
+                                        attributes = attributes)
   return(wateringResponse)
 }
 
@@ -359,7 +359,7 @@ getWatering <- function(token, experimentURI ="", variablesName = list(), provid
 # ##' @examples
 # ##' # Not run (is an internal function)
 # ##' @keywords internal
-# postPhenotypes <- function(token, experimentURI = "", data = NULL, reportId = "", verbose=FALSE){
+# postPhenotypes <- function(token, experimentURI = "", data = NULL, reportId = ""){
 #
 #   attributes = list(sessionId = token)
 #   if ( is.null(data)){
@@ -408,7 +408,7 @@ getWatering <- function(token, experimentURI ="", variablesName = list(), provid
 ##' # publicLabelView$data
 ##' @keywords internal
 getLabelViewByExperimentById <- function(token ,experimentURI="" ,viewType="" ,cameraAngle="",provider="",
-                                         page = NULL,pageSize = NULL,verbose=FALSE){
+                                         page = NULL,pageSize = NULL){
 
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)

@@ -31,7 +31,7 @@
 ##'  publicExp$data
 ##' }
 ##' @keywords internal
-getExperimentById <- function(token, experimentURI ="", page = NULL,pageSize = NULL,verbose=FALSE){
+getExperimentById <- function(token, experimentURI ="", page = NULL,pageSize = NULL){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
   attributes = list(sessionId = token, page = page, pageSize = pageSize)
@@ -41,7 +41,7 @@ getExperimentById <- function(token, experimentURI ="", page = NULL,pageSize = N
     # IS 03/11/2016 Suppress double URL encoding. Update tomcat allowed encoded slash security parameter
     expUrlEncoded<-paste0(utils::URLencode(experimentURI,  reserved = TRUE),"/details")
     experimentResponse<-getResponseFromWS(resource = get("EXPERIMENT",configWS),
-                                          paramPath=expUrlEncoded,attributes=attributes,verbose=verbose)
+                                          paramPath=expUrlEncoded,attributes=attributes)
     return(experimentResponse)
   }
 }
@@ -71,7 +71,7 @@ getExperimentById <- function(token, experimentURI ="", page = NULL,pageSize = N
 ##' }
 ##' @export
 getExperiments <- function(token, projectName ="", season = "", sortOrder = "DESC" ,
-                           page = NULL,pageSize = NULL,verbose=FALSE){
+                           page = NULL,pageSize = NULL){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
   attributes = list(sessionId = token, page = page, pageSize = pageSize)
@@ -86,7 +86,7 @@ getExperiments <- function(token, projectName ="", season = "", sortOrder = "DES
     attributes <- c(attributes, sortOrder = sortOrder)
   }
   experimentResponse<-getResponseFromWS(resource = get("EXPERIMENT",configWS),
-                                        attributes = attributes,verbose=verbose)
+                                        attributes = attributes)
   return(experimentResponse)
 }
 

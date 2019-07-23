@@ -43,7 +43,7 @@ connect(apiID="ws_public")
  aToken = getToken("guest@inra.fr","guest")
  myImages<-getImagesAnalysis(token = aToken$data,
            experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
-           variablesName = list("objAreaSum"),pageSize = 100000,verbose=FALSE)
+           variablesName = list("objAreaSum"),pageSize = 100000)
  head(myImages$data)
 }
 }

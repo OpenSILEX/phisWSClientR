@@ -41,7 +41,7 @@ connect(apiID="ws_public")
  accesToken = getToken("guest@inra.fr","guest")
  mywater<-getWatering(token=accesToken$data,
          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
-         variablesName = list("weightBefore"),pageSize=100000,verbose=FALSE)
+         variablesName = list("weightBefore"),pageSize=100000)
  head(mywater$data)
 }
 }

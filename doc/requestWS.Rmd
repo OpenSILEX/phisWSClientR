@@ -118,13 +118,13 @@ Different categories of variables are available in the phenomeapi web service:
   requetManip<-getImagesAnalysis(token=aToken$data, experimentURI=myExp,
                              variablesName = list("plantHeight"),
                              labelView ="side0",
-                             pageSize=10,verbose=FALSE)$data
+                             pageSize=10)$data
   head(requetManip)
 
   # getPlants function allows the user to retrieve all the information for all the plants of an experiment
   # In this example, we set the pageSize to 10 for speed purpose but in real example, please use tpCount
   idManip<-getPlants(token=aToken$data, experimentURI=myExp,
-                     pageSize=10,verbose=FALSE)$data
+                     pageSize=10)$data
   head(idManip)
 ```
 
@@ -136,14 +136,14 @@ try the following code and explore the dataset
   tpCount<-getEnvironment(token = aToken$data ,
                      experimentURI = myExp,
                      facility=myFacility,
-                     variables = "air humidity_weather station_percentage",verbose=FALSE)$totalCount
+                     variables = "air humidity_weather station_percentage")$totalCount
   #--- Air humidity
   # we retrieve this number with $totalcount
   # In this example, we set the pageSize to 10 for speed purpose but in real example, please use tpCount
   myMeteoHumidity<-getEnvironment(token = aToken$data,experimentURI=myExp,
                      facility=myFacility,
                      variables="air humidity_weather station_percentage",
-                     pageSize=10,verbose=FALSE)$data
+                     pageSize=10)$data
 ```
 
 # Retrieves the watering data of an experiment
@@ -157,7 +157,7 @@ try the following code and explore the dataset
   # In this example, we set the pageSize to 10 for speed purpose but in real example, please use tpCount
   requetIrrig<-getWatering(token=aToken$data,experimentURI=myExp,
                            variablesName = list("weightAfter"),
-                           pageSize=10,verbose=FALSE)$data
+                           pageSize=10)$data
 ```
 
 # Session info

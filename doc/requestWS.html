@@ -498,7 +498,7 @@ Update   : 14/02/2019
   requetManip&lt;-getImagesAnalysis(token=aToken$data, experimentURI=myExp,
                              variablesName = list(&quot;plantHeight&quot;),
                              labelView =&quot;side0&quot;,
-                             pageSize=10,verbose=FALSE)$data</code></pre>
+                             pageSize=10)$data</code></pre>
 <pre><code>## [1] &quot;Query executed and data recovered&quot;</code></pre>
 <pre class="r"><code>  head(requetManip)</code></pre>
 <pre><code>##                                             plantURI
@@ -539,7 +539,7 @@ Update   : 14/02/2019
 <pre class="r"><code>  # getPlants function allows the user to retrieve all the information for all the plants of an experiment
   # In this example, we set the pageSize to 10 for speed purpose but in real example, please use tpCount
   idManip&lt;-getPlants(token=aToken$data, experimentURI=myExp,
-                     pageSize=10,verbose=FALSE)$data</code></pre>
+                     pageSize=10)$data</code></pre>
 <pre><code>## [1] &quot;Query executed and data recovered&quot;</code></pre>
 <pre class="r"><code>  head(idManip)</code></pre>
 <pre><code>##                        plateform technicalPlateau
@@ -613,7 +613,7 @@ Update   : 14/02/2019
   tpCount&lt;-getEnvironment(token = aToken$data ,
                      experimentURI = myExp,
                      facility=myFacility,
-                     variables = &quot;air humidity_weather station_percentage&quot;,verbose=FALSE)$totalCount</code></pre>
+                     variables = &quot;air humidity_weather station_percentage&quot;)$totalCount</code></pre>
 <pre><code>## [1] &quot;Query executed and data recovered&quot;</code></pre>
 <pre class="r"><code>  #--- Air humidity
   # we retrieve this number with $totalcount
@@ -621,7 +621,7 @@ Update   : 14/02/2019
   myMeteoHumidity&lt;-getEnvironment(token = aToken$data,experimentURI=myExp,
                      facility=myFacility,
                      variables=&quot;air humidity_weather station_percentage&quot;,
-                     pageSize=10,verbose=FALSE)$data</code></pre>
+                     pageSize=10)$data</code></pre>
 <pre><code>## [1] &quot;Query executed and data recovered&quot;</code></pre>
 </div>
 <div id="retrieves-the-watering-data-of-an-experiment" class="section level1">
@@ -635,7 +635,7 @@ Update   : 14/02/2019
   # In this example, we set the pageSize to 10 for speed purpose but in real example, please use tpCount
   requetIrrig&lt;-getWatering(token=aToken$data,experimentURI=myExp,
                            variablesName = list(&quot;weightAfter&quot;),
-                           pageSize=10,verbose=FALSE)$data</code></pre>
+                           pageSize=10)$data</code></pre>
 <pre><code>## [1] &quot;Query executed and data recovered&quot;</code></pre>
 </div>
 <div id="session-info" class="section level1">

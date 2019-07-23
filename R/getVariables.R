@@ -33,7 +33,7 @@
 ##' }
 ##' @export
 getVariablesByCategory<-function(token,category ="",experimentURI ="",imageryProvider="",
-                                 page=NULL,pageSize=NULL,verbose=FALSE){
+                                 page=NULL,pageSize=NULL){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
   attributes = list(sessionId=token, page=page, pageSize = pageSize)
@@ -47,7 +47,7 @@ getVariablesByCategory<-function(token,category ="",experimentURI ="",imageryPro
       attributes <- c(attributes, imageryProvider = imageryProvider)
     }
     variableResponse <- getResponseFromWS(resource=paste0(get("VARIABLES",configWS),"/category/",category),
-                                          attributes = attributes,verbose=verbose)
+                                          attributes = attributes)
     return(variableResponse)
   }
 }

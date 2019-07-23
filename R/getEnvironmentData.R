@@ -45,7 +45,7 @@
 ##' }
 ##' @export
 getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = "" ,variables = "",facility = "",
-                           experimentURI ="", page = NULL, pageSize = NULL,verbose=FALSE){
+                           experimentURI ="", page = NULL, pageSize = NULL){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
   
@@ -69,7 +69,7 @@ getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = 
     attributes <- c(attributes, variables = utils::URLencode(variables))
   }
   environmentResponse <- getResponseFromWS(resource = get("ENVIRONMENT",configWS),
-                                           attributes = attributes,verbose=verbose)
+                                           attributes = attributes)
   return(environmentResponse)
 }
 

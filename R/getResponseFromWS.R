@@ -14,7 +14,7 @@
 ##' @param responseObject object HTTP httr
 ##' @param verbose logical FALSE by default, if TRUE display information about the progress
 ##' @keywords internal
-getResponseFromWS<-function(resource,paramPath = NULL,attributes,type="application/json",verbose=FALSE){
+getResponseFromWS<-function(resource,paramPath = NULL,attributes,type="application/json"){
   webserviceBaseUrl <- get("BASE_PATH",configWS)
   urlParams <- ""
   # creation de l'url
