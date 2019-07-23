@@ -37,7 +37,7 @@ service
 }
 \examples{
 \donttest{
-initializeClientConnection(apiID="ws_public")
+connect(apiID="ws_public")
  accesToken = getToken("guestphis@supagro.inra.fr","guestphis")
  mywater<-getWatering(token=accesToken$data,
          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",

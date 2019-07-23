@@ -15,7 +15,7 @@
 ##' @return a session token user identifier in the WS
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_public")
+##' connect(apiID="ws_public")
 ##' aToken <- getToken("guestphis@supagro.inra.fr","guestphis")
 ##' aToken$data
 ##' }
@@ -97,7 +97,7 @@ getToken<-function(login,password,verbose=FALSE){
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_public")
+##' connect(apiID="ws_public")
 ##'  aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
 ##'  plantes<-getPlants(aToken,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##' }
@@ -245,7 +245,7 @@ getPlantEnvironment <- function(token,plantURI ="",variableCategory ="",startDat
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_public")
+##' connect(apiID="ws_public")
 ##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  myImages<-getImagesAnalysis(token = aToken$data,
 ##'            experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
@@ -302,7 +302,7 @@ getImagesAnalysis <- function(token, experimentURI ="", variablesName = list(),
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_public")
+##' connect(apiID="ws_public")
 ##'  accesToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  mywater<-getWatering(token=accesToken$data,
 ##'          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",

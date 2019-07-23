@@ -28,7 +28,7 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+##'  connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ##'  token = getToken("guest@opensilex.org","guest")$data
 ##'  vars = getVariables2(token = token)$data$uri
 ##'  totalCount <- getData(token, variable = vars[4])$totalCount

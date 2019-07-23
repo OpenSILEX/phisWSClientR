@@ -21,7 +21,7 @@ Retrieves a user identifier for connexion to the WebService (WS)
 }
 \examples{
 \donttest{
-initializeClientConnection(apiID="ws_public")
+connect(apiID="ws_public")
 aToken <- getToken("guestphis@supagro.inra.fr","guestphis")
 aToken$data
 }

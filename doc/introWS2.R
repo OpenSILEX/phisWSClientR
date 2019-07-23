@@ -3,7 +3,7 @@
 
 ## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
   # If you want to access to a private web service, you have to insert the address of the WS and the port
-  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+  connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 
 ## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
   aToken <- getToken("guest@opensilex.org","guest")

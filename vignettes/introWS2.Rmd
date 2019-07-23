@@ -56,7 +56,7 @@ Ask permission to request to the web service:
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
   # If you want to access to a private web service, you have to insert the address of the WS and the port
-  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+  connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ```
 
 *aToken* will be used in all the requests to the web service. This is your identification and grants the access to some data according to your login information.

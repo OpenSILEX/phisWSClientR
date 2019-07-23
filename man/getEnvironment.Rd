@@ -41,7 +41,7 @@ service
 }
 \examples{
 \donttest{
-initializeClientConnection(apiID="ws_public")
+connect(apiID="ws_public")
  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
  getEnvironment(aToken$data,page=3,pageSize=100,startDate="2012-02-21",endDate = "2012-03-21")
  test<-getEnvironment(aToken$data,

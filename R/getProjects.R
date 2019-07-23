@@ -22,7 +22,7 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_public")
+##'  connect(apiID="ws_public")
 ##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  getProjects(aToken$data)
 ##'  getProjects(aToken$data, page = 1)
@@ -67,7 +67,7 @@ getProjects<-function(token, projectName = "",page=NULL,pageSize=NULL,verbose=FA
 ##' service
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_private",
+##'  connect(apiID="ws_private",
 ##'   url = "www.opensilex.org/openSilexAPI/rest/")
 ##'  aToken = getToken("guest@opensilex.org","guest")
 ##'  projects <- getProjects2(aToken$data,

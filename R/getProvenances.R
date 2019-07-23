@@ -24,7 +24,7 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+##' connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ##' aToken = getToken("guest@opensilex.org","guest")
 ##' provenances <- getProvenances(aToken$data,
 ##'  uri = "http://www.opensilex.org/demo/2018/pv181515071552",

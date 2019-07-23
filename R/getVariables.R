@@ -25,7 +25,7 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_public")
+##'  connect(apiID="ws_public")
 ##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  vars <- getVariablesByCategory(aToken$data,category="imagery",
 ##'           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
@@ -78,7 +78,7 @@ getVariablesByCategory<-function(token,category ="",experimentURI ="",imageryPro
 ##' service
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+##'  connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ##'  aToken = getToken("guest@opensilex.org","guest")
 ##'  vars <- getVariablesDetails(aToken$data, uri = "http://www.opensilex.org/demo/id/variables/v001")
 ##'  vars <- getVariablesDetails(aToken$data,label = "Leaf-Area_LAI-Computation_LAI")
@@ -151,7 +151,7 @@ getVariablesDetails <- function(token,
 ##' service
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+##'  connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ##'  aToken = getToken("guest@opensilex.org","guest")
 ##'  vars <- getVariables2(aToken$data, uri = "http://www.opensilex.org/demo/id/variables/v001")
 ##'  vars <- getVariables2(aToken$data,label = "Leaf-Area_LAI-Computation_LAI")
@@ -222,7 +222,7 @@ getVariables2 <- function(token,
 ##' @importFrom tidyr gather
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+##'  connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ##'  aToken = getToken("guest@opensilex.org","guest")
 ##'  varExp<- getVariablesByExperiment(aToken$data, uri = "http://www.opensilex.org/demo/DIA2017-1")
 ##'  varExp$data

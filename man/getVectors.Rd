@@ -46,7 +46,7 @@ service
 }
 \examples{
 \donttest{
-initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 aToken = getToken("guest@opensilex.org","guest")
 vectors <- getVectors(aToken$data, uri = "http://www.opensilex.org/demo/2018/v1801")
 vectors <- getVectors(aToken$data, serialNumber = "01BD1DD71500001")

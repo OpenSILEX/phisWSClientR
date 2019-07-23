@@ -32,7 +32,7 @@ service
 }
 \examples{
 \donttest{
-initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 aToken = getToken("guest@opensilex.org","guest")
 methods <- getMethods2(aToken$data,
                    uri = "http://www.opensilex.org/demo/id/methods/m010")

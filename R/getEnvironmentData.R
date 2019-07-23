@@ -28,7 +28,7 @@
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_public")
+##' connect(apiID="ws_public")
 ##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  getEnvironment(aToken$data,page=3,pageSize=100,startDate="2012-02-21",endDate = "2012-03-21")
 ##'  test<-getEnvironment(aToken$data,
@@ -94,7 +94,7 @@ getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = 
 ##' service
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+##'  connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ##'  aToken = getToken("guest@opensilex.org","guest")
 ##'  # Retrieve the number of available data
 ##'  mycount <- getEnvironmentData(token=aToken$data, 

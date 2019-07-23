@@ -39,7 +39,7 @@ service
 }
 \examples{
 \donttest{
- initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+ connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
  aToken = getToken("guest@opensilex.org","guest")
  # Retrieve the number of available data
  mycount <- getEnvironmentData(token=aToken$data, 

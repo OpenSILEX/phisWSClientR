@@ -24,7 +24,7 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_public")
+##' connect(apiID="ws_public")
 ##'  aToken <- getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  publicExp<-getExperimentById(aToken$data,
 ##'         experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
@@ -62,7 +62,7 @@ getExperimentById <- function(token, experimentURI ="", page = NULL,pageSize = N
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_public")
+##' connect(apiID="ws_public")
 ##'  aToken <- getToken("guestphis@supagro.inra.fr","guestphis")$data
 ##'  getExperiments(aToken,page=3,pageSize=100,startDate="2012-02-21",endDate="2012-03-21")
 ##'  getExperiments(aToken,projectName = "PHIS_Publi")
@@ -111,7 +111,7 @@ getExperiments <- function(token, projectName ="", season = "", sortOrder = "DES
 ##' @details You have to execute the \code{\link{getToken}}
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+##' connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 ##' aToken = getToken("guest@opensilex.org","guest")
 ##' myexp <- getExperiments2(aToken$data,
 ##'                    uri = "http://www.opensilex.org/demo/DIA2017-1")

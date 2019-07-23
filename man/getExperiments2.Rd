@@ -44,7 +44,7 @@ You have to execute the \code{\link{getToken}}
 }
 \examples{
 \donttest{
-initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 aToken = getToken("guest@opensilex.org","guest")
 myexp <- getExperiments2(aToken$data,
                    uri = "http://www.opensilex.org/demo/DIA2017-1")

@@ -3,11 +3,11 @@
 
 ## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
   # If you want to access to the public web service 
-  initializeClientConnection(apiID="ws_public")
+  connect(apiID="ws_public")
 
 ## ----echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE-------------------
 #    # If you want to access to a private web service, you have to insert the address of the WS and the port
-#    initializeClientConnection(apiID="ws_private",url = "147.99.7.5:8080/phenomeapi/resources/")
+#    connect(apiID="ws_private",url = "147.99.7.5:8080/phenomeapi/resources/")
 
 ## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
   aToken<-getToken("guestphis@supagro.inra.fr","guestphis")

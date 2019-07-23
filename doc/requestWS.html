@@ -238,9 +238,9 @@ Update   : 14/02/2019
 <h1><span class="header-section-number">1</span> Creation of an identifier</h1>
 <p>Ask permission to request to the web service:</p>
 <pre class="r"><code>  # If you want to access to the public web service 
-  initializeClientConnection(apiID=&quot;ws_public&quot;)</code></pre>
+  connect(apiID=&quot;ws_public&quot;)</code></pre>
 <pre class="r"><code>  # If you want to access to a private web service, you have to insert the address of the WS and the port
-  initializeClientConnection(apiID=&quot;ws_private&quot;,url = &quot;147.99.7.5:8080/phenomeapi/resources/&quot;)</code></pre>
+  connect(apiID=&quot;ws_private&quot;,url = &quot;147.99.7.5:8080/phenomeapi/resources/&quot;)</code></pre>
 <p><em>aToken</em> will be used in all the requests to the web service.</p>
 <pre class="r"><code>  aToken&lt;-getToken(&quot;guestphis@supagro.inra.fr&quot;,&quot;guestphis&quot;)</code></pre>
 <pre><code>## [1] &quot;Query executed and data recovered - WS1&quot;</code></pre>

@@ -7,33 +7,26 @@
 #-------------------------------------------------------------------------------
 
 
-##' @title initializeClientConnection
+##' @title connect
 ##' @param apiID character, a character name of an API ("ws_public" or "ws_private")
 ##' @param url character, if apiID is private add the url of the chosen API, containing the IP,
-##'            the port and the path of the WS resources 'www.opensilex.org/openSilexAPI/rest/'
-##'            or the full url with the protocol 'http://www.opensilex.org/openSilexAPI/rest/'
-##' @param http_scheme character, permits to switch between http, https or other protocols
+##'            the full url with the protocol 'http://www.opensilex.org/openSilexAPI/rest/'
 ##' @description load name space and connexion parameters of the webservice.
 ##' Execute only once at the beginning of the requests.
 ##' In the case of a WebService change of address or a renaming of services, please edit this list.
 ##' and execute the function.
 ##' @export
-initializeClientConnection<-function(apiID,url = "", http_scheme = "http"){
+connect<-function(apiID,userId = "guest@opensilex.org", password = "guest",url = ""){
   # if apiID is public then we use the public configWS given by the package
   # else if apiID is private, we use the url procided by the user
   if (apiID == "ws_private") {
     if(url != ""){
       # configWS is an environment with specific variables to phenomeapi web service
       # full url if protocol has been sent
-      if(grepl("http", url)){
         assign("BASE_PATH", url, configWS)
-      }else{
-        # short url 
-        assign("BASE_PATH",paste0(http_scheme, "://", url), configWS)
-      }
-
     } else {
       print("Please, you have to give an URL and port address")
+      stop()
     }
   } else if (apiID == "ws_public") {
       assign("BASE_PATH",get("PUBLIC_PATH",configWS),configWS)
@@ -145,7 +138,7 @@ getTokenResponseWS2<-function(resource,attributes,type = "application/json",verb
 # ##' @return WSResponse WSResponse class instance
 # ##' @keywords internal
 # postResponseFromWS<-function(resource, paramPath = NULL, attributes,  encode ="json", requestBody, verbose=FALSE){
-#   #configWS<-initializeClientConnection()
+#   #configWS<-connect()
 #   webserviceBaseUrl <- configWS[["BASE_PATH"]]
 #   urlParams = ""
 #   # create the l'url

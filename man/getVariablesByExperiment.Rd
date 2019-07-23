@@ -38,7 +38,7 @@ service
 }
 \examples{
 \donttest{
- initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+ connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
  aToken = getToken("guest@opensilex.org","guest")
  varExp<- getVariablesByExperiment(aToken$data, uri = "http://www.opensilex.org/demo/DIA2017-1")
  varExp$data

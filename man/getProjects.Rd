@@ -30,7 +30,7 @@ service
 }
 \examples{
 \donttest{
- initializeClientConnection(apiID="ws_public")
+ connect(apiID="ws_public")
  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
  getProjects(aToken$data)
  getProjects(aToken$data, page = 1)
