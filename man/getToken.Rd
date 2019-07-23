@@ -22,7 +22,7 @@ Retrieves a user identifier for connexion to the WebService (WS)
 \examples{
 \donttest{
 connect(apiID="ws_public")
-aToken <- getToken("guestphis@supagro.inra.fr","guestphis")
+aToken <- getToken("guest@inra.fr","guest")
 aToken$data
 }
 }

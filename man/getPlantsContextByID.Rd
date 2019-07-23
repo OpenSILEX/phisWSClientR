@@ -32,7 +32,7 @@ service
 }
 \examples{
 # not run (is an internal function!!!)
-# aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
+# aToken<-getToken("guest@inra.fr","guest")$data
 # test<-getPlantsContextByID(aToken,plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
 #       ,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 # test$data

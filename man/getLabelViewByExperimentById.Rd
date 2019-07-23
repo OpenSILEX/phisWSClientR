@@ -37,7 +37,7 @@ service
 }
 \examples{
 # Not run (is an internal function)
-# aToken = getToken("guestphis@supagro.inra.fr","guestphis")$data
+# aToken = getToken("guest@inra.fr","guest")$data
 # publicLabelView <- getLabelViewByExperimentById(aToken,
 #      experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 # publicLabelView$data

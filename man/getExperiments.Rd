@@ -36,7 +36,7 @@ service
 \examples{
 \donttest{
 connect(apiID="ws_public")
- aToken <- getToken("guestphis@supagro.inra.fr","guestphis")$data
+ aToken <- getToken("guest@inra.fr","guest")$data
  getExperiments(aToken,page=3,pageSize=100,startDate="2012-02-21",endDate="2012-03-21")
  getExperiments(aToken,projectName = "PHIS_Publi")
  getExperiments(aToken,sortOrder = "ASC")

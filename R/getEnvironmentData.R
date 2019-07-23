@@ -29,7 +29,7 @@
 ##' @examples
 ##' \donttest{
 ##' connect(apiID="ws_public")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
+##'  aToken = getToken("guest@inra.fr","guest")
 ##'  getEnvironment(aToken$data,page=3,pageSize=100,startDate="2012-02-21",endDate = "2012-03-21")
 ##'  test<-getEnvironment(aToken$data,
 ##'        experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")

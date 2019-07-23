@@ -16,7 +16,7 @@
 ##' @examples
 ##' \donttest{
 ##' connect(apiID="ws_public")
-##' aToken <- getToken("guestphis@supagro.inra.fr","guestphis")
+##' aToken <- getToken("guest@inra.fr","guest")
 ##' aToken$data
 ##' }
 ##' @export
@@ -98,7 +98,7 @@ getToken<-function(login,password,verbose=FALSE){
 ##' @examples
 ##' \donttest{
 ##' connect(apiID="ws_public")
-##'  aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
+##'  aToken<-getToken("guest@inra.fr","guest")$data
 ##'  plantes<-getPlants(aToken,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##' }
 ##' @export
@@ -136,7 +136,7 @@ getPlants <- function(token, plantAlias ="", experimentURI = "", germplasmURI = 
 ##' service
 ##' @examples
 ##' # not run (is an internal function!!!)
-##' # aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
+##' # aToken<-getToken("guest@inra.fr","guest")$data
 ##' # test<-getPlantsContextByID(aToken,plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
 ##' #       ,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##' # test$data
@@ -182,7 +182,7 @@ getPlantsContextByID<-function(token, plantURI ="",experimentURI="",page = NULL,
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' # not run (is an internal function!!!)
-##' # aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
+##' # aToken<-getToken("guest@inra.fr","guest")$data
 ##' # myplant<-getPlantEnvironment(aToken,
 ##' #       plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
 ##' #       experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
@@ -246,7 +246,7 @@ getPlantEnvironment <- function(token,plantURI ="",variableCategory ="",startDat
 ##' @examples
 ##' \donttest{
 ##' connect(apiID="ws_public")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
+##'  aToken = getToken("guest@inra.fr","guest")
 ##'  myImages<-getImagesAnalysis(token = aToken$data,
 ##'            experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
 ##'            variablesName = list("objAreaSum"),pageSize = 100000,verbose=FALSE)
@@ -303,7 +303,7 @@ getImagesAnalysis <- function(token, experimentURI ="", variablesName = list(),
 ##' @examples
 ##' \donttest{
 ##' connect(apiID="ws_public")
-##'  accesToken = getToken("guestphis@supagro.inra.fr","guestphis")
+##'  accesToken = getToken("guest@inra.fr","guest")
 ##'  mywater<-getWatering(token=accesToken$data,
 ##'          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
 ##'          variablesName = list("weightBefore"),pageSize=100000,verbose=FALSE)
@@ -402,7 +402,7 @@ getWatering <- function(token, experimentURI ="", variablesName = list(), provid
 ##' service
 ##' @examples
 ##' # Not run (is an internal function)
-##' # aToken = getToken("guestphis@supagro.inra.fr","guestphis")$data
+##' # aToken = getToken("guest@inra.fr","guest")$data
 ##' # publicLabelView <- getLabelViewByExperimentById(aToken,
 ##' #      experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##' # publicLabelView$data

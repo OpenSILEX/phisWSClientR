@@ -23,7 +23,7 @@
 ##' @examples
 ##' \donttest{
 ##'  connect(apiID="ws_public")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
+##'  aToken = getToken("guest@inra.fr","guest")
 ##'  getProjects(aToken$data)
 ##'  getProjects(aToken$data, page = 1)
 ##'  getProjects(aToken$data, page = 3, pageSize = 100)

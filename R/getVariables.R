@@ -26,7 +26,7 @@
 ##' @examples
 ##' \donttest{
 ##'  connect(apiID="ws_public")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
+##'  aToken = getToken("guest@inra.fr","guest")
 ##'  vars <- getVariablesByCategory(aToken$data,category="imagery",
 ##'           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##'  vars$data

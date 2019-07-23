@@ -242,7 +242,7 @@ Update   : 14/02/2019
 <pre class="r"><code>  # If you want to access to a private web service, you have to insert the address of the WS and the port
   connect(apiID=&quot;ws_private&quot;,url = &quot;147.99.7.5:8080/phenomeapi/resources/&quot;)</code></pre>
 <p><em>aToken</em> will be used in all the requests to the web service.</p>
-<pre class="r"><code>  aToken&lt;-getToken(&quot;guestphis@supagro.inra.fr&quot;,&quot;guestphis&quot;)</code></pre>
+<pre class="r"><code>  aToken&lt;-getToken(&quot;guest@inra.fr&quot;,&quot;guest&quot;)</code></pre>
 <pre><code>## [1] &quot;Query executed and data recovered - WS1&quot;</code></pre>
 </div>
 <div id="retrieves-the-available-projects" class="section level1">
@@ -262,11 +262,11 @@ Update   : 14/02/2019
 ## 4                                                                                                                                                        
 ## 5                                                                                                                  To follow ear and silk growth in maize
 ##    crop                       leadPerson
-## 1 maize francois.tardieu@supagro.inra.fr
-## 2 maize francois.tardieu@supagro.inra.fr
-## 3 maize francois.tardieu@supagro.inra.fr
-## 4 maize francois.tardieu@supagro.inra.fr
-## 5 maize  nicolas.brichet@supagro.inra.fr</code></pre>
+## 1 maize francois.tardieu@inra.fr
+## 2 maize francois.tardieu@inra.fr
+## 3 maize francois.tardieu@inra.fr
+## 4 maize francois.tardieu@inra.fr
+## 5 maize  nicolas.brichet@inra.fr</code></pre>
 <pre class="r"><code>  getExperiments(aToken$data,projectName = &quot;XYZ&quot;)</code></pre>
 <pre><code>## [1] &quot;Query executed and data recovered&quot;</code></pre>
 <pre><code>## $currentPage
@@ -297,9 +297,9 @@ Update   : 14/02/2019
 ##              experimentPlateform  startDate    endDate programName
 ## 1 http://www.phenome-fppn.fr/m3p 2017-03-30 2017-06-30          NA
 ##   designType                      keyContact
-## 1         NA nicolas.brichet@supagro.inra.fr
+## 1         NA nicolas.brichet@inra.fr
 ##                                                                                                                                                                                                                                                                                                                                                                                                                                      contacts
-## 1 scientific supervisor, technical supervisor, scientific supervisor, scientific supervisor, scientific supervisor, technical supervisor, technical supervisor, Cabrera-Bosquet, Brichet, Tardieu, Turc, Welcker, LUCHAIRE, Suard, cabrera@supagro.inra.fr, nicolas.brichet@supagro.inra.fr, francois.tardieu@supagro.inra.fr, olivier.turc@supagro.inra.fr, welcker@supagro.inra.fr, nathalie.luchaire@inra.fr, benoit.suard@supagro.inra.fr
+## 1 scientific supervisor, technical supervisor, scientific supervisor, scientific supervisor, scientific supervisor, technical supervisor, technical supervisor, Cabrera-Bosquet, Brichet, Tardieu, Turc, Welcker, LUCHAIRE, Suard, cabrera@inra.fr, nicolas.brichet@inra.fr, francois.tardieu@inra.fr, olivier.turc@inra.fr, welcker@inra.fr, nathalie.luchaire@inra.fr, benoit.suard@inra.fr
 ##   meteoStationCode meteoStationNetwork studyHistory attributes seasons
 ## 1               NA                  NA           NA         NA      NA
 ##   observationVariables germplasm

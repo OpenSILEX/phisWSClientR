@@ -38,7 +38,7 @@ service
 \examples{
 \donttest{
 connect(apiID="ws_public")
- accesToken = getToken("guestphis@supagro.inra.fr","guestphis")
+ accesToken = getToken("guest@inra.fr","guest")
  mywater<-getWatering(token=accesToken$data,
          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
          variablesName = list("weightBefore"),pageSize=100000,verbose=FALSE)
