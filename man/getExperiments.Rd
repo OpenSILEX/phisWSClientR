@@ -17,8 +17,6 @@ getExperiments(projectName = "", season = "", sortOrder = "DESC",
 \item{page}{displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
-
-\item{token}{a token}
 }
 \value{
 WSResponse object
@@ -27,17 +25,16 @@ WSResponse object
 Retrieves the available experiments and/or linked to a project
 }
 \details{
-You have to execute the getToken() function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
 connectToWS(apiID="ws_public")
- aToken <- getToken("guestphis@inra.fr","guestphis")$data
- getExperiments(aToken,page=3,pageSize=100,startDate="2012-02-21",endDate="2012-03-21")
- getExperiments(aToken,projectName = "PHIS_Publi")
- getExperiments(aToken,sortOrder = "ASC")
- getExperiments(aToken,season = 2012 )
+ getExperiments(page=3,pageSize=100,startDate="2012-02-21",endDate="2012-03-21")
+ getExperiments(projectName = "PHIS_Publi")
+ getExperiments(sortOrder = "ASC")
+ getExperiments(season = 2012 )
 }
 }
 \seealso{

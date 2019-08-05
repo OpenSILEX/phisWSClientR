@@ -56,7 +56,7 @@ Ask permission to request to the web service:
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
   # If you want to access to a private web service, you have to insert the address of the WS and the port
-  connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
+  connectToWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
 ```
 
 *aToken* will be used in all the requests to the web service. This is your identification and grants the access to some data according to your login information.
@@ -70,66 +70,66 @@ Ask permission to request to the web service:
 ## Projects
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getProjects2(aToken$data, uri="http://www.opensilex.org/demo/PHENOME-FPPN")
+  getProjects2( uri="http://www.opensilex.org/demo/PHENOME-FPPN")
 ```
 
 ## Experiments
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getExperiments2(aToken$data, uri="http://www.opensilex.org/demo/DIA2017-1")
+  getExperiments2( uri="http://www.opensilex.org/demo/DIA2017-1")
 ```
 ## Scientific Object
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getScientificObjects(aToken$data, uri="http://www.opensilex.org/demo/2018/o18000076")
+  getScientificObjects( uri="http://www.opensilex.org/demo/2018/o18000076")
 ```
 
 ##Infrastructures
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getInfrastructures(aToken$data, uri="https://emphasis.plant-phenotyping.eu")
+  getInfrastructures( uri="https://emphasis.plant-phenotyping.eu")
 ```
 
 ## Variables 
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getVariables2(aToken$data, uri="http://www.opensilex.org/demo/id/variables/v010")
+  getVariables2( uri="http://www.opensilex.org/demo/id/variables/v010")
 ```
 
 ## Traits
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getTraits(aToken$data, uri="http://www.opensilex.org/demo/id/traits/t010")
+  getTraits( uri="http://www.opensilex.org/demo/id/traits/t010")
 ```
 
 ## Methods
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getMethods2(aToken$data, uri="http://www.opensilex.org/demo/id/methods/m010")
+  getMethods2( uri="http://www.opensilex.org/demo/id/methods/m010")
 ```
 
 ## Units
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getUnits(aToken$data, uri="http://www.opensilex.org/demo/id/units/u007")
+  getUnits( uri="http://www.opensilex.org/demo/id/units/u007")
 ```
 
 ## Species
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getSpecies(aToken$data, uri="http://www.opensilex.org/id/species/helianthusannuus", language = "en")
+  getSpecies( uri="http://www.opensilex.org/id/species/helianthusannuus", language = "en")
 ```
 
 ## Sensors
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getSensors(aToken$data, uri="http://www.opensilex.org/demo/2018/s18001")
+  getSensors( uri="http://www.opensilex.org/demo/2018/s18001")
 ```
 
 ## Vectors
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getVectors(aToken$data, serialNumber = "01BD1DD71500001")
+  getVectors( serialNumber = "01BD1DD71500001")
 ```
 
 ## Events
@@ -137,7 +137,7 @@ Ask permission to request to the web service:
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
 # Where to find the "type" URL ?
 # Where is the ontology access ?
-  getEvents(aToken$data, type = "http://www.opensilex.org/vocabulary/oeev#Fertilization", pageSize=10)
+  getEvents( type = "http://www.opensilex.org/vocabulary/oeev#Fertilization", pageSize=10)
 ```
 
 ## Annotations
@@ -145,7 +145,7 @@ Ask permission to request to the web service:
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
 # Where to find the "type" URL ?
 # Where is the ontology access ?
-  getAnnotations(aToken$data, comment = "Ustilago maydis infection" , pageSize=10)
+  getAnnotations( comment = "Ustilago maydis infection" , pageSize=10)
 ```
 
 # Fetch Data from the webservice
@@ -153,13 +153,13 @@ Ask permission to request to the web service:
 ## Environment data
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getEnvironmentData(aToken$data, variable = "http://www.opensilex.org/demo/id/variables/v010", pageSize=50)
+  getEnvironmentData( variable = "http://www.opensilex.org/demo/id/variables/v010", pageSize=50)
 ```
 
 ## Phenotypic data
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  head(getPhenotypeData(aToken$data, 
+  head(getPhenotypeData( 
                         variable = "http://www.opensilex.org/demo/id/variables/v001", 
                         pageSize=10)$data)
 ```

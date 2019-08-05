@@ -10,7 +10,6 @@
 ##' @title getUnits
 ##'
 ##' @description Retrieves the unit based on search criterion
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of a unit (optional)
 ##' @param label character, search by the label of a unit (optional)
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
@@ -18,14 +17,12 @@
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
 ##' connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-##' aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##' units <- getUnits(aToken$data,
-##'                    uri="http://www.opensilex.org/demo/id/units/u007")
+##' units <- getUnits(uri="http://www.opensilex.org/demo/id/units/u007")
 ##' units$data
 ##' }
 ##' @export
@@ -39,8 +36,7 @@ getUnits <- function(
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   
   attributes <- list(pageSize = pageSize,
-                     page = page,
-                     Authorization=token)
+                     page = page)
   if (uri!="")   attributes <- c(attributes, uri = uri)
   if (label!="") attributes <- c(attributes, label = label)
   

@@ -21,8 +21,6 @@ getScientificObjects(uri = "", experiment = "", alias = "",
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
-
-\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -31,14 +29,13 @@ WSResponse object
 retrieves the scientific objects based on search criterion
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
  connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
- aToken = getToken("guestphis@supagro.inra.fr","guestphis")
- scientificObjects <- getScientificObjects(aToken$data,
+ scientificObjects <- getScientificObjects(
                               uri = "http://www.opensilex.org/demo/2018/o18000076")
  scientificObjects$data
 }

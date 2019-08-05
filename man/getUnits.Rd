@@ -17,8 +17,6 @@ getUnits(uri = "", label = "", page = NULL, pageSize = NULL,
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
-
-\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -27,15 +25,13 @@ WSResponse object
 Retrieves the unit based on search criterion
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
 connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-units <- getUnits(aToken$data,
-                   uri="http://www.opensilex.org/demo/id/units/u007")
+units <- getUnits(uri="http://www.opensilex.org/demo/id/units/u007")
 units$data
 }
 }

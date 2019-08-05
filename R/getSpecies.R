@@ -10,7 +10,6 @@
 ##' @title getSpecies
 ##'
 ##' @description retrieves the specie behind the specie uri
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of a specie (optional)
 ##' @param label character, search by the label of a specie (optional)
 ##' @param language character, language of the answer, "en", "fr", etc (optional)
@@ -19,13 +18,12 @@
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
 ##' connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-##' aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##' species <- getSpecies(aToken$data)
+##' species <- getSpecies()
 ##' species$data
 ##' }
 ##' @export
@@ -40,8 +38,7 @@ getSpecies <- function(
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   
   attributes <- list(pageSize = pageSize,
-                     page = page,
-                     Authorization=token)
+                     page = page)
   if (uri!="")      attributes <- c(attributes, uri = uri)
   if (label!="")    attributes <- c(attributes, label = label)
   if (language!="") attributes <- c(attributes, language = language)

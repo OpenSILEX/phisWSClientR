@@ -10,7 +10,6 @@
 ##' @title getInfrastructures
 ##'
 ##' @description retrieves the infrastructures based on search criterion
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of an infrastructure (optional)
 ##' @param rdfType character, search by the rdf type of an infrastructure (optional)
 ##' @param label character, search by the label of an infrastructure (optional)
@@ -20,14 +19,14 @@
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
 ##' connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-##' aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##' infrastructures <- getInfrastructures(aToken$data,
-##'                    uri = "https://emphasis.plant-phenotyping.eu")
+##' infrastructures <- getInfrastructures( 
+##'                        uri = "https://emphasis.plant-phenotyping.eu"
+##'                      )
 ##' infrastructures$data
 ##' }
 ##' @export
@@ -43,8 +42,7 @@ getInfrastructures <- function(
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   
   attributes <- list(pageSize = pageSize,
-                     page = page,
-                     Authorization=token)
+                     page = page)
   if (uri!="")      attributes <- c(attributes, uri = uri)
   if (rdfType!="")  attributes <- c(attributes, rdfType = rdfType)
   if (label!="")    attributes <- c(attributes, label = label)

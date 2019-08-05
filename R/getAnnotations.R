@@ -19,7 +19,7 @@
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{

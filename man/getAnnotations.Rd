@@ -29,7 +29,7 @@ WSResponse object
 retrieves the annotation based on search criterion
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{

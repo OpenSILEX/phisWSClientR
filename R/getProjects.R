@@ -11,23 +11,21 @@
 ##' @title getProjects retrieves the list of projects from the web service
 ##'
 ##' @description Retrieves the list of projects in the WS
-##' @param token a token
 ##' @param projectName Name of the project to search
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
 ##'  connectToWS(apiID="ws_public")
-##'  aToken = getToken("guestphis@inra.fr","guestphis")
-##'  getProjects(aToken$data)
-##'  getProjects(aToken$data, page = 1)
-##'  getProjects(aToken$data, page = 3, pageSize = 100)
-##'  getProjects(aToken$data, projectName = "PHIS_Publi")
+##'  getProjects()
+##'  getProjects(page = 1)
+##'  getProjects(page = 3, pageSize = 100)
+##'  getProjects(projectName = "PHIS_Publi")
 ##' }
 ##' @export
 getProjects<-function( projectName = "",page=NULL,pageSize=NULL){
@@ -46,7 +44,6 @@ getProjects<-function( projectName = "",page=NULL,pageSize=NULL){
 ##' @title getProjects2
 ##'
 ##' @description Retrieves the list of projects in the WS2 with the selected filters
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the URI of a project (optional)
 ##' @param name character, search by the name of a project (optional)
 ##' @param acronyme character, search by the acronyme of a project (optional)
@@ -63,14 +60,13 @@ getProjects<-function( projectName = "",page=NULL,pageSize=NULL){
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
 ##'  connectToWS(apiID="ws_private",
 ##'   url = "http://www.opensilex.org/openSilexAPI/rest/")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  projects <- getProjects2(aToken$data,
+##'  projects <- getProjects2(
 ##'   uri="http://www.opensilex.org/demo/PHENOME-FPPN")
 ##'  projects$data
 ##' }
@@ -95,8 +91,7 @@ getProjects2 <- function(
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   
   attributes <- list(page = page,
-                     pageSize = pageSize,
-                     Authorization = token)
+                     pageSize = pageSize)
   
   if (uri != "")              attributes <- c(attributes, uri = uri)
   if (name != "")             attributes <- c(attributes, name = name)

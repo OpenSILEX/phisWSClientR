@@ -23,8 +23,6 @@ getVariablesDetails(uri = "", label = "", trait = "", method = "",
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
-
-\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 a WSResponse object. In the 'data' part of the returned object, a data.frame is
@@ -40,15 +38,14 @@ a WSResponse object. In the 'data' part of the returned object, a data.frame is
 Retrieves the variable descriptions, trait, method and unit covered by the variable
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
- aToken = getToken("guestphis@supagro.inra.fr","guestphis")
- vars <- getVariablesDetails(aToken$data, uri = "http://www.opensilex.org/demo/id/variables/v001")
- vars <- getVariablesDetails(aToken$data,label = "Leaf-Area_LAI-Computation_LAI")
+ connectToWS(apiID="ws_private","guest@opensilex.fr","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+ vars <- getVariablesDetails(uri = "http://www.opensilex.org/demo/id/variables/v001")
+ vars <- getVariablesDetails(label = "Leaf-Area_LAI-Computation_LAI")
  vars$data
 }
 }

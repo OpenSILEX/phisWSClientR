@@ -30,8 +30,6 @@ getExperiments2(uri = "", startDate = "", endDate = "", field = "",
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
-
-\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -40,13 +38,12 @@ WSResponse object
 retrieves the experiments based on search criterion
 }
 \details{
-You have to execute the \code{\link{getToken}}
+You have to execute the \code{\link{connectToWS}}
 }
 \examples{
 \donttest{
 connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-myexp <- getExperiments2(aToken$data,
+myexp <- getExperiments2(
                    uri = "http://www.opensilex.org/demo/DIA2017-1")
 myexp$data
 }

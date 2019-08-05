@@ -21,8 +21,6 @@ getEnvironmentData(variable = "", startDate = "", endDate = "",
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{dateSortAsc}{logical, sort date in ascending order if TRUE}
-
-\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -31,23 +29,23 @@ WSResponse object
 retrieves the environmental data from a variable or a sensor
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
  connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/","guestphis@supagro.inra.fr","guestphis")
  # Retrieve the number of available data
- mycount <- getEnvironmentData(token=aToken$data, 
-      variable = "http://www.opensilex.org/demo/id/variables/v004")$totalCount
+ mycount <- getEnvironmentData(variable = "http://www.opensilex.org/demo/id/variables/v004")$totalCount
  # Retrieve the environmental data
- myenvir <- getEnvironmentData(token=aToken$data, pageSize=mycount,
-         variable = "http://www.opensilex.org/demo/id/variables/v004")
- myenvir <- getEnvironmentData(token=aToken$data,
-  pageSize=mycount,
-  variable = "http://www.opensilex.org/demo/id/variables/v004", 
- startDate="2017-06-15T10:51:00+0200",
- endDate="2017-06-17T10:51:00+0200")
+ myenvir <- getEnvironmentData(
+              pageSize=mycount,
+              variable = "http://www.opensilex.org/demo/id/variables/v004")
+ myenvir <- getEnvironmentData(
+               pageSize=mycount,
+               variable = "http://www.opensilex.org/demo/id/variables/v004", 
+               startDate="2017-06-15T10:51:00+0200",
+               endDate="2017-06-17T10:51:00+0200")
  str(myenvir$data)
  head(myenvir$data)
 }

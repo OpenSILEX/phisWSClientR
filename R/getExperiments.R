@@ -13,7 +13,6 @@
 ##' @title getExperimentById
 ##'
 ##' @description retrieves the informations for one experiment
-##' @param token a token
 ##' @param experimentURI URI of the experiment
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
@@ -25,8 +24,7 @@
 ##' @examples
 ##' \donttest{
 ##' connectToWS(apiID="ws_public")
-##'  aToken <- getToken("guestphis@inra.fr","guestphis")
-##'  publicExp<-getExperimentById(aToken$data,
+##'  publicExp<-getExperimentById(
 ##'         experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##'  publicExp$data
 ##' }
@@ -49,7 +47,6 @@ getExperimentById <- function( experimentURI ="", page = NULL,pageSize = NULL){
 ##' @title retrieves the experiments from the web service
 ##'
 ##' @description Retrieves the available experiments and/or linked to a project
-##' @param token a token
 ##' @param projectName  project name
 ##' @param season character, a year when the experiment was conducted
 ##' @param sortOrder ordering "ASC" or "DESC"
@@ -58,16 +55,15 @@ getExperimentById <- function( experimentURI ="", page = NULL,pageSize = NULL){
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
 ##' connectToWS(apiID="ws_public")
-##'  aToken <- getToken("guestphis@inra.fr","guestphis")$data
-##'  getExperiments(aToken,page=3,pageSize=100,startDate="2012-02-21",endDate="2012-03-21")
-##'  getExperiments(aToken,projectName = "PHIS_Publi")
-##'  getExperiments(aToken,sortOrder = "ASC")
-##'  getExperiments(aToken,season = 2012 )
+##'  getExperiments(page=3,pageSize=100,startDate="2012-02-21",endDate="2012-03-21")
+##'  getExperiments(projectName = "PHIS_Publi")
+##'  getExperiments(sortOrder = "ASC")
+##'  getExperiments(season = 2012 )
 ##' }
 ##' @export
 getExperiments <- function( projectName ="", season = "", sortOrder = "DESC" ,
@@ -94,7 +90,6 @@ getExperiments <- function( projectName ="", season = "", sortOrder = "DESC" ,
 ##' @title getExperiments2
 ##'
 ##' @description retrieves the experiments based on search criterion
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of an experiment (optional)
 ##' @param startDate character, search from the start date of experiment (optional)
 ##' @param endDate character, search to the end date of experiment (optional)
@@ -108,12 +103,11 @@ getExperiments <- function( projectName ="", season = "", sortOrder = "DESC" ,
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{getToken}}
+##' @details You have to execute the \code{\link{connectToWS}}
 ##' @examples
 ##' \donttest{
 ##' connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-##' aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##' myexp <- getExperiments2(aToken$data,
+##' myexp <- getExperiments2(
 ##'                    uri = "http://www.opensilex.org/demo/DIA2017-1")
 ##' myexp$data
 ##' }
@@ -134,8 +128,7 @@ getExperiments2 <- function(
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   
   attributes <- list(pageSize = pageSize,
-                     page = page,
-                     Authorization=token)
+                     page = page)
   if (uri!="")      attributes <- c(attributes, uri = uri)
   if (startDate!="")attributes <- c(attributes, startDate = startDate)
   if (endDate!="" ) attributes <- c(attributes, endDate = endDate)

@@ -76,6 +76,8 @@ getToken<-function(login,password){
   if (exists("response")){
     class(response) <- append(class(response),"WSResponse")
     return(response)
+  }else{
+    return(NULL)
   }
 }
 
@@ -93,7 +95,7 @@ getToken<-function(login,password){
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
@@ -132,7 +134,7 @@ getPlants <- function( plantAlias ="", experimentURI = "", germplasmURI = "" ,
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' # not run (is an internal function!!!)
@@ -177,7 +179,7 @@ getPlantsContextByID<-function( plantURI ="",experimentURI="",page = NULL,
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
 
 ##' @return WSResponse object
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
@@ -240,7 +242,7 @@ getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = ""
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
 
 ##' @return WSResponse object
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
@@ -297,7 +299,7 @@ getImagesAnalysis <- function( experimentURI ="", variablesName = list(),
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
 
 ##' @return WSResponse object
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
@@ -354,7 +356,7 @@ getWatering <- function( experimentURI ="", variablesName = list(), provider = "
 # ##' .. ..$ value         : int 0'
 # ##' @seealso http://147.99.7.5:8080/phenomeapi/api-docs/#!/environment/postPhenotypes
 # ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-# ##' @details You have to execute the getToken() function first to have access to the web
+# ##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 # ##' service
 # ##' @examples
 # ##' # Not run (is an internal function)
@@ -398,7 +400,7 @@ getWatering <- function( experimentURI ="", variablesName = list(), provider = "
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' # Not run (is an internal function)

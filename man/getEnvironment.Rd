@@ -24,8 +24,6 @@ getEnvironment(variableCategory = "", startDate = "", endDate = "",
 \item{page}{displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
-
-\item{token}{a token}
 }
 \value{
 WSResponse object
@@ -34,7 +32,7 @@ WSResponse object
 Retrieves environmental mesures of an experiment or by dates
 }
 \details{
-You have to execute the getToken() function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{

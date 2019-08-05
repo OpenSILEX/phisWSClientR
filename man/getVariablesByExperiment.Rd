@@ -15,8 +15,6 @@ getVariablesByExperiment(uri = "", pageSize = NULL, page = NULL,
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
-
-\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 a WSResponse object. In the 'data' part of the returned object, a data.frame is
@@ -33,14 +31,13 @@ Retrieves the variable descriptions, trait, method and unit covered by the varia
       for a given experiment URI
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
- aToken = getToken("guestphis@supagro.inra.fr","guestphis")
- varExp<- getVariablesByExperiment(aToken$data, uri = "http://www.opensilex.org/demo/DIA2017-1")
+ connectToWS(apiID="ws_private","guest@opensilex.org/","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+ varExp<- getVariablesByExperiment(uri = "http://www.opensilex.org/demo/DIA2017-1")
  varExp$data
 }
 }

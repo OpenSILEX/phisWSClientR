@@ -12,8 +12,6 @@ getProjects(projectName = "", page = NULL, pageSize = NULL)
 \item{page}{displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
-
-\item{token}{a token}
 }
 \value{
 WSResponse object
@@ -22,17 +20,16 @@ WSResponse object
 Retrieves the list of projects in the WS
 }
 \details{
-You have to execute the getToken() function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
  connectToWS(apiID="ws_public")
- aToken = getToken("guestphis@inra.fr","guestphis")
- getProjects(aToken$data)
- getProjects(aToken$data, page = 1)
- getProjects(aToken$data, page = 3, pageSize = 100)
- getProjects(aToken$data, projectName = "PHIS_Publi")
+ getProjects()
+ getProjects(page = 1)
+ getProjects(page = 3, pageSize = 100)
+ getProjects(projectName = "PHIS_Publi")
 }
 }
 \seealso{

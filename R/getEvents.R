@@ -10,7 +10,6 @@
 ##' @title getEvents
 ##'
 ##' @description retrieves the events based on search criterion
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of an event (optional)
 ##' @param type character, search by the type of an event (optional)
 ##' @param concernsUri character, search by the URI concerned by the event (optional)
@@ -21,13 +20,12 @@
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
 ##' connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-##' aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##' events <- getEvents(aToken$data,
+##' events <- getEvents(
 ##'  type = "http://www.opensilex.org/vocabulary/oeev#Fertilization",
 ##'   pageSize=10)
 ##' events$data
@@ -46,8 +44,7 @@ getEvents <- function(
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   
   attributes <- list(pageSize = pageSize,
-                     page = page,
-                     Authorization=token)
+                     page = page)
   if (uri!="")            attributes <- c(attributes, uri = uri)
   if (type!="")           attributes <- c(attributes, type = type)
   if (concernsUri!="")    attributes <- c(attributes, concernsUri = concernsUri)

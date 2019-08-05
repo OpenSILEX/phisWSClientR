@@ -85,7 +85,7 @@ installLocally:
 
 deployOnTestRepository:
   when: manual
-  stage: deploy
+  stage: build
   script:
     # Install ssh-agent through openssh-client if not present
     - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qqy )'

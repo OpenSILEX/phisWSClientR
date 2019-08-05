@@ -29,7 +29,7 @@ WSResponse object
 Retrieves irrigation data
 }
 \details{
-You have to execute the getToken() function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{

@@ -18,7 +18,7 @@
 ##' In the case of a WebService change of address or a renaming of services, please edit this list.
 ##' and execute the function.
 ##' WS1 - connectToWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
-##' WS2 - connectToWS(apiID="ws_private",username="guest@opensilex.org",password"guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' WS2 - connectToWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##' @export
 connectToWS<-function(apiID, username, password, url = ""){
   # if apiID is public then we use the public configWS given by the package
@@ -47,7 +47,11 @@ connectToWS<-function(apiID, username, password, url = ""){
   assign("USERNAME", username, configWS)
   assign("PASSWORD", password, configWS)
   tokenData = phisWSClientR::getToken(username,password)
-  assign("TOKEN_VALUE", tokenData$data, configWS)
+  if(!is.null(tokenData) && length(tokenData) > 0) {
+    assign("TOKEN_VALUE", tokenData$data, configWS)
+  }else{
+    stop("Not able to connect")
+  }
 } 
  
 

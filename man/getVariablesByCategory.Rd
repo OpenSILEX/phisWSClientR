@@ -17,8 +17,6 @@ getVariablesByCategory(category = "", experimentURI = "",
 \item{page}{displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
-
-\item{token}{a token}
 }
 \value{
 WSResponse object
@@ -27,14 +25,13 @@ WSResponse object
 Retrieves the variable by categories (environment or setpoint...)
 }
 \details{
-You have to execute the getToken() function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_public")
- aToken = getToken("guestphis@inra.fr","guestphis")
- vars <- getVariablesByCategory(aToken$data,category="imagery",
+ connectToWS(apiID="ws_public","guestphis@inra.fr","guestphis")
+ vars <- getVariablesByCategory(category="imagery",
           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
  vars$data
 }

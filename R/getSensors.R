@@ -10,7 +10,6 @@
 ##' @title getSensors
 ##'
 ##' @description Retrieves the sensors based on search criterion
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of a sensor (optional)
 ##' @param rdfType character, search by the rdf type of a sensor (optional)
 ##' @param label character, search by the label of the measure (optional)
@@ -25,15 +24,14 @@
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
 ##' connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-##' aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##' sensors <- getSensors(aToken$data,
+##' sensors <- getSensors(
 ##'  uri = "http://www.opensilex.org/demo/2018/s18001")
-##' sensors <- getSensors(aToken$data, brand = "Cimel")
+##' sensors <- getSensors( brand = "Cimel")
 ##' sensors$data
 ##' }
 ##' @export
@@ -53,7 +51,7 @@ getSensors <- function(
   if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   
-  attributes <- list(pageSize = pageSize,page = page,Authorization=token)
+  attributes <- list(pageSize = pageSize,page = page)
   
   if (uri!="")                   attributes <- c(attributes, uri = uri)
   if (rdfType!="")               attributes <- c(attributes, rdfType = rdfType)

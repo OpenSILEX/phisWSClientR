@@ -12,8 +12,6 @@ getExperimentById(experimentURI = "", page = NULL, pageSize = NULL)
 \item{page}{displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
-
-\item{token}{a token}
 }
 \value{
 WSResponse object
@@ -28,8 +26,7 @@ service
 \examples{
 \donttest{
 connectToWS(apiID="ws_public")
- aToken <- getToken("guestphis@inra.fr","guestphis")
- publicExp<-getExperimentById(aToken$data,
+ publicExp<-getExperimentById(
         experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
  publicExp$data
 }

@@ -17,8 +17,6 @@ getTraits(uri = "", label = "", page = NULL, pageSize = NULL,
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
-
-\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -27,15 +25,13 @@ WSResponse object
 retrieves the trait based on search criterion
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
 connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-traits <- getTraits(aToken$data,
-                   uri = "http://www.opensilex.org/demo/id/traits/t010")
+traits <- getTraits(uri = "http://www.opensilex.org/demo/id/traits/t010")
 traits$data
 }
 }

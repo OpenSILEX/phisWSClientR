@@ -24,8 +24,6 @@ getEvents(uri = "", type = "", concernsUri = "",
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
-
-\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -34,14 +32,13 @@ WSResponse object
 retrieves the events based on search criterion
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
 connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-events <- getEvents(aToken$data,
+events <- getEvents(
  type = "http://www.opensilex.org/vocabulary/oeev#Fertilization",
   pageSize=10)
 events$data

@@ -34,7 +34,7 @@ WSResponse object
 Retrieves the data from the web service
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{

@@ -10,7 +10,6 @@
 ##' @title getScientificObjects
 ##'
 ##' @description retrieves the scientific objects based on search criterion
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of an annotation (optional)
 ##' @param experiment character, search by the uri of an experiment (optional)
 ##' @param alias character, search by an alias (optional)
@@ -20,13 +19,12 @@
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
 ##'  connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  scientificObjects <- getScientificObjects(aToken$data,
+##'  scientificObjects <- getScientificObjects(
 ##'                               uri = "http://www.opensilex.org/demo/2018/o18000076")
 ##'  scientificObjects$data
 ##' }
@@ -43,8 +41,7 @@ getScientificObjects <- function(
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   
   attributes <- list(pageSize=pageSize,
-                     page = page,
-                     Authorization=token)
+                     page = page)
   if (uri!="")        attributes <- c(attributes, uri = uri)
   if (experiment!="") attributes <- c(attributes, experiment = experiment)
   if (alias!="")      attributes <- c(attributes, alias = alias)

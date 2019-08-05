@@ -12,7 +12,6 @@
 ##' @title getVariablesByCategory
 ##'
 ##' @description Retrieves the variable by categories (environment or setpoint...)
-##' @param token a token
 ##' @param category Name of the category to search
 ##' @param imageryProvider character, provider of the images
 ##' @param experimentURI URI of the experiment
@@ -21,13 +20,12 @@
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToWS(apiID="ws_public")
-##'  aToken = getToken("guestphis@inra.fr","guestphis")
-##'  vars <- getVariablesByCategory(aToken$data,category="imagery",
+##'  connectToWS(apiID="ws_public","guestphis@inra.fr","guestphis")
+##'  vars <- getVariablesByCategory(category="imagery",
 ##'           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##'  vars$data
 ##' }
@@ -56,7 +54,6 @@ getVariablesByCategory<-function(category ="",experimentURI ="",imageryProvider=
 ##' @title getVariablesDetails
 ##'
 ##' @description Retrieves the variable descriptions, trait, method and unit covered by the variable
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of a variable (optional)
 ##' @param label character, search by label (optional)
 ##' @param trait character, search by trait uri (optional)
@@ -74,14 +71,13 @@ getVariablesByCategory<-function(category ="",experimentURI ="",imageryProvider=
 ##' \item{and uri, label and comment}{for each variable}
 ##' }
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  vars <- getVariablesDetails(aToken$data, uri = "http://www.opensilex.org/demo/id/variables/v001")
-##'  vars <- getVariablesDetails(aToken$data,label = "Leaf-Area_LAI-Computation_LAI")
+##'  connectToWS(apiID="ws_private","guest@opensilex.fr","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  vars <- getVariablesDetails(uri = "http://www.opensilex.org/demo/id/variables/v001")
+##'  vars <- getVariablesDetails(label = "Leaf-Area_LAI-Computation_LAI")
 ##'  vars$data
 ##' }
 ##' @export
@@ -98,8 +94,7 @@ getVariablesDetails <- function(
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE",configWS)
   
   attributes <- list(pageSize=pageSize,
-                     page = page,
-                     Authorization=token)
+                     page = page)
   if (uri!="")    attributes <- c(attributes, uri = uri)
   if (label!="")  attributes <- c(attributes, lavel = label)
   if (trait!="")  attributes <- c(attributes, trait = trait)
@@ -128,7 +123,6 @@ getVariablesDetails <- function(
 ##' @title getVariables2
 ##'
 ##' @description Retrieves the variable descriptions, trait, method and unit covered by the variable
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of a variable (optional)
 ##' @param label character, search by label (optional)
 ##' @param trait character, search by trait uri (optional)
@@ -146,14 +140,13 @@ getVariablesDetails <- function(
 ##' \item{and uri, label and comment}{for each variable}
 ##' }
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  vars <- getVariables2(aToken$data, uri = "http://www.opensilex.org/demo/id/variables/v001")
-##'  vars <- getVariables2(aToken$data,label = "Leaf-Area_LAI-Computation_LAI")
+##'  connectToWS(apiID="ws_private","guest@opensilex.org","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  vars <- getVariables2(uri = "http://www.opensilex.org/demo/id/variables/v001")
+##'  vars <- getVariables2(label = "Leaf-Area_LAI-Computation_LAI")
 ##'  vars$data
 ##' }
 ##' @export
@@ -170,8 +163,7 @@ getVariables2 <- function(
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE",configWS)
   
   attributes <- list(pageSize=pageSize,
-                     page = page,
-                     Authorization=token)
+                     page = page)
   if (uri!="")    attributes <- c(attributes, uri = uri)
   if (label!="")  attributes <- c(attributes, lavel = label)
   if (trait!="")  attributes <- c(attributes, trait = trait)
@@ -200,7 +192,6 @@ getVariables2 <- function(
 ##'
 ##' @description Retrieves the variable descriptions, trait, method and unit covered by the variable
 ##'       for a given experiment URI
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of an experiment
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize character, number of elements by page (pagination Plant Breeding API)
@@ -214,15 +205,14 @@ getVariables2 <- function(
 ##' \item{and uri, label and comment}{for each variable}
 ##' }
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
 ##' service
 ##' @importFrom dplyr select starts_with
 ##' @importFrom tidyr gather
 ##' @examples
 ##' \donttest{
-##'  connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  varExp<- getVariablesByExperiment(aToken$data, uri = "http://www.opensilex.org/demo/DIA2017-1")
+##'  connectToWS(apiID="ws_private","guest@opensilex.org/","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  varExp<- getVariablesByExperiment(uri = "http://www.opensilex.org/demo/DIA2017-1")
 ##'  varExp$data
 ##' }
 ##' @export
@@ -235,8 +225,7 @@ getVariablesByExperiment <- function(
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE",configWS)
   
   attributes <- list(pageSize=pageSize,
-                     page = page,
-                     Authorization=token)
+                     page = page)
   # Retrieve the information of the given experiment URI
   tmpExp<-getExperiments2(uri = uri)
   
@@ -250,7 +239,7 @@ getVariablesByExperiment <- function(
   
   # Request on VARIABLES service to retrieve all the information
   # of the variables of ALL experiments
-  tmpCountVar<-getVariables2(token)$totalCount
+  tmpCountVar<-getVariables2()$totalCount
   tmpVar<-getVariables2(pageSize = tmpCountVar)$data
 
   # Filtering variables on THIS experiment

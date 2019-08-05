@@ -37,8 +37,6 @@ getProjects2(page = NULL, pageSize = NULL, uri = "", name = "",
 \item{website}{character, search by website of a project (optional)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
-
-\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -47,15 +45,14 @@ WSResponse object
 Retrieves the list of projects in the WS2 with the selected filters
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
  connectToWS(apiID="ws_private",
   url = "http://www.opensilex.org/openSilexAPI/rest/")
- aToken = getToken("guestphis@supagro.inra.fr","guestphis")
- projects <- getProjects2(aToken$data,
+ projects <- getProjects2(
   uri="http://www.opensilex.org/demo/PHENOME-FPPN")
  projects$data
 }

@@ -19,8 +19,6 @@ getSpecies(uri = "", label = "", language = "", page = NULL,
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
-
-\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -29,14 +27,13 @@ WSResponse object
 retrieves the specie behind the specie uri
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
 connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-species <- getSpecies(aToken$data)
+species <- getSpecies()
 species$data
 }
 }

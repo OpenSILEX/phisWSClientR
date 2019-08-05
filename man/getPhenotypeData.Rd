@@ -28,8 +28,6 @@ getPhenotypeData(variable = "", experiment = "",
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
-
-\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -38,17 +36,16 @@ WSResponse object
 Retrieves the phenotype measures data from a variable, an experiment or a sensor
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
  connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
- aToken = getToken("guestphis@supagro.inra.fr","guestphis")
- phenodata <- getPhenotypeData(aToken$data,
-  variable = "http://www.opensilex.org/demo/id/variables/v001")
- phenodata <- getPhenotypeData(aToken$data,
-  variable = "http://www.opensilex.org/demo/id/variables/v001",
+ phenodata <- getPhenotypeData(
+   variable = "http://www.opensilex.org/demo/id/variables/v001")
+ phenodata <- getPhenotypeData(
+   variable = "http://www.opensilex.org/demo/id/variables/v001",
    startDate="2017-06-16", endDate="2017-07-16")
  phenodata$data
 }

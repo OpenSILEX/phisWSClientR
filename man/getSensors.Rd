@@ -33,8 +33,6 @@ getSensors(uri = "", rdfType = "", label = "", brand = "",
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
-
-\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -43,16 +41,15 @@ WSResponse object
 Retrieves the sensors based on search criterion
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
 connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-sensors <- getSensors(aToken$data,
+sensors <- getSensors(
  uri = "http://www.opensilex.org/demo/2018/s18001")
-sensors <- getSensors(aToken$data, brand = "Cimel")
+sensors <- getSensors( brand = "Cimel")
 sensors$data
 }
 }

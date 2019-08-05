@@ -22,5 +22,5 @@ Execute only once at the beginning of the requests.
 In the case of a WebService change of address or a renaming of services, please edit this list.
 and execute the function.
 WS1 - connectToWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
-WS2 - connectToWS(apiID="ws_private",username="guest@opensilex.org",password"guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+WS2 - connectToWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
 }
