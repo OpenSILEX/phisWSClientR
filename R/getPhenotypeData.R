@@ -27,8 +27,8 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-##'  aToken = getToken("guest@opensilex.org","guest")
+##'  connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  phenodata <- getPhenotypeData(aToken$data,
 ##'   variable = "http://www.opensilex.org/demo/id/variables/v001")
 ##'  phenodata <- getPhenotypeData(aToken$data,
@@ -37,7 +37,7 @@
 ##'  phenodata$data
 ##' }
 ##' @export
-getPhenotypeData <- function(token,
+getPhenotypeData <- function(
                              variable = "",
                              experiment = "",
                              scientificObject = "",
@@ -63,8 +63,7 @@ getPhenotypeData <- function(token,
   if (incertitude!="")       attributes <- c(attributes, incertitude = incertitude)
   
   variableResponse <- getResponseFromWS2(resource = paste0(get("DATASETS", configWS)),
-                                         attributes = attributes,
-                                         verbose = verbose)
+                                         attributes = attributes)
   outputData <- data.frame()
   jsonData <- data.frame(variableResponse$data[[1]])
   AO=jsonData$agronomicalObject

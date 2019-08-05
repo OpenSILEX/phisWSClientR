@@ -4,14 +4,12 @@
 \alias{getVectors}
 \title{getVectors}
 \usage{
-getVectors(token, uri = "", rdfType = "", label = "", brand = "",
+getVectors(uri = "", rdfType = "", label = "", brand = "",
   serialNumber = "", inServiceDate = "", dateOfPurchase = "",
   personInCharge = "", page = NULL, pageSize = NULL,
   verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{uri}{character, search by the uri of an annotation (optional)}
 
 \item{rdfType}{character, search by the rdf type of a sensor (optional)}
@@ -33,6 +31,8 @@ getVectors(token, uri = "", rdfType = "", label = "", brand = "",
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
+
+\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -46,8 +46,8 @@ service
 }
 \examples{
 \donttest{
-connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-aToken = getToken("guest@opensilex.org","guest")
+connectToWS(apiID="ws_private", url = "http://http://http://www.opensilex.org/openSilexAPI/rest/")
+aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 vectors <- getVectors(aToken$data, uri = "http://www.opensilex.org/demo/2018/v1801")
 vectors <- getVectors(aToken$data, serialNumber = "01BD1DD71500001")
 vectors$data

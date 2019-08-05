@@ -5,11 +5,9 @@
 \title{getResponseFromWS retrieves the data of a service from the WS1}
 \usage{
 getResponseFromWS(resource, paramPath = NULL, attributes,
-  type = "application/json", verbose = FALSE)
+  type = "application/json")
 }
 \arguments{
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
-
 \item{responseObject}{object HTTP httr}
 }
 \description{

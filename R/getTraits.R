@@ -22,14 +22,14 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-##' aToken = getToken("guest@opensilex.org","guest")
+##' connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##' traits <- getTraits(aToken$data,
 ##'                    uri = "http://www.opensilex.org/demo/id/traits/t010")
 ##' traits$data
 ##' }
 ##' @export
-getTraits <- function(token,
+getTraits <- function(
                       uri = "",
                       label = "",
                       page = NULL,
@@ -45,7 +45,6 @@ getTraits <- function(token,
   if (label!="") attributes <- c(attributes, label = label)
   
   variableResponse <- getResponseFromWS2(resource = paste0(get("TRAITS", configWS)),
-                                         attributes = attributes,
-                                         verbose = verbose)
+                                         attributes = attributes)
   return(variableResponse)
 }

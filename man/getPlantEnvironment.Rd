@@ -4,14 +4,11 @@
 \alias{getPlantEnvironment}
 \title{retrieves the environmental mesures of a plant from the web service}
 \usage{
-getPlantEnvironment(token, plantURI = "", variableCategory = "",
+getPlantEnvironment(plantURI = "", variableCategory = "",
   startDate = "", endDate = "", variables = "", facility = "",
-  experimentURI = "", page = NULL, pageSize = NULL,
-  verbose = FALSE)
+  experimentURI = "", page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{token}{a token}
-
 \item{plantURI}{plant URI}
 
 \item{variableCategory}{character, a category of variables}
@@ -30,7 +27,7 @@ getPlantEnvironment(token, plantURI = "", variableCategory = "",
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
 
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
+\item{token}{a token}
 }
 \value{
 WSResponse object
@@ -44,7 +41,7 @@ service
 }
 \examples{
 # not run (is an internal function!!!)
-# aToken<-getToken("guest@inra.fr","guest")$data
+# aToken<-getToken("guestphis@inra.fr","guestphis")$data
 # myplant<-getPlantEnvironment(aToken,
 #       plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
 #       experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")

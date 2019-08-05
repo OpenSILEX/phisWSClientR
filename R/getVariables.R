@@ -18,25 +18,25 @@
 ##' @param experimentURI URI of the experiment
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the getToken() function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connect(apiID="ws_public")
-##'  aToken = getToken("guest@inra.fr","guest")
+##'  connectToWS(apiID="ws_public")
+##'  aToken = getToken("guestphis@inra.fr","guestphis")
 ##'  vars <- getVariablesByCategory(aToken$data,category="imagery",
 ##'           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##'  vars$data
 ##' }
 ##' @export
-getVariablesByCategory<-function(token,category ="",experimentURI ="",imageryProvider="",
+getVariablesByCategory<-function(category ="",experimentURI ="",imageryProvider="",
                                  page=NULL,pageSize=NULL){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  attributes = list(sessionId=token, page=page, pageSize = pageSize)
+  attributes = list( page=page, pageSize = pageSize)
   if (category  == ""){
     stop("no category selected")
   } else {
@@ -78,14 +78,14 @@ getVariablesByCategory<-function(token,category ="",experimentURI ="",imageryPro
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-##'  aToken = getToken("guest@opensilex.org","guest")
+##'  connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  vars <- getVariablesDetails(aToken$data, uri = "http://www.opensilex.org/demo/id/variables/v001")
 ##'  vars <- getVariablesDetails(aToken$data,label = "Leaf-Area_LAI-Computation_LAI")
 ##'  vars$data
 ##' }
 ##' @export
-getVariablesDetails <- function(token,
+getVariablesDetails <- function(
                           uri = "",
                           label = "",
                           trait = "",
@@ -107,8 +107,7 @@ getVariablesDetails <- function(token,
   if (unit!="")   attributes <- c(attributes, unit = unit)
   
   variableResponse <- getResponseFromWS2(resource = paste0(get("VARIABLES_DETAILS", configWS)),
-                                         attributes = attributes,
-                                         verbose = verbose)
+                                         attributes = attributes)
   
   # Convert the JSON data.frame in real R data.frame
   tmp<-variableResponse$data
@@ -151,14 +150,14 @@ getVariablesDetails <- function(token,
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-##'  aToken = getToken("guest@opensilex.org","guest")
+##'  connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  vars <- getVariables2(aToken$data, uri = "http://www.opensilex.org/demo/id/variables/v001")
 ##'  vars <- getVariables2(aToken$data,label = "Leaf-Area_LAI-Computation_LAI")
 ##'  vars$data
 ##' }
 ##' @export
-getVariables2 <- function(token,
+getVariables2 <- function(
                           uri = "",
                           label = "",
                           trait = "",
@@ -180,8 +179,7 @@ getVariables2 <- function(token,
   if (unit!="")   attributes <- c(attributes, unit = unit)
   
   variableResponse <- getResponseFromWS2(resource = paste0(get("VARIABLES", configWS)),
-                                         attributes = attributes,
-                                         verbose = verbose)
+                                         attributes = attributes)
   
   # Convert the JSON data.frame in real R data.frame
   tmp<-variableResponse$data
@@ -222,13 +220,13 @@ getVariables2 <- function(token,
 ##' @importFrom tidyr gather
 ##' @examples
 ##' \donttest{
-##'  connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-##'  aToken = getToken("guest@opensilex.org","guest")
+##'  connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  varExp<- getVariablesByExperiment(aToken$data, uri = "http://www.opensilex.org/demo/DIA2017-1")
 ##'  varExp$data
 ##' }
 ##' @export
-getVariablesByExperiment <- function(token,
+getVariablesByExperiment <- function(
                           uri = "",
                           pageSize = NULL,
                           page = NULL,
@@ -240,7 +238,7 @@ getVariablesByExperiment <- function(token,
                      page = page,
                      Authorization=token)
   # Retrieve the information of the given experiment URI
-  tmpExp<-getExperiments2(token,uri = uri)
+  tmpExp<-getExperiments2(uri = uri)
   
   # Some datamanagement to retrieve the names of the variables
   # in THIS experiment
@@ -253,7 +251,7 @@ getVariablesByExperiment <- function(token,
   # Request on VARIABLES service to retrieve all the information
   # of the variables of ALL experiments
   tmpCountVar<-getVariables2(token)$totalCount
-  tmpVar<-getVariables2(token,pageSize = tmpCountVar)$data
+  tmpVar<-getVariables2(pageSize = tmpCountVar)$data
 
   # Filtering variables on THIS experiment
   tmpFilterData<-tmpVar[tmpVar[,"uri"] %in% inputVar,]

@@ -12,9 +12,10 @@
 ##'
 ##' @description Create an URL to call the WS and retrun a formatted response of WSResponse class.
 ##' @param responseObject object HTTP httr
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @keywords internal
 getResponseFromWS<-function(resource,paramPath = NULL,attributes,type="application/json"){
+  attributes[["sessionId"]] = get("TOKEN_VALUE",configWS)
   webserviceBaseUrl <- get("BASE_PATH",configWS)
   urlParams <- ""
   # creation de l'url
@@ -38,10 +39,9 @@ getResponseFromWS<-function(resource,paramPath = NULL,attributes,type="applicati
   } else {
     finalurl <- paste0(webserviceBaseUrl, resource ,"/",paramPath, "?", urlParams)
   }
-  
   ptm <- proc.time()
   r <- httr::GET(finalurl)
-  if (verbose) {
+  if (get("VERBOSE", configWS)) {
     print("Request Time : " )
     print(proc.time() - ptm)
     print(r)
@@ -71,9 +71,9 @@ getResponseFromWS<-function(resource,paramPath = NULL,attributes,type="applicati
 ##' @param paramPath character, the extension of the service to call, default to NULL
 ##' @param attributes character, the list of attributes to give to the GET request
 ##' @param type character, the type of the output, default to application/json
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @keywords internal
-getResponseFromWS2 <- function(resource, paramPath = NULL, attributes, type = "application/json", verbose = FALSE){
+getResponseFromWS2 <- function(resource, paramPath = NULL, attributes, type = "application/json"){
   webserviceBaseUrl <- get("BASE_PATH", configWS)
   urlParams <- ""
   # url concatenation
@@ -99,8 +99,8 @@ getResponseFromWS2 <- function(resource, paramPath = NULL, attributes, type = "a
   }
   
   ptm <- proc.time()
-  r <- httr::GET(finalurl, config = httr::add_headers(Authorization=paste("Bearer ",attributes$Authorization, sep = "")))
-  if (verbose) {
+  r <- httr::GET(finalurl, config = httr::add_headers(Authorization=paste("Bearer ",get("TOKEN_VALUE",configWS), sep = "")))
+  if (get("VERBOSE", configWS)) {
     print("Request Time : " )
     print(proc.time() - ptm)
     print(r)

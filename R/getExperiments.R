@@ -17,24 +17,24 @@
 ##' @param experimentURI URI of the experiment
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the getToken() function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##' connect(apiID="ws_public")
-##'  aToken <- getToken("guest@inra.fr","guest")
+##' connectToWS(apiID="ws_public")
+##'  aToken <- getToken("guestphis@inra.fr","guestphis")
 ##'  publicExp<-getExperimentById(aToken$data,
 ##'         experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##'  publicExp$data
 ##' }
 ##' @keywords internal
-getExperimentById <- function(token, experimentURI ="", page = NULL,pageSize = NULL){
+getExperimentById <- function( experimentURI ="", page = NULL,pageSize = NULL){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  attributes = list(sessionId = token, page = page, pageSize = pageSize)
+  attributes = list(page = page, pageSize = pageSize)
   if (experimentURI  == ""){
     stop("no experimentURI selected")
   } else {
@@ -55,26 +55,26 @@ getExperimentById <- function(token, experimentURI ="", page = NULL,pageSize = N
 ##' @param sortOrder ordering "ASC" or "DESC"
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the getToken() function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##' connect(apiID="ws_public")
-##'  aToken <- getToken("guest@inra.fr","guest")$data
+##' connectToWS(apiID="ws_public")
+##'  aToken <- getToken("guestphis@inra.fr","guestphis")$data
 ##'  getExperiments(aToken,page=3,pageSize=100,startDate="2012-02-21",endDate="2012-03-21")
 ##'  getExperiments(aToken,projectName = "PHIS_Publi")
 ##'  getExperiments(aToken,sortOrder = "ASC")
 ##'  getExperiments(aToken,season = 2012 )
 ##' }
 ##' @export
-getExperiments <- function(token, projectName ="", season = "", sortOrder = "DESC" ,
+getExperiments <- function( projectName ="", season = "", sortOrder = "DESC" ,
                            page = NULL,pageSize = NULL){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  attributes = list(sessionId = token, page = page, pageSize = pageSize)
+  attributes = list(page = page, pageSize = pageSize)
   
   if (projectName != ""){
     attributes <- c(attributes, projectName = projectName)
@@ -111,14 +111,14 @@ getExperiments <- function(token, projectName ="", season = "", sortOrder = "DES
 ##' @details You have to execute the \code{\link{getToken}}
 ##' @examples
 ##' \donttest{
-##' connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-##' aToken = getToken("guest@opensilex.org","guest")
+##' connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##' myexp <- getExperiments2(aToken$data,
 ##'                    uri = "http://www.opensilex.org/demo/DIA2017-1")
 ##' myexp$data
 ##' }
 ##' @export
-getExperiments2 <- function(token,
+getExperiments2 <- function(
                             uri = "",
                             startDate = "",
                             endDate = "",
@@ -146,7 +146,6 @@ getExperiments2 <- function(token,
   if (keywords!="") attributes <- c(attributes, keywords = keywords)
   
   variableResponse <- getResponseFromWS2(resource = paste0(get("EXPERIMENTS", configWS)),
-                                         attributes = attributes,
-                                         verbose = verbose)
+                                         attributes = attributes)
   return(variableResponse)
 }

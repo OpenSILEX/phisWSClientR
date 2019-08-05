@@ -4,14 +4,12 @@
 \alias{getToken}
 \title{retrieves a user identifier for connexion to the web service}
 \usage{
-getToken(login, password, verbose = FALSE)
+getToken(login, password)
 }
 \arguments{
 \item{login}{login of the user to create the token}
 
 \item{password}{password of the user to create the token}
-
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
 }
 \value{
 a session token user identifier in the WS
@@ -21,8 +19,8 @@ Retrieves a user identifier for connexion to the WebService (WS)
 }
 \examples{
 \donttest{
-connect(apiID="ws_public")
-aToken <- getToken("guest@inra.fr","guest")
+connectToWS(apiID="ws_public")
+aToken <- getToken("guestphis@inra.fr","guestphis")
 aToken$data
 }
 }

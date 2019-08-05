@@ -4,13 +4,11 @@
 \alias{getPhenotypeData}
 \title{getPhenotypeData}
 \usage{
-getPhenotypeData(token, variable = "", experiment = "",
+getPhenotypeData(variable = "", experiment = "",
   scientificObject = "", startDate = "", endDate = "", sensor = "",
   incertitude = "", page = NULL, pageSize = NULL, verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{variable}{character, search by the uri of a variable (optional). You can access the list of variables through \code{\link{getVariables2}} function.}
 
 \item{experiment}{character, search by the uri of an experiment (optional). You can access the list of experiments through \code{\link{getExperiments}} function.}
@@ -30,6 +28,8 @@ getPhenotypeData(token, variable = "", experiment = "",
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
+
+\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -43,8 +43,8 @@ service
 }
 \examples{
 \donttest{
- connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
- aToken = getToken("guest@opensilex.org","guest")
+ connectToWS(apiID="ws_private", url = "http://http://http://www.opensilex.org/openSilexAPI/rest/")
+ aToken = getToken("guestphis@supagro.inra.fr","guestphis")
  phenodata <- getPhenotypeData(aToken$data,
   variable = "http://www.opensilex.org/demo/id/variables/v001")
  phenodata <- getPhenotypeData(aToken$data,

@@ -8,8 +8,7 @@ in progress...
 
 To initialize a client request:
 
-* connect()
-* getToken()
+* connectToWS()
 
 For the first web service, the available functions are:
 

@@ -4,13 +4,11 @@
 \alias{getEnvironment}
 \title{retrieves the environmental mesures of an experiment from the web service}
 \usage{
-getEnvironment(token, variableCategory = "", startDate = "",
-  endDate = "", variables = "", facility = "", experimentURI = "",
-  page = NULL, pageSize = NULL, verbose = FALSE)
+getEnvironment(variableCategory = "", startDate = "", endDate = "",
+  variables = "", facility = "", experimentURI = "", page = NULL,
+  pageSize = NULL)
 }
 \arguments{
-\item{token}{a token}
-
 \item{variableCategory}{character, a category of variables}
 
 \item{startDate}{data > startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )}
@@ -27,7 +25,7 @@ getEnvironment(token, variableCategory = "", startDate = "",
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
 
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
+\item{token}{a token}
 }
 \value{
 WSResponse object
@@ -41,19 +39,15 @@ service
 }
 \examples{
 \donttest{
-connect(apiID="ws_public")
- aToken = getToken("guest@inra.fr","guest")
- getEnvironment(aToken$data,page=3,pageSize=100,startDate="2012-02-21",endDate = "2012-03-21")
- test<-getEnvironment(aToken$data,
-       experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
+ connectToWS(apiID="ws_public", username = "guestphis@supagro.inra.fr", password = "guestphis")
+ getEnvironment(page=3,pageSize=100,startDate="2017-06-29",endDate = "2017-06-16")
+ test<-getEnvironment(experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30")
  test$data
- getEnvironment(aToken$data,
- experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
- startDate="2012-02-21",
- endDate="2012-02-15 19:20:30")
- 
- getEnvironment(aToken$data, experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
-    facility="http://www.phenome-fppn.fr/m3p/ec3",
+ getEnvironment( experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30",
+                 startDate="2017-06-16",
+                 endDate="2017-06-29")
+ getEnvironment(experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30",
+    facility="http://www.phenome-fppn.fr/m3p/es2",
     variables="wind speed_weather station_meter per second")
 }
 }

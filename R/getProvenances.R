@@ -24,8 +24,8 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-##' aToken = getToken("guest@opensilex.org","guest")
+##' connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##' provenances <- getProvenances(aToken$data,
 ##'  uri = "http://www.opensilex.org/demo/2018/pv181515071552",
 ##'   pageSize=10)
@@ -35,7 +35,7 @@
 ##' provenances$data
 ##' }
 ##' @export
-getProvenances <- function(token,
+getProvenances <- function(
                       uri = "",
                       label = "",
                       comment = "",
@@ -55,7 +55,6 @@ getProvenances <- function(token,
   if (jsonValueFilter!="") attributes <- c(attributes, jsonValueFilter = jsonValueFilter)
   
   variableResponse <- getResponseFromWS2(resource = paste0(get("PROVENANCES", configWS)),
-                                         attributes = attributes,
-                                         verbose = verbose)
+                                         attributes = attributes)
   return(variableResponse)
 }

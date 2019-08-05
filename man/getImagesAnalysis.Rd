@@ -4,13 +4,11 @@
 \alias{getImagesAnalysis}
 \title{retrieves the images analysis data from the web service}
 \usage{
-getImagesAnalysis(token, experimentURI = "", variablesName = list(),
+getImagesAnalysis(experimentURI = "", variablesName = list(),
   labelView = "", provider = "", date = "", page = NULL,
-  pageSize = NULL, verbose = FALSE)
+  pageSize = NULL)
 }
 \arguments{
-\item{token}{a token}
-
 \item{experimentURI}{URI of the experiment}
 
 \item{variablesName}{list, variable names of images analysis (ex : "objAreaSum")}
@@ -25,7 +23,7 @@ getImagesAnalysis(token, experimentURI = "", variablesName = list(),
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
 
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
+\item{token}{a token}
 }
 \value{
 WSResponse object
@@ -39,8 +37,8 @@ service
 }
 \examples{
 \donttest{
-connect(apiID="ws_public")
- aToken = getToken("guest@inra.fr","guest")
+connectToWS(apiID="ws_public")
+ aToken = getToken("guestphis@inra.fr","guestphis")
  myImages<-getImagesAnalysis(token = aToken$data,
            experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
            variablesName = list("objAreaSum"),pageSize = 100000)

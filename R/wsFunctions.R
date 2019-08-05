@@ -7,7 +7,7 @@
 #-------------------------------------------------------------------------------
 
 
-##' @title connect
+##' @title connectToWS
 ##' @param apiID character, a character name of an API ("ws_public" or "ws_private")
 ##' @param url character, if apiID is private add the url of the chosen API, containing the IP,
 ##'            the full url with the protocol 'http://www.opensilex.org/openSilexAPI/rest/'
@@ -17,37 +17,37 @@
 ##' Execute only once at the beginning of the requests.
 ##' In the case of a WebService change of address or a renaming of services, please edit this list.
 ##' and execute the function.
+##' WS1 - connectToWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
+##' WS2 - connectToWS(apiID="ws_private",username="guest@opensilex.org",password"guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##' @export
-connect<-function(apiID, url = "", username = "guest@opensilex.org", password = "guest"){
+connectToWS<-function(apiID, username, password, url = ""){
   # if apiID is public then we use the public configWS given by the package
   # else if apiID is private, we use the url procided by the user
   if (username == "") {
-    print("Please, you have to give an userId")
-    stop()
+    stop("Please, you have to give an userId")
   }
   if (password == "") {
-    print("Please, you have to give an user password")
-    stop()
+    stop("Please, you have to give an user password")
   }  
-  
+   
   # configWS is an environment with specific variables to opensilex web service
   # full url if protocol has been sent 
   if (apiID == "ws_private") {
     if(url == ""){
-      print("Please, you have to give an URL")
-      stop()
-    } 
-  }else{
-    assign("BASE_PATH", url, configWS)
+      stop("Please, you have to give an URL")
+    } else{
+      assign("BASE_PATH", url, configWS)
+    }
   }
   
   if (apiID == "ws_public") {
     assign("BASE_PATH",get("PUBLIC_PATH",configWS),configWS)
-  }assign("BASE_PATH","", configWS)
+  }
+  # set token
   assign("USERNAME", username, configWS)
   assign("PASSWORD", password, configWS)
-  phisWSClientR::getToken(username,password)
-  
+  tokenData = phisWSClientR::getToken(username,password)
+  assign("TOKEN_VALUE", tokenData$data, configWS)
 } 
  
 
@@ -57,7 +57,7 @@ connect<-function(apiID, url = "", username = "guest@opensilex.org", password = 
 ##' returns a formatted response of WSResponse class.
 ##' @param resource character, an resource from the web service api
 ##' @param attributes a list containing a login and a password
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @details This function is OK for the first version of the web service
 ##'  (a GET call with a visible request)
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
@@ -82,10 +82,10 @@ getTokenResponseWS<-function(resource,paramPath=NULL,attributes,type = "applicat
   } else {
     finalurl <- paste0(webserviceBaseUrl, resource ,"/",paramPath, "?", urlParams)
   }
-
+  
   ptm <- proc.time()
   r <- httr::GET(finalurl)
-  if (verbose) {
+  if (get("VERBOSE",configWS)) {
     print("Request Time : " )
     print(proc.time() - ptm)
     print(r)
@@ -101,7 +101,7 @@ getTokenResponseWS<-function(resource,paramPath=NULL,attributes,type = "applicat
 ##' returns a formatted response of WSResponse class.
 ##' @param resource character, an resource from the web service api
 ##' @param attributes a list containing a login and a password
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @details This function is OK for the second version of the web service
 ##'  (a POST call with an invisible request using a correct JSON list in a body)
 ##' @seealso https://brapi.docs.apiary.io/#introduction/structure-of-the-response-object
@@ -123,7 +123,7 @@ getTokenResponseWS2<-function(resource,attributes,type = "application/json"){
   # call
   ptm <- proc.time()
   r <- httr::POST(url=finalurl,body = finalbody,encode="json")
-  if (verbose) {
+  if (get("VERBOSE",configWS)) {
     print("Request Time : " )
     print(proc.time() - ptm)
     print(r)
@@ -152,11 +152,10 @@ getTokenResponseWS2<-function(resource,attributes,type = "application/json"){
 # ##' @param attributes query parameters
 # ##' @param encode character, type of encodage
 # ##' @param requestBody body data which will be send
-# ##' @param verbose logical FALSE by default, if TRUE display information about the progress
 # ##' @return WSResponse WSResponse class instance
 # ##' @keywords internal
 # postResponseFromWS<-function(resource, paramPath = NULL, attributes,  encode ="json", requestBody){
-#   #configWS<-connect()
+#   #configWS<-connectToWS()
 #   webserviceBaseUrl <- configWS[["BASE_PATH"]]
 #   urlParams = ""
 #   # create the l'url
@@ -272,8 +271,13 @@ ObjectType<-function(obj){
 
 ##'@title setDebugMode
 ##'@description Activate or deactivate debug mode
-##'@param active a boolean to activate the debug instructions
+##'@param active logical, FALSE by default, if TRUE display information about the progress
 ##'@export
 setDebugMode<-function(active=TRUE){
-  assign("VERBOSE", active, configWS)
+  if(active == TRUE || active == FALSE){
+    assign("VERBOSE", active, configWS)
+  }else{
+    stop("Wrong parameter used must be TRUE or FALSE")
+    assign("VERBOSE",  TRUE, configWS)
+  }
 }

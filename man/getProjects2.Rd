@@ -4,15 +4,12 @@
 \alias{getProjects2}
 \title{getProjects2}
 \usage{
-getProjects2(token, page = NULL, pageSize = NULL, uri = "",
-  name = "", acronyme = "", subprojectType = "",
-  financialSupport = "", financialName = "", dateStart = "",
-  dateEnd = "", keywords = "", parentProject = "", website = "",
-  verbose = FALSE)
+getProjects2(page = NULL, pageSize = NULL, uri = "", name = "",
+  acronyme = "", subprojectType = "", financialSupport = "",
+  financialName = "", dateStart = "", dateEnd = "", keywords = "",
+  parentProject = "", website = "", verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{page}{numeric, displayed page (pagination Plant Breeding API) (optional)}
 
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API) (optional)}
@@ -40,6 +37,8 @@ getProjects2(token, page = NULL, pageSize = NULL, uri = "",
 \item{website}{character, search by website of a project (optional)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
+
+\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -53,9 +52,9 @@ service
 }
 \examples{
 \donttest{
- connect(apiID="ws_private",
-  url = "www.opensilex.org/openSilexAPI/rest/")
- aToken = getToken("guest@opensilex.org","guest")
+ connectToWS(apiID="ws_private",
+  url = "http://http://http://www.opensilex.org/openSilexAPI/rest/")
+ aToken = getToken("guestphis@supagro.inra.fr","guestphis")
  projects <- getProjects2(aToken$data,
   uri="http://www.opensilex.org/demo/PHENOME-FPPN")
  projects$data

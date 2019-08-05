@@ -86,11 +86,23 @@ installLocally:
 deployOnTestRepository:
   when: manual
   stage: deploy
-  image: ilyasemenov/gitlab-ci-git-push
   script:
-    - git-push niio972@github.com:niio972/phisWSClientR master
+    # Install ssh-agent through openssh-client if not present
+    - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qqy )'
+    # Add the private key to this user
+    - eval $(ssh-agent -s) && ssh-add <(echo "$SSH_PRIVATE_KEY") && mkdir -p ~/.ssh
+    # Docker specific settings
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    # Config git to avoid first usage questions. Set the identity
+    - git config --global user.email "$GITHUB_USER_EMAIL" && git config --global user.name "Gitlab CI"
+    # 
+    # Do Git stuff, for example:
+    #
+    - "git remote add upstream https://github.com/niio972/phisWSClientR"
+    - "git fetch upstream"
+    - "git push upstream HEAD:master --force"
   only:
-    - master
+    - v2.0.0
     
 deployOnTestRepositoryTest: 
   image: ilyasemenov/gitlab-ci-git-push

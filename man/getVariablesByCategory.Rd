@@ -4,13 +4,10 @@
 \alias{getVariablesByCategory}
 \title{getVariablesByCategory}
 \usage{
-getVariablesByCategory(token, category = "", experimentURI = "",
-  imageryProvider = "", page = NULL, pageSize = NULL,
-  verbose = FALSE)
+getVariablesByCategory(category = "", experimentURI = "",
+  imageryProvider = "", page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{token}{a token}
-
 \item{category}{Name of the category to search}
 
 \item{experimentURI}{URI of the experiment}
@@ -21,7 +18,7 @@ getVariablesByCategory(token, category = "", experimentURI = "",
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
 
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
+\item{token}{a token}
 }
 \value{
 WSResponse object
@@ -35,8 +32,8 @@ service
 }
 \examples{
 \donttest{
- connect(apiID="ws_public")
- aToken = getToken("guest@inra.fr","guest")
+ connectToWS(apiID="ws_public")
+ aToken = getToken("guestphis@inra.fr","guestphis")
  vars <- getVariablesByCategory(aToken$data,category="imagery",
           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
  vars$data

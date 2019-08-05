@@ -4,12 +4,10 @@
 \alias{getSpecies}
 \title{getSpecies}
 \usage{
-getSpecies(token, uri = "", label = "", language = "", page = NULL,
+getSpecies(uri = "", label = "", language = "", page = NULL,
   pageSize = NULL, verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{uri}{character, search by the uri of a specie (optional)}
 
 \item{label}{character, search by the label of a specie (optional)}
@@ -21,6 +19,8 @@ getSpecies(token, uri = "", label = "", language = "", page = NULL,
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
+
+\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -34,8 +34,8 @@ service
 }
 \examples{
 \donttest{
-connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-aToken = getToken("guest@opensilex.org","guest")
+connectToWS(apiID="ws_private", url = "http://http://http://www.opensilex.org/openSilexAPI/rest/")
+aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 species <- getSpecies(aToken$data)
 species$data
 }

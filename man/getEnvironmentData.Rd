@@ -4,13 +4,10 @@
 \alias{getEnvironmentData}
 \title{getEnvironmentData}
 \usage{
-getEnvironmentData(token, variable = "", startDate = "",
-  endDate = "", sensor = "", page = NULL, pageSize = NULL,
-  dateSortAsc = TRUE, verbose = FALSE)
+getEnvironmentData(variable = "", startDate = "", endDate = "",
+  sensor = "", page = NULL, pageSize = NULL, dateSortAsc = TRUE)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{variable}{character, search by the uri of a variable. You can access the list of variables through the \code{\link{getVariables2}} function.}
 
 \item{startDate}{character, search from start date (optional)}
@@ -25,7 +22,7 @@ getEnvironmentData(token, variable = "", startDate = "",
 
 \item{dateSortAsc}{logical, sort date in ascending order if TRUE}
 
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
+\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -39,8 +36,7 @@ service
 }
 \examples{
 \donttest{
- connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
- aToken = getToken("guest@opensilex.org","guest")
+ connectToWS(apiID="ws_private", url = "http://http://http://www.opensilex.org/openSilexAPI/rest/","guestphis@supagro.inra.fr","guestphis")
  # Retrieve the number of available data
  mycount <- getEnvironmentData(token=aToken$data, 
       variable = "http://www.opensilex.org/demo/id/variables/v004")$totalCount

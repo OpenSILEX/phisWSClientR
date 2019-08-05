@@ -21,35 +21,30 @@
 ##' @param experimentURI URI of the experiment
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @details You have to execute the getToken() function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##' connect(apiID="ws_public")
-##'  aToken = getToken("guest@inra.fr","guest")
-##'  getEnvironment(aToken$data,page=3,pageSize=100,startDate="2012-02-21",endDate = "2012-03-21")
-##'  test<-getEnvironment(aToken$data,
-##'        experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
+##'  connectToWS(apiID="ws_public", username = "guestphis@supagro.inra.fr", password = "guestphis")
+##'  getEnvironment(page=3,pageSize=100,startDate="2017-06-29",endDate = "2017-06-16")
+##'  test<-getEnvironment(experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30")
 ##'  test$data
-##'  getEnvironment(aToken$data,
-##'  experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
-##'  startDate="2012-02-21",
-##'  endDate="2012-02-15 19:20:30")
-##'  
-##'  getEnvironment(aToken$data, experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
-##'     facility="http://www.phenome-fppn.fr/m3p/ec3",
+##'  getEnvironment( experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30",
+##'                  startDate="2017-06-16",
+##'                  endDate="2017-06-29")
+##'  getEnvironment(experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30",
+##'     facility="http://www.phenome-fppn.fr/m3p/es2",
 ##'     variables="wind speed_weather station_meter per second")
 ##' }
 ##' @export
-getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = "" ,variables = "",facility = "",
+getEnvironment <- function(variableCategory ="",startDate = "",endDate = "" ,variables = "",facility = "",
                            experimentURI ="", page = NULL, pageSize = NULL){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
   
-  attributes = list(sessionId = token, page = page, pageSize=pageSize)
+  attributes = list(page = page, pageSize=pageSize)
   if (startDate != ""){
     attributes <- c(attributes, startDate = startDate)
   }
@@ -87,15 +82,13 @@ getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = 
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @param dateSortAsc logical, sort date in ascending order if TRUE
-##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-##'  aToken = getToken("guest@opensilex.org","guest")
+##'  connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/","guestphis@supagro.inra.fr","guestphis")
 ##'  # Retrieve the number of available data
 ##'  mycount <- getEnvironmentData(token=aToken$data, 
 ##'       variable = "http://www.opensilex.org/demo/id/variables/v004")$totalCount
@@ -111,15 +104,14 @@ getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = 
 ##'  head(myenvir$data)
 ##' }
 ##' @export
-getEnvironmentData <- function(token,
+getEnvironmentData <- function(
                                variable = "",
                                startDate = "",
                                endDate = "",
                                sensor = "",
                                page = NULL,
                                pageSize = NULL,
-                               dateSortAsc = TRUE,
-                               verbose = FALSE){
+                               dateSortAsc = TRUE){
   if (is.null(page)) page <- get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE",configWS)
   
@@ -132,7 +124,6 @@ getEnvironmentData <- function(token,
   if (sensor!="")    attributes <- c(attributes, sensor = sensor)
   
   variableResponse <- getResponseFromWS2(resource = paste0(get("ENVIRONMENTS", configWS)),
-                                         attributes = attributes,
-                                         verbose = verbose)
+                                         attributes = attributes)
   return(variableResponse)
 }

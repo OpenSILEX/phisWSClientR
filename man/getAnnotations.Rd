@@ -4,13 +4,10 @@
 \alias{getAnnotations}
 \title{getAnnotations}
 \usage{
-getAnnotations(token, uri = "", creator = "", motivatedBy = "",
-  comment = "", target = "", page = NULL, pageSize = NULL,
-  verbose = FALSE)
+getAnnotations(uri = "", creator = "", motivatedBy = "",
+  comment = "", target = "", page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{uri}{character, search by the uri of an annotation (optional)}
 
 \item{creator}{character, search by the uri of th creator of the annotations (optional)}
@@ -24,8 +21,6 @@ getAnnotations(token, uri = "", creator = "", motivatedBy = "",
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
-
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
 }
 \value{
 WSResponse object
@@ -39,10 +34,10 @@ service
 }
 \examples{
 \donttest{
- connect(apiID="ws_private",
-  url = "www.opensilex.org/openSilexAPI/rest/")
- aToken = getToken("guest@opensilex.org","guest")
- annotations <- getAnnotations(aToken$data,
+ connectToWS(apiID="ws_private",
+  url = "http://www.opensilex.org/openSilexAPI/rest/",
+ "guestphis@supagro.inra.fr","guestphis")
+ annotations <- getAnnotations(
   comment = "Ustilago maydis infection" , pageSize=10)
  annotations$data
 }

@@ -11,12 +11,12 @@
 ##' @description Retrieves a user identifier for connexion to the WebService (WS)
 ##' @param login login of the user to create the token
 ##' @param password password of the user to create the token
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @return a session token user identifier in the WS
 ##' @examples
 ##' \donttest{
-##' connect(apiID="ws_public")
-##' aToken <- getToken("guest@inra.fr","guest")
+##' connectToWS(apiID="ws_public")
+##' aToken <- getToken("guestphis@inra.fr","guestphis")
 ##' aToken$data
 ##' }
 ##' @export
@@ -90,23 +90,23 @@ getToken<-function(login,password){
 ##' @param germplasmURI filter by genotype
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the getToken() function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##' connect(apiID="ws_public")
-##'  aToken<-getToken("guest@inra.fr","guest")$data
+##' connectToWS(apiID="ws_public")
+##'  aToken<-getToken("guestphis@inra.fr","guestphis")$data
 ##'  plantes<-getPlants(aToken,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##' }
 ##' @export
-getPlants <- function(token, plantAlias ="", experimentURI = "", germplasmURI = "" ,
+getPlants <- function( plantAlias ="", experimentURI = "", germplasmURI = "" ,
                       page = NULL,pageSize = NULL){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  attributes = list(sessionId = token, page = page, pageSize = pageSize)
+  attributes = list(page = page, pageSize = pageSize)
 
   if (plantAlias != ""){
     attributes <- c(attributes, plantAlias = plantAlias)
@@ -129,23 +129,23 @@ getPlants <- function(token, plantAlias ="", experimentURI = "", germplasmURI = 
 ##' @param experimentURI URI of the experiment
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the getToken() function first to have access to the web
 ##' service
 ##' @examples
 ##' # not run (is an internal function!!!)
-##' # aToken<-getToken("guest@inra.fr","guest")$data
+##' # aToken<-getToken("guestphis@inra.fr","guestphis")$data
 ##' # test<-getPlantsContextByID(aToken,plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
 ##' #       ,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##' # test$data
 ##' @keywords internal
-getPlantsContextByID<-function(token, plantURI ="",experimentURI="",page = NULL,
+getPlantsContextByID<-function( plantURI ="",experimentURI="",page = NULL,
                                  pageSize = NULL){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  attributes = list(sessionId = token, page = page, pageSize = pageSize)
+  attributes = list(page = page, pageSize = pageSize)
   if (experimentURI != ""){
     attributes <- c(attributes, experimentURI = experimentURI)
   }
@@ -175,29 +175,29 @@ getPlantsContextByID<-function(token, plantURI ="",experimentURI="",page = NULL,
 ##' @param experimentURI URI of the experiment
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @return WSResponse object
 ##' @details You have to execute the getToken() function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' # not run (is an internal function!!!)
-##' # aToken<-getToken("guest@inra.fr","guest")$data
+##' # aToken<-getToken("guestphis@inra.fr","guestphis")$data
 ##' # myplant<-getPlantEnvironment(aToken,
 ##' #       plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
 ##' #       experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##' # myplant$data
 ##' @keywords internal
-getPlantEnvironment <- function(token,plantURI ="",variableCategory ="",startDate = "",endDate = "",
+getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = "",endDate = "",
                                 variables = "",facility = "", experimentURI ="",
                                 page = NULL,pageSize = NULL){
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  attributes = list(sessionId = token, page = page, pageSize = pageSize)
+  attributes = list(page = page, pageSize = pageSize)
   if (plantURI  == ""){
     stop("no plantURI given")
   } else {
-    attributes = list(sessionId = token, page = page, pageSize = pageSize)
+    attributes = list(page = page, pageSize = pageSize)
     if (startDate != ""){
       attributes <- c(attributes, startDate = startDate)
     }
@@ -238,28 +238,28 @@ getPlantEnvironment <- function(token,plantURI ="",variableCategory ="",startDat
 ##' @param date character, data for one day (format: YYYY-MM-DD)
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @return WSResponse object
 ##' @details You have to execute the getToken() function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##' connect(apiID="ws_public")
-##'  aToken = getToken("guest@inra.fr","guest")
+##' connectToWS(apiID="ws_public")
+##'  aToken = getToken("guestphis@inra.fr","guestphis")
 ##'  myImages<-getImagesAnalysis(token = aToken$data,
 ##'            experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
 ##'            variablesName = list("objAreaSum"),pageSize = 100000)
 ##'  head(myImages$data)
 ##' }
 ##' @export
-getImagesAnalysis <- function(token, experimentURI ="", variablesName = list(),
+getImagesAnalysis <- function( experimentURI ="", variablesName = list(),
                               labelView ="", provider = "", date = "",
                               page = NULL,pageSize = NULL){
 
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  attributes = list(sessionId = token, page = page, pageSize = pageSize)
+  attributes = list(page = page, pageSize = pageSize)
   if (date != ""){
     attributes <- c(attributes, date = date)
   }
@@ -295,27 +295,27 @@ getImagesAnalysis <- function(token, experimentURI ="", variablesName = list(),
 ##' @param date character, data for one day (format: YYYY-MM-DD)
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @return WSResponse object
 ##' @details You have to execute the getToken() function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##' connect(apiID="ws_public")
-##'  accesToken = getToken("guest@inra.fr","guest")
+##' connectToWS(apiID="ws_public")
+##'  accesToken = getToken("guestphis@inra.fr","guestphis")
 ##'  mywater<-getWatering(token=accesToken$data,
 ##'          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
 ##'          variablesName = list("weightBefore"),pageSize=100000)
 ##'  head(mywater$data)
 ##' }
 ##' @export
-getWatering <- function(token, experimentURI ="", variablesName = list(), provider = "", date = "",
+getWatering <- function( experimentURI ="", variablesName = list(), provider = "", date = "",
                         page = NULL,pageSize = NULL){
 
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  attributes = list(sessionId = token, page = page, pageSize = pageSize)
+  attributes = list(page = page, pageSize = pageSize)
   if (date != ""){
     attributes <- c(attributes, date = date)
   }
@@ -359,7 +359,7 @@ getWatering <- function(token, experimentURI ="", variablesName = list(), provid
 # ##' @examples
 # ##' # Not run (is an internal function)
 # ##' @keywords internal
-# postPhenotypes <- function(token, experimentURI = "", data = NULL, reportId = ""){
+# postPhenotypes <- function( experimentURI = "", data = NULL, reportId = ""){
 #
 #   attributes = list(sessionId = token)
 #   if ( is.null(data)){
@@ -395,14 +395,14 @@ getWatering <- function(token, experimentURI ="", variablesName = list(), provid
 ##' @param experimentURI experiment unique identifier
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the getToken() function first to have access to the web
 ##' service
 ##' @examples
 ##' # Not run (is an internal function)
-##' # aToken = getToken("guest@inra.fr","guest")$data
+##' # aToken = getToken("guestphis@inra.fr","guestphis")$data
 ##' # publicLabelView <- getLabelViewByExperimentById(aToken,
 ##' #      experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##' # publicLabelView$data
@@ -412,7 +412,7 @@ getLabelViewByExperimentById <- function(token ,experimentURI="" ,viewType="" ,c
 
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  attributes = list(sessionId = token, page = page, pageSize = pageSize)
+  attributes = list(page = page, pageSize = pageSize)
 
   if(experimentURI  == ""){
     stop("no experimentURI selected")

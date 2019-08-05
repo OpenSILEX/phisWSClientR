@@ -5,8 +5,7 @@
 \title{getLabelViewByExperimentById}
 \usage{
 getLabelViewByExperimentById(token, experimentURI = "", viewType = "",
-  cameraAngle = "", provider = "", page = NULL, pageSize = NULL,
-  verbose = FALSE)
+  cameraAngle = "", provider = "", page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{token}{a token}
@@ -22,8 +21,6 @@ getLabelViewByExperimentById(token, experimentURI = "", viewType = "",
 \item{page}{displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
-
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
 }
 \value{
 WSResponse object
@@ -37,7 +34,7 @@ service
 }
 \examples{
 # Not run (is an internal function)
-# aToken = getToken("guest@inra.fr","guest")$data
+# aToken = getToken("guestphis@inra.fr","guestphis")$data
 # publicLabelView <- getLabelViewByExperimentById(aToken,
 #      experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 # publicLabelView$data

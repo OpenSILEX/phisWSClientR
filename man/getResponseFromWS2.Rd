@@ -5,7 +5,7 @@
 \title{getResponseFromWS2 retrieves the data of a service from the WS2}
 \usage{
 getResponseFromWS2(resource, paramPath = NULL, attributes,
-  type = "application/json", verbose = FALSE)
+  type = "application/json")
 }
 \arguments{
 \item{resource}{character, the name of the service to call}
@@ -15,8 +15,6 @@ getResponseFromWS2(resource, paramPath = NULL, attributes,
 \item{attributes}{character, the list of attributes to give to the GET request}
 
 \item{type}{character, the type of the output, default to application/json}
-
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
 }
 \description{
 Create an URL to call the WS and retrun a formatted response of WSResponse class.

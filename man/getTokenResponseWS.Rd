@@ -5,14 +5,12 @@
 \title{getTokenResponseWS}
 \usage{
 getTokenResponseWS(resource, paramPath = NULL, attributes,
-  type = "application/json", verbose = FALSE)
+  type = "application/json")
 }
 \arguments{
 \item{resource}{character, an resource from the web service api}
 
 \item{attributes}{a list containing a login and a password}
-
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
 }
 \value{
 responseObject an object HTTP httr

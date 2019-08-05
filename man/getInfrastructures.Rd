@@ -4,12 +4,10 @@
 \alias{getInfrastructures}
 \title{getInfrastructures}
 \usage{
-getInfrastructures(token, uri = "", rdfType = "", label = "",
+getInfrastructures(uri = "", rdfType = "", label = "",
   language = "en", page = NULL, pageSize = NULL, verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{uri}{character, search by the uri of an infrastructure (optional)}
 
 \item{rdfType}{character, search by the rdf type of an infrastructure (optional)}
@@ -23,6 +21,8 @@ getInfrastructures(token, uri = "", rdfType = "", label = "",
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
+
+\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -36,8 +36,8 @@ service
 }
 \examples{
 \donttest{
-connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-aToken = getToken("guest@opensilex.org","guest")
+connectToWS(apiID="ws_private", url = "http://http://http://www.opensilex.org/openSilexAPI/rest/")
+aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 infrastructures <- getInfrastructures(aToken$data,
                    uri = "https://emphasis.plant-phenotyping.eu")
 infrastructures$data

@@ -28,14 +28,14 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-##' aToken = getToken("guest@opensilex.org","guest")
+##' connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##' vectors <- getVectors(aToken$data, uri = "http://www.opensilex.org/demo/2018/v1801")
 ##' vectors <- getVectors(aToken$data, serialNumber = "01BD1DD71500001")
 ##' vectors$data
 ##' }
 ##' @export
-getVectors <- function(token,
+getVectors <- function(
                        uri = "",
                        rdfType = "",
                        label = "",
@@ -63,7 +63,6 @@ getVectors <- function(token,
   if (personInCharge!="") attributes <- c(attributes, personInCharge = personInCharge)
   
   variableResponse <- getResponseFromWS2(resource = paste0(get("VECTORS", configWS)),
-                                         attributes = attributes,
-                                         verbose = verbose)
+                                         attributes = attributes)
   return(variableResponse)
 }

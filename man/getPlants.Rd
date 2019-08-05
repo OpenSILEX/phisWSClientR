@@ -4,12 +4,10 @@
 \alias{getPlants}
 \title{retrieves the context of plant linked to an experiment from the web service}
 \usage{
-getPlants(token, plantAlias = "", experimentURI = "",
-  germplasmURI = "", page = NULL, pageSize = NULL, verbose = FALSE)
+getPlants(plantAlias = "", experimentURI = "", germplasmURI = "",
+  page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{token}{a token}
-
 \item{plantAlias}{an alias of plant}
 
 \item{experimentURI}{URI of the experiment}
@@ -20,7 +18,7 @@ getPlants(token, plantAlias = "", experimentURI = "",
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
 
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
+\item{token}{a token}
 }
 \value{
 WSResponse object
@@ -34,8 +32,8 @@ service
 }
 \examples{
 \donttest{
-connect(apiID="ws_public")
- aToken<-getToken("guest@inra.fr","guest")$data
+connectToWS(apiID="ws_public")
+ aToken<-getToken("guestphis@inra.fr","guestphis")$data
  plantes<-getPlants(aToken,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 }
 }

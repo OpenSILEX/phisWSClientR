@@ -6,7 +6,7 @@
   connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
 
 ## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
-  aToken <- getToken("guest@opensilex.org","guest")
+  aToken <- getToken("guestphis@supagro.inra.fr","guestphis")
 
 ## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
   getProjects2(aToken$data, uri="http://www.opensilex.org/demo/PHENOME-FPPN")

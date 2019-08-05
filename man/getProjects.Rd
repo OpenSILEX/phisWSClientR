@@ -4,19 +4,16 @@
 \alias{getProjects}
 \title{getProjects retrieves the list of projects from the web service}
 \usage{
-getProjects(token, projectName = "", page = NULL, pageSize = NULL,
-  verbose = FALSE)
+getProjects(projectName = "", page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{token}{a token}
-
 \item{projectName}{Name of the project to search}
 
 \item{page}{displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
 
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
+\item{token}{a token}
 }
 \value{
 WSResponse object
@@ -30,8 +27,8 @@ service
 }
 \examples{
 \donttest{
- connect(apiID="ws_public")
- aToken = getToken("guest@inra.fr","guest")
+ connectToWS(apiID="ws_public")
+ aToken = getToken("guestphis@inra.fr","guestphis")
  getProjects(aToken$data)
  getProjects(aToken$data, page = 1)
  getProjects(aToken$data, page = 3, pageSize = 100)

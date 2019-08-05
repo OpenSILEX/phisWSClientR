@@ -4,12 +4,10 @@
 \alias{getVariablesByExperiment}
 \title{getVariablesByExperiment}
 \usage{
-getVariablesByExperiment(token, uri = "", pageSize = NULL,
-  page = NULL, verbose = FALSE)
+getVariablesByExperiment(uri = "", pageSize = NULL, page = NULL,
+  verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{uri}{character, search by the uri of an experiment}
 
 \item{pageSize}{character, number of elements by page (pagination Plant Breeding API)}
@@ -17,6 +15,8 @@ getVariablesByExperiment(token, uri = "", pageSize = NULL,
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
+
+\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 a WSResponse object. In the 'data' part of the returned object, a data.frame is
@@ -38,8 +38,8 @@ service
 }
 \examples{
 \donttest{
- connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
- aToken = getToken("guest@opensilex.org","guest")
+ connectToWS(apiID="ws_private", url = "http://http://http://www.opensilex.org/openSilexAPI/rest/")
+ aToken = getToken("guestphis@supagro.inra.fr","guestphis")
  varExp<- getVariablesByExperiment(aToken$data, uri = "http://www.opensilex.org/demo/DIA2017-1")
  varExp$data
 }

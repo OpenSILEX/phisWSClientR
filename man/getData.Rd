@@ -4,13 +4,11 @@
 \alias{getData}
 \title{getData}
 \usage{
-getData(token, variableUri = "", objectUri = "", objectLabel = "",
+getData(variableUri = "", objectUri = "", objectLabel = "",
   provenanceUri = "", provenanceLabel = "", startDate = "",
-  endDate = "", page = NULL, pageSize = NULL, verbose = FALSE)
+  endDate = "", page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{variableUri}{character, search by the uri of a variable (NOT optional). You can access the list of variables through \code{\link{getVariables2}} function.}
 
 \item{objectUri}{character, search by object uri}
@@ -28,8 +26,6 @@ getData(token, variableUri = "", objectUri = "", objectLabel = "",
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
-
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
 }
 \value{
 WSResponse object
@@ -43,13 +39,14 @@ service
 }
 \examples{
 \donttest{
- connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
- token = getToken("guest@opensilex.org","guest")$data
- vars = getVariables2(token = token)$data$uri
- totalCount <- getData(token, variable = vars[4])$totalCount
- data <- getData(token,
+ connectToWS(apiID="ws_private",
+  url = "http:/www.opensilex.org/openSilexAPI/rest/",
+ "guestphis@supagro.inra.fr","guestphis")
+ vars = getVariables2()$data$uri
+ totalCount <- getData( variable = vars[4])$totalCount
+ data <- getData(
     variable = vars[4], pageSize = totalCount)
- data <- getData(token,
+ data <- getData(
     variable = vars[5],
    startDate = "2017-05-01", endDate = "2017-06-01", pageSize = totalCount)
  data$data

@@ -4,13 +4,11 @@
 \alias{getEvents}
 \title{getEvents}
 \usage{
-getEvents(token, uri = "", type = "", concernsUri = "",
+getEvents(uri = "", type = "", concernsUri = "",
   concernsLabel = "", startDate = "", endDate = "", page = NULL,
-  pageSize = NULL, verbose = FALSE)
+  pageSize = NULL)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{uri}{character, search by the uri of an event (optional)}
 
 \item{type}{character, search by the type of an event (optional)}
@@ -27,7 +25,7 @@ getEvents(token, uri = "", type = "", concernsUri = "",
 
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
+\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -41,8 +39,8 @@ service
 }
 \examples{
 \donttest{
-connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-aToken = getToken("guest@opensilex.org","guest")
+connectToWS(apiID="ws_private", url = "http://http://http://www.opensilex.org/openSilexAPI/rest/")
+aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 events <- getEvents(aToken$data,
  type = "http://www.opensilex.org/vocabulary/oeev#Fertilization",
   pageSize=10)

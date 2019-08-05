@@ -29,15 +29,15 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-##' aToken = getToken("guest@opensilex.org","guest")
+##' connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##' sensors <- getSensors(aToken$data,
 ##'  uri = "http://www.opensilex.org/demo/2018/s18001")
 ##' sensors <- getSensors(aToken$data, brand = "Cimel")
 ##' sensors$data
 ##' }
 ##' @export
-getSensors <- function(token,
+getSensors <- function(
                        uri = "",
                        rdfType = "",
                        label = "",
@@ -66,7 +66,6 @@ getSensors <- function(token,
   if (personInCharge!="")        attributes <- c(attributes, personInCharge = personInCharge)
   
   variableResponse <- getResponseFromWS2(resource = paste0(get("SENSORS", configWS)),
-                                         attributes = attributes,
-                                         verbose = verbose)
+                                         attributes = attributes)
   return(variableResponse)
 }

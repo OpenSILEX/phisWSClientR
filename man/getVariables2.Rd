@@ -4,12 +4,10 @@
 \alias{getVariables2}
 \title{getVariables2}
 \usage{
-getVariables2(token, uri = "", label = "", trait = "", method = "",
+getVariables2(uri = "", label = "", trait = "", method = "",
   unit = "", pageSize = NULL, page = NULL, verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{uri}{character, search by the uri of a variable (optional)}
 
 \item{label}{character, search by label (optional)}
@@ -25,6 +23,8 @@ getVariables2(token, uri = "", label = "", trait = "", method = "",
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
+
+\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 a WSResponse object. In the 'data' part of the returned object, a data.frame is
@@ -45,8 +45,8 @@ service
 }
 \examples{
 \donttest{
- connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
- aToken = getToken("guest@opensilex.org","guest")
+ connectToWS(apiID="ws_private", url = "http://http://http://www.opensilex.org/openSilexAPI/rest/")
+ aToken = getToken("guestphis@supagro.inra.fr","guestphis")
  vars <- getVariables2(aToken$data, uri = "http://www.opensilex.org/demo/id/variables/v001")
  vars <- getVariables2(aToken$data,label = "Leaf-Area_LAI-Computation_LAI")
  vars$data

@@ -19,22 +19,21 @@
 ##' @param endDate character, search to the end of range (optional)
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##' connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-##' aToken = getToken("guest@opensilex.org","guest")
+##' connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##' events <- getEvents(aToken$data,
 ##'  type = "http://www.opensilex.org/vocabulary/oeev#Fertilization",
 ##'   pageSize=10)
 ##' events$data
 ##' }
 ##' @export
-getEvents <- function(token,
+getEvents <- function(
                       uri = "",
                       type = "",
                       concernsUri = "",
@@ -42,8 +41,7 @@ getEvents <- function(token,
                       startDate = "",
                       endDate = "",
                       page = NULL,
-                      pageSize = NULL,
-                      verbose = FALSE){
+                      pageSize = NULL){
   if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   
@@ -58,7 +56,6 @@ getEvents <- function(token,
   if (endDate!="")        attributes <- c(attributes, endDate = endDate)
   
   variableResponse <- getResponseFromWS2(resource = paste0(get("EVENTS", configWS)),
-                                         attributes = attributes,
-                                         verbose = verbose)
+                                         attributes = attributes)
   return(variableResponse)
 }

@@ -4,12 +4,10 @@
 \alias{getPlantsContextByID}
 \title{getPlantsContextByID}
 \usage{
-getPlantsContextByID(token, plantURI = "", experimentURI = "",
-  page = NULL, pageSize = NULL, verbose = FALSE)
+getPlantsContextByID(plantURI = "", experimentURI = "", page = NULL,
+  pageSize = NULL)
 }
 \arguments{
-\item{token}{a token}
-
 \item{plantURI}{character, a URI identifier of a plant}
 
 \item{experimentURI}{URI of the experiment}
@@ -18,7 +16,7 @@ getPlantsContextByID(token, plantURI = "", experimentURI = "",
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
 
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
+\item{token}{a token}
 }
 \value{
 WSResponse object
@@ -32,7 +30,7 @@ service
 }
 \examples{
 # not run (is an internal function!!!)
-# aToken<-getToken("guest@inra.fr","guest")$data
+# aToken<-getToken("guestphis@inra.fr","guestphis")$data
 # test<-getPlantsContextByID(aToken,plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
 #       ,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 # test$data

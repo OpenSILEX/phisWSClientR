@@ -15,26 +15,26 @@
 ##' @param projectName Name of the project to search
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
+
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the getToken() function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connect(apiID="ws_public")
-##'  aToken = getToken("guest@inra.fr","guest")
+##'  connectToWS(apiID="ws_public")
+##'  aToken = getToken("guestphis@inra.fr","guestphis")
 ##'  getProjects(aToken$data)
 ##'  getProjects(aToken$data, page = 1)
 ##'  getProjects(aToken$data, page = 3, pageSize = 100)
 ##'  getProjects(aToken$data, projectName = "PHIS_Publi")
 ##' }
 ##' @export
-getProjects<-function(token, projectName = "",page=NULL,pageSize=NULL){
+getProjects<-function( projectName = "",page=NULL,pageSize=NULL){
   if(is.null(page)) page<-get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
   
-  attributes = list(sessionId = token, page = page, pageSize = pageSize)
+  attributes = list(sessionId = get("TOKEN_VALUE",configWS), page = page, pageSize = pageSize)
   if (projectName != ""){
     attributes <- c(attributes, projectName = projectName)
   }
@@ -67,16 +67,16 @@ getProjects<-function(token, projectName = "",page=NULL,pageSize=NULL){
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connect(apiID="ws_private",
-##'   url = "www.opensilex.org/openSilexAPI/rest/")
-##'  aToken = getToken("guest@opensilex.org","guest")
+##'  connectToWS(apiID="ws_private",
+##'   url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  projects <- getProjects2(aToken$data,
 ##'   uri="http://www.opensilex.org/demo/PHENOME-FPPN")
 ##'  projects$data
 ##' }
 ##' @export
 
-getProjects2 <- function(token,
+getProjects2 <- function(
                          page = NULL,
                          pageSize = NULL,
                          uri = "",
@@ -111,7 +111,6 @@ getProjects2 <- function(token,
   if (website != "")          attributes <- c(attributes, website = website)
   
   projectResponse <- getResponseFromWS2(resource = get("PROJECTS", configWS),
-                                        attributes = attributes,
-                                        verbose = verbose)
+                                        attributes = attributes)
   return(projectResponse)
 }

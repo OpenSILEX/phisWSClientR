@@ -4,14 +4,12 @@
 \alias{getSensors}
 \title{getSensors}
 \usage{
-getSensors(token, uri = "", rdfType = "", label = "", brand = "",
+getSensors(uri = "", rdfType = "", label = "", brand = "",
   serialNumber = "", inServiceDate = "", dateOfPurchase = "",
   dateOfLastCalibration = "", personInCharge = "", page = NULL,
   pageSize = NULL, verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{uri}{character, search by the uri of a sensor (optional)}
 
 \item{rdfType}{character, search by the rdf type of a sensor (optional)}
@@ -35,6 +33,8 @@ getSensors(token, uri = "", rdfType = "", label = "", brand = "",
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
+
+\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -48,8 +48,8 @@ service
 }
 \examples{
 \donttest{
-connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-aToken = getToken("guest@opensilex.org","guest")
+connectToWS(apiID="ws_private", url = "http://http://http://www.opensilex.org/openSilexAPI/rest/")
+aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 sensors <- getSensors(aToken$data,
  uri = "http://www.opensilex.org/demo/2018/s18001")
 sensors <- getSensors(aToken$data, brand = "Cimel")

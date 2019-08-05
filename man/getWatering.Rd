@@ -4,13 +4,10 @@
 \alias{getWatering}
 \title{retrieves the irrigation data from the web service}
 \usage{
-getWatering(token, experimentURI = "", variablesName = list(),
-  provider = "", date = "", page = NULL, pageSize = NULL,
-  verbose = FALSE)
+getWatering(experimentURI = "", variablesName = list(),
+  provider = "", date = "", page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{token}{a token}
-
 \item{experimentURI}{URI of the experiment}
 
 \item{variablesName}{list, variable names of images analysis}
@@ -23,7 +20,7 @@ getWatering(token, experimentURI = "", variablesName = list(),
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
 
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
+\item{token}{a token}
 }
 \value{
 WSResponse object
@@ -37,8 +34,8 @@ service
 }
 \examples{
 \donttest{
-connect(apiID="ws_public")
- accesToken = getToken("guest@inra.fr","guest")
+connectToWS(apiID="ws_public")
+ accesToken = getToken("guestphis@inra.fr","guestphis")
  mywater<-getWatering(token=accesToken$data,
          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
          variablesName = list("weightBefore"),pageSize=100000)

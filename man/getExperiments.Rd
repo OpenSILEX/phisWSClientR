@@ -4,13 +4,10 @@
 \alias{getExperiments}
 \title{retrieves the experiments from the web service}
 \usage{
-getExperiments(token, projectName = "", season = "",
-  sortOrder = "DESC", page = NULL, pageSize = NULL,
-  verbose = FALSE)
+getExperiments(projectName = "", season = "", sortOrder = "DESC",
+  page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{token}{a token}
-
 \item{projectName}{project name}
 
 \item{season}{character, a year when the experiment was conducted}
@@ -21,7 +18,7 @@ getExperiments(token, projectName = "", season = "",
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
 
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
+\item{token}{a token}
 }
 \value{
 WSResponse object
@@ -35,8 +32,8 @@ service
 }
 \examples{
 \donttest{
-connect(apiID="ws_public")
- aToken <- getToken("guest@inra.fr","guest")$data
+connectToWS(apiID="ws_public")
+ aToken <- getToken("guestphis@inra.fr","guestphis")$data
  getExperiments(aToken,page=3,pageSize=100,startDate="2012-02-21",endDate="2012-03-21")
  getExperiments(aToken,projectName = "PHIS_Publi")
  getExperiments(aToken,sortOrder = "ASC")

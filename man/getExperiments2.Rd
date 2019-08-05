@@ -4,13 +4,11 @@
 \alias{getExperiments2}
 \title{getExperiments2}
 \usage{
-getExperiments2(token, uri = "", startDate = "", endDate = "",
-  field = "", campaign = "", place = "", alias = "",
-  keywords = "", page = NULL, pageSize = NULL, verbose = FALSE)
+getExperiments2(uri = "", startDate = "", endDate = "", field = "",
+  campaign = "", place = "", alias = "", keywords = "",
+  page = NULL, pageSize = NULL, verbose = FALSE)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{uri}{character, search by the uri of an experiment (optional)}
 
 \item{startDate}{character, search from the start date of experiment (optional)}
@@ -32,6 +30,8 @@ getExperiments2(token, uri = "", startDate = "", endDate = "",
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
+
+\item{token}{character, a token from \code{\link{getToken}} function}
 }
 \value{
 WSResponse object
@@ -44,8 +44,8 @@ You have to execute the \code{\link{getToken}}
 }
 \examples{
 \donttest{
-connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-aToken = getToken("guest@opensilex.org","guest")
+connectToWS(apiID="ws_private", url = "http://http://http://www.opensilex.org/openSilexAPI/rest/")
+aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 myexp <- getExperiments2(aToken$data,
                    uri = "http://www.opensilex.org/demo/DIA2017-1")
 myexp$data

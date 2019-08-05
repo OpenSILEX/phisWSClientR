@@ -11,7 +11,6 @@
 ##' @title getData
 ##'
 ##' @description Retrieves the data from the web service
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param variableUri character, search by the uri of a variable (NOT optional). You can access the list of variables through \code{\link{getVariables2}} function.
 ##' @param startDate character, search from start date (optional)
 ##' @param endDate character, search to end date (optional)
@@ -21,26 +20,26 @@
 ##' @param provenanceLabel character, search by provenance label
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connect(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-##'  token = getToken("guest@opensilex.org","guest")$data
-##'  vars = getVariables2(token = token)$data$uri
-##'  totalCount <- getData(token, variable = vars[4])$totalCount
-##'  data <- getData(token,
+##'  connectToWS(apiID="ws_private",
+##'   url = "http:/www.opensilex.org/openSilexAPI/rest/",
+##'  "guestphis@supagro.inra.fr","guestphis")
+##'  vars = getVariables2()$data$uri
+##'  totalCount <- getData( variable = vars[4])$totalCount
+##'  data <- getData(
 ##'     variable = vars[4], pageSize = totalCount)
-##'  data <- getData(token,
+##'  data <- getData(
 ##'     variable = vars[5],
 ##'    startDate = "2017-05-01", endDate = "2017-06-01", pageSize = totalCount)
 ##'  data$data
 ##' }
 ##' @export
-getData <- function(token,
+getData <- function(
                     variableUri = "",
                     objectUri = "",
                    objectLabel = "",
@@ -49,14 +48,12 @@ getData <- function(token,
                    startDate = "",
                    endDate = "",
                    page = NULL,
-                   pageSize = NULL,
-                   verbose = FALSE){
+                   pageSize = NULL){
   if (is.null(page)) page <- get("DEFAULT_PAGE",configWS)
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE",configWS)
   
   attributes <- list(pageSize=pageSize,
-                     page = page,
-                     Authorization=token)
+                     page = page)
   if (variableUri!="")    attributes <- c(attributes, variableUri = variableUri)
   if (objectUri!="")      attributes <- c(attributes, objectUri = objectUri)
   if (objectLabel!="") attributes <- c(attributes, objectLabel = objectLabel)
@@ -66,8 +63,7 @@ getData <- function(token,
   if (provenanceLabel!="") attributes <- c(attributes, provenanceLabel = provenanceLabel)
   
   variableResponse <- getResponseFromWS2(resource = paste0(get("DATASEARCH", configWS)),
-                                         attributes = attributes,
-                                         verbose = verbose)
+                                         attributes = attributes)
   
   # convert value column from character to numeric
   variableResponse$data[,"value"]<-as.numeric(variableResponse$data[,"value"])
