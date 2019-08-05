@@ -53,7 +53,7 @@ service
 \examples{
 \donttest{
  connectToWS(apiID="ws_private",
-  url = "http://http://http://www.opensilex.org/openSilexAPI/rest/")
+  url = "http://www.opensilex.org/openSilexAPI/rest/")
  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
  projects <- getProjects2(aToken$data,
   uri="http://www.opensilex.org/demo/PHENOME-FPPN")

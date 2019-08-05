@@ -45,7 +45,7 @@ service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_private", url = "http://http://http://www.opensilex.org/openSilexAPI/rest/")
+ connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
  vars <- getVariables2(aToken$data, uri = "http://www.opensilex.org/demo/id/variables/v001")
  vars <- getVariables2(aToken$data,label = "Leaf-Area_LAI-Computation_LAI")

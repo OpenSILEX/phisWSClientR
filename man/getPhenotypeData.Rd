@@ -43,7 +43,7 @@ service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_private", url = "http://http://http://www.opensilex.org/openSilexAPI/rest/")
+ connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
  phenodata <- getPhenotypeData(aToken$data,
   variable = "http://www.opensilex.org/demo/id/variables/v001")

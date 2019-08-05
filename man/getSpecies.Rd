@@ -34,7 +34,7 @@ service
 }
 \examples{
 \donttest{
-connectToWS(apiID="ws_private", url = "http://http://http://www.opensilex.org/openSilexAPI/rest/")
+connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
 aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 species <- getSpecies(aToken$data)
 species$data

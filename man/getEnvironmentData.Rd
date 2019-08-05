@@ -36,7 +36,7 @@ service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_private", url = "http://http://http://www.opensilex.org/openSilexAPI/rest/","guestphis@supagro.inra.fr","guestphis")
+ connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/","guestphis@supagro.inra.fr","guestphis")
  # Retrieve the number of available data
  mycount <- getEnvironmentData(token=aToken$data, 
       variable = "http://www.opensilex.org/demo/id/variables/v004")$totalCount
