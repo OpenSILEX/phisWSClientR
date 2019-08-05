@@ -27,6 +27,7 @@ cache:
 
 # create an archive 
 buildBinary:
+  when: manual
   stage: build
   before_script:
    - mkdir -p $R_LIBS
@@ -90,9 +91,9 @@ deployOnTestRepository:
     # Install ssh-agent through openssh-client if not present
     - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qqy )'
     # Add the private key to this user
-    - eval $(ssh-agent -s) && ssh-add <(echo "$SSH_PRIVATE_KEY") && mkdir -p ~/.ssh
+    - eval $(ssh-agent -s) && ssh-add <(echo "$SSH_PRIVATE_KEY") && mkdir -p /root/.ssh
     # Docker specific settings
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > /root/.ssh/config'
     # Config git to avoid first usage questions. Set the identity
     - git config --global user.email "$GITHUB_USER_EMAIL" && git config --global user.name "Gitlab CI"
     # 
