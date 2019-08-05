@@ -56,7 +56,7 @@ checkNotes:
   stage: check
   script:
     - mkdir -p $R_TMP_USER
-    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
+    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/notesFail"))'
     - if [ -f $R_TMP_USER/notesFail ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
 
 unitTests:
@@ -76,7 +76,7 @@ codeCoverage:
 installFromGithub:
   stage: test
   script:
-    - R -e 'source("https://install-github.me/r-lib/desc");desc<-desc::description$new();remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref=desc$get("Version")[[1]])'
+    - R -e 'source("https://install-github.me/r-lib/desc");desc<-desc::description$new();remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref=paste0("v",desc$get("Version")[[1]]))'
 
 installLocally:
   stage: test
