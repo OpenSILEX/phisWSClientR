@@ -91,20 +91,12 @@ deployOnTestRepository:
     # Install ssh-agent through openssh-client if not present
      # (change apt-get to yum if you use a CentOS-based image)
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-    # Run ssh-agent (inside the build environment)
     - eval $(ssh-agent -s)
-    - ssh-add <(echo "$SSH_PRIVATE_KEY")  > /dev/null
-    - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
-    - mkdir -p /root/.ssh
-    - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > /root/.ssh/known_hosts'
+    - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 --decode)
+    - git config --global user.email "$GITHUB_USER_NAME"
+    - git config --global user.name "$GITHUB_USER_EMAIL"
     - echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa
     - chmod 600 /root/.ssh/id_rsa && chmod 700 /root/.ssh
-
-    # Config git to avoid first usage questions. Set the identity
-    - git config --global user.email "$GITHUB_USER_EMAIL" && git config --global user.name "Gitlab CI"
-    # 
     # Do Git stuff, for example:
     #
     - "git remote add upstream https://github.com/niio972/phisWSClientR"
