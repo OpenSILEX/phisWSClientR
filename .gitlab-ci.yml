@@ -88,11 +88,10 @@ deployOnTestRepository:
   when: manual
   stage: build
   script:
-    - whoami
     # Install ssh-agent through openssh-client if not present
     - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qqy )'
     # Add the private key to this user
-    - eval $(ssh-agent -s) && ssh-add <(echo "$SSH_PRIVATE_KEY") && mkdir -p /root/.ssh
+    - eval $(ssh-agent -s) && ssh-add <(echo "$SSH_PRIVATE_KEY") && mkdir -p /root/.ssh/config
     # Docker specific settings
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > /root/.ssh/config'
     # Config git to avoid first usage questions. Set the identity
