@@ -15,8 +15,8 @@
 ##' @return a session token user identifier in the WS
 ##' @examples
 ##' \donttest{
-##' connectToOpenSILEXWS(apiID="ws_public")
-##' aToken <- getToken("guestphis@inra.fr","guestphis")
+##' connectToOpenSILEXWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
+##' aToken <- getToken("guestphis@supagro.inra.fr","guestphis")
 ##' aToken$data
 ##' }
 ##' @export
@@ -40,36 +40,38 @@ getToken<-function(login,password){
       codeHttpMessage = "Query executed and data recovered - WS1",
       codeStatusMessage = json$metadata$status,
       data = json$session_token,
-      ws="WS1")
-    print("Query executed and data recovered - WS1")
+      expiresIn = 1200, # @see http://147.100.179.156:8080/phenomeapi/api-docs/
+      webserviceVersion=1)
+    # set WS TYPE in config environment
+    logging::loginfo(response[["codeHttpMessage"]])
+    
   } else if (tokenResp2$status_code >= 200 && tokenResp2$status_code < 300 && tokenResp1$status_code >=400){
     json = jsonlite::fromJSON(httr::content(tokenResp2, as = "text", encoding = "UTF-8"))
+
     response <- list(
-      #currentPage = json$metadata$pagination$currentPage,
-      #totalCount = json$metadata$pagination$totalCount,
-      #totalPages = json$metadata$pagination$totalPages,
       codeHttp = tokenResp2$status_code,
       codeHttpMessage = "Query executed and data recovered - WS2",
       codeStatusMessage = json$metadata$status,
       data = json$access_token,
-      ws="WS2")
-
-    print("Query executed and data recovered - WS2")
+      expiresIn = json$expires_in,
+      webserviceVersion=2)
+    # set WS TYPE in config environment
+    logging::loginfo(response[["codeHttpMessage"]])
   } else if(tokenResp1$status_code == 500 || tokenResp2$status_code == 500){
-       print("WebService internal error")
+       logging::logerror("WebService internal error")
   } else if(tokenResp1$status_code == 401 || tokenResp2$status_code == 401){
-    print("User not authorized")
+       logging::logerror("User not authorized")
   } else if(tokenResp1$status_code == 404 || tokenResp2$status_code == 404){
-    print("Not found")
+       logging::logerror("Not found")
   } else if((tokenResp1$status_code >= 400 && tokenResp1$status_code != 401 &&
              tokenResp1$status_code != 404 && tokenResp1$status_code < 500) &&
             (tokenResp2$status_code >= 400 && tokenResp2$status_code != 401 &&
              tokenResp2$status_code != 404 && tokenResp2$status_code < 500)){
-    print("Bad user request")
+       logging::logwarn("Bad user request")
   }
 
   if (tokenResp1$status_code > 250 && tokenResp2$status_code > 250){
-      print("No web service available! Check your login/password and/or your url...")
+       logging::logwarn("No web service available! Check your login/password and/or your url...")
   }
 
   # define class S3 and return the list if exists
@@ -100,7 +102,7 @@ getToken<-function(login,password){
 ##' @examples
 ##' \donttest{
 ##' connectToOpenSILEXWS(apiID="ws_public")
-##'  aToken<-getToken("guestphis@inra.fr","guestphis")$data
+##'  aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
 ##'  plantes<-getPlants(aToken,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##' }
 ##' @export
@@ -138,7 +140,7 @@ getPlants <- function( plantAlias ="", experimentURI = "", germplasmURI = "" ,
 ##' service
 ##' @examples
 ##' # not run (is an internal function!!!)
-##' # aToken<-getToken("guestphis@inra.fr","guestphis")$data
+##' # aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
 ##' # test<-getPlantsContextByID(aToken,plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
 ##' #       ,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##' # test$data
@@ -184,7 +186,7 @@ getPlantsContextByID<-function( plantURI ="",experimentURI="",page = NULL,
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' # not run (is an internal function!!!)
-##' # aToken<-getToken("guestphis@inra.fr","guestphis")$data
+##' # aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
 ##' # myplant<-getPlantEnvironment(aToken,
 ##' #       plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
 ##' #       experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
@@ -248,7 +250,7 @@ getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = ""
 ##' @examples
 ##' \donttest{
 ##' connectToOpenSILEXWS(apiID="ws_public")
-##'  aToken = getToken("guestphis@inra.fr","guestphis")
+##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  myImages<-getImagesAnalysis(token = aToken$data,
 ##'            experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
 ##'            variablesName = list("objAreaSum"),pageSize = 100000)
@@ -305,7 +307,7 @@ getImagesAnalysis <- function( experimentURI ="", variablesName = list(),
 ##' @examples
 ##' \donttest{
 ##' connectToOpenSILEXWS(apiID="ws_public")
-##'  accesToken = getToken("guestphis@inra.fr","guestphis")
+##'  accesToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  mywater<-getWatering(token=accesToken$data,
 ##'          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
 ##'          variablesName = list("weightBefore"),pageSize=100000)
@@ -404,7 +406,7 @@ getWatering <- function( experimentURI ="", variablesName = list(), provider = "
 ##' service
 ##' @examples
 ##' # Not run (is an internal function)
-##' # aToken = getToken("guestphis@inra.fr","guestphis")$data
+##' # aToken = getToken("guestphis@supagro.inra.fr","guestphis")$data
 ##' # publicLabelView <- getLabelViewByExperimentById(aToken,
 ##' #      experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##' # publicLabelView$data

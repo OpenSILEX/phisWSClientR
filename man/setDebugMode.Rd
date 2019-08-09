@@ -4,11 +4,14 @@
 \alias{setDebugMode}
 \title{setDebugMode}
 \usage{
-setDebugMode(active = TRUE)
+setDebugMode(level = "INFO")
 }
 \arguments{
-\item{active}{logical, FALSE by default, if TRUE display information about the progress}
+\item{level}{character, Default value values "INFO", Allowed values "CRITICAL"," ERROR", "WARNING", "INFO", "DEBUG", "NOTSET"}
 }
 \description{
-Activate or deactivate debug mode
+Allows to retreive a particular level debugging messages
+}
+\seealso{
+https://docs.python.org/3/library/logging.html#levels
 }

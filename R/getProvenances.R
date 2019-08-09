@@ -51,7 +51,7 @@ getProvenances <- function(
   if (comment!="")         attributes <- c(attributes, comment = comment)
   if (jsonValueFilter!="") attributes <- c(attributes, jsonValueFilter = jsonValueFilter)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("PROVENANCES", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("PROVENANCES", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

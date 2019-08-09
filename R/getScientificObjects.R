@@ -47,7 +47,7 @@ getScientificObjects <- function(
   if (alias!="")      attributes <- c(attributes, alias = alias)
   if (rdfType!="")    attributes <- c(attributes, rdfType = rdfType)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("SCIENTIFIC_OBJECTS", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("SCIENTIFIC_OBJECTS", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

@@ -62,8 +62,8 @@ getData <- function(
   if (provenanceUri!="")  attributes <- c(attributes, provenanceUri = provenanceUri)
   if (provenanceLabel!="") attributes <- c(attributes, provenanceLabel = provenanceLabel)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("DATASEARCH", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("DATASEARCH", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   
   # convert value column from character to numeric
   variableResponse$data[,"value"]<-as.numeric(variableResponse$data[,"value"])

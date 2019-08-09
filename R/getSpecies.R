@@ -44,7 +44,7 @@ getSpecies <- function(
   if (language!="") attributes <- c(attributes, language = language)
   
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("SPECIES", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("SPECIES", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

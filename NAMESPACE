@@ -2,6 +2,7 @@
 
 export(connectToOpenSILEXWS)
 export(getAnnotations)
+export(getConfigInformations)
 export(getData)
 export(getEnvironment)
 export(getEnvironmentData)

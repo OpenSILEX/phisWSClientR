@@ -24,7 +24,7 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToOpenSILEXWS(apiID="ws_public","guestphis@inra.fr","guestphis")
+##'  connectToOpenSILEXWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
 ##'  vars <- getVariablesByCategory(category="imagery",
 ##'           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##'  vars$data
@@ -45,7 +45,7 @@ getVariablesByCategory<-function(category ="",experimentURI ="",imageryProvider=
       attributes <- c(attributes, imageryProvider = imageryProvider)
     }
     variableResponse <- getResponseFromWS(resource=paste0(get("VARIABLES",configWS),"/category/",category),
-                                          attributes = attributes)
+                                          attributes = attributes, wsVersion = 1)
     return(variableResponse)
   }
 }
@@ -101,8 +101,8 @@ getVariablesDetails <- function(
   if (method!="") attributes <- c(attributes, method = method)
   if (unit!="")   attributes <- c(attributes, unit = unit)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("VARIABLES_DETAILS", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("VARIABLES_DETAILS", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   
   # Convert the JSON data.frame in real R data.frame
   tmp<-variableResponse$data
@@ -170,8 +170,8 @@ getVariables2 <- function(
   if (method!="") attributes <- c(attributes, method = method)
   if (unit!="")   attributes <- c(attributes, unit = unit)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("VARIABLES", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("VARIABLES", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   
   # Convert the JSON data.frame in real R data.frame
   tmp<-variableResponse$data

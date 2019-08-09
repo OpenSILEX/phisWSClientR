@@ -50,7 +50,7 @@ getAnnotations <- function(
   if (comment!="")     attributes <- c(attributes, comment = comment)
   if (target!="")      attributes <- c(attributes, target = target)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("ANNOTATIONS", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("ANNOTATIONS", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

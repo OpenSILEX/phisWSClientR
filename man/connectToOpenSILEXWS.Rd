@@ -14,7 +14,7 @@ connectToOpenSILEXWS(apiID, username, password, url = "")
 \item{password}{password of the user to create the token}
 
 \item{url}{character, if apiID is private add the url of the chosen API, containing the IP,
-the full url with the protocol 'http://www.opensilex.org/openSilexAPI/rest/'}
+the full url with the protocol. e.g. 'http://www.opensilex.org/openSilexAPI/rest/'}
 }
 \description{
 load name space and connexion parameters of the webservice.

@@ -10,7 +10,7 @@
 ##' @title connectToOpenSILEXWS
 ##' @param apiID character, a character name of an API ("ws_public" or "ws_private")
 ##' @param url character, if apiID is private add the url of the chosen API, containing the IP,
-##'            the full url with the protocol 'http://www.opensilex.org/openSilexAPI/rest/'
+##'            the full url with the protocol. e.g. 'http://www.opensilex.org/openSilexAPI/rest/'
 ##' @param username login of the user to create the token
 ##' @param password password of the user to create the token
 ##' @description load name space and connexion parameters of the webservice.
@@ -21,36 +21,36 @@
 ##' WS2 - connectToOpenSILEXWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##' @export
 connectToOpenSILEXWS<-function(apiID, username, password, url = ""){
-  # if apiID is public then we use the public configWS given by the package
-  # else if apiID is private, we use the url procided by the user
+  
   if (username == "") {
-    stop("Please, you have to give an userId")
+    stop("Please, give an username")
   }
   if (password == "") {
-    stop("Please, you have to give an user password")
+    stop("Please, give an user password")
   }  
-   
+  
   # configWS is an environment with specific variables to opensilex web service
-  # full url if protocol has been sent 
+  # if apiID is private, we use the url given by the user
   if (apiID == "ws_private") {
     if(url == ""){
-      stop("Please, you have to give an URL")
+      stop("Please, give an OpenSILEX WS full URL")
     } else{
       assign("BASE_PATH", url, configWS)
     }
   }
   
+  # if apiID is public then we use the public configWS given by the package
   if (apiID == "ws_public") {
     assign("BASE_PATH",get("PUBLIC_PATH",configWS),configWS)
   }
-  # set token
-  assign("USERNAME", username, configWS)
-  assign("PASSWORD", password, configWS)
+  
+  # get token
   tokenData = phisWSClientR::getToken(username,password)
+  
   if(!is.null(tokenData) && length(tokenData) > 0) {
-    assign("TOKEN_VALUE", tokenData$data, configWS)
+    setLoginUserInformations(username, password, tokenData)
   }else{
-    stop("Not able to connect")
+    stop("Not able to connect to the specified OpenSILEX WS")
   }
 } 
  
@@ -89,12 +89,13 @@ getTokenResponseWS<-function(resource,paramPath=NULL,attributes,type = "applicat
   
   ptm <- proc.time()
   r <- httr::GET(finalurl)
-  if (get("VERBOSE",configWS)) {
-    print("Request Time : " )
+  
+  # debug
+  if( names(logging::getLogger()$level) == "DEBUG"){
+    logging::logdebug("Request Time : " )
     print(proc.time() - ptm)
     print(r)
-  }
-
+  } 
   return(r)
 }
 
@@ -114,7 +115,6 @@ getTokenResponseWS<-function(resource,paramPath=NULL,attributes,type = "applicat
 ##' @keywords internal
 getTokenResponseWS2<-function(resource,attributes,type = "application/json"){
   # create the URL
-  #finalurl <- paste0(get("BASE_PATH",configWS),"brapi/v1/token")
   finalurl <- paste0(get("BASE_PATH",configWS),resource)
 
   # Create the body JSON list with the attributes
@@ -127,24 +127,14 @@ getTokenResponseWS2<-function(resource,attributes,type = "application/json"){
   # call
   ptm <- proc.time()
   r <- httr::POST(url=finalurl,body = finalbody,encode="json")
-  if (get("VERBOSE",configWS)) {
-    print("Request Time : " )
+  
+  # debug
+  if( names(logging::getLogger()$level) == "DEBUG"){
+    logging::logdebug("Request Time : " )
     print(proc.time() - ptm)
     print(r)
-  }
-
-  # if (r$status_code >= 500){
-  #   print("WebService internal error")
-  # }
-  # if (r$status_code == 401){
-  #   print("User not authorized")
-  # }
-  # if (r$status_code >= 400 && r$status_code != 401 &&  r$status_code < 500){
-  #   print("Bad user request")
-  # }
-  # if (r$status_code >= 200 && r$status_code < 300){
-  #   print("Query executed and data recovered")
-  # }
+  } 
+  
   return(r)
 }
 
@@ -218,9 +208,9 @@ getDataAndShowStatus<-function(responseObject){
   json = jsonlite::fromJSON(httr::content(responseObject, as = "text", encoding = "UTF-8"))
   if (responseObject$status_code >= 400){
     if (!is.null(json$metadata$status) && length(json$metadata$status) > 0){
-      print("Additional Request information :")
-      print(json$metadata$status)
       status = json$metadata$status
+      logging::loginfo("Additional Request information :")
+      logging::loginfo(status)
     }
     if(responseObject$status_code >= 500){
       msg = "WebService internal error"
@@ -242,8 +232,8 @@ getDataAndShowStatus<-function(responseObject){
     )
   } else {
     if (!is.null(json$metadata$status) && length(json$metadata$status) > 0){
-      print("Additional Request information :")
-      print(json$metadata$status)
+      logging::loginfo("Additional Request information :")
+      logging::loginfo(json$metadata$status)
       status = json$metadata$status
     }
     if (responseObject$status_code >= 200 && responseObject$status_code < 300){
@@ -274,14 +264,51 @@ ObjectType<-function(obj){
 }
 
 ##'@title setDebugMode
-##'@description Activate or deactivate debug mode
-##'@param active logical, FALSE by default, if TRUE display information about the progress
+##'@description Allows to retreive a particular level debugging messages
+##'@seealso https://docs.python.org/3/library/logging.html#levels
+##'@param level character, Default value values "INFO", Allowed values "CRITICAL"," ERROR", "WARNING", "INFO", "DEBUG", "NOTSET"
 ##'@export
-setDebugMode<-function(active=TRUE){
-  if(active == TRUE || active == FALSE){
-    assign("VERBOSE", active, configWS)
-  }else{
-    stop("Wrong parameter used must be TRUE or FALSE")
-    assign("VERBOSE",  TRUE, configWS)
-  }
+setDebugMode<-function(level= "INFO"){
+  if(level == "CRITICAL") logging::setLevel(50)
+  if(level == "ERROR") logging::setLevel(40)
+  if(level == "WARNING") logging::setLevel(30)
+  if(level == "INFO") logging::setLevel(20)
+  if(level == "DEBUG") logging::setLevel(10)
+  if(level == "NOTSET") logging::setLevel(0)
+}
+
+##' @title setLoginUserInformations
+##' @param tokenData S3 class, saves informations extract from WS getToken response
+##' @description Save information in config environment
+##' @keywords internal
+setLoginUserInformations<-function(username,password,tokenData){
+  # save user parameters in config environment
+  assign("TOKEN_VALUE", tokenData$data, configWS)
+  assign("USERNAME", username, configWS)
+  assign("PASSWORD", password, configWS)
+  assign("WS_VERSION", tokenData$webserviceVersion, configWS)
+  assign("TOKEN_VALID_TIME",tokenData$expiresIn,configWS)
+  assign("TOKEN_VALID",TRUE,configWS)
+  assign("USER_VALID",TRUE,configWS)
+  
+  later::later(function(){assign("TOKEN_VALID",FALSE,configWS)},tokenData$expiresIn)
+  assign("RECONNECT_ON_DISCONNECTION",tokenData$expiresIn,configWS)
+  
+  #debug
+  logging::logdebug(paste("BASE_PATH",get("BASE_PATH", configWS)))
+  logging::logdebug(paste("USERNAME",get("USERNAME",configWS)))
+  logging::logdebug(paste("TOKEN_VALUE",get("TOKEN_VALUE",configWS)))
+  logging::logdebug(paste("WS_VERSION",get("WS_VERSION",configWS)))
+  logging::logdebug(paste("TOKEN_VALID_TIME",get("TOKEN_VALID_TIME",configWS)))
+}
+
+##' @title getConfigInformations
+##' @description get useful information from config environment
+##' @export
+getConfigInformations<-function(){
+  print(paste("BASE_PATH",get("BASE_PATH", configWS)))
+  print(paste("USERNAME",get("USERNAME",configWS)))
+  print(paste("TOKEN_VALUE",get("TOKEN_VALUE",configWS)))
+  print(paste("WS_VERSION",get("WS_VERSION",configWS)))
+  print(paste("TOKEN_VALID_TIME",get("TOKEN_VALID_TIME",configWS)))
 }

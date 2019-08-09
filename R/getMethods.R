@@ -40,7 +40,7 @@ getMethods2 <- function(
   if (uri!="")    attributes <- c(attributes, uri = uri)
   if (label!="")  attributes <- c(attributes, label = label)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("METHODS", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("METHODS", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

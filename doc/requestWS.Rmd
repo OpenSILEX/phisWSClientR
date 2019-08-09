@@ -58,7 +58,7 @@ Ask permission to request to the web service:
 *aToken* will be used in all the requests to the web service.
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  aToken<-getToken("guestphis@inra.fr","guestphis")
+  aToken<-getToken("guestphis@supagro.inra.fr","guestphis")
 ```
 
 # Retrieves the available projects

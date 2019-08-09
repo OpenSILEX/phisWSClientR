@@ -39,7 +39,7 @@ getExperimentById <- function( experimentURI ="", page = NULL,pageSize = NULL){
     # IS 03/11/2016 Suppress double URL encoding. Update tomcat allowed encoded slash security parameter
     expUrlEncoded<-paste0(utils::URLencode(experimentURI,  reserved = TRUE),"/details")
     experimentResponse<-getResponseFromWS(resource = get("EXPERIMENT",configWS),
-                                          paramPath=expUrlEncoded,attributes=attributes)
+                                          paramPath=expUrlEncoded, attributes=attributes, wsVersion = 1)
     return(experimentResponse)
   }
 }
@@ -82,7 +82,7 @@ getExperiments <- function( projectName ="", season = "", sortOrder = "DESC" ,
     attributes <- c(attributes, sortOrder = sortOrder)
   }
   experimentResponse<-getResponseFromWS(resource = get("EXPERIMENT",configWS),
-                                        attributes = attributes)
+                                        attributes = attributes, wsVersion = 1)
   return(experimentResponse)
 }
 
@@ -138,7 +138,7 @@ getExperiments2 <- function(
   if (alias!="")    attributes <- c(attributes, alias = alias)
   if (keywords!="") attributes <- c(attributes, keywords = keywords)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("EXPERIMENTS", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("EXPERIMENTS", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

@@ -52,7 +52,7 @@ getEvents <- function(
   if (startDate!="")      attributes <- c(attributes, startDate = startDate)
   if (endDate!="")        attributes <- c(attributes, endDate = endDate)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("EVENTS", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("EVENTS", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

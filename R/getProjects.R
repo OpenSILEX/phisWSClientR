@@ -36,7 +36,7 @@ getProjects<-function( projectName = "",page=NULL,pageSize=NULL){
   if (projectName != ""){
     attributes <- c(attributes, projectName = projectName)
   }
-  projectResponse<-getResponseFromWS(resource = get("PROJECTS",configWS),attributes=attributes)
+  projectResponse <- getResponseFromWS(resource = get("PROJECTS",configWS),attributes=attributes, wsVersion = 1)
   return(projectResponse)
 }
 
@@ -85,8 +85,7 @@ getProjects2 <- function(
                          dateEnd = "",
                          keywords = "",
                          parentProject = "",
-                         website = "",
-                         verbose = FALSE){
+                         website = ""){
   if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
   if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   
@@ -105,7 +104,6 @@ getProjects2 <- function(
   if (parentProject != "")    attributes <- c(attributes, parentProject = parentProject)
   if (website != "")          attributes <- c(attributes, website = website)
   
-  projectResponse <- getResponseFromWS2(resource = get("PROJECTS", configWS),
-                                        attributes = attributes)
+  projectResponse <- getResponseFromWS(resource = get("PROJECTS", configWS), attributes = attributes, wsVersion = 2)
   return(projectResponse)
 }

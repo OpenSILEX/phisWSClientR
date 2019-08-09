@@ -38,9 +38,9 @@ configWS<-new.env(emptyenv())
   assign("BASE_PATH","", configWS)
   assign("USERNAME","", configWS)
   assign("PASSWORD","", configWS)
-  
-  # debug parameters
-  assign("VERBOSE", FALSE, configWS)
+  assign("TOKEN_VALID",FALSE,configWS)
+  assign("USER_VALID",FALSE,configWS)
+  assign("WS_VERSION",0,configWS)
   
   # WS phis1
   assign("TOKEN", "token", configWS)
@@ -80,6 +80,6 @@ configWS<-new.env(emptyenv())
   assign("PROJECTS", "projects", configWS)
   assign("DEFAULT_PAGE", 0, configWS)
   assign("DEFAULT_PAGESIZE", 100, configWS)
+  
 
-  invisible()
 }

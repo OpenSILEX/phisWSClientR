@@ -2,15 +2,15 @@
 % Please edit documentation in R/getResponseFromWS.R
 \name{getResponseFromWS}
 \alias{getResponseFromWS}
-\title{getResponseFromWS retrieves the data of a service from the WS1}
+\title{getResponseFromWS retrieves the data of a service from the WS}
 \usage{
-getResponseFromWS(resource, paramPath = NULL, attributes,
+getResponseFromWS(resource, paramPath = NULL, attributes, wsVersion,
   type = "application/json")
 }
 \arguments{
 \item{responseObject}{object HTTP httr}
 }
 \description{
-Create an URL to call the WS and retrun a formatted response of WSResponse class.
+Create an URL to call the WS and return a formatted response of WSResponse class.
 }
 \keyword{internal}

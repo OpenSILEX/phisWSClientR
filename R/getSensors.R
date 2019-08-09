@@ -63,7 +63,7 @@ getSensors <- function(
   if (dateOfLastCalibration!="") attributes <- c(attributes, dateOfLastCalibration = dateOfLastCalibration)
   if (personInCharge!="")        attributes <- c(attributes, personInCharge = personInCharge)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("SENSORS", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("SENSORS", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

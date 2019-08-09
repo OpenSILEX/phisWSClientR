@@ -59,10 +59,10 @@ Ask permission to request to the web service:
   connectToOpenSILEXWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
 ```
 
-*aToken* will be used in all the requests to the web service. This is your identification and grants the access to some data according to your login information.
+*aToken* is your identification and grants the access to some data according to your login information.
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  aToken <- getToken("guestphis@supagro.inra.fr","guestphis")
+  aToken <- getToken("guest@opensilex.org","guest")
 ```
 
 # Fetch informations about elements in the web service
@@ -87,7 +87,7 @@ Ask permission to request to the web service:
 ##Infrastructures
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getInfrastructures( uri="https://emphasis.plant-phenotyping.eu")
+  getInfrastructures(uri="https://emphasis.plant-phenotyping.eu")
 ```
 
 ## Variables 
@@ -136,7 +136,7 @@ Ask permission to request to the web service:
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
 # Where to find the "type" URL ?
-# Where is the ontology access ?
+# Where is the ontology access  https://github.com/OpenSILEX/ontology-vocabularies/blob/master/oeev.owl
   getEvents( type = "http://www.opensilex.org/vocabulary/oeev#Fertilization", pageSize=10)
 ```
 
@@ -144,7 +144,7 @@ Ask permission to request to the web service:
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
 # Where to find the "type" URL ?
-# Where is the ontology access ?
+# Where is the ontology access https://github.com/OpenSILEX/ontology-vocabularies/blob/master/oeev.owl
   getAnnotations( comment = "Ustilago maydis infection" , pageSize=10)
 ```
 

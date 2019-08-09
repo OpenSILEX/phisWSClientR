@@ -35,7 +35,7 @@ service
 \examples{
 \donttest{
 connectToOpenSILEXWS(apiID="ws_public")
- accesToken = getToken("guestphis@inra.fr","guestphis")
+ accesToken = getToken("guestphis@supagro.inra.fr","guestphis")
  mywater<-getWatering(token=accesToken$data,
          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
          variablesName = list("weightBefore"),pageSize=100000)

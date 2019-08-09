@@ -48,7 +48,7 @@ getInfrastructures <- function(
   if (label!="")    attributes <- c(attributes, label = label)
   if (language!="") attributes <- c(attributes, language = language)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("INFRASTRUCTURES", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("INFRASTRUCTURES", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

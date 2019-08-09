@@ -9,7 +9,7 @@ Authors@R: c(person("Pascal", "Neveu", email = "pascal.neveu@inra.fr", role = "a
     person("Jean-Eudes", "Hollebecq", email = "jean-eudes.hollebecq@inra.fr", role = "aut"),
     person("Isabelle", "Sanchez", email = "isabelle.sanchez@inra.fr", role = c("aut", "cre")))
 Maintainer: Isabelle Sanchez <isabelle.sanchez@inra.fr>
-Description: a set of functions to connect R to the phenomeapi web service in phis OpenSILEX. You can retrieve phenotypic data 
+Description: a set of functions to connect R to the phenomeapi web service in OpenSILEX PHIS. You can retrieve phenotypic data 
    from the greenhouse platforms (GET imagery, environment, watering and weighing) or the field platforms. Public access is allowed
    with specific login as well as private access if the user has an account on an instance of the PHIS system information.
 Depends:
@@ -24,7 +24,9 @@ Imports:
     jsonlite,
     httr,
     urltools,
-    openssl
+    openssl,
+    logging,
+    later
 Suggests:
     roxygen2,
     knitr,
@@ -32,3 +34,4 @@ Suggests:
 Author: Isabelle Sanchez [aut, cre]
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
+Encoding: UTF-8

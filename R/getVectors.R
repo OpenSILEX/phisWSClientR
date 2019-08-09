@@ -60,7 +60,7 @@ getVectors <- function(
   if (dateOfPurchase!="") attributes <- c(attributes, dateOfPurchase = dateOfPurchase)
   if (personInCharge!="") attributes <- c(attributes, personInCharge = personInCharge)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("VECTORS", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("VECTORS", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

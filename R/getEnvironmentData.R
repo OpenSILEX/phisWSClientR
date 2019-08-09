@@ -63,7 +63,7 @@ getEnvironment <- function(variableCategory ="",startDate = "",endDate = "" ,var
     attributes <- c(attributes, variables = utils::URLencode(variables))
   }
   environmentResponse <- getResponseFromWS(resource = get("ENVIRONMENT",configWS),
-                                           attributes = attributes)
+                                           attributes = attributes, wsVersion = 1)
   return(environmentResponse)
 }
 
@@ -120,7 +120,7 @@ getEnvironmentData <- function(
   if (endDate!="")   attributes <- c(attributes, endDate = endDate)
   if (sensor!="")    attributes <- c(attributes, sensor = sensor)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("ENVIRONMENTS", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("ENVIRONMENTS", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

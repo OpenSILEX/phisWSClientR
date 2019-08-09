@@ -30,7 +30,7 @@ service
 }
 \examples{
 \donttest{
- connectToOpenSILEXWS(apiID="ws_public","guestphis@inra.fr","guestphis")
+ connectToOpenSILEXWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
  vars <- getVariablesByCategory(category="imagery",
           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
  vars$data

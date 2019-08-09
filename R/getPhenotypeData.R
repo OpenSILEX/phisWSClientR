@@ -59,8 +59,8 @@ getPhenotypeData <- function(
   if (sensor!="")            attributes <- c(attributes, sensor = sensor)
   if (incertitude!="")       attributes <- c(attributes, incertitude = incertitude)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("DATASETS", configWS)),
-                                         attributes = attributes)
+  variableResponse <- getResponseFromWS(resource = paste0(get("DATASETS", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   outputData <- data.frame()
   jsonData <- data.frame(variableResponse$data[[1]])
   AO=jsonData$agronomicalObject

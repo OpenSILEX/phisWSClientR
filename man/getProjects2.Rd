@@ -7,7 +7,7 @@
 getProjects2(page = NULL, pageSize = NULL, uri = "", name = "",
   acronyme = "", subprojectType = "", financialSupport = "",
   financialName = "", dateStart = "", dateEnd = "", keywords = "",
-  parentProject = "", website = "", verbose = FALSE)
+  parentProject = "", website = "")
 }
 \arguments{
 \item{page}{numeric, displayed page (pagination Plant Breeding API) (optional)}

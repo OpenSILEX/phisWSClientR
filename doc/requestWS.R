@@ -10,7 +10,7 @@
 #    connect(apiID="ws_private",url = "147.99.7.5:8080/phenomeapi/resources/")
 
 ## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
-  aToken<-getToken("guestphis@inra.fr","guestphis")
+  aToken<-getToken("guestphis@supagro.inra.fr","guestphis")
 
 ## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
   getProjects(aToken$data)$data

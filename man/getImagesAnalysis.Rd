@@ -38,7 +38,7 @@ service
 \examples{
 \donttest{
 connectToOpenSILEXWS(apiID="ws_public")
- aToken = getToken("guestphis@inra.fr","guestphis")
+ aToken = getToken("guestphis@supagro.inra.fr","guestphis")
  myImages<-getImagesAnalysis(token = aToken$data,
            experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
            variablesName = list("objAreaSum"),pageSize = 100000)
