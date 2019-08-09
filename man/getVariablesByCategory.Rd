@@ -25,12 +25,12 @@ WSResponse object
 Retrieves the variable by categories (environment or setpoint...)
 }
 \details{
-You have to execute the \code{\link{connectToWS}} function first to have access to the web
+You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_public","guestphis@inra.fr","guestphis")
+ connectToOpenSILEXWS(apiID="ws_public","guestphis@inra.fr","guestphis")
  vars <- getVariablesByCategory(category="imagery",
           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
  vars$data

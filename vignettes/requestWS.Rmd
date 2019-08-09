@@ -46,12 +46,12 @@ Ask permission to request to the web service:
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
   # If you want to access to the public web service 
-  connectToWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
+  connectToOpenSILEXWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
 ```
 
 ```{r,echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE}
   # If you want to access to a private web service, you have to insert the address of the WS and the port
-  connectToWS(apiID="ws_private","guestphis@supagro.inra.fr","guestphis",url = "147.99.7.5:8080/phenomeapi/resources/")
+  connectToOpenSILEXWS(apiID="ws_private","guestphis@supagro.inra.fr","guestphis",url = "147.99.7.5:8080/phenomeapi/resources/")
 ```
 
 # Retrieves the available projects

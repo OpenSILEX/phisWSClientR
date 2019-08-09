@@ -7,7 +7,7 @@
 #-------------------------------------------------------------------------------
 
 
-##' @title connectToWS
+##' @title connectToOpenSILEXWS
 ##' @param apiID character, a character name of an API ("ws_public" or "ws_private")
 ##' @param url character, if apiID is private add the url of the chosen API, containing the IP,
 ##'            the full url with the protocol 'http://www.opensilex.org/openSilexAPI/rest/'
@@ -17,10 +17,10 @@
 ##' Execute only once at the beginning of the requests.
 ##' In the case of a WebService change of address or a renaming of services, please edit this list.
 ##' and execute the function.
-##' WS1 - connectToWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
-##' WS2 - connectToWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' WS1 - connectToOpenSILEXWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
+##' WS2 - connectToOpenSILEXWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##' @export
-connectToWS<-function(apiID, username, password, url = ""){
+connectToOpenSILEXWS<-function(apiID, username, password, url = ""){
   # if apiID is public then we use the public configWS given by the package
   # else if apiID is private, we use the url procided by the user
   if (username == "") {
@@ -159,7 +159,7 @@ getTokenResponseWS2<-function(resource,attributes,type = "application/json"){
 # ##' @return WSResponse WSResponse class instance
 # ##' @keywords internal
 # postResponseFromWS<-function(resource, paramPath = NULL, attributes,  encode ="json", requestBody){
-#   #configWS<-connectToWS()
+#   #configWS<-connectToOpenSILEXWS()
 #   webserviceBaseUrl <- configWS[["BASE_PATH"]]
 #   urlParams = ""
 #   # create the l'url

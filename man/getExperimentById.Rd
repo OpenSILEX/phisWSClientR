@@ -25,7 +25,7 @@ service
 }
 \examples{
 \donttest{
-connectToWS(apiID="ws_public")
+connectToOpenSILEXWS(apiID="ws_public")
  publicExp<-getExperimentById(
         experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
  publicExp$data

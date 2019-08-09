@@ -32,12 +32,12 @@ WSResponse object
 Retrieves environmental mesures of an experiment or by dates
 }
 \details{
-You have to execute the \code{\link{connectToWS}} function first to have access to the web
+You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_public", username = "guestphis@supagro.inra.fr", password = "guestphis")
+ connectToOpenSILEXWS(apiID="ws_public", username = "guestphis@supagro.inra.fr", password = "guestphis")
  getEnvironment(page=3,pageSize=100,startDate="2017-06-29",endDate = "2017-06-16")
  test<-getEnvironment(experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30")
  test$data

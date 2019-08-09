@@ -33,7 +33,7 @@ configWS<-new.env(emptyenv())
 
 .onLoad <- function(libname, pkgname){
   
-  # connectToWSion parameters
+  # connectToOpenSILEXWSion parameters
   assign("PUBLIC_PATH","http://147.100.179.156:8080/phenomeapi/resources/", configWS)
   assign("BASE_PATH","", configWS)
   assign("USERNAME","", configWS)

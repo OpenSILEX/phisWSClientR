@@ -27,12 +27,12 @@ WSResponse object
 Retrieves context of plant linked to an experiment
 }
 \details{
-You have to execute the \code{\link{connectToWS}} function first to have access to the web
+You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
-connectToWS(apiID="ws_public")
+connectToOpenSILEXWS(apiID="ws_public")
  aToken<-getToken("guestphis@inra.fr","guestphis")$data
  plantes<-getPlants(aToken,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 }

@@ -23,7 +23,7 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' connectToWS(apiID="ws_public")
+##' connectToOpenSILEXWS(apiID="ws_public")
 ##'  publicExp<-getExperimentById(
 ##'         experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##'  publicExp$data
@@ -55,11 +55,11 @@ getExperimentById <- function( experimentURI ="", page = NULL,pageSize = NULL){
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##' connectToWS(apiID="ws_public")
+##' connectToOpenSILEXWS(apiID="ws_public")
 ##'  getExperiments(page=3,pageSize=100,startDate="2012-02-21",endDate="2012-03-21")
 ##'  getExperiments(projectName = "PHIS_Publi")
 ##'  getExperiments(sortOrder = "ASC")
@@ -103,10 +103,10 @@ getExperiments <- function( projectName ="", season = "", sortOrder = "DESC" ,
 ##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToWS}}
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}}
 ##' @examples
 ##' \donttest{
-##' connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##' myexp <- getExperiments2(
 ##'                    uri = "http://www.opensilex.org/demo/DIA2017-1")
 ##' myexp$data

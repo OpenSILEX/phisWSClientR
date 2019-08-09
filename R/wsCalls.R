@@ -15,7 +15,7 @@
 ##' @return a session token user identifier in the WS
 ##' @examples
 ##' \donttest{
-##' connectToWS(apiID="ws_public")
+##' connectToOpenSILEXWS(apiID="ws_public")
 ##' aToken <- getToken("guestphis@inra.fr","guestphis")
 ##' aToken$data
 ##' }
@@ -95,11 +95,11 @@ getToken<-function(login,password){
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##' connectToWS(apiID="ws_public")
+##' connectToOpenSILEXWS(apiID="ws_public")
 ##'  aToken<-getToken("guestphis@inra.fr","guestphis")$data
 ##'  plantes<-getPlants(aToken,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##' }
@@ -134,7 +134,7 @@ getPlants <- function( plantAlias ="", experimentURI = "", germplasmURI = "" ,
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' # not run (is an internal function!!!)
@@ -179,7 +179,7 @@ getPlantsContextByID<-function( plantURI ="",experimentURI="",page = NULL,
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
 
 ##' @return WSResponse object
-##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
@@ -242,12 +242,12 @@ getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = ""
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
 
 ##' @return WSResponse object
-##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##' connectToWS(apiID="ws_public")
+##' connectToOpenSILEXWS(apiID="ws_public")
 ##'  aToken = getToken("guestphis@inra.fr","guestphis")
 ##'  myImages<-getImagesAnalysis(token = aToken$data,
 ##'            experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
@@ -299,12 +299,12 @@ getImagesAnalysis <- function( experimentURI ="", variablesName = list(),
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
 
 ##' @return WSResponse object
-##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##' connectToWS(apiID="ws_public")
+##' connectToOpenSILEXWS(apiID="ws_public")
 ##'  accesToken = getToken("guestphis@inra.fr","guestphis")
 ##'  mywater<-getWatering(token=accesToken$data,
 ##'          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
@@ -356,7 +356,7 @@ getWatering <- function( experimentURI ="", variablesName = list(), provider = "
 # ##' .. ..$ value         : int 0'
 # ##' @seealso http://147.99.7.5:8080/phenomeapi/api-docs/#!/environment/postPhenotypes
 # ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-# ##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+# ##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 # ##' service
 # ##' @examples
 # ##' # Not run (is an internal function)
@@ -400,7 +400,7 @@ getWatering <- function( experimentURI ="", variablesName = list(), provider = "
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' # Not run (is an internal function)

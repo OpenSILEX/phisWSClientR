@@ -29,12 +29,12 @@ WSResponse object
 Retrieves irrigation data
 }
 \details{
-You have to execute the \code{\link{connectToWS}} function first to have access to the web
+You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
-connectToWS(apiID="ws_public")
+connectToOpenSILEXWS(apiID="ws_public")
  accesToken = getToken("guestphis@inra.fr","guestphis")
  mywater<-getWatering(token=accesToken$data,
          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",

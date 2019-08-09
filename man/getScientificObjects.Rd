@@ -29,12 +29,12 @@ WSResponse object
 retrieves the scientific objects based on search criterion
 }
 \details{
-You have to execute the \code{\link{connectToWS}} function first to have access to the web
+You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+ connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
  scientificObjects <- getScientificObjects(
                               uri = "http://www.opensilex.org/demo/2018/o18000076")
  scientificObjects$data

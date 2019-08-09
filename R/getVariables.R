@@ -20,11 +20,11 @@
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToWS(apiID="ws_public","guestphis@inra.fr","guestphis")
+##'  connectToOpenSILEXWS(apiID="ws_public","guestphis@inra.fr","guestphis")
 ##'  vars <- getVariablesByCategory(category="imagery",
 ##'           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##'  vars$data
@@ -71,11 +71,11 @@ getVariablesByCategory<-function(category ="",experimentURI ="",imageryProvider=
 ##' \item{and uri, label and comment}{for each variable}
 ##' }
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToWS(apiID="ws_private","guest@opensilex.fr","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  connectToOpenSILEXWS(apiID="ws_private","guest@opensilex.fr","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##'  vars <- getVariablesDetails(uri = "http://www.opensilex.org/demo/id/variables/v001")
 ##'  vars <- getVariablesDetails(label = "Leaf-Area_LAI-Computation_LAI")
 ##'  vars$data
@@ -140,11 +140,11 @@ getVariablesDetails <- function(
 ##' \item{and uri, label and comment}{for each variable}
 ##' }
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToWS(apiID="ws_private","guest@opensilex.org","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  connectToOpenSILEXWS(apiID="ws_private","guest@opensilex.org","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##'  vars <- getVariables2(uri = "http://www.opensilex.org/demo/id/variables/v001")
 ##'  vars <- getVariables2(label = "Leaf-Area_LAI-Computation_LAI")
 ##'  vars$data
@@ -205,13 +205,13 @@ getVariables2 <- function(
 ##' \item{and uri, label and comment}{for each variable}
 ##' }
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 ##' service
 ##' @importFrom dplyr select starts_with
 ##' @importFrom tidyr gather
 ##' @examples
 ##' \donttest{
-##'  connectToWS(apiID="ws_private","guest@opensilex.org/","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  connectToOpenSILEXWS(apiID="ws_private","guest@opensilex.org/","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##'  varExp<- getVariablesByExperiment(uri = "http://www.opensilex.org/demo/DIA2017-1")
 ##'  varExp$data
 ##' }

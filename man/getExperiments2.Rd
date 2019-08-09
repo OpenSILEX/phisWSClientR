@@ -38,11 +38,11 @@ WSResponse object
 retrieves the experiments based on search criterion
 }
 \details{
-You have to execute the \code{\link{connectToWS}}
+You have to execute the \code{\link{connectToOpenSILEXWS}}
 }
 \examples{
 \donttest{
-connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
 myexp <- getExperiments2(
                    uri = "http://www.opensilex.org/demo/DIA2017-1")
 myexp$data

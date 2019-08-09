@@ -21,12 +21,12 @@
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
-##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##'  connectToWS(apiID="ws_public", username = "guestphis@supagro.inra.fr", password = "guestphis")
+##'  connectToOpenSILEXWS(apiID="ws_public", username = "guestphis@supagro.inra.fr", password = "guestphis")
 ##'  getEnvironment(page=3,pageSize=100,startDate="2017-06-29",endDate = "2017-06-16")
 ##'  test<-getEnvironment(experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30")
 ##'  test$data
@@ -82,11 +82,11 @@ getEnvironment <- function(variableCategory ="",startDate = "",endDate = "" ,var
 ##' @param dateSortAsc logical, sort date in ascending order if TRUE
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/","guestphis@supagro.inra.fr","guestphis")
+##'  connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/","guestphis@supagro.inra.fr","guestphis")
 ##'  # Retrieve the number of available data
 ##'  mycount <- getEnvironmentData(variable = "http://www.opensilex.org/demo/id/variables/v004")$totalCount
 ##'  # Retrieve the environmental data

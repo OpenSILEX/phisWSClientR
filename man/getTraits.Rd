@@ -25,12 +25,12 @@ WSResponse object
 retrieves the trait based on search criterion
 }
 \details{
-You have to execute the \code{\link{connectToWS}} function first to have access to the web
+You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
-connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
 traits <- getTraits(uri = "http://www.opensilex.org/demo/id/traits/t010")
 traits$data
 }

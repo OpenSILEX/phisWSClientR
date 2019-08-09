@@ -36,7 +36,7 @@ WSResponse object
 Retrieves environmental mesures of a plant or by dates
 }
 \details{
-You have to execute the \code{\link{connectToWS}} function first to have access to the web
+You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 service
 }
 \examples{

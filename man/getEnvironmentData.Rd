@@ -29,12 +29,12 @@ WSResponse object
 retrieves the environmental data from a variable or a sensor
 }
 \details{
-You have to execute the \code{\link{connectToWS}} function first to have access to the web
+You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/","guestphis@supagro.inra.fr","guestphis")
+ connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/","guestphis@supagro.inra.fr","guestphis")
  # Retrieve the number of available data
  mycount <- getEnvironmentData(variable = "http://www.opensilex.org/demo/id/variables/v004")$totalCount
  # Retrieve the environmental data

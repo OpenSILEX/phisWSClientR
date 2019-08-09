@@ -39,12 +39,12 @@ WSResponse object
 retrieves the vectors based on search criterion
 }
 \details{
-You have to execute the connectToWS() function first to have access to the web
+You have to execute the connectToOpenSILEXWS() function first to have access to the web
 service
 }
 \examples{
 \donttest{
-connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
 aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 vectors <- getVectors(aToken$data, uri = "http://www.opensilex.org/demo/2018/v1801")
 vectors <- getVectors(aToken$data, serialNumber = "01BD1DD71500001")

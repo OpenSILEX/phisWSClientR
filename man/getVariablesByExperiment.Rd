@@ -31,12 +31,12 @@ Retrieves the variable descriptions, trait, method and unit covered by the varia
       for a given experiment URI
 }
 \details{
-You have to execute the \code{\link{connectToWS}} function first to have access to the web
+You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_private","guest@opensilex.org/","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+ connectToOpenSILEXWS(apiID="ws_private","guest@opensilex.org/","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
  varExp<- getVariablesByExperiment(uri = "http://www.opensilex.org/demo/DIA2017-1")
  varExp$data
 }

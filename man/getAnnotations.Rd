@@ -29,12 +29,12 @@ WSResponse object
 retrieves the annotation based on search criterion
 }
 \details{
-You have to execute the \code{\link{connectToWS}} function first to have access to the web
+You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_private",
+ connectToOpenSILEXWS(apiID="ws_private",
   url = "http://www.opensilex.org/openSilexAPI/rest/",
  "guestphis@supagro.inra.fr","guestphis")
  annotations <- getAnnotations(

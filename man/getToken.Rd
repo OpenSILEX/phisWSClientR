@@ -19,7 +19,7 @@ Retrieves a user identifier for connexion to the WebService (WS)
 }
 \examples{
 \donttest{
-connectToWS(apiID="ws_public")
+connectToOpenSILEXWS(apiID="ws_public")
 aToken <- getToken("guestphis@inra.fr","guestphis")
 aToken$data
 }

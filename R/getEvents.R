@@ -20,11 +20,11 @@
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##' connectToWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##' events <- getEvents(
 ##'  type = "http://www.opensilex.org/vocabulary/oeev#Fertilization",
 ##'   pageSize=10)

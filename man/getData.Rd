@@ -34,12 +34,12 @@ WSResponse object
 Retrieves the data from the web service
 }
 \details{
-You have to execute the \code{\link{connectToWS}} function first to have access to the web
+You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_private",
+ connectToOpenSILEXWS(apiID="ws_private",
   url = "http:/www.opensilex.org/openSilexAPI/rest/",
  "guestphis@supagro.inra.fr","guestphis")
  vars = getVariables2()$data$uri

@@ -25,7 +25,7 @@ WSResponse object
 Retrieves the contect of a plant
 }
 \details{
-You have to execute the \code{\link{connectToWS}} function first to have access to the web
+You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 service
 }
 \examples{

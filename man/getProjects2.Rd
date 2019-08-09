@@ -45,12 +45,12 @@ WSResponse object
 Retrieves the list of projects in the WS2 with the selected filters
 }
 \details{
-You have to execute the \code{\link{connectToWS}} function first to have access to the web
+You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_private",
+ connectToOpenSILEXWS(apiID="ws_private",
   url = "http://www.opensilex.org/openSilexAPI/rest/")
  projects <- getProjects2(
   uri="http://www.opensilex.org/demo/PHENOME-FPPN")

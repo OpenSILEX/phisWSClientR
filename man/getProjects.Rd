@@ -20,12 +20,12 @@ WSResponse object
 Retrieves the list of projects in the WS
 }
 \details{
-You have to execute the \code{\link{connectToWS}} function first to have access to the web
+You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToWS(apiID="ws_public")
+ connectToOpenSILEXWS(apiID="ws_public")
  getProjects()
  getProjects(page = 1)
  getProjects(page = 3, pageSize = 100)
