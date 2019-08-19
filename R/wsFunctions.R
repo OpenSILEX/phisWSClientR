@@ -290,7 +290,7 @@ setLoginUserInformations<-function(username,password,tokenData){
   assign("TOKEN_VALID_TIME",tokenData$expiresIn,configWS)
   assign("TOKEN_VALID",TRUE,configWS)
   assign("USER_VALID",TRUE,configWS)
-  
+
   later::later(function(){assign("TOKEN_VALID",FALSE,configWS)},tokenData$expiresIn)
   assign("RECONNECT_ON_DISCONNECTION",tokenData$expiresIn,configWS)
   
@@ -303,12 +303,21 @@ setLoginUserInformations<-function(username,password,tokenData){
 }
 
 ##' @title getConfigInformations
-##' @description get useful information from config environment
+##' @description show useful informations from config environment
+##' @return a dataframe with informations from config environment
 ##' @export
-getConfigInformations<-function(){
-  print(paste("BASE_PATH",get("BASE_PATH", configWS)))
+getUserInformations<-function(){
+  if(is.null(get("TOKEN_VALUE",configWS))) stop("Connect first using connectionToOpenSILEXWS() function")
+     
+  print(paste("BASE_PATH ",get("BASE_PATH", configWS)))
   print(paste("USERNAME",get("USERNAME",configWS)))
   print(paste("TOKEN_VALUE",get("TOKEN_VALUE",configWS)))
-  print(paste("WS_VERSION",get("WS_VERSION",configWS)))
-  print(paste("TOKEN_VALID_TIME",get("TOKEN_VALID_TIME",configWS)))
+  
+  df <- data.frame("BASE_PATH" = get("BASE_PATH", configWS),
+                   "USERNAME" = get("USERNAME",configWS),
+                   "TOKEN_VALUE" = get("TOKEN_VALUE",configWS),
+                   "TOKEN_VALID_TIME" = get("TOKEN_VALID_TIME",configWS),
+                   "WS_VERSION" = get("WS_VERSION",configWS))
+  str(df)
+  return(df)
 }

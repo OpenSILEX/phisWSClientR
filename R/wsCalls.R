@@ -53,7 +53,7 @@ getToken<-function(login,password){
       codeHttpMessage = "Query executed and data recovered - WS2",
       codeStatusMessage = json$metadata$status,
       data = json$access_token,
-      expiresIn = json$expires_in,
+      expiresIn = as.integer(json$expires_in),
       webserviceVersion=2)
     # set WS TYPE in config environment
     logging::loginfo(response[["codeHttpMessage"]])
