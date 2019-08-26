@@ -287,11 +287,12 @@ setLoginUserInformations<-function(username,password,tokenData){
   assign("USERNAME", username, configWS)
   assign("PASSWORD", password, configWS)
   assign("WS_VERSION", tokenData$webserviceVersion, configWS)
-  assign("TOKEN_VALID_TIME",tokenData$expiresIn,configWS)
+  assign("TOKEN_CREATED_AT", Sys.time(), configWS)
+  assign("TOKEN_VALID_TIME",tokenData$expiresIn ,configWS)
   assign("TOKEN_VALID",TRUE,configWS)
   assign("USER_VALID",TRUE,configWS)
 
-  later::later(function(){assign("TOKEN_VALID",FALSE,configWS)},tokenData$expiresIn)
+  later::later(function(){assign("TOKEN_VALID",FALSE,configWS)},tokenData$expiresIn + 1)
   assign("RECONNECT_ON_DISCONNECTION",tokenData$expiresIn,configWS)
   
   #debug
@@ -309,14 +310,15 @@ setLoginUserInformations<-function(username,password,tokenData){
 getUserInformations<-function(){
   if(is.null(get("TOKEN_VALUE",configWS))) stop("Connect first using connectionToOpenSILEXWS() function")
      
-  print(paste("BASE_PATH ",get("BASE_PATH", configWS)))
-  print(paste("USERNAME",get("USERNAME",configWS)))
-  print(paste("TOKEN_VALUE",get("TOKEN_VALUE",configWS)))
+  nbSecondRemaining <- round(get("TOKEN_VALID_TIME",configWS) - abs(as.numeric(Sys.time() - get("TOKEN_CREATED_AT",configWS), units = "secs")))
+  if(nbSecondRemaining < 0) nbSecondRemaining = 0
   
   df <- data.frame("BASE_PATH" = get("BASE_PATH", configWS),
                    "USERNAME" = get("USERNAME",configWS),
                    "TOKEN_VALUE" = get("TOKEN_VALUE",configWS),
                    "TOKEN_VALID_TIME" = get("TOKEN_VALID_TIME",configWS),
+                   "TOKEN_EXPIRE_TIME" = nbSecondRemaining,
+                   "TOKEN_VALID" = get("TOKEN_VALID",configWS),
                    "WS_VERSION" = get("WS_VERSION",configWS))
   str(df)
   return(df)

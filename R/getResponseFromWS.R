@@ -20,7 +20,7 @@ getResponseFromWS<-function(resource,paramPath = NULL,attributes,wsVersion,type=
     
     if(!get("TOKEN_VALID",configWS)){
       logging::loginfo("Token expired. Reconnecting to WS ... ")
-      phisWSClientR::connectToOpenSILEXWS("ws_private",get("USERNAME",configWS),get("PASSWORD",configWS),get("BASE_PATH",configWS))
+      connectToOpenSILEXWS("ws_private",get("USERNAME",configWS),get("PASSWORD",configWS),get("BASE_PATH",configWS))
       if(!get("TOKEN_VALID",configWS)) stop("You cannot use this service on this OpenSILEX Instance")
       logging::loginfo("Reconnected to WS ... ")
     }
