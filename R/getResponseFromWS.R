@@ -32,7 +32,7 @@ getResponseFromWS<-function(resource,paramPath = NULL,attributes,wsVersion,type=
     if(wsVersion == 2){
       responseWS <- getResponseFromWS2(resource = resource, paramPath= paramPath, attributes = attributes, type= type)
     }
-  return(response)
+  return(responseWS)
 }
 
 
