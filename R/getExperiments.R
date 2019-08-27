@@ -100,7 +100,6 @@ getExperiments <- function( projectName ="", season = "", sortOrder = "DESC" ,
 ##' @param keywords character, search by keywords of an experiment (optional)
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the \code{\link{connectToOpenSILEXWS}}

@@ -61,7 +61,6 @@ getVariablesByCategory<-function(category ="",experimentURI ="",imageryProvider=
 ##' @param unit character, search variables by unit uri (optional)
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize character, number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return a WSResponse object. In the 'data' part of the returned object, a data.frame is
 ##'    given, containing:
 ##' \describe{
@@ -130,7 +129,6 @@ getVariablesDetails <- function(
 ##' @param unit character, search variables by unit uri (optional)
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize character, number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return a WSResponse object. In the 'data' part of the returned object, a data.frame is
 ##'    given, containing:
 ##' \describe{
@@ -195,7 +193,6 @@ getVariables2 <- function(
 ##' @param uri character, search by the uri of an experiment
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize character, number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return a WSResponse object. In the 'data' part of the returned object, a data.frame is
 ##'    given, containing:
 ##' \describe{

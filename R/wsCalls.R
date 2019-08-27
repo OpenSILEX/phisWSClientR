@@ -169,7 +169,6 @@ getPlantsContextByID<-function( plantURI ="",experimentURI="",page = NULL,
 ##' @title retrieves the environmental mesures of a plant from the web service
 ##'
 ##' @description Retrieves environmental mesures of a plant or by dates
-##' @param token a token
 ##' @param plantURI plant URI
 ##' @param variableCategory character, a category of variables
 ##' @param startDate data > startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )
@@ -234,7 +233,6 @@ getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = ""
 ##' @title retrieves the images analysis data from the web service
 ##'
 ##' @description Retrieves data from image analysis
-##' @param token a token
 ##' @param experimentURI URI of the experiment
 ##' @param variablesName list, variable names of images analysis (ex : "objAreaSum")
 ##' @param labelView character, label view of an image
@@ -257,7 +255,7 @@ getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = ""
 ##'  head(myImages$data)
 ##' }
 ##' @export
-getImagesAnalysis <- function( experimentURI ="", variablesName = list(),
+getImagesAnalysis <- function(experimentURI ="", variablesName = list(),
                               labelView ="", provider = "", date = "",
                               page = NULL,pageSize = NULL){
 
@@ -292,7 +290,6 @@ getImagesAnalysis <- function( experimentURI ="", variablesName = list(),
 ##' @title retrieves the irrigation data from the web service
 ##'
 ##' @description Retrieves irrigation data
-##' @param token a token
 ##' @param experimentURI URI of the experiment
 ##' @param variablesName list, variable names of images analysis
 ##' @param provider character, provider of data
@@ -314,7 +311,7 @@ getImagesAnalysis <- function( experimentURI ="", variablesName = list(),
 ##'  head(mywater$data)
 ##' }
 ##' @export
-getWatering <- function( experimentURI ="", variablesName = list(), provider = "", date = "",
+getWatering <- function(experimentURI ="", variablesName = list(), provider = "", date = "",
                         page = NULL,pageSize = NULL){
 
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
@@ -348,7 +345,6 @@ getWatering <- function( experimentURI ="", variablesName = list(), provider = "
 # ##'
 # ##' @description Post phenotypes data
 # ##' @details !!!in development!!!
-# ##' @param token a token
 # ##' @param experimentURI URI of the experiment
 # ##' @param data list of dataframe
 # ##'  $ data :'data.frame':  1 obs. of  5 variables:
@@ -393,7 +389,6 @@ getWatering <- function( experimentURI ="", variablesName = list(), provider = "
 ##' @title getLabelViewByExperimentById
 ##'
 ##' @description Retrieves LabelViews used in a specific experiment
-##' @param token a token
 ##' @param viewType type of view, top or side
 ##' @param cameraAngle numeric, angle of the camera
 ##' @param provider origin of the data
@@ -407,12 +402,11 @@ getWatering <- function( experimentURI ="", variablesName = list(), provider = "
 ##' service
 ##' @examples
 ##' # Not run (is an internal function)
-##' # aToken = getToken("guestphis@supagro.inra.fr","guestphis")$data
-##' # publicLabelView <- getLabelViewByExperimentById(aToken,
+##' # publicLabelView <- getLabelViewByExperimentById(
 ##' #      experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##' # publicLabelView$data
 ##' @keywords internal
-getLabelViewByExperimentById <- function(token ,experimentURI="" ,viewType="" ,cameraAngle="",provider="",
+getLabelViewByExperimentById <- function(experimentURI="" ,viewType="" ,cameraAngle="",provider="",
                                          page = NULL,pageSize = NULL){
 
   if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
@@ -434,7 +428,10 @@ getLabelViewByExperimentById <- function(token ,experimentURI="" ,viewType="" ,c
     # AC 28/10/2016 Suppress double URL encoding. Update tomcat allowed encoded slash security parameter
     expUrlEncoded<-paste0(utils::URLencode(experimentURI, reserved = TRUE),"/labelViews")
     experimentLabelViewsResponse <- getResponseFromWS(resource = get("EXPERIMENT",configWS),
-                                                      paramPath = expUrlEncoded, attributes =  attributes)
+                                                      paramPath = expUrlEncoded, 
+                                                      attributes =  attributes,
+                                                      wsVersion=1
+                                                      )
 
     return(experimentLabelViewsResponse)
   }
