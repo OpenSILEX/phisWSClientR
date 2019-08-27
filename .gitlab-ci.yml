@@ -91,7 +91,7 @@ deployOnTestRepository:
     ## Install ssh-agent if not already installed, it is required by Docker.
     ## (change apt-get to yum if you use an RPM-based image)
     ##
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
   
     ##
     ## Run ssh-agent (inside the build environment)
@@ -142,9 +142,10 @@ deployOnTestRepository:
     - git config --global user.email "$GITHUB_USER_NAME"
     - git config --global user.name "$GITHUB_USER_EMAIL"
     - ssh git@github.com
-    - "git remote add upstream https://github.com/niio972/phisWSClientR"
-    - "git fetch upstream"
-    - "git push upstream HEAD:master --force"
+    - git remote add upstream https://github.com/niio972/phisWSClientR
+    - git remote -v
+    - git fetch upstream
+    - git push upstream HEAD:master --force
   only:
     - v2.0.0
     
