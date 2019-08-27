@@ -121,7 +121,7 @@ getPlants <- function( plantAlias ="", experimentURI = "", germplasmURI = "" ,
   if (germplasmURI != ""){
     attributes <- c(attributes, germplasmURI = germplasmURI)
   }
-  plantsResponse<-getResponseFromWS(resource = get("PLANTS",configWS),attributes = attributes)
+  plantsResponse<-getResponseFromWS(resource = get("PLANTS",configWS), attributes = attributes, wsVersion=1)
   return(plantsResponse)
 }
 
@@ -284,7 +284,7 @@ getImagesAnalysis <- function( experimentURI ="", variablesName = list(),
     attributes <- c(attributes, experimentURI = experimentURI)
   }
   imagesAnalysisResponse <- getResponseFromWS(resource = get("IMAGESANALYSIS",configWS),
-                                              attributes = attributes)
+                                              attributes = attributes, wsVersion =1)
   return(imagesAnalysisResponse)
 }
 
@@ -339,7 +339,8 @@ getWatering <- function( experimentURI ="", variablesName = list(), provider = "
   }
 
   wateringResponse <- getResponseFromWS(resource = get("WATERING",configWS),
-                                        attributes = attributes)
+                                        attributes = attributes,
+                                        wsVersion=1)
   return(wateringResponse)
 }
 
