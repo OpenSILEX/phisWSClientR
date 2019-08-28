@@ -26,8 +26,13 @@
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##'  connectToOpenSILEXWS(apiID="ws_public", username = "guestphis@supagro.inra.fr", password = "guestphis")
-##'  getEnvironment(page=3,pageSize=100,startDate="2017-06-29",endDate = "2017-06-16")
+##'  connectToOpenSILEXWS(apiID="ws_public", 
+##'  username = "guestphis@supagro.inra.fr",
+##'  password = "guestphis")
+##'  getEnvironment(page=3,
+##'                 pageSize=100,
+##'                 startDate="2017-06-29",
+##'                 endDate = "2017-06-16")
 ##'  test<-getEnvironment(experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30")
 ##'  test$data
 ##'  getEnvironment( experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30",
@@ -86,7 +91,9 @@ getEnvironment <- function(variableCategory ="",startDate = "",endDate = "" ,var
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/","guestphis@supagro.inra.fr","guestphis")
+##'  connectToOpenSILEXWS(apiID="ws_private",
+##'   url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'   "guestphis@opensilex.org","guest")
 ##'  # Retrieve the number of available data
 ##'  mycount <- getEnvironmentData(variable = "http://www.opensilex.org/demo/id/variables/v004")$totalCount
 ##'  # Retrieve the environmental data

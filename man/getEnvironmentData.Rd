@@ -34,7 +34,9 @@ service
 }
 \examples{
 \donttest{
- connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/","guestphis@supagro.inra.fr","guestphis")
+ connectToOpenSILEXWS(apiID="ws_private",
+  url = "http://www.opensilex.org/openSilexAPI/rest/",
+  "guestphis@supagro.inra.fr","guestphis")
  # Retrieve the number of available data
  mycount <- getEnvironmentData(variable = "http://www.opensilex.org/demo/id/variables/v004")$totalCount
  # Retrieve the environmental data
