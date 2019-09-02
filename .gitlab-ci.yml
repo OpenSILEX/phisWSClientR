@@ -140,7 +140,6 @@ deployOnTestRepository:
     ##
     - git config --global user.email "$GITHUB_USER_NAME"
     - git config --global user.name "$GITHUB_USER_EMAIL"
-    - ssh git@github.com
     - git remote add upstream https://github.com/niio972/phisWSClientR
     - git remote -v
     - git fetch upstream
