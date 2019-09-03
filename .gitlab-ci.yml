@@ -13,7 +13,7 @@ stages:
 # define system environment variables
 variables:
   R_REPOS: "http://cloud.R-project.org/"
-  R_LIBS : "$CI_PROJECT_DIR/.install_deps" # Hiding dependencies cache
+  R_LIBS : ".cache/install_deps" # dependencies cache
   R_ENVIRON : "$CI_PROJECT_DIR/.Renviron" # R environment cache
   R_TMP_USER: "$CI_PROJECT_DIR/tmp"  # temporary directory
 
@@ -21,9 +21,8 @@ variables:
 cache:
     key: "$CI_COMMIT_REF_SLUG"
     paths:
-      - $R_LIBS
-      - $R_ENVIRON
-
+      - ".cache/install_deps"
+      - ".Renviron"
 
 # create an archive 
 buildBinary:
