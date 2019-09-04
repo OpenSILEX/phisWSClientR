@@ -33,7 +33,12 @@ service
 }
 \examples{
 \donttest{
- connectToPHISWS(apiID="ws_private","guest@opensilex.org/","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+ connectToPHISWS(
+  apiID="ws_private",
+  "guest@opensilex.org/",
+  "guest",
+  url = "http://www.opensilex.org/openSilexAPI/rest/"
+  )
  varExp<- getVariablesByExperiment(uri = "http://www.opensilex.org/demo/DIA2017-1")
  varExp$data
 }

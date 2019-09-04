@@ -41,7 +41,12 @@ service
 }
 \examples{
 \donttest{
- connectToPHISWS(apiID="ws_private","guest@opensilex.fr","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+ connectToPHISWS(
+  apiID="ws_private",
+  "guest@opensilex.org/",
+  "guest",
+  url = "http://www.opensilex.org/openSilexAPI/rest/"
+  )
  vars <- getVariablesDetails(uri = "http://www.opensilex.org/demo/id/variables/v001")
  vars <- getVariablesDetails(label = "Leaf-Area_LAI-Computation_LAI")
  vars$data

@@ -17,7 +17,7 @@ Depends:
     opensilexWSClientR
 License: GPL-3 | file LICENSE
 LazyData: TRUE
-Remotes: github::niio972/opensilex-ws-client-r
+Remotes: github::opensilex/opensilex-ws-client-r
 Imports:
     ggplot2,
     tidyr,
