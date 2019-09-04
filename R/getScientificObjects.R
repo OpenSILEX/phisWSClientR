@@ -18,11 +18,11 @@
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##'  scientificObjects <- getScientificObjects(
 ##'                               uri = "http://www.opensilex.org/demo/2018/o18000076")
 ##'  scientificObjects$data
@@ -34,10 +34,9 @@ getScientificObjects <- function(
                                  alias = "",
                                  rdfType = "",
                                  page = NULL,
-                                 pageSize = NULL,
-                                 verbose = FALSE){
-  if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
-  if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
+                                 pageSize = NULL){
+  
+  
   
   attributes <- list(pageSize=pageSize,
                      page = page)
@@ -46,7 +45,7 @@ getScientificObjects <- function(
   if (alias!="")      attributes <- c(attributes, alias = alias)
   if (rdfType!="")    attributes <- c(attributes, rdfType = rdfType)
   
-  variableResponse <- getResponseFromWS(resource = paste0(get("SCIENTIFIC_OBJECTS", configWS)),
+  variableResponse <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("SCIENTIFIC_OBJECTS", configWS)),
                                          attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

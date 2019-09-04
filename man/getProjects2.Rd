@@ -35,8 +35,6 @@ getProjects2(page = NULL, pageSize = NULL, uri = "", name = "",
 \item{parentProject}{character, search by parent project (optional)}
 
 \item{website}{character, search by website of a project (optional)}
-
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
 }
 \value{
 WSResponse object
@@ -45,12 +43,12 @@ WSResponse object
 Retrieves the list of projects in the WS2 with the selected filters
 }
 \details{
-You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToOpenSILEXWS(apiID="ws_private",
+ connectToPHISWS(apiID="ws_private",
   url = "http://www.opensilex.org/openSilexAPI/rest/")
  projects <- getProjects2(
   uri="http://www.opensilex.org/demo/PHENOME-FPPN")

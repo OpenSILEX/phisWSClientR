@@ -4,8 +4,7 @@
 \alias{getUnits}
 \title{getUnits}
 \usage{
-getUnits(uri = "", label = "", page = NULL, pageSize = NULL,
-  verbose = FALSE)
+getUnits(uri = "", label = "", page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{uri}{character, search by the uri of a unit (optional)}
@@ -15,8 +14,6 @@ getUnits(uri = "", label = "", page = NULL, pageSize = NULL,
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
-
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
 }
 \value{
 WSResponse object
@@ -25,12 +22,12 @@ WSResponse object
 Retrieves the unit based on search criterion
 }
 \details{
-You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
-connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
 units <- getUnits(uri="http://www.opensilex.org/demo/id/units/u007")
 units$data
 }

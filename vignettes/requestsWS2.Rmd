@@ -56,13 +56,13 @@ Ask permission to request to the web service:
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
   # If you want to access to a private web service, you have to insert the address of the WS and the port
-  connectToOpenSILEXWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
+  connectToPHISWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
 ```
 
 *aToken* is your identification and grants the access to some data according to your login information.
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  aToken <- getToken("guest@opensilex.org","guest")
+  aToken <- opensilexWSClientR::getToken("guest@opensilex.org","guest")
 ```
 
 # Fetch informations about elements in the web service
@@ -163,7 +163,14 @@ Ask permission to request to the web service:
                         variable = "http://www.opensilex.org/demo/id/variables/v001", 
                         pageSize=10)$data)
 ```
-
+ ------------ Developper part  ------------
+# Get more informations on during a call
+# Can be useful to understand what append ruing a call
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  setLogLevel("DEBUG")
+  getEnvironmentData( variable = "http://www.opensilex.org/demo/id/variables/v010", pageSize=50)
+  setLogLevel("INFO")
+```
 # Session info
 
 ```{r session,echo=FALSE,message=FALSE, warning=FALSE}

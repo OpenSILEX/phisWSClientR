@@ -4,8 +4,7 @@
 \alias{getVariablesByExperiment}
 \title{getVariablesByExperiment}
 \usage{
-getVariablesByExperiment(uri = "", pageSize = NULL, page = NULL,
-  verbose = FALSE)
+getVariablesByExperiment(uri = "", pageSize = NULL, page = NULL)
 }
 \arguments{
 \item{uri}{character, search by the uri of an experiment}
@@ -13,8 +12,6 @@ getVariablesByExperiment(uri = "", pageSize = NULL, page = NULL,
 \item{pageSize}{character, number of elements by page (pagination Plant Breeding API)}
 
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
-
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
 }
 \value{
 a WSResponse object. In the 'data' part of the returned object, a data.frame is
@@ -31,12 +28,12 @@ Retrieves the variable descriptions, trait, method and unit covered by the varia
       for a given experiment URI
 }
 \details{
-You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToOpenSILEXWS(apiID="ws_private","guest@opensilex.org/","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+ connectToPHISWS(apiID="ws_private","guest@opensilex.org/","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
  varExp<- getVariablesByExperiment(uri = "http://www.opensilex.org/demo/DIA2017-1")
  varExp$data
 }

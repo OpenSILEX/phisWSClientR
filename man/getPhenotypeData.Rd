@@ -6,7 +6,7 @@
 \usage{
 getPhenotypeData(variable = "", experiment = "",
   scientificObject = "", startDate = "", endDate = "", sensor = "",
-  incertitude = "", page = NULL, pageSize = NULL, verbose = FALSE)
+  incertitude = "", page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{variable}{character, search by the uri of a variable (optional). You can access the list of variables through \code{\link{getVariables2}} function.}
@@ -26,8 +26,6 @@ getPhenotypeData(variable = "", experiment = "",
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
-
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
 }
 \value{
 WSResponse object
@@ -36,12 +34,12 @@ WSResponse object
 Retrieves the phenotype measures data from a variable, an experiment or a sensor
 }
 \details{
-You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+ connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
  phenodata <- getPhenotypeData(
    variable = "http://www.opensilex.org/demo/id/variables/v001")
  phenodata <- getPhenotypeData(

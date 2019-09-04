@@ -8,38 +8,6 @@
 # Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
-##' @title getProjects retrieves the list of projects from the web service
-##'
-##' @description Retrieves the list of projects in the WS
-##' @param projectName Name of the project to search
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
-
-##' @return WSResponse object
-##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
-##' service
-##' @examples
-##' \donttest{
-##'  connectToOpenSILEXWS(apiID="ws_public")
-##'  getProjects()
-##'  getProjects(page = 1)
-##'  getProjects(page = 3, pageSize = 100)
-##'  getProjects(projectName = "PHIS_Publi")
-##' }
-##' @export
-getProjects<-function( projectName = "",page=NULL,pageSize=NULL){
-  if(is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  
-  attributes = list(sessionId = get("TOKEN_VALUE",configWS), page = page, pageSize = pageSize)
-  if (projectName != ""){
-    attributes <- c(attributes, projectName = projectName)
-  }
-  projectResponse <- getResponseFromWS(resource = get("PROJECTS",configWS),attributes=attributes, wsVersion = 1)
-  return(projectResponse)
-}
-
 #---------------------------------------------------------------
 ##' @title getProjects2
 ##'
@@ -59,11 +27,11 @@ getProjects<-function( projectName = "",page=NULL,pageSize=NULL){
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API) (optional)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToOpenSILEXWS(apiID="ws_private",
+##'  connectToPHISWS(apiID="ws_private",
 ##'   url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##'  projects <- getProjects2(
 ##'   uri="http://www.opensilex.org/demo/PHENOME-FPPN")
@@ -85,11 +53,10 @@ getProjects2 <- function(
                          keywords = "",
                          parentProject = "",
                          website = ""){
-  if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
-  if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
   
-  attributes <- list(page = page,
-                     pageSize = pageSize)
+  
+  
+  attributes <- list(page = page, pageSize = pageSize)
   
   if (uri != "")              attributes <- c(attributes, uri = uri)
   if (name != "")             attributes <- c(attributes, name = name)
@@ -103,6 +70,6 @@ getProjects2 <- function(
   if (parentProject != "")    attributes <- c(attributes, parentProject = parentProject)
   if (website != "")          attributes <- c(attributes, website = website)
   
-  projectResponse <- getResponseFromWS(resource = get("PROJECTS", configWS), attributes = attributes, wsVersion = 2)
+  projectResponse <- opensilexWSClientR::getResponseFromWS(resource = get("PROJECTS", configWS), attributes = attributes, wsVersion = 2)
   return(projectResponse)
 }

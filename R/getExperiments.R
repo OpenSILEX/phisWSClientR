@@ -23,22 +23,20 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##' connectToOpenSILEXWS(apiID="ws_public")
+##' connectToPHISWS(apiID="ws_public")
 ##'  publicExp<-getExperimentById(
 ##'         experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##'  publicExp$data
 ##' }
 ##' @keywords internal
 getExperimentById <- function( experimentURI ="", page = NULL,pageSize = NULL){
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
   attributes = list(page = page, pageSize = pageSize)
   if (experimentURI  == ""){
     stop("no experimentURI selected")
   } else {
     # IS 03/11/2016 Suppress double URL encoding. Update tomcat allowed encoded slash security parameter
     expUrlEncoded<-paste0(utils::URLencode(experimentURI,  reserved = TRUE),"/details")
-    experimentResponse<-getResponseFromWS(resource = get("EXPERIMENT",configWS),
+    experimentResponse<-opensilexWSClientR::getResponseFromWS(resource = get("EXPERIMENT",configWS),
                                           paramPath=expUrlEncoded, attributes=attributes, wsVersion = 1)
     return(experimentResponse)
   }
@@ -55,11 +53,11 @@ getExperimentById <- function( experimentURI ="", page = NULL,pageSize = NULL){
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##' connectToOpenSILEXWS(apiID="ws_public")
+##' connectToPHISWS(apiID="ws_public")
 ##'  getExperiments(page=3,pageSize=100,startDate="2012-02-21",endDate="2012-03-21")
 ##'  getExperiments(projectName = "PHIS_Publi")
 ##'  getExperiments(sortOrder = "ASC")
@@ -68,8 +66,7 @@ getExperimentById <- function( experimentURI ="", page = NULL,pageSize = NULL){
 ##' @export
 getExperiments <- function( projectName ="", season = "", sortOrder = "DESC" ,
                            page = NULL,pageSize = NULL){
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
+  
   attributes = list(page = page, pageSize = pageSize)
   
   if (projectName != ""){
@@ -81,7 +78,7 @@ getExperiments <- function( projectName ="", season = "", sortOrder = "DESC" ,
   if (sortOrder != ""){
     attributes <- c(attributes, sortOrder = sortOrder)
   }
-  experimentResponse<-getResponseFromWS(resource = get("EXPERIMENT",configWS),
+  experimentResponse<-opensilexWSClientR::getResponseFromWS(resource = get("EXPERIMENT",configWS),
                                         attributes = attributes, wsVersion = 1)
   return(experimentResponse)
 }
@@ -102,10 +99,10 @@ getExperiments <- function( projectName ="", season = "", sortOrder = "DESC" ,
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}}
+##' @details You have to execute the \code{\link{connectToPHISWS}}
 ##' @examples
 ##' \donttest{
-##' connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##' myexp <- getExperiments2(
 ##'                    uri = "http://www.opensilex.org/demo/DIA2017-1")
 ##' myexp$data
@@ -121,13 +118,11 @@ getExperiments2 <- function(
                             alias = "",
                             keywords = "",
                             page = NULL,
-                            pageSize = NULL,
-                            verbose = FALSE){
-  if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
-  if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
+                            pageSize = NULL){
   
-  attributes <- list(pageSize = pageSize,
-                     page = page)
+  
+  
+  attributes <- list(pageSize = pageSize,  page = page)
   if (uri!="")      attributes <- c(attributes, uri = uri)
   if (startDate!="")attributes <- c(attributes, startDate = startDate)
   if (endDate!="" ) attributes <- c(attributes, endDate = endDate)
@@ -137,7 +132,7 @@ getExperiments2 <- function(
   if (alias!="")    attributes <- c(attributes, alias = alias)
   if (keywords!="") attributes <- c(attributes, keywords = keywords)
   
-  variableResponse <- getResponseFromWS(resource = paste0(get("EXPERIMENTS", configWS)),
+  variableResponse <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("EXPERIMENTS", configWS)),
                                          attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

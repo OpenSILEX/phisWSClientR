@@ -8,7 +8,7 @@ in progress...
 
 To initialize a client request:
 
-- connectToOpenSILEXWS()
+- connectToPHISWS()
 
 For the first web service, the available functions are:
 

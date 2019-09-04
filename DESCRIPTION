@@ -13,9 +13,11 @@ Description: a set of functions to connect R to the phenomeapi web service in Op
    from the greenhouse platforms (GET imagery, environment, watering and weighing) or the field platforms. Public access is allowed
    with specific login as well as private access if the user has an account on an instance of the PHIS system information.
 Depends:
-    R (>= 3.2.0)
-License: GPL-3
+    R (>= 3.2.0),
+    opensilexWSClientR
+License: GPL-3 | file LICENSE
 LazyData: TRUE
+Remotes: github::niio972/opensilex-ws-client-r
 Imports:
     ggplot2,
     tidyr,
@@ -24,10 +26,9 @@ Imports:
     jsonlite,
     httr,
     urltools,
-    openssl,
     logging,
-    later,
-    opensilexWSClientR
+    openssl,
+    later
 Suggests:
     roxygen2,
     knitr,
@@ -36,5 +37,3 @@ Author: Isabelle Sanchez [aut, cre]
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 Encoding: UTF-8
-# Git
-Remotes: git::https://github.com/niio972/opensilex-ws-client-r.git

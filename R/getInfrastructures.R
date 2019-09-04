@@ -18,11 +18,11 @@
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##' connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##' infrastructures <- getInfrastructures( 
 ##'                        uri = "https://emphasis.plant-phenotyping.eu"
 ##'                      )
@@ -35,10 +35,9 @@ getInfrastructures <- function(
                                label = "",
                                language = "en",
                                page = NULL,
-                               pageSize = NULL,
-                               verbose = FALSE){
-  if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
-  if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
+                               pageSize = NULL){
+  
+  
   
   attributes <- list(pageSize = pageSize,
                      page = page)
@@ -47,7 +46,7 @@ getInfrastructures <- function(
   if (label!="")    attributes <- c(attributes, label = label)
   if (language!="") attributes <- c(attributes, language = language)
   
-  variableResponse <- getResponseFromWS(resource = paste0(get("INFRASTRUCTURES", configWS)),
+  variableResponse <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("INFRASTRUCTURES", configWS)),
                                          attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

@@ -6,89 +6,40 @@
 # Update: 29/10/2018 (by I.Sanchez) - 30/10/2016 (by  A. Charleroy)
 #-------------------------------------------------------------------------------
 
-##' @title retrieves a user identifier for connexion to the web service
+##' @title getProjects retrieves the list of projects from the web service
 ##'
-##' @description Retrieves a user identifier for connexion to the WebService (WS)
-##' @param login login of the user to create the token
-##' @param password password of the user to create the token
+##' @description Retrieves the list of projects in the WS
+##' @param projectName Name of the project to search
+##' @param page displayed page (pagination Plant Breeding API)
+##' @param pageSize number of elements by page (pagination Plant Breeding API)
 
-##' @return a session token user identifier in the WS
+##' @return WSResponse object
+##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
+##' service
 ##' @examples
 ##' \donttest{
-##' connectToOpenSILEXWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
-##' aToken <- getToken("guestphis@supagro.inra.fr","guestphis")
-##' aToken$data
+##'  connectToPHISWS(apiID="ws_public")
+##'  getProjects()
+##'  getProjects(page = 1)
+##'  getProjects(page = 3, pageSize = 100)
+##'  getProjects(projectName = "PHIS_Publi")
 ##' }
 ##' @export
-getToken<-function(login,password){
-  attributes<-list(username = login, password = password)
-
-  # Try 1 on first web service
-  tokenResp1<-getTokenResponseWS(resource = get("TOKEN",configWS), attributes = attributes)
-
-  # Try 2 on second web service
-  tokenResp2<-getTokenResponseWS2(resource = get("BRAPITOKEN",configWS), attributes = attributes)
-
-  # Test which WS is OK
-  if (tokenResp1$status_code >= 200 && tokenResp1$status_code < 300 && tokenResp2$status_code >=400){
-    json = jsonlite::fromJSON(httr::content(tokenResp1, as = "text", encoding = "UTF-8"))
-    response <- list(
-      currentPage = json$metadata$pagination$currentPage,
-      totalCount = json$metadata$pagination$totalCount,
-      totalPages = json$metadata$pagination$totalPages,
-      codeHttp = tokenResp1$status_code,
-      codeHttpMessage = "Query executed and data recovered - WS1",
-      codeStatusMessage = json$metadata$status,
-      data = json$session_token,
-      expiresIn = 1200, # @see http://147.100.179.156:8080/phenomeapi/api-docs/
-      webserviceVersion=1)
-    # set WS TYPE in config environment
-    logging::loginfo(response[["codeHttpMessage"]])
-    
-  } else if (tokenResp2$status_code >= 200 && tokenResp2$status_code < 300 && tokenResp1$status_code >=400){
-    json = jsonlite::fromJSON(httr::content(tokenResp2, as = "text", encoding = "UTF-8"))
-
-    response <- list(
-      codeHttp = tokenResp2$status_code,
-      codeHttpMessage = "Query executed and data recovered - WS2",
-      codeStatusMessage = json$metadata$status,
-      data = json$access_token,
-      expiresIn = as.integer(json$expires_in),
-      webserviceVersion=2)
-    # set WS TYPE in config environment
-    logging::loginfo(response[["codeHttpMessage"]])
-  } else if(tokenResp1$status_code == 500 || tokenResp2$status_code == 500){
-       logging::logerror("WebService internal error")
-  } else if(tokenResp1$status_code == 401 || tokenResp2$status_code == 401){
-       logging::logerror("User not authorized")
-  } else if(tokenResp1$status_code == 404 || tokenResp2$status_code == 404){
-       logging::logerror("Not found")
-  } else if((tokenResp1$status_code >= 400 && tokenResp1$status_code != 401 &&
-             tokenResp1$status_code != 404 && tokenResp1$status_code < 500) &&
-            (tokenResp2$status_code >= 400 && tokenResp2$status_code != 401 &&
-             tokenResp2$status_code != 404 && tokenResp2$status_code < 500)){
-       logging::logwarn("Bad user request")
+getProjects<-function( projectName = "",page=NULL,pageSize=NULL){
+  
+  attributes = list(page = page, pageSize = pageSize)
+  if (projectName != ""){
+    attributes <- c(attributes, projectName = projectName)
   }
-
-  if (tokenResp1$status_code > 250 && tokenResp2$status_code > 250){
-       logging::logwarn("No web service available! Check your login/password and/or your url...")
-  }
-
-  # define class S3 and return the list if exists
-  if (exists("response")){
-    class(response) <- append(class(response),"WSResponse")
-    return(response)
-  }else{
-    return(NULL)
-  }
+  projectResponse <- opensilexWSClientR::getResponseFromWS(resource = get("PROJECTS",configWS),attributes=attributes, wsVersion = 1)
+  return(projectResponse)
 }
-
 
 
 ##' @title retrieves the context of plant linked to an experiment from the web service
 ##'
 ##' @description Retrieves context of plant linked to an experiment
-##' @param token a token
 ##' @param plantAlias an alias of plant
 ##' @param experimentURI URI of the experiment
 ##' @param germplasmURI filter by genotype
@@ -97,19 +48,19 @@ getToken<-function(login,password){
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##' connectToOpenSILEXWS(apiID="ws_public")
+##' connectToPHISWS(apiID="ws_public")
 ##'  aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
 ##'  plantes<-getPlants(aToken,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##' }
 ##' @export
 getPlants <- function( plantAlias ="", experimentURI = "", germplasmURI = "" ,
                       page = NULL,pageSize = NULL){
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
+  
+  
   attributes = list(page = page, pageSize = pageSize)
 
   if (plantAlias != ""){
@@ -121,7 +72,7 @@ getPlants <- function( plantAlias ="", experimentURI = "", germplasmURI = "" ,
   if (germplasmURI != ""){
     attributes <- c(attributes, germplasmURI = germplasmURI)
   }
-  plantsResponse<-getResponseFromWS(resource = get("PLANTS",configWS), attributes = attributes, wsVersion=1)
+  plantsResponse<-opensilexWSClientR::getResponseFromWS(resource = get("PLANTS",configWS), attributes = attributes, wsVersion=1)
   return(plantsResponse)
 }
 
@@ -136,7 +87,7 @@ getPlants <- function( plantAlias ="", experimentURI = "", germplasmURI = "" ,
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' # not run (is an internal function!!!)
@@ -147,8 +98,8 @@ getPlants <- function( plantAlias ="", experimentURI = "", germplasmURI = "" ,
 ##' @keywords internal
 getPlantsContextByID<-function( plantURI ="",experimentURI="",page = NULL,
                                  pageSize = NULL){
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
+  
+  
   attributes = list(page = page, pageSize = pageSize)
   if (experimentURI != ""){
     attributes <- c(attributes, experimentURI = experimentURI)
@@ -159,7 +110,7 @@ getPlantsContextByID<-function( plantURI ="",experimentURI="",page = NULL,
   } else {
     # AC 28/10/2016 Suppress double URL encoding. Update tomcat allowed encoded slash security parameter
     plantURIEncoded = utils::URLencode(plantURI,reserved = TRUE)
-    plantByIDResponse<-getResponseFromWS(resource = get("PLANTS",configWS),
+    plantByIDResponse<-opensilexWSClientR::getResponseFromWS(resource = get("PLANTS",configWS),
                                         paramPath=plantURIEncoded,attributes=attributes)
     return(plantByIDResponse)
   }
@@ -180,7 +131,7 @@ getPlantsContextByID<-function( plantURI ="",experimentURI="",page = NULL,
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
 
 ##' @return WSResponse object
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
@@ -194,8 +145,8 @@ getPlantsContextByID<-function( plantURI ="",experimentURI="",page = NULL,
 getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = "",endDate = "",
                                 variables = "",facility = "", experimentURI ="",
                                 page = NULL,pageSize = NULL){
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
+  
+  
   attributes = list(page = page, pageSize = pageSize)
   if (plantURI  == ""){
     stop("no plantURI given")
@@ -223,7 +174,7 @@ getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = ""
     }
     # AC 28/10/2016 Suppress double URL encoding. Update tomcat allowed encoded slash security parameter
     plantURIEncoded =  utils::URLencode(plantURI, reserved = TRUE)
-    plantEnvironmentResponse<-getResponseFromWS(resource = get("PLANTS",configWS),
+    plantEnvironmentResponse<-opensilexWSClientR::getResponseFromWS(resource = get("PLANTS",configWS),
                                                 paramPath = paste0(plantURIEncoded,"/environment"),
                                                 attributes =  attributes)
     return(plantEnvironmentResponse)
@@ -242,12 +193,12 @@ getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = ""
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
 
 ##' @return WSResponse object
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##' connectToOpenSILEXWS(apiID="ws_public")
+##' connectToPHISWS(apiID="ws_public")
 ##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  myImages<-getImagesAnalysis(token = aToken$data,
 ##'            experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
@@ -259,8 +210,8 @@ getImagesAnalysis <- function(experimentURI ="", variablesName = list(),
                               labelView ="", provider = "", date = "",
                               page = NULL,pageSize = NULL){
 
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
+  
+  
   attributes = list(page = page, pageSize = pageSize)
   if (date != ""){
     attributes <- c(attributes, date = date)
@@ -281,7 +232,7 @@ getImagesAnalysis <- function(experimentURI ="", variablesName = list(),
   if (experimentURI != ""){
     attributes <- c(attributes, experimentURI = experimentURI)
   }
-  imagesAnalysisResponse <- getResponseFromWS(resource = get("IMAGESANALYSIS",configWS),
+  imagesAnalysisResponse <- opensilexWSClientR::getResponseFromWS(resource = get("IMAGESANALYSIS",configWS),
                                               attributes = attributes, wsVersion =1)
   return(imagesAnalysisResponse)
 }
@@ -298,12 +249,12 @@ getImagesAnalysis <- function(experimentURI ="", variablesName = list(),
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
 
 ##' @return WSResponse object
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##' connectToOpenSILEXWS(apiID="ws_public")
+##' connectToPHISWS(apiID="ws_public")
 ##'  accesToken = getToken("guestphis@supagro.inra.fr","guestphis")
 ##'  mywater<-getWatering(token=accesToken$data,
 ##'          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
@@ -314,8 +265,8 @@ getImagesAnalysis <- function(experimentURI ="", variablesName = list(),
 getWatering <- function(experimentURI ="", variablesName = list(), provider = "", date = "",
                         page = NULL,pageSize = NULL){
 
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
+  
+  
   attributes = list(page = page, pageSize = pageSize)
   if (date != ""){
     attributes <- c(attributes, date = date)
@@ -335,7 +286,7 @@ getWatering <- function(experimentURI ="", variablesName = list(), provider = ""
     attributes <- c(attributes, experimentURI = experimentURI)
   }
 
-  wateringResponse <- getResponseFromWS(resource = get("WATERING",configWS),
+  wateringResponse <- opensilexWSClientR::getResponseFromWS(resource = get("WATERING",configWS),
                                         attributes = attributes,
                                         wsVersion=1)
   return(wateringResponse)
@@ -355,7 +306,7 @@ getWatering <- function(experimentURI ="", variablesName = list(), provider = ""
 # ##' .. ..$ value         : int 0'
 # ##' @seealso http://147.99.7.5:8080/phenomeapi/api-docs/#!/environment/postPhenotypes
 # ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-# ##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+# ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 # ##' service
 # ##' @examples
 # ##' # Not run (is an internal function)
@@ -398,7 +349,7 @@ getWatering <- function(experimentURI ="", variablesName = list(), provider = ""
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' # Not run (is an internal function)
@@ -409,8 +360,8 @@ getWatering <- function(experimentURI ="", variablesName = list(), provider = ""
 getLabelViewByExperimentById <- function(experimentURI="" ,viewType="" ,cameraAngle="",provider="",
                                          page = NULL,pageSize = NULL){
 
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
+  
+  
   attributes = list(page = page, pageSize = pageSize)
 
   if(experimentURI  == ""){
@@ -427,7 +378,7 @@ getLabelViewByExperimentById <- function(experimentURI="" ,viewType="" ,cameraAn
     }
     # AC 28/10/2016 Suppress double URL encoding. Update tomcat allowed encoded slash security parameter
     expUrlEncoded<-paste0(utils::URLencode(experimentURI, reserved = TRUE),"/labelViews")
-    experimentLabelViewsResponse <- getResponseFromWS(resource = get("EXPERIMENT",configWS),
+    experimentLabelViewsResponse <- opensilexWSClientR::getResponseFromWS(resource = get("EXPERIMENT",configWS),
                                                       paramPath = expUrlEncoded, 
                                                       attributes =  attributes,
                                                       wsVersion=1

@@ -25,12 +25,12 @@ WSResponse object
 Retrieves the available experiments and/or linked to a project
 }
 \details{
-You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
-connectToOpenSILEXWS(apiID="ws_public")
+connectToPHISWS(apiID="ws_public")
  getExperiments(page=3,pageSize=100,startDate="2012-02-21",endDate="2012-03-21")
  getExperiments(projectName = "PHIS_Publi")
  getExperiments(sortOrder = "ASC")

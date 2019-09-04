@@ -6,8 +6,7 @@
 \usage{
 getVectors(uri = "", rdfType = "", label = "", brand = "",
   serialNumber = "", inServiceDate = "", dateOfPurchase = "",
-  personInCharge = "", page = NULL, pageSize = NULL,
-  verbose = FALSE)
+  personInCharge = "", page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{uri}{character, search by the uri of an annotation (optional)}
@@ -29,8 +28,6 @@ getVectors(uri = "", rdfType = "", label = "", brand = "",
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
-
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
 }
 \value{
 WSResponse object
@@ -39,12 +36,12 @@ WSResponse object
 retrieves the vectors based on search criterion
 }
 \details{
-You have to execute the connectToOpenSILEXWS() function first to have access to the web
+You have to execute the connectToPHISWS() function first to have access to the web
 service
 }
 \examples{
 \donttest{
-connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
 aToken = getToken("guestphis@supagro.inra.fr","guestphis")
 vectors <- getVectors(aToken$data, uri = "http://www.opensilex.org/demo/2018/v1801")
 vectors <- getVectors(aToken$data, serialNumber = "01BD1DD71500001")

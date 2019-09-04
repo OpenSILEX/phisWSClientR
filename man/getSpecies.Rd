@@ -5,7 +5,7 @@
 \title{getSpecies}
 \usage{
 getSpecies(uri = "", label = "", language = "", page = NULL,
-  pageSize = NULL, verbose = FALSE)
+  pageSize = NULL)
 }
 \arguments{
 \item{uri}{character, search by the uri of a specie (optional)}
@@ -17,8 +17,6 @@ getSpecies(uri = "", label = "", language = "", page = NULL,
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
-
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
 }
 \value{
 WSResponse object
@@ -27,12 +25,12 @@ WSResponse object
 retrieves the specie behind the specie uri
 }
 \details{
-You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
-connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
 species <- getSpecies()
 species$data
 }

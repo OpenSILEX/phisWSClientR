@@ -20,20 +20,23 @@
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToOpenSILEXWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
+##'  connectToPHISWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
 ##'  vars <- getVariablesByCategory(category="imagery",
 ##'           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##'  vars$data
 ##' }
 ##' @export
-getVariablesByCategory<-function(category ="",experimentURI ="",imageryProvider="",
-                                 page=NULL,pageSize=NULL){
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
+getVariablesByCategory<-function(category ="",
+                                 experimentURI ="",
+                                 imageryProvider="",
+                                 page=NULL,
+                                 pageSize=NULL){
+  
+  
   attributes = list( page=page, pageSize = pageSize)
   if (category  == ""){
     stop("no category selected")
@@ -44,7 +47,7 @@ getVariablesByCategory<-function(category ="",experimentURI ="",imageryProvider=
     if (imageryProvider != ""){
       attributes <- c(attributes, imageryProvider = imageryProvider)
     }
-    variableResponse <- getResponseFromWS(resource=paste0(get("VARIABLES",configWS),"/category/",category),
+    variableResponse <- opensilexWSClientR::getResponseFromWS(resource=paste0(get("VARIABLES",configWS),"/category/",category),
                                           attributes = attributes, wsVersion = 1)
     return(variableResponse)
   }
@@ -70,11 +73,11 @@ getVariablesByCategory<-function(category ="",experimentURI ="",imageryProvider=
 ##' \item{and uri, label and comment}{for each variable}
 ##' }
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToOpenSILEXWS(apiID="ws_private","guest@opensilex.fr","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  connectToPHISWS(apiID="ws_private","guest@opensilex.fr","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##'  vars <- getVariablesDetails(uri = "http://www.opensilex.org/demo/id/variables/v001")
 ##'  vars <- getVariablesDetails(label = "Leaf-Area_LAI-Computation_LAI")
 ##'  vars$data
@@ -87,10 +90,9 @@ getVariablesDetails <- function(
                           method = "",
                           unit = "",
                           pageSize = NULL,
-                          page = NULL,
-                          verbose = FALSE){
-  if (is.null(page)) page <- get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE",configWS)
+                          page = NULL){
+  
+ 
   
   attributes <- list(pageSize=pageSize,
                      page = page)
@@ -100,7 +102,7 @@ getVariablesDetails <- function(
   if (method!="") attributes <- c(attributes, method = method)
   if (unit!="")   attributes <- c(attributes, unit = unit)
   
-  variableResponse <- getResponseFromWS(resource = paste0(get("VARIABLES_DETAILS", configWS)),
+  variableResponse <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("VARIABLES_DETAILS", configWS)),
                                          attributes = attributes, wsVersion = 2)
   
   # Convert the JSON data.frame in real R data.frame
@@ -138,11 +140,11 @@ getVariablesDetails <- function(
 ##' \item{and uri, label and comment}{for each variable}
 ##' }
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToOpenSILEXWS(apiID="ws_private","guest@opensilex.org","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  connectToPHISWS(apiID="ws_private","guest@opensilex.org","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##'  vars <- getVariables2(uri = "http://www.opensilex.org/demo/id/variables/v001")
 ##'  vars <- getVariables2(label = "Leaf-Area_LAI-Computation_LAI")
 ##'  vars$data
@@ -155,10 +157,9 @@ getVariables2 <- function(
                           method = "",
                           unit = "",
                           pageSize = NULL,
-                          page = NULL,
-                          verbose = FALSE){
-  if (is.null(page)) page <- get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE",configWS)
+                          page = NULL){
+  
+ 
   
   attributes <- list(pageSize=pageSize,
                      page = page)
@@ -168,7 +169,7 @@ getVariables2 <- function(
   if (method!="") attributes <- c(attributes, method = method)
   if (unit!="")   attributes <- c(attributes, unit = unit)
   
-  variableResponse <- getResponseFromWS(resource = paste0(get("VARIABLES", configWS)),
+  variableResponse <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("VARIABLES", configWS)),
                                          attributes = attributes, wsVersion = 2)
   
   # Convert the JSON data.frame in real R data.frame
@@ -202,13 +203,13 @@ getVariables2 <- function(
 ##' \item{and uri, label and comment}{for each variable}
 ##' }
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @importFrom dplyr select starts_with
 ##' @importFrom tidyr gather
 ##' @examples
 ##' \donttest{
-##'  connectToOpenSILEXWS(apiID="ws_private","guest@opensilex.org/","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##'  connectToPHISWS(apiID="ws_private","guest@opensilex.org/","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##'  varExp<- getVariablesByExperiment(uri = "http://www.opensilex.org/demo/DIA2017-1")
 ##'  varExp$data
 ##' }
@@ -216,10 +217,10 @@ getVariables2 <- function(
 getVariablesByExperiment <- function(
                           uri = "",
                           pageSize = NULL,
-                          page = NULL,
-                          verbose = FALSE){
-  if (is.null(page)) page <- get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE",configWS)
+                          page = NULL
+                          ){
+  
+ 
   
   attributes <- list(pageSize=pageSize,
                      page = page)

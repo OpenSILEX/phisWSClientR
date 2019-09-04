@@ -21,12 +21,12 @@
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##'  connectToOpenSILEXWS(apiID="ws_public", 
+##'  connectToPHISWS(apiID="ws_public", 
 ##'  username = "guestphis@supagro.inra.fr",
 ##'  password = "guestphis")
 ##'  getEnvironment(page=3,
@@ -45,8 +45,6 @@
 ##' @export
 getEnvironment <- function(variableCategory ="",startDate = "",endDate = "" ,variables = "",facility = "",
                            experimentURI ="", page = NULL, pageSize = NULL){
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
   
   attributes = list(page = page, pageSize=pageSize)
   if (startDate != ""){
@@ -67,7 +65,7 @@ getEnvironment <- function(variableCategory ="",startDate = "",endDate = "" ,var
   if (variables != ""){
     attributes <- c(attributes, variables = utils::URLencode(variables))
   }
-  environmentResponse <- getResponseFromWS(resource = get("ENVIRONMENT",configWS),
+  environmentResponse <- opensilexWSClientR::getResponseFromWS(resource = get("ENVIRONMENT",configWS),
                                            attributes = attributes, wsVersion = 1)
   return(environmentResponse)
 }
@@ -87,15 +85,18 @@ getEnvironment <- function(variableCategory ="",startDate = "",endDate = "" ,var
 ##' @param dateSortAsc logical, sort date in ascending order if TRUE
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToOpenSILEXWS(apiID="ws_private",
+##'  connectToPHISWS(apiID="ws_private",
 ##'   url = "http://www.opensilex.org/openSilexAPI/rest/",
 ##'   "guestphis@opensilex.org","guest")
 ##'  # Retrieve the number of available data
-##'  mycount <- getEnvironmentData(variable = "http://www.opensilex.org/demo/id/variables/v004")$totalCount
+##'  environmentData <- getEnvironmentData(
+##'                       variable = "http://www.opensilex.org/demo/id/variables/v004"
+##'                     )
+##'  mycount <- environmentData$totalCount
 ##'  # Retrieve the environmental data
 ##'  myenvir <- getEnvironmentData(
 ##'               pageSize=mycount,
@@ -117,17 +118,14 @@ getEnvironmentData <- function(
                                page = NULL,
                                pageSize = NULL,
                                dateSortAsc = TRUE){
-  if (is.null(page)) page <- get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE",configWS)
   
-  attributes <- list(pageSize=pageSize,
-                     page = page)
+  attributes <- list(pageSize=pageSize, page = page)
   if (variable!="")  attributes <- c(attributes, variable = variable)
   if (startDate!="") attributes <- c(attributes, startDate = startDate)
   if (endDate!="")   attributes <- c(attributes, endDate = endDate)
   if (sensor!="")    attributes <- c(attributes, sensor = sensor)
   
-  variableResponse <- getResponseFromWS(resource = paste0(get("ENVIRONMENTS", configWS)),
+  variableResponse <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("ENVIRONMENTS", configWS)),
                                          attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

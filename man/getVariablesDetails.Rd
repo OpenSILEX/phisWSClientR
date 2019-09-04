@@ -5,7 +5,7 @@
 \title{getVariablesDetails}
 \usage{
 getVariablesDetails(uri = "", label = "", trait = "", method = "",
-  unit = "", pageSize = NULL, page = NULL, verbose = FALSE)
+  unit = "", pageSize = NULL, page = NULL)
 }
 \arguments{
 \item{uri}{character, search by the uri of a variable (optional)}
@@ -21,8 +21,6 @@ getVariablesDetails(uri = "", label = "", trait = "", method = "",
 \item{pageSize}{character, number of elements by page (pagination Plant Breeding API)}
 
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
-
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
 }
 \value{
 a WSResponse object. In the 'data' part of the returned object, a data.frame is
@@ -38,12 +36,12 @@ a WSResponse object. In the 'data' part of the returned object, a data.frame is
 Retrieves the variable descriptions, trait, method and unit covered by the variable
 }
 \details{
-You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToOpenSILEXWS(apiID="ws_private","guest@opensilex.fr","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+ connectToPHISWS(apiID="ws_private","guest@opensilex.fr","guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
  vars <- getVariablesDetails(uri = "http://www.opensilex.org/demo/id/variables/v001")
  vars <- getVariablesDetails(label = "Leaf-Area_LAI-Computation_LAI")
  vars$data

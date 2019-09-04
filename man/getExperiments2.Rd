@@ -6,7 +6,7 @@
 \usage{
 getExperiments2(uri = "", startDate = "", endDate = "", field = "",
   campaign = "", place = "", alias = "", keywords = "",
-  page = NULL, pageSize = NULL, verbose = FALSE)
+  page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{uri}{character, search by the uri of an experiment (optional)}
@@ -28,8 +28,6 @@ getExperiments2(uri = "", startDate = "", endDate = "", field = "",
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
-
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
 }
 \value{
 WSResponse object
@@ -38,11 +36,11 @@ WSResponse object
 retrieves the experiments based on search criterion
 }
 \details{
-You have to execute the \code{\link{connectToOpenSILEXWS}}
+You have to execute the \code{\link{connectToPHISWS}}
 }
 \examples{
 \donttest{
-connectToOpenSILEXWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
 myexp <- getExperiments2(
                    uri = "http://www.opensilex.org/demo/DIA2017-1")
 myexp$data

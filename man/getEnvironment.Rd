@@ -32,14 +32,14 @@ WSResponse object
 Retrieves environmental mesures of an experiment or by dates
 }
 \details{
-You have to execute the \code{\link{connectToOpenSILEXWS}} function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- connectToOpenSILEXWS(apiID="ws_public",
-  username = "guestphis@supagro.inra.fr",
-   password = "guestphis")
+ connectToPHISWS(apiID="ws_public", 
+ username = "guestphis@supagro.inra.fr",
+ password = "guestphis")
  getEnvironment(page=3,
                 pageSize=100,
                 startDate="2017-06-29",
