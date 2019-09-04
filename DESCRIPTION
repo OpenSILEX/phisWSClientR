@@ -26,7 +26,8 @@ Imports:
     urltools,
     openssl,
     logging,
-    later
+    later,
+    opensilexWSClientR
 Suggests:
     roxygen2,
     knitr,
@@ -35,3 +36,5 @@ Author: Isabelle Sanchez [aut, cre]
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 Encoding: UTF-8
+# Git
+Remotes: git::https://github.com/niio972/opensilex-ws-client-r.git
