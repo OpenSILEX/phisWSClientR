@@ -7,11 +7,11 @@
 getProjects(projectName = "", page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{projectName}{Name of the project to search}
+\item{projectName}{character, Name of the project to search}
 
-\item{page}{displayed page (pagination Plant Breeding API)}
+\item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
-\item{pageSize}{number of elements by page (pagination Plant Breeding API)}
+\item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 }
 \value{
 WSResponse object
@@ -25,13 +25,15 @@ service
 }
 \examples{
 \donttest{
- connectToPHISWS(apiID="ws_public")
+ connectToPHISWS(apiID="ws_1_public", 
+                 username = "guestphis@supagro.inra.fr",
+                 password = "guestphis")
  getProjects()
- getProjects(page = 1)
- getProjects(page = 3, pageSize = 100)
- getProjects(projectName = "PHIS_Publi")
 }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }

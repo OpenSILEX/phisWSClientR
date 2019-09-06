@@ -36,18 +36,23 @@ WSResponse object
 retrieves the vectors based on search criterion
 }
 \details{
-You have to execute the connectToPHISWS() function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
-connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-vectors <- getVectors(aToken$data, uri = "http://www.opensilex.org/demo/2018/v1801")
-vectors <- getVectors(aToken$data, serialNumber = "01BD1DD71500001")
+connectToPHISWS(apiID="ws_private",
+               url = "http://www.opensilex.org/openSilexAPI/rest/",
+               username="guest@opensilex.org",
+               password="guest")
+vectors <- getVectors(uri = "http://www.opensilex.org/demo/2018/v1801")
+vectors <- getVectors(serialNumber = "01BD1DD71500001")
 vectors$data
 }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }

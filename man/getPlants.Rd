@@ -8,15 +8,15 @@ getPlants(plantAlias = "", experimentURI = "", germplasmURI = "",
   page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{plantAlias}{an alias of plant}
+\item{plantAlias}{character, an alias of plant}
 
-\item{experimentURI}{URI of the experiment}
+\item{experimentURI}{character, URI of the experiment}
 
-\item{germplasmURI}{filter by genotype}
+\item{germplasmURI}{character, filter by genotype}
 
-\item{page}{displayed page (pagination Plant Breeding API)}
+\item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
-\item{pageSize}{number of elements by page (pagination Plant Breeding API)}
+\item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 }
 \value{
 WSResponse object
@@ -30,11 +30,15 @@ service
 }
 \examples{
 \donttest{
-connectToPHISWS(apiID="ws_public")
- aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
- plantes<-getPlants(aToken,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
+ connectToPHISWS(apiID="ws_1_public", 
+                 username = "guestphis@supagro.inra.fr",
+                 password = "guestphis")
+ plantes<-getPlants(experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23")
 }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }

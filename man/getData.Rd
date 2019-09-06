@@ -39,19 +39,23 @@ service
 }
 \examples{
 \donttest{
- connectToPHISWS(apiID="ws_private",
-  url = "http:/www.opensilex.org/openSilexAPI/rest/",
- "guestphis@supagro.inra.fr","guestphis")
- vars = getVariables2()$data$uri
- totalCount <- getData( variable = vars[4])$totalCount
- data <- getData(
-    variable = vars[4], pageSize = totalCount)
- data <- getData(
-    variable = vars[5],
-   startDate = "2017-05-01", endDate = "2017-06-01", pageSize = totalCount)
- data$data
+connectToPHISWS(apiID="ws_private",
+               url = "http://www.opensilex.org/openSilexAPI/rest/",
+               username="guest@opensilex.org",
+               password="guest")
+ vars<-getVariables2()$data$uri
+ totalCount <- getData(variable = vars[4])$totalCount
+ data <- getData(variable = vars[4],pageSize = totalCount)
+ data <- getData(variable = vars[5],
+                 startDate = "2017-05-01",
+                 endDate = "2017-06-01",
+                 pageSize = totalCount)
+ str(data$data)
 }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }

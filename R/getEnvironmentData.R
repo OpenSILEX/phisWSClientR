@@ -5,7 +5,7 @@
 #            * getEnvironmentData for WS2
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/01/2019
-# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 06/09/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 
@@ -24,21 +24,23 @@
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @examples
 ##' \donttest{
-##'  connectToPHISWS(apiID="ws_public", 
-##'  username = "guestphis@supagro.inra.fr",
-##'  password = "guestphis")
+##'  connectToPHISWS(apiID="ws_1_public", 
+##'                  username = "guestphis@supagro.inra.fr",
+##'                  password = "guestphis")
 ##'  getEnvironment(page=3,
 ##'                 pageSize=100,
 ##'                 startDate="2017-06-29",
 ##'                 endDate = "2017-06-16")
-##'  test<-getEnvironment(experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30")
+##'  test<-getEnvironment(experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23")
 ##'  test$data
-##'  getEnvironment( experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30",
+##'  getEnvironment( experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23",
 ##'                  startDate="2017-06-16",
 ##'                  endDate="2017-06-29")
-##'  getEnvironment(experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30",
+##'  getEnvironment(experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23",
 ##'     facility="http://www.phenome-fppn.fr/m3p/es2",
 ##'     variables="wind speed_weather station_meter per second")
 ##' }
@@ -85,27 +87,30 @@ getEnvironment <- function(variableCategory ="",startDate = "",endDate = "" ,var
 ##' @param dateSortAsc logical, sort date in ascending order if TRUE
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToPHISWS(apiID="ws_private",
-##'   url = "http://www.opensilex.org/openSilexAPI/rest/",
-##'   "guestphis@opensilex.org","guest")
+##' connectToPHISWS(apiID="ws_private",
+##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'                username="guest@opensilex.org",
+##'                password="guest")
 ##'  # Retrieve the number of available data
-##'  environmentData <- getEnvironmentData(
+##'  environmentData <-getEnvironmentData(
 ##'                       variable = "http://www.opensilex.org/demo/id/variables/v004"
-##'                     )
-##'  mycount <- environmentData$totalCount
+##'                    )
+##'  mycount <-environmentData$totalCount
 ##'  # Retrieve the environmental data
-##'  myenvir <- getEnvironmentData(
+##'  myenvir <-getEnvironmentData(
 ##'               pageSize=mycount,
 ##'               variable = "http://www.opensilex.org/demo/id/variables/v004")
-##'  myenvir <- getEnvironmentData(
-##'                pageSize=mycount,
-##'                variable = "http://www.opensilex.org/demo/id/variables/v004", 
-##'                startDate="2017-06-15T10:51:00+0200",
-##'                endDate="2017-06-17T10:51:00+0200")
+##'  myenvir <-getEnvironmentData(
+##'               pageSize=mycount,
+##'               variable = "http://www.opensilex.org/demo/id/variables/v004", 
+##'               startDate="2017-06-15T10:51:00+0200",
+##'               endDate="2017-06-17T10:51:00+0200")
 ##'  str(myenvir$data)
 ##'  head(myenvir$data)
 ##' }

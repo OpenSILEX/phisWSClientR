@@ -9,23 +9,23 @@ getPlantEnvironment(plantURI = "", variableCategory = "",
   experimentURI = "", page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{plantURI}{plant URI}
+\item{plantURI}{character, plant URI}
 
 \item{variableCategory}{character, a category of variables}
 
-\item{startDate}{data > startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )}
+\item{startDate}{character, data > startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )}
 
-\item{endDate}{data < startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )}
+\item{endDate}{character, data < startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )}
 
-\item{variables}{list of variables for the request (Ex: "wind speed_weather station_meter per second")}
+\item{variables}{character, list of variables for the request (Ex: "wind speed_weather station_meter per second")}
 
-\item{facility}{place of the experiment (Ex: "http://www.phenome-fppn.fr/m3p/ec3")}
+\item{facility}{character, place of the experiment (Ex: "http://www.phenome-fppn.fr/m3p/ec3")}
 
-\item{experimentURI}{URI of the experiment}
+\item{experimentURI}{character, URI of the experiment}
 
-\item{page}{displayed page (pagination Plant Breeding API)}
+\item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
-\item{pageSize}{number of elements by page (pagination Plant Breeding API)}
+\item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 }
 \value{
 WSResponse object
@@ -38,14 +38,21 @@ You have to execute the \code{\link{connectToPHISWS}} function first to have acc
 service
 }
 \examples{
+\donttest{
 # not run (is an internal function!!!)
-# aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
-# myplant<-getPlantEnvironment(aToken,
-#       plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
-#       experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
-# myplant$data
+connectToPHISWS(apiID="ws_1_public", 
+                 username = "guestphis@supagro.inra.fr",
+                 password = "guestphis")
+myplant<-getPlantEnvironment(
+       plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
+       experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2017-11-23")
+myplant$data
+}
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }
 \keyword{internal}

@@ -4,7 +4,7 @@
 #            * getProvenance
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/06/2019
-# Update: 
+# Update: 06/09/2019 (I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getProvenance
@@ -18,38 +18,39 @@
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##' connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' connectToPHISWS(apiID="ws_private",
+##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'                username="guest@opensilex.org",
+##'                password="guest")
 ##' provenances <- getProvenances(
-##'  uri = "http://www.opensilex.org/demo/2018/pv181515071552",
-##'   pageSize=10)
+##'    uri = "http://www.opensilex.org/demo/2018/pv181515071552",
+##'    pageSize=10)
 ##' provenances <- getProvenances(
-##'  label ="PROV2019-LEAF",
-##'   pageSize=10)
+##'                   label ="PROV2019-LEAF",
+##'                   pageSize=10)
 ##' provenances$data
 ##' }
 ##' @export
-getProvenances <- function(
-                      uri = "",
+getProvenances <- function(uri = "",
                       label = "",
                       comment = "",
                       jsonValueFilter = "",
                       page = NULL,
                       pageSize = NULL){
-  
-  
-  
-  attributes <- list(pageSize = pageSize,
-                     page = page)
+
+  attributes <- list(pageSize = pageSize,page = page)
   if (uri!="")             attributes <- c(attributes, uri = uri)
   if (label!="")           attributes <- c(attributes, label = label)
   if (comment!="")         attributes <- c(attributes, comment = comment)
   if (jsonValueFilter!="") attributes <- c(attributes, jsonValueFilter = jsonValueFilter)
   
-  variableResponse <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("PROVENANCES", configWS)),
-                                         attributes = attributes, wsVersion = 2)
-  return(variableResponse)
+  Response <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("PROVENANCES", configWS)),
+                                                    attributes = attributes, wsVersion = 2)
+  return(Response)
 }

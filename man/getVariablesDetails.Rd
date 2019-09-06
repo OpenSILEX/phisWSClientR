@@ -18,7 +18,7 @@ getVariablesDetails(uri = "", label = "", trait = "", method = "",
 
 \item{unit}{character, search variables by unit uri (optional)}
 
-\item{pageSize}{character, number of elements by page (pagination Plant Breeding API)}
+\item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 }
@@ -41,12 +41,10 @@ service
 }
 \examples{
 \donttest{
- connectToPHISWS(
-  apiID="ws_private",
-  "guest@opensilex.org/",
-  "guest",
-  url = "http://www.opensilex.org/openSilexAPI/rest/"
-  )
+connectToPHISWS(apiID="ws_private",
+               url = "http://www.opensilex.org/openSilexAPI/rest/",
+               username="guest@opensilex.org",
+               password="guest")
  vars <- getVariablesDetails(uri = "http://www.opensilex.org/demo/id/variables/v001")
  vars <- getVariablesDetails(label = "Leaf-Area_LAI-Computation_LAI")
  vars$data
@@ -54,4 +52,7 @@ service
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }

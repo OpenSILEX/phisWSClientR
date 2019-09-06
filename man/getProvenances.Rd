@@ -32,16 +32,22 @@ service
 }
 \examples{
 \donttest{
-connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+connectToPHISWS(apiID="ws_private",
+               url = "http://www.opensilex.org/openSilexAPI/rest/",
+               username="guest@opensilex.org",
+               password="guest")
 provenances <- getProvenances(
- uri = "http://www.opensilex.org/demo/2018/pv181515071552",
-  pageSize=10)
+   uri = "http://www.opensilex.org/demo/2018/pv181515071552",
+   pageSize=10)
 provenances <- getProvenances(
- label ="PROV2019-LEAF",
-  pageSize=10)
+                  label ="PROV2019-LEAF",
+                  pageSize=10)
 provenances$data
 }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }

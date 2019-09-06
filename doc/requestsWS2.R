@@ -46,10 +46,10 @@
 # Where is the ontology access  https://github.com/OpenSILEX/ontology-vocabularies/blob/master/oeev.owl
   getEvents( type = "http://www.opensilex.org/vocabulary/oeev#Fertilization", pageSize=10)
 
-## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
-# Where to find the "type" URL ?
-# Where is the ontology access https://github.com/OpenSILEX/ontology-vocabularies/blob/master/oeev.owl
-  getAnnotations( comment = "Ustilago maydis infection" , pageSize=10)
+## ----echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE-------------------
+#  # Where to find the "type" URL ?
+#  # Where is the ontology access https://github.com/OpenSILEX/ontology-vocabularies/blob/master/oeev.owl
+#    getAnnotations( comment = "Ustilago maydis infection" , pageSize=10)
 
 ## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
   getEnvironmentData( variable = "http://www.opensilex.org/demo/id/variables/v010", pageSize=50)

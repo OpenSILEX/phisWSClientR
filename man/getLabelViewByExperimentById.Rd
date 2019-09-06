@@ -31,12 +31,20 @@ You have to execute the \code{\link{connectToPHISWS}} function first to have acc
 service
 }
 \examples{
+\donttest{
 # Not run (is an internal function)
-# publicLabelView <- getLabelViewByExperimentById(
-#      experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
-# publicLabelView$data
+ connectToPHISWS(apiID="ws_1_public", 
+                 username = "guestphis@supagro.inra.fr",
+                 password = "guestphis")
+publicLabelView <- getLabelViewByExperimentById(
+          experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23")
+publicLabelView$data
+}
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }
 \keyword{internal}

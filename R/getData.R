@@ -4,7 +4,7 @@
 #            * getData
 # Authors: Hollebecq Jean-Eudes
 # Creation: 12/03/2019
-# Update: 20/06/2019
+# Update: 06/09/2019 (I.Sanchez)
 
 #-------------------------------------------------------------------------------
 
@@ -22,41 +22,43 @@
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToPHISWS(apiID="ws_private",
-##'   url = "http:/www.opensilex.org/openSilexAPI/rest/",
-##'  "guestphis@supagro.inra.fr","guestphis")
-##'  vars = getVariables2()$data$uri
-##'  totalCount <- getData( variable = vars[4])$totalCount
-##'  data <- getData(
-##'     variable = vars[4], pageSize = totalCount)
-##'  data <- getData(
-##'     variable = vars[5],
-##'    startDate = "2017-05-01", endDate = "2017-06-01", pageSize = totalCount)
-##'  data$data
+##' connectToPHISWS(apiID="ws_private",
+##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'                username="guest@opensilex.org",
+##'                password="guest")
+##'  vars<-getVariables2()$data$uri
+##'  totalCount <- getData(variable = vars[4])$totalCount
+##'  data <- getData(variable = vars[4],pageSize = totalCount)
+##'  data <- getData(variable = vars[5],
+##'                  startDate = "2017-05-01",
+##'                  endDate = "2017-06-01",
+##'                  pageSize = totalCount)
+##'  str(data$data)
 ##' }
 ##' @export
-getData <- function(
-                    variableUri = "",
+getData <- function(variableUri = "",
                     objectUri = "",
-                   objectLabel = "",
-                   provenanceUri = "",
-                   provenanceLabel  = "",
-                   startDate = "",
-                   endDate = "",
-                   page = NULL,
-                   pageSize = NULL){
+                    objectLabel = "",
+                    provenanceUri = "",
+                    provenanceLabel  = "",
+                    startDate = "",
+                    endDate = "",
+                    page = NULL,
+                    pageSize = NULL){
   
   attributes <- list(pageSize=pageSize,  page = page)
-  if (variableUri!="")    attributes <- c(attributes, variableUri = variableUri)
-  if (objectUri!="")      attributes <- c(attributes, objectUri = objectUri)
-  if (objectLabel!="") attributes <- c(attributes, objectLabel = objectLabel)
-  if (startDate!="")   attributes <- c(attributes, startDate = startDate)
-  if (endDate!="")     attributes <- c(attributes, endDate = endDate)
-  if (provenanceUri!="")  attributes <- c(attributes, provenanceUri = provenanceUri)
+  if (variableUri!="")     attributes <- c(attributes, variableUri = variableUri)
+  if (objectUri!="")       attributes <- c(attributes, objectUri = objectUri)
+  if (objectLabel!="")     attributes <- c(attributes, objectLabel = objectLabel)
+  if (startDate!="")       attributes <- c(attributes, startDate = startDate)
+  if (endDate!="")         attributes <- c(attributes, endDate = endDate)
+  if (provenanceUri!="")   attributes <- c(attributes, provenanceUri = provenanceUri)
   if (provenanceLabel!="") attributes <- c(attributes, provenanceLabel = provenanceLabel)
   
   variableResponse <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("DATASEARCH", configWS)),

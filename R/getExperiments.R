@@ -7,7 +7,7 @@
 # Do we have to join getExperiments and getExperiments2????
 # Authors: A. Charleroy, I.Sanchez, J.E.Hollebecq, E.Chourrout
 # Creation: 24/01/2019
-# Update: 04/04/2019 (by I.Sanchez)
+# Update: 06/09/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getExperimentById
@@ -19,14 +19,18 @@
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @examples
 ##' \donttest{
-##' connectToPHISWS(apiID="ws_public")
-##'  publicExp<-getExperimentById(
+##'  connectToPHISWS(apiID="ws_1_public", 
+##'                  username = "guestphis@supagro.inra.fr",
+##'                  password = "guestphis")
+##'  Exp1<-getExperimentById(
 ##'         experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
-##'  publicExp$data
+##'  Exp1$data
 ##' }
 ##' @keywords internal
 getExperimentById <- function( experimentURI ="", page = NULL,pageSize = NULL){
@@ -55,13 +59,14 @@ getExperimentById <- function( experimentURI ="", page = NULL,pageSize = NULL){
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @examples
 ##' \donttest{
-##' connectToPHISWS(apiID="ws_public")
-##'  getExperiments(page=3,pageSize=100,startDate="2012-02-21",endDate="2012-03-21")
-##'  getExperiments(projectName = "PHIS_Publi")
-##'  getExperiments(sortOrder = "ASC")
-##'  getExperiments(season = 2012 )
+##'  connectToPHISWS(apiID="ws_1_public", 
+##'                  username = "guestphis@supagro.inra.fr",
+##'                  password = "guestphis")
+##'  getExperiments(page=3)
 ##' }
 ##' @export
 getExperiments <- function( projectName ="", season = "", sortOrder = "DESC" ,
@@ -99,12 +104,18 @@ getExperiments <- function( projectName ="", season = "", sortOrder = "DESC" ,
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{connectToPHISWS}}
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
+##' service
 ##' @examples
 ##' \donttest{
-##' connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' connectToPHISWS(apiID="ws_private",
+##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'                username="guest@opensilex.org",
+##'                password="guest")
 ##' myexp <- getExperiments2(
-##'                    uri = "http://www.opensilex.org/demo/DIA2017-1")
+##'               uri = "http://www.opensilex.org/demo/DIA2017-1")
 ##' myexp$data
 ##' }
 ##' @export

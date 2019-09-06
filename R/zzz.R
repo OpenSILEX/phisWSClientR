@@ -1,9 +1,10 @@
 #-------------------------------------------------------------------------------
 # Program: zzz.R
-# Objective:
+# Objective: defines a public configuration for the web service access in an 
+#             environment
 # Author: I. Sanchez
 # Creation: 19/03/2018
-# Update: 25/01/2019
+# Update: 06/09/2019
 #-------------------------------------------------------------------------------
 
 ## title defines a public configuration for the web service access

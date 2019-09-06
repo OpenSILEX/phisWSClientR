@@ -1,38 +1,39 @@
 #-------------------------------------------------------------------------------
-# Program: wsCalls.R
+# Program: ws1Calls.R
 # Objective: functions called by the user on the web service Phenomeapi
 # Author: A. Charleroy
 # Creation: 12/08/2016
-# Update: 29/10/2018 (by I.Sanchez) - 30/10/2016 (by  A. Charleroy)
+# Update: 06/09/2019 (by I.Sanchez) - 30/10/2016 (by  A. Charleroy)
 #-------------------------------------------------------------------------------
 
 ##' @title getProjects retrieves the list of projects from the web service
 ##'
 ##' @description Retrieves the list of projects in the WS
-##' @param projectName Name of the project to search
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
-
+##' @param projectName character, Name of the project to search
+##' @param page numeric, displayed page (pagination Plant Breeding API)
+##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToPHISWS(apiID="ws_public")
+##'  connectToPHISWS(apiID="ws_1_public", 
+##'                  username = "guestphis@supagro.inra.fr",
+##'                  password = "guestphis")
 ##'  getProjects()
-##'  getProjects(page = 1)
-##'  getProjects(page = 3, pageSize = 100)
-##'  getProjects(projectName = "PHIS_Publi")
 ##' }
 ##' @export
-getProjects<-function( projectName = "",page=NULL,pageSize=NULL){
+getProjects<-function(projectName= "",page=NULL,pageSize=NULL){
   
   attributes = list(page = page, pageSize = pageSize)
   if (projectName != ""){
     attributes <- c(attributes, projectName = projectName)
   }
-  projectResponse <- opensilexWSClientR::getResponseFromWS(resource = get("PROJECTS",configWS),attributes=attributes, wsVersion = 1)
+  projectResponse <- opensilexWSClientR::getResponseFromWS(resource = get("PROJECTS",configWS),
+                                                           attributes=attributes, wsVersion = 1)
   return(projectResponse)
 }
 
@@ -40,26 +41,27 @@ getProjects<-function( projectName = "",page=NULL,pageSize=NULL){
 ##' @title retrieves the context of plant linked to an experiment from the web service
 ##'
 ##' @description Retrieves context of plant linked to an experiment
-##' @param plantAlias an alias of plant
-##' @param experimentURI URI of the experiment
-##' @param germplasmURI filter by genotype
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
-
+##' @param plantAlias character, an alias of plant
+##' @param experimentURI character, URI of the experiment
+##' @param germplasmURI character, filter by genotype
+##' @param page numeric, displayed page (pagination Plant Breeding API)
+##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##' connectToPHISWS(apiID="ws_public")
-##'  aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
-##'  plantes<-getPlants(aToken,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
+##'  connectToPHISWS(apiID="ws_1_public", 
+##'                  username = "guestphis@supagro.inra.fr",
+##'                  password = "guestphis")
+##'  plantes<-getPlants(experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23")
 ##' }
 ##' @export
-getPlants <- function( plantAlias ="", experimentURI = "", germplasmURI = "" ,
+getPlants <- function(plantAlias ="", experimentURI = "", germplasmURI = "" ,
                       page = NULL,pageSize = NULL){
-  
   
   attributes = list(page = page, pageSize = pageSize)
 
@@ -72,33 +74,38 @@ getPlants <- function( plantAlias ="", experimentURI = "", germplasmURI = "" ,
   if (germplasmURI != ""){
     attributes <- c(attributes, germplasmURI = germplasmURI)
   }
-  plantsResponse<-opensilexWSClientR::getResponseFromWS(resource = get("PLANTS",configWS), attributes = attributes, wsVersion=1)
+  plantsResponse<-opensilexWSClientR::getResponseFromWS(resource = get("PLANTS",configWS), 
+                                                        attributes = attributes, wsVersion=1)
   return(plantsResponse)
 }
 
 ##' @title getPlantsContextByID
 ##'
 ##' @description Retrieves the contect of a plant
-##' @param token a token
 ##' @param plantURI character, a URI identifier of a plant
-##' @param experimentURI URI of the experiment
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
-
+##' @param experimentURI character, URI of the experiment
+##' @param page numeric, displayed page (pagination Plant Breeding API)
+##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @examples
+##' \donttest{
 ##' # not run (is an internal function!!!)
-##' # aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
-##' # test<-getPlantsContextByID(aToken,plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
-##' #       ,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
-##' # test$data
+##' connectToPHISWS(apiID="ws_1_public", 
+##'                  username = "guestphis@supagro.inra.fr",
+##'                  password = "guestphis")
+##' test<-getPlantsContextByID(
+##'            plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
+##'           experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23")
+##' test$data
+##' }
 ##' @keywords internal
-getPlantsContextByID<-function( plantURI ="",experimentURI="",page = NULL,
-                                 pageSize = NULL){
-  
+getPlantsContextByID<-function(plantURI ="",experimentURI="",page = NULL,
+                               pageSize = NULL){
   
   attributes = list(page = page, pageSize = pageSize)
   if (experimentURI != ""){
@@ -120,32 +127,36 @@ getPlantsContextByID<-function( plantURI ="",experimentURI="",page = NULL,
 ##' @title retrieves the environmental mesures of a plant from the web service
 ##'
 ##' @description Retrieves environmental mesures of a plant or by dates
-##' @param plantURI plant URI
+##' @param plantURI character, plant URI
 ##' @param variableCategory character, a category of variables
-##' @param startDate data > startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )
-##' @param endDate data < startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )
-##' @param variables list of variables for the request (Ex: "wind speed_weather station_meter per second")
-##' @param facility place of the experiment (Ex: "http://www.phenome-fppn.fr/m3p/ec3")
-##' @param experimentURI URI of the experiment
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
-
+##' @param startDate character, data > startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )
+##' @param endDate character, data < startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )
+##' @param variables character, list of variables for the request (Ex: "wind speed_weather station_meter per second")
+##' @param facility character, place of the experiment (Ex: "http://www.phenome-fppn.fr/m3p/ec3")
+##' @param experimentURI character, URI of the experiment
+##' @param page numeric, displayed page (pagination Plant Breeding API)
+##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @examples
+##' \donttest{
 ##' # not run (is an internal function!!!)
-##' # aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
-##' # myplant<-getPlantEnvironment(aToken,
-##' #       plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
-##' #       experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
-##' # myplant$data
+##' connectToPHISWS(apiID="ws_1_public", 
+##'                  username = "guestphis@supagro.inra.fr",
+##'                  password = "guestphis")
+##' myplant<-getPlantEnvironment(
+##'        plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
+##'        experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2017-11-23")
+##' myplant$data
+##' }
 ##' @keywords internal
 getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = "",endDate = "",
                                 variables = "",facility = "", experimentURI ="",
                                 page = NULL,pageSize = NULL){
-  
   
   attributes = list(page = page, pageSize = pageSize)
   if (plantURI  == ""){
@@ -191,17 +202,19 @@ getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = ""
 ##' @param date character, data for one day (format: YYYY-MM-DD)
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
-
 ##' @return WSResponse object
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @examples
 ##' \donttest{
-##' connectToPHISWS(apiID="ws_public")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  myImages<-getImagesAnalysis(token = aToken$data,
-##'            experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
+##'  connectToPHISWS(apiID="ws_1_public", 
+##'                  username = "guestphis@supagro.inra.fr",
+##'                  password = "guestphis")
+##'  myImages<-getImagesAnalysis(
+##'            experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2017-11-23",
 ##'            variablesName = list("objAreaSum"),pageSize = 100000)
 ##'  head(myImages$data)
 ##' }
@@ -209,8 +222,6 @@ getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = ""
 getImagesAnalysis <- function(experimentURI ="", variablesName = list(),
                               labelView ="", provider = "", date = "",
                               page = NULL,pageSize = NULL){
-
-  
   
   attributes = list(page = page, pageSize = pageSize)
   if (date != ""){
@@ -241,32 +252,32 @@ getImagesAnalysis <- function(experimentURI ="", variablesName = list(),
 ##' @title retrieves the irrigation data from the web service
 ##'
 ##' @description Retrieves irrigation data
-##' @param experimentURI URI of the experiment
+##' @param experimentURI character, URI of the experiment
 ##' @param variablesName list, variable names of images analysis
 ##' @param provider character, provider of data
 ##' @param date character, data for one day (format: YYYY-MM-DD)
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
-
+##' @param page numeric, displayed page (pagination Plant Breeding API)
+##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##' connectToPHISWS(apiID="ws_public")
-##'  accesToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  mywater<-getWatering(token=accesToken$data,
-##'          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
+##'  connectToPHISWS(apiID="ws_1_public", 
+##'                  username = "guestphis@supagro.inra.fr",
+##'                  password = "guestphis")
+##'  mywater<-getWatering(
+##'          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2017-11-23",
 ##'          variablesName = list("weightBefore"),pageSize=100000)
 ##'  head(mywater$data)
 ##' }
 ##' @export
-getWatering <- function(experimentURI ="", variablesName = list(), provider = "", date = "",
-                        page = NULL,pageSize = NULL){
+getWatering <- function(experimentURI ="", variablesName = list(), provider = "", 
+                        date = "",page = NULL,pageSize = NULL){
 
-  
-  
   attributes = list(page = page, pageSize = pageSize)
   if (date != ""){
     attributes <- c(attributes, date = date)
@@ -349,19 +360,24 @@ getWatering <- function(experimentURI ="", variablesName = list(), provider = ""
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
+##' \donttest{
 ##' # Not run (is an internal function)
-##' # publicLabelView <- getLabelViewByExperimentById(
-##' #      experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
-##' # publicLabelView$data
+##'  connectToPHISWS(apiID="ws_1_public", 
+##'                  username = "guestphis@supagro.inra.fr",
+##'                  password = "guestphis")
+##' publicLabelView <- getLabelViewByExperimentById(
+##'           experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23")
+##' publicLabelView$data
+##' }
 ##' @keywords internal
-getLabelViewByExperimentById <- function(experimentURI="" ,viewType="" ,cameraAngle="",provider="",
-                                         page = NULL,pageSize = NULL){
+getLabelViewByExperimentById <- function(experimentURI="" ,viewType="" ,cameraAngle="",
+                                         provider="",page = NULL,pageSize = NULL){
 
-  
-  
   attributes = list(page = page, pageSize = pageSize)
 
   if(experimentURI  == ""){

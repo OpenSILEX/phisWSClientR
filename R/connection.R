@@ -3,7 +3,7 @@
 # Objective: functions to facilitate connection on OpenSILEX web service
 # Author: A. Charleroy
 # Creation: 04/09/2019
-# Update:
+# Update: 06/09/2019 (I.Sanchez)
 #-------------------------------------------------------------------------------
 
 
@@ -20,10 +20,12 @@
 ##' In the case of a WebService change of address or a renaming of services, please edit this list.
 ##' and execute the function.
 ##' Demonstration instances : 
-##' WS1 - connectToPHISWS(apiID="ws_1_public","guestphis@supagro.inra.fr","guestphis")
-##' WS2 - connectToPHISWS(apiID="ws_2_public","guest@opensilex.org","guest")
-
-##' WS2 - connectToPHISWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' \describe{
+##' \item{WS1}{connectToPHISWS(apiID="ws_1_public","guestphis@supagro.inra.fr","guestphis")}
+##' \item{WS2}{connectToPHISWS(apiID="ws_2_public","guest@opensilex.org","guest")}
+##' \item{WS2}{connectToPHISWS(apiID="ws_private",username="guest@opensilex.org",password="guest", 
+##' url = "http://www.opensilex.org/openSilexAPI/rest/")}
+##' }
 ##' @export
 connectToPHISWS<-function(apiID, username = NULL, password = NULL, url = NULL, reconnection = TRUE){
   

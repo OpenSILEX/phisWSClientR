@@ -6,26 +6,30 @@
 #             * getVariablesByExperiment: for WS2
 # Authors: A. Charleroy, I.Sanchez, J.E.Hollebecq, E.Chourrout
 # Creation: 24/01/2019
-# Last Update: 02/07/2019 (A. Charleroy)
+# Last Update: 02/07/2019 (A. Charleroy) & 06/09/2019 (I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getVariablesByCategory
 ##'
 ##' @description Retrieves the variable by categories (environment or setpoint...)
-##' @param category Name of the category to search
+##' @param category character, Name of the category to search
 ##' @param imageryProvider character, provider of the images
-##' @param experimentURI URI of the experiment
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
+##' @param experimentURI character, URI of the experiment
+##' @param page numeric, displayed page (pagination Plant Breeding API)
+##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToPHISWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
-##'  vars <- getVariablesByCategory(category="imagery",
+##'  connectToPHISWS(apiID="ws_public", 
+##'                  username = "guestphis@supagro.inra.fr",
+##'                  password = "guestphis")
+##'  vars<-getVariablesByCategory(category="imagery",
 ##'           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
 ##'  vars$data
 ##' }
@@ -35,8 +39,7 @@ getVariablesByCategory<-function(category ="",
                                  imageryProvider="",
                                  page=NULL,
                                  pageSize=NULL){
-  
-  
+
   attributes = list( page=page, pageSize = pageSize)
   if (category  == ""){
     stop("no category selected")
@@ -47,9 +50,9 @@ getVariablesByCategory<-function(category ="",
     if (imageryProvider != ""){
       attributes <- c(attributes, imageryProvider = imageryProvider)
     }
-    variableResponse <- opensilexWSClientR::getResponseFromWS(resource=paste0(get("VARIABLES",configWS),"/category/",category),
+    Response <- opensilexWSClientR::getResponseFromWS(resource=paste0(get("VARIABLES",configWS),"/category/",category),
                                           attributes = attributes, wsVersion = 1)
-    return(variableResponse)
+    return(Response)
   }
 }
 
@@ -63,7 +66,7 @@ getVariablesByCategory<-function(category ="",
 ##' @param method character, search by method uri (optional)
 ##' @param unit character, search variables by unit uri (optional)
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
-##' @param pageSize character, number of elements by page (pagination Plant Breeding API)
+##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return a WSResponse object. In the 'data' part of the returned object, a data.frame is
 ##'    given, containing:
 ##' \describe{
@@ -73,32 +76,29 @@ getVariablesByCategory<-function(category ="",
 ##' \item{and uri, label and comment}{for each variable}
 ##' }
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToPHISWS(
-##'   apiID="ws_private",
-##'   "guest@opensilex.org/",
-##'   "guest",
-##'   url = "http://www.opensilex.org/openSilexAPI/rest/"
-##'   )
+##' connectToPHISWS(apiID="ws_private",
+##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'                username="guest@opensilex.org",
+##'                password="guest")
 ##'  vars <- getVariablesDetails(uri = "http://www.opensilex.org/demo/id/variables/v001")
 ##'  vars <- getVariablesDetails(label = "Leaf-Area_LAI-Computation_LAI")
 ##'  vars$data
 ##' }
 ##' @export
-getVariablesDetails <- function(
-                          uri = "",
+getVariablesDetails <- function(uri = "",
                           label = "",
                           trait = "",
                           method = "",
                           unit = "",
                           pageSize = NULL,
                           page = NULL){
-  
- 
-  
+
   attributes <- list(pageSize=pageSize,
                      page = page)
   if (uri!="")    attributes <- c(attributes, uri = uri)
@@ -107,21 +107,21 @@ getVariablesDetails <- function(
   if (method!="") attributes <- c(attributes, method = method)
   if (unit!="")   attributes <- c(attributes, unit = unit)
   
-  variableResponse <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("VARIABLES_DETAILS", configWS)),
-                                         attributes = attributes, wsVersion = 2)
+  Response <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("VARIABLES_DETAILS", configWS)),
+                                                    attributes = attributes, wsVersion = 2)
   
   # Convert the JSON data.frame in real R data.frame
-  tmp<-variableResponse$data
-  variableResponse$data<-cbind.data.frame(as.data.frame(tmp$trait),
+  tmp<-Response$data
+  Response$data<-cbind.data.frame(as.data.frame(tmp$trait),
                                           as.data.frame(tmp$method),
                                           as.data.frame(tmp$unit),
                                           tmp[,4:6])
-  colnames(variableResponse$data)<-c(paste("trait",colnames(tmp$trait),sep="."),
-                                     paste("method",colnames(tmp$method),sep="."),
-                                     paste("unit",colnames(tmp$unit),sep="."),
-                                     colnames(tmp)[4:6])
+  colnames(Response$data)<-c(paste("trait",colnames(tmp$trait),sep="."),
+                             paste("method",colnames(tmp$method),sep="."),
+                             paste("unit",colnames(tmp$unit),sep="."),
+                             colnames(tmp)[4:6])
   
-  return(variableResponse)
+  return(Response)
 }
 
 
@@ -135,7 +135,7 @@ getVariablesDetails <- function(
 ##' @param method character, search by method uri (optional)
 ##' @param unit character, search variables by unit uri (optional)
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
-##' @param pageSize character, number of elements by page (pagination Plant Breeding API)
+##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return a WSResponse object. In the 'data' part of the returned object, a data.frame is
 ##'    given, containing:
 ##' \describe{
@@ -145,55 +145,51 @@ getVariablesDetails <- function(
 ##' \item{and uri, label and comment}{for each variable}
 ##' }
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToPHISWS(
-##'   apiID="ws_private",
-##'   "guest@opensilex.org/",
-##'   "guest",
-##'   url = "http://www.opensilex.org/openSilexAPI/rest/"
-##'   )
+##' connectToPHISWS(apiID="ws_private",
+##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'                username="guest@opensilex.org",
+##'                password="guest")
 ##'  vars <- getVariables2(uri = "http://www.opensilex.org/demo/id/variables/v001")
 ##'  vars <- getVariables2(label = "Leaf-Area_LAI-Computation_LAI")
 ##'  vars$data
 ##' }
 ##' @export
-getVariables2 <- function(
-                          uri = "",
+getVariables2 <- function(uri = "",
                           label = "",
                           trait = "",
                           method = "",
                           unit = "",
                           pageSize = NULL,
                           page = NULL){
-  
- 
-  
-  attributes <- list(pageSize=pageSize,
-                     page = page)
+
+  attributes <- list(pageSize=pageSize,page = page)
   if (uri!="")    attributes <- c(attributes, uri = uri)
   if (label!="")  attributes <- c(attributes, lavel = label)
   if (trait!="")  attributes <- c(attributes, trait = trait)
   if (method!="") attributes <- c(attributes, method = method)
   if (unit!="")   attributes <- c(attributes, unit = unit)
   
-  variableResponse <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("VARIABLES", configWS)),
+  Response <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("VARIABLES", configWS)),
                                          attributes = attributes, wsVersion = 2)
   
   # Convert the JSON data.frame in real R data.frame
-  tmp<-variableResponse$data
-  variableResponse$data<-cbind.data.frame(as.data.frame(tmp$trait),
-                         as.data.frame(tmp$method),
-                         as.data.frame(tmp$unit),
-                         tmp[,4:6])
-  colnames(variableResponse$data)<-c(paste("trait",colnames(tmp$trait),sep="."),
-                    paste("method",colnames(tmp$method),sep="."),
-                    paste("unit",colnames(tmp$unit),sep="."),
-                    colnames(tmp)[4:6])
+  tmp<-Response$data
+  Response$data<-cbind.data.frame(as.data.frame(tmp$trait),
+                                  as.data.frame(tmp$method),
+                                  as.data.frame(tmp$unit),
+                                  tmp[,4:6])
+  colnames(Response$data)<-c(paste("trait",colnames(tmp$trait),sep="."),
+                             paste("method",colnames(tmp$method),sep="."),
+                             paste("unit",colnames(tmp$unit),sep="."),
+                             colnames(tmp)[4:6])
   
-  return(variableResponse)
+  return(Response)
 }
 
 #----------------------------------------------------------------------------
@@ -203,7 +199,7 @@ getVariables2 <- function(
 ##'       for a given experiment URI
 ##' @param uri character, search by the uri of an experiment
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
-##' @param pageSize character, number of elements by page (pagination Plant Breeding API)
+##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return a WSResponse object. In the 'data' part of the returned object, a data.frame is
 ##'    given, containing:
 ##' \describe{
@@ -213,32 +209,25 @@ getVariables2 <- function(
 ##' \item{and uri, label and comment}{for each variable}
 ##' }
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @importFrom dplyr select starts_with
 ##' @importFrom tidyr gather
 ##' @examples
 ##' \donttest{
-##'  connectToPHISWS(
-##'   apiID="ws_private",
-##'   "guest@opensilex.org/",
-##'   "guest",
-##'   url = "http://www.opensilex.org/openSilexAPI/rest/"
-##'   )
-##'  varExp<- getVariablesByExperiment(uri = "http://www.opensilex.org/demo/DIA2017-1")
+##' connectToPHISWS(apiID="ws_private",
+##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'                username="guest@opensilex.org",
+##'                password="guest")
+##'  varExp<- getVariablesByExperiment(uri="http://www.opensilex.org/demo/DIA2017-1")
 ##'  varExp$data
 ##' }
 ##' @export
-getVariablesByExperiment <- function(
-                          uri = "",
-                          pageSize = NULL,
-                          page = NULL
-                          ){
-  
- 
-  
-  attributes <- list(pageSize=pageSize,
-                     page = page)
+getVariablesByExperiment <- function(uri = "",pageSize = NULL,page = NULL){
+
+  attributes <- list(pageSize=pageSize,page = page)
   # Retrieve the information of the given experiment URI
   tmpExp<-getExperiments2(uri = uri)
   

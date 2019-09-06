@@ -27,20 +27,22 @@
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API) (optional)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToPHISWS(apiID="ws_private",
-##'   url = "http://www.opensilex.org/openSilexAPI/rest/")
-##'  projects <- getProjects2(
-##'   uri="http://www.opensilex.org/demo/PHENOME-FPPN")
+##' connectToPHISWS(apiID="ws_private",
+##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'                username="guest@opensilex.org",
+##'                password="guest")
+##'  projects <- getProjects2(uri="http://www.opensilex.org/demo/PHENOME-FPPN")
 ##'  projects$data
 ##' }
 ##' @export
 
-getProjects2 <- function(
-                         page = NULL,
+getProjects2 <- function(page = NULL,
                          pageSize = NULL,
                          uri = "",
                          name = "",
@@ -53,8 +55,6 @@ getProjects2 <- function(
                          keywords = "",
                          parentProject = "",
                          website = ""){
-  
-  
   
   attributes <- list(page = page, pageSize = pageSize)
   
@@ -70,6 +70,7 @@ getProjects2 <- function(
   if (parentProject != "")    attributes <- c(attributes, parentProject = parentProject)
   if (website != "")          attributes <- c(attributes, website = website)
   
-  projectResponse <- opensilexWSClientR::getResponseFromWS(resource = get("PROJECTS", configWS), attributes = attributes, wsVersion = 2)
+  projectResponse <- opensilexWSClientR::getResponseFromWS(resource = get("PROJECTS", configWS), 
+                                                           attributes = attributes, wsVersion = 2)
   return(projectResponse)
 }

@@ -8,15 +8,15 @@ getVariablesByCategory(category = "", experimentURI = "",
   imageryProvider = "", page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{category}{Name of the category to search}
+\item{category}{character, Name of the category to search}
 
-\item{experimentURI}{URI of the experiment}
+\item{experimentURI}{character, URI of the experiment}
 
 \item{imageryProvider}{character, provider of the images}
 
-\item{page}{displayed page (pagination Plant Breeding API)}
+\item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
-\item{pageSize}{number of elements by page (pagination Plant Breeding API)}
+\item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 }
 \value{
 WSResponse object
@@ -30,12 +30,17 @@ service
 }
 \examples{
 \donttest{
- connectToPHISWS(apiID="ws_public","guestphis@supagro.inra.fr","guestphis")
- vars <- getVariablesByCategory(category="imagery",
+ connectToPHISWS(apiID="ws_public", 
+                 username = "guestphis@supagro.inra.fr",
+                 password = "guestphis")
+ vars<-getVariablesByCategory(category="imagery",
           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
  vars$data
 }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }

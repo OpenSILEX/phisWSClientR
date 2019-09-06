@@ -10,13 +10,11 @@ getPlantsContextByID(plantURI = "", experimentURI = "", page = NULL,
 \arguments{
 \item{plantURI}{character, a URI identifier of a plant}
 
-\item{experimentURI}{URI of the experiment}
+\item{experimentURI}{character, URI of the experiment}
 
-\item{page}{displayed page (pagination Plant Breeding API)}
+\item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
-\item{pageSize}{number of elements by page (pagination Plant Breeding API)}
-
-\item{token}{a token}
+\item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 }
 \value{
 WSResponse object
@@ -29,13 +27,21 @@ You have to execute the \code{\link{connectToPHISWS}} function first to have acc
 service
 }
 \examples{
+\donttest{
 # not run (is an internal function!!!)
-# aToken<-getToken("guestphis@supagro.inra.fr","guestphis")$data
-# test<-getPlantsContextByID(aToken,plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
-#       ,experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
-# test$data
+connectToPHISWS(apiID="ws_1_public", 
+                 username = "guestphis@supagro.inra.fr",
+                 password = "guestphis")
+test<-getPlantsContextByID(
+           plantURI="http://www.phenome-fppn.fr/m3p/arch/2011/c11005809",
+          experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23")
+test$data
+}
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }
 \keyword{internal}

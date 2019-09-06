@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="I.Sanchez &amp; A. Charleroy (INRA MISTEA)" />
@@ -343,18 +344,6 @@ summary {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
@@ -376,7 +365,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Requests on the web service 1 - PhenomeAPI</h1>
 <h4 class="author">I.Sanchez &amp; A. Charleroy (INRA MISTEA)</h4>
-<h4 class="date">septembre 04, 2019</h4>
+<h4 class="date">septembre 06, 2019</h4>
 
 </div>
 
@@ -425,7 +414,7 @@ Update   : 14/02/2019
 <p>Ask permission to request to the web service:</p>
 <pre class="r"><code>  # If you want to access to the public web service 
   connectToPHISWS(apiID=&quot;ws_1_public&quot;)</code></pre>
-<pre><code>## 2019-09-04 17:08:15 INFO::Query executed and data recovered - WS1</code></pre>
+<pre><code>## 2019-09-06 09:40:22 INFO::Query executed and data recovered - WS1</code></pre>
 <pre class="r"><code>  # If you want to access to a private web service, you have to insert the address of the WS and the port
   connectToPHISWS(apiID=&quot;ws_private&quot;,&quot;guestphis@supagro.inra.fr&quot;,&quot;guestphis&quot;,url = &quot;147.99.7.5:8080/phenomeapi/resources/&quot;)</code></pre>
 </div>
@@ -436,7 +425,7 @@ Update   : 14/02/2019
 <div id="retrieves-the-available-projects" class="section level1">
 <h1><span class="header-section-number">3</span> Retrieves the available projects</h1>
 <pre class="r"><code>  getProjects()$data</code></pre>
-<pre><code>## 2019-09-04 17:08:15 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2019-09-06 09:40:22 INFO::Query executed and data recovered</code></pre>
 <pre><code>##                                                                id
 ## 1                                                        Amaizing
 ## 2                                                           DROPS
@@ -466,10 +455,10 @@ Update   : 14/02/2019
 ## 5 maize              michel.zivy@inra.fr
 ## 6 maize  nicolas.brichet@supagro.inra.fr</code></pre>
 <pre class="r"><code>  getExperiments(projectName = &quot;PHIS_Publi&quot;)</code></pre>
-<pre><code>## 2019-09-04 17:08:15 ERROR::Bad user request
-## 2019-09-04 17:08:15 INFO::Additional Request information :
-## 2019-09-04 17:08:15 INFO::status: Info
-##  2019-09-04 17:08:15 INFO::status: No results</code></pre>
+<pre><code>## 2019-09-06 09:40:22 ERROR::Bad user request
+## 2019-09-06 09:40:22 INFO::Additional Request information :
+## 2019-09-06 09:40:22 INFO::status: Info
+##  2019-09-06 09:40:22 INFO::status: No results</code></pre>
 <pre><code>## $currentPage
 ## NULL
 ## 
@@ -496,7 +485,7 @@ Update   : 14/02/2019
 ## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
 <p>The user can define a variable with the experiment URI provided by the result of <em>getExperiments()</em> function that can be used in the call of each functions useful to retrieve the data:</p>
 <pre class="r"><code>  myExp&lt;-getExperiments(projectName = &quot;XYZ&quot;)$data$experimentURI</code></pre>
-<pre><code>## 2019-09-04 17:08:15 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2019-09-06 09:40:22 INFO::Query executed and data recovered</code></pre>
 <pre class="r"><code>  print(myExp)</code></pre>
 <pre><code>## [1] &quot;http://www.phenome-fppn.fr/m3p/ARCH2017-03-30&quot;</code></pre>
 </div>
@@ -514,7 +503,7 @@ Update   : 14/02/2019
 <div id="environment" class="section level2">
 <h2><span class="header-section-number">4.1</span> Environment</h2>
 <pre class="r"><code>  vars &lt;- getVariablesByCategory(category = &quot;environment&quot;,experimentURI = myExp)</code></pre>
-<pre><code>## 2019-09-04 17:08:16 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2019-09-06 09:40:23 INFO::Query executed and data recovered</code></pre>
 <pre class="r"><code>  # Only the first rows of the data.frame containing the 'environment' variables...
   head(vars$data)</code></pre>
 <pre><code>##   observationVariableDbId                           observationVariableId
@@ -578,7 +567,7 @@ Update   : 14/02/2019
 <h2><span class="header-section-number">4.2</span> Imagery</h2>
 <pre class="r"><code>  # first rows of 'imagery' variables
   head(getVariablesByCategory(category =&quot;imagery&quot;,experimentURI=myExp)$data)</code></pre>
-<pre><code>## 2019-09-04 17:08:16 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2019-09-06 09:40:23 INFO::Query executed and data recovered</code></pre>
 <pre><code>##                             observationVariableDbId
 ## 1                imagery.plantWidth_computed_pixels
 ## 2 imagery.silk_volume_Silk_detection_Ilastik_pixels
@@ -633,7 +622,7 @@ Update   : 14/02/2019
 <h2><span class="header-section-number">4.3</span> Watering</h2>
 <pre class="r"><code>  # first rows of 'watering' variables
   head(getVariablesByCategory(category =&quot;watering&quot;,experimentURI=myExp)$data)</code></pre>
-<pre><code>## 2019-09-04 17:08:16 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2019-09-06 09:40:23 INFO::Query executed and data recovered</code></pre>
 <pre><code>##               observationVariableDbId      observationVariableId
 ## 1 watering.weightBefore_unspecified_g weightBefore_unspecified_g
 ## 2 watering.weightBefore_unspecified_g weightBefore_unspecified_g
@@ -678,14 +667,14 @@ Update   : 14/02/2019
   tpCount&lt;-getImagesAnalysis(experimentURI=myExp,
                              variablesName = list(&quot;plantHeight&quot;),
                              labelView =&quot;side0&quot;)$totalCount</code></pre>
-<pre><code>## 2019-09-04 17:08:25 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2019-09-06 09:40:32 INFO::Query executed and data recovered</code></pre>
 <pre class="r"><code>  # we retrieve this number with $totalcount
   # In this example, we set the pageSize to 10 for speed purpose but in real example, please use tpCount
   requetManip&lt;-getImagesAnalysis( experimentURI=myExp,
                              variablesName = list(&quot;plantHeight&quot;),
                              labelView =&quot;side0&quot;,
                              pageSize=10)$data</code></pre>
-<pre><code>## 2019-09-04 17:08:33 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2019-09-06 09:40:40 INFO::Query executed and data recovered</code></pre>
 <pre class="r"><code>  head(requetManip)</code></pre>
 <pre><code>##                                             plantURI
 ## 1 http://www.phenome-fppn.fr/m3p/arch/2017/c17000326
@@ -726,7 +715,7 @@ Update   : 14/02/2019
   # In this example, we set the pageSize to 10 for speed purpose but in real example, please use tpCount
   idManip&lt;-getPlants( experimentURI=myExp,
                      pageSize=10)$data</code></pre>
-<pre><code>## 2019-09-04 17:08:33 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2019-09-06 09:40:40 INFO::Query executed and data recovered</code></pre>
 <pre class="r"><code>  head(idManip)</code></pre>
 <pre><code>##                        plateform technicalPlateau
 ## 1 http://www.phenome-fppn.fr/m3p               NA
@@ -800,7 +789,7 @@ Update   : 14/02/2019
                      experimentURI = myExp,
                      facility=myFacility,
                      variables = &quot;air humidity_weather station_percentage&quot;)$totalCount</code></pre>
-<pre><code>## 2019-09-04 17:08:34 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2019-09-06 09:40:41 INFO::Query executed and data recovered</code></pre>
 <pre class="r"><code>  #--- Air humidity
   # we retrieve this number with $totalcount
   # In this example, we set the pageSize to 10 for speed purpose but in real example, please use tpCount
@@ -808,46 +797,46 @@ Update   : 14/02/2019
                      facility=myFacility,
                      variables=&quot;air humidity_weather station_percentage&quot;,
                      pageSize=10)$data</code></pre>
-<pre><code>## 2019-09-04 17:08:34 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2019-09-06 09:40:41 INFO::Query executed and data recovered</code></pre>
 </div>
 <div id="retrieves-the-watering-data-of-an-experiment" class="section level1">
 <h1><span class="header-section-number">7</span> Retrieves the watering data of an experiment</h1>
 <p>try the following code and explore the dataset</p>
 <pre class="r"><code>  tpCount&lt;-getWatering(experimentURI=myExp,
                        variablesName = list(&quot;weightAfter&quot;))$totalCount</code></pre>
-<pre><code>## 2019-09-04 17:08:35 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2019-09-06 09:40:42 INFO::Query executed and data recovered</code></pre>
 <pre class="r"><code>  # we retrieve this number with $totalcount
   # In this example, we set the pageSize to 10 for speed purpose but in real example, please use tpCount
   requetIrrig&lt;-getWatering(experimentURI=myExp,
                            variablesName = list(&quot;weightAfter&quot;),
                            pageSize=10)$data</code></pre>
-<pre><code>## 2019-09-04 17:08:35 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2019-09-06 09:40:42 INFO::Query executed and data recovered</code></pre>
 <p>———— Developper part ———— # Get more informations on during a call # Can be useful to understand what append ruing a call</p>
 <pre class="r"><code>  setLogLevel(&quot;DEBUG&quot;)</code></pre>
 <pre><code>## [1] &quot;Log level set to DEBUG&quot;</code></pre>
 <pre class="r"><code>  tpCount&lt;-getWatering(experimentURI=myExp,
                        variablesName = list(&quot;weightAfter&quot;))$totalCount</code></pre>
-<pre><code>## 2019-09-04 17:08:35 DEBUG::Request Time :
+<pre><code>## 2019-09-06 09:40:43 DEBUG::Request Time :
 ## utilisateur     système      écoulé 
-##       0.006       0.000       0.282 
+##       0.012       0.000       0.355 
 ## Response [http://147.100.179.156:8080/phenomeapi/resources/watering?page=0&amp;pageSize=100&amp;variablesName=weightAfter&amp;experimentURI=http%3A%2F%2Fwww.phenome-fppn.fr%2Fm3p%2FARCH2017-03-30&amp;sessionId=9323b2ed5c00ffc4bcd2bbca6507bc1f]
-##   Date: 2019-09-04 15:07
+##   Date: 2019-09-06 07:36
 ##   Status: 200
 ##   Content-Type: application/json
 ##   Size: 24.8 kB
 ## 
-## 2019-09-04 17:08:35 INFO::Query executed and data recovered</code></pre>
+## 2019-09-06 09:40:43 INFO::Query executed and data recovered</code></pre>
 <pre class="r"><code>  setLogLevel(&quot;INFO&quot;)</code></pre>
 <pre><code>## [1] &quot;Log level set to INFO&quot;</code></pre>
 </div>
 <div id="session-info" class="section level1">
 <h1><span class="header-section-number">8</span> Session info</h1>
-<pre><code>## R version 3.4.4 (2018-03-15)
+<pre><code>## R version 3.6.1 (2019-07-05)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 16.04.6 LTS
 ## 
 ## Matrix products: default
-## BLAS: /usr/lib/libblas/libblas.so.3.6.0
+## BLAS:   /usr/lib/libblas/libblas.so.3.6.0
 ## LAPACK: /usr/lib/lapack/liblapack.so.3.6.0
 ## 
 ## locale:
@@ -866,21 +855,21 @@ Update   : 14/02/2019
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] Rcpp_1.0.2        later_0.8.0       pillar_1.4.2     
-##  [4] compiler_3.4.4    prettyunits_1.0.2 remotes_2.1.0    
-##  [7] tools_3.4.4       testthat_2.0.1    digest_0.6.20    
-## [10] pkgbuild_1.0.2    pkgload_1.0.2     jsonlite_1.6     
-## [13] tibble_2.1.3      memoise_1.1.0     evaluate_0.13    
+##  [4] compiler_3.6.1    prettyunits_1.0.2 remotes_2.1.0    
+##  [7] tools_3.6.1       testthat_2.1.1    digest_0.6.20    
+## [10] pkgbuild_1.0.3    pkgload_1.0.2     jsonlite_1.6     
+## [13] tibble_2.1.3      memoise_1.1.0     evaluate_0.14    
 ## [16] pkgconfig_2.0.2   rlang_0.4.0       cli_1.1.0        
-## [19] rstudioapi_0.9.0  curl_4.0          yaml_2.2.0       
-## [22] xfun_0.5          httr_1.4.1        withr_2.1.2      
-## [25] stringr_1.4.0     dplyr_0.8.3       knitr_1.22       
-## [28] desc_1.2.0        fs_1.2.6          askpass_1.1      
-## [31] devtools_2.0.1    tidyselect_0.2.5  rprojroot_1.3-2  
-## [34] glue_1.3.1        R6_2.4.0          processx_3.2.1   
-## [37] rmarkdown_1.12    sessioninfo_1.1.1 tidyr_0.8.3      
-## [40] purrr_0.3.2       callr_3.1.1       magrittr_1.5     
+## [19] rstudioapi_0.10   curl_4.0          yaml_2.2.0       
+## [22] xfun_0.8          httr_1.4.1        withr_2.1.2      
+## [25] stringr_1.4.0     dplyr_0.8.3       knitr_1.23       
+## [28] desc_1.2.0        fs_1.3.1          askpass_1.1      
+## [31] devtools_2.1.0    tidyselect_0.2.5  rprojroot_1.3-2  
+## [34] glue_1.3.1        R6_2.4.0          processx_3.4.0   
+## [37] rmarkdown_1.14    sessioninfo_1.1.1 tidyr_0.8.3      
+## [40] purrr_0.3.2       callr_3.3.0       magrittr_1.5     
 ## [43] backports_1.1.4   ps_1.3.0          htmltools_0.3.6  
-## [46] usethis_1.4.0     assertthat_0.2.1  logging_0.10-108 
+## [46] usethis_1.5.1     assertthat_0.2.1  logging_0.10-108 
 ## [49] stringi_1.4.3     openssl_1.4.1     crayon_1.3.4</code></pre>
 </div>
 <div id="references" class="section level1">
@@ -907,6 +896,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

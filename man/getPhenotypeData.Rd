@@ -21,7 +21,7 @@ getPhenotypeData(variable = "", experiment = "",
 
 \item{sensor}{character, search by the uri of a sensor (optional). you can access the list of sensors through the \code{\link{getSensors}} function.}
 
-\item{incertitude}{character, search by incertitude ???????????????????? (optional)}
+\item{incertitude}{character, search by incertitude (in progress...) (optional)}
 
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
@@ -39,7 +39,10 @@ service
 }
 \examples{
 \donttest{
- connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+connectToPHISWS(apiID="ws_private",
+               url = "http://www.opensilex.org/openSilexAPI/rest/",
+               username="guest@opensilex.org",
+               password="guest")
  phenodata <- getPhenotypeData(
    variable = "http://www.opensilex.org/demo/id/variables/v001")
  phenodata <- getPhenotypeData(
@@ -50,4 +53,7 @@ service
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }

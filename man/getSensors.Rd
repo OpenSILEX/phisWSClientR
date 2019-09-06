@@ -44,13 +44,18 @@ service
 }
 \examples{
 \donttest{
-connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-sensors <- getSensors(
- uri = "http://www.opensilex.org/demo/2018/s18001")
-sensors <- getSensors( brand = "Cimel")
+connectToPHISWS(apiID="ws_private",
+               url = "http://www.opensilex.org/openSilexAPI/rest/",
+               username="guest@opensilex.org",
+               password="guest")
+sensors <- getSensors(uri = "http://www.opensilex.org/demo/2018/s18001")
+sensors <- getSensors(brand = "Cimel")
 sensors$data
 }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }

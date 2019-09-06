@@ -4,7 +4,7 @@
 #            * getScientificObjects
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/01/2019
-# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 06/09/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getScientificObjects
@@ -18,34 +18,34 @@
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
-##'  scientificObjects <- getScientificObjects(
-##'                               uri = "http://www.opensilex.org/demo/2018/o18000076")
-##'  scientificObjects$data
+##' connectToPHISWS(apiID="ws_private",
+##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'                username="guest@opensilex.org",
+##'                password="guest")
+##'  test<-getScientificObjects(uri="http://www.opensilex.org/demo/2018/o18000076")
+##'  test$data
 ##' }
 ##' @export
-getScientificObjects <- function(
-                                 uri = "",
+getScientificObjects <- function(uri = "",
                                  experiment = "",
                                  alias = "",
                                  rdfType = "",
                                  page = NULL,
                                  pageSize = NULL){
-  
-  
-  
-  attributes <- list(pageSize=pageSize,
-                     page = page)
+
+  attributes <- list(pageSize=pageSize,page = page)
   if (uri!="")        attributes <- c(attributes, uri = uri)
   if (experiment!="") attributes <- c(attributes, experiment = experiment)
   if (alias!="")      attributes <- c(attributes, alias = alias)
   if (rdfType!="")    attributes <- c(attributes, rdfType = rdfType)
   
-  variableResponse <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("SCIENTIFIC_OBJECTS", configWS)),
-                                         attributes = attributes, wsVersion = 2)
-  return(variableResponse)
+  Response <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("SCIENTIFIC_OBJECTS", configWS)),
+                                                    attributes = attributes, wsVersion = 2)
+  return(Response)
 }

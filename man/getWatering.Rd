@@ -8,7 +8,7 @@ getWatering(experimentURI = "", variablesName = list(),
   provider = "", date = "", page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{experimentURI}{URI of the experiment}
+\item{experimentURI}{character, URI of the experiment}
 
 \item{variablesName}{list, variable names of images analysis}
 
@@ -16,9 +16,9 @@ getWatering(experimentURI = "", variablesName = list(),
 
 \item{date}{character, data for one day (format: YYYY-MM-DD)}
 
-\item{page}{displayed page (pagination Plant Breeding API)}
+\item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
-\item{pageSize}{number of elements by page (pagination Plant Breeding API)}
+\item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 }
 \value{
 WSResponse object
@@ -32,14 +32,18 @@ service
 }
 \examples{
 \donttest{
-connectToPHISWS(apiID="ws_public")
- accesToken = getToken("guestphis@supagro.inra.fr","guestphis")
- mywater<-getWatering(token=accesToken$data,
-         experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
+ connectToPHISWS(apiID="ws_1_public", 
+                 username = "guestphis@supagro.inra.fr",
+                 password = "guestphis")
+ mywater<-getWatering(
+         experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2017-11-23",
          variablesName = list("weightBefore"),pageSize=100000)
  head(mywater$data)
 }
 }
 \seealso{
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
+
 http://docs.brapi.apiary.io/#introduction/url-structure
 }

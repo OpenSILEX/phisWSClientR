@@ -25,7 +25,10 @@ Execute only once at the beginning of the requests.
 In the case of a WebService change of address or a renaming of services, please edit this list.
 and execute the function.
 Demonstration instances : 
-WS1 - connectToPHISWS(apiID="ws_1_public","guestphis@supagro.inra.fr","guestphis")
-WS2 - connectToPHISWS(apiID="ws_2_public","guest@opensilex.org","guest")
-WS2 - connectToPHISWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
+\describe{
+\item{WS1}{connectToPHISWS(apiID="ws_1_public","guestphis@supagro.inra.fr","guestphis")}
+\item{WS2}{connectToPHISWS(apiID="ws_2_public","guest@opensilex.org","guest")}
+\item{WS2}{connectToPHISWS(apiID="ws_private",username="guest@opensilex.org",password="guest", 
+url = "http://www.opensilex.org/openSilexAPI/rest/")}
+}
 }

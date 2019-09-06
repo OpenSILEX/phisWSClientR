@@ -20,18 +20,23 @@ WSResponse object
 retrieves the informations for one experiment
 }
 \details{
-You have to execute the getToken() function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
-connectToPHISWS(apiID="ws_public")
- publicExp<-getExperimentById(
+ connectToPHISWS(apiID="ws_1_public", 
+                 username = "guestphis@supagro.inra.fr",
+                 password = "guestphis")
+ Exp1<-getExperimentById(
         experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
- publicExp$data
+ Exp1$data
 }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }
 \keyword{internal}

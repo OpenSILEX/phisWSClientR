@@ -30,13 +30,15 @@ service
 }
 \examples{
 \donttest{
-connectToPHISWS(apiID="ws_public")
- getExperiments(page=3,pageSize=100,startDate="2012-02-21",endDate="2012-03-21")
- getExperiments(projectName = "PHIS_Publi")
- getExperiments(sortOrder = "ASC")
- getExperiments(season = 2012 )
+ connectToPHISWS(apiID="ws_1_public", 
+                 username = "guestphis@supagro.inra.fr",
+                 password = "guestphis")
+ getExperiments(page=3)
 }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }

@@ -4,7 +4,7 @@
 #            * getPhenotypeData
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/01/2019
-# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 06/09/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getPhenotypeData
@@ -16,16 +16,21 @@
 ##' @param startDate character, search from start date (optional)
 ##' @param endDate character, search to end date (optional)
 ##' @param sensor character, search by the uri of a sensor (optional). you can access the list of sensors through the \code{\link{getSensors}} function.
-##' @param incertitude character, search by incertitude ???????????????????? (optional)
+##' @param incertitude character, search by incertitude (in progress...) (optional)
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToPHISWS(apiID="ws_private", url = "http://www.opensilex.org/openSilexAPI/rest/")
+##' connectToPHISWS(apiID="ws_private",
+##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'                username="guest@opensilex.org",
+##'                password="guest")
 ##'  phenodata <- getPhenotypeData(
 ##'    variable = "http://www.opensilex.org/demo/id/variables/v001")
 ##'  phenodata <- getPhenotypeData(
@@ -34,8 +39,7 @@
 ##'  phenodata$data
 ##' }
 ##' @export
-getPhenotypeData <- function(
-                             variable = "",
+getPhenotypeData <- function(variable = "",
                              experiment = "",
                              scientificObject = "",
                              startDate = "",
@@ -44,9 +48,7 @@ getPhenotypeData <- function(
                              incertitude = "",
                              page = NULL,
                              pageSize = NULL){
-  
- 
-  
+
   attributes <- list(pageSize=pageSize,
                      page = page)
   if (experiment!="")        attributes <- c(attributes, experiment = experiment)
