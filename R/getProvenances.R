@@ -4,7 +4,7 @@
 #            * getProvenance
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/06/2019
-# Update: 06/09/2019 (I.Sanchez)
+# Update: 06/09/2019 (I.Sanchez) - 09/09/2019 (A.Charleroy)
 #-------------------------------------------------------------------------------
 
 ##' @title getProvenance
@@ -37,6 +37,9 @@
 ##'                   pageSize = 10)
 ##' provenances <- getProvenances(
 ##'                   label = "PROV2019-LEAF",
+##'                   jsonValueFilter =
+##'                   list(SensingDevice = "http://www.opensilex.org/demo/s001",
+##'                   Vector = "http://www.opensilex.org/demo/v001")
 ##'                   pageSize = 10)
 ##' provenances$data
 ##' }
@@ -52,6 +55,7 @@ getProvenances <- function(uri = "",
   if (uri!="")             attributes <- c(attributes, uri = uri)
   if (label!="")           attributes <- c(attributes, label = label)
   if (comment!="")         attributes <- c(attributes, comment = comment)
+  # Manage json filter
   if (!is.null(jsonValueFilter) ){
     if(is.list(jsonValueFilter)){
       attributes <- c(attributes, jsonValueFilter = jsonlite::toJSON(list(sensor="test"),auto_unbox = TRUE))
