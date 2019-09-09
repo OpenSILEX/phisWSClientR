@@ -24,15 +24,16 @@ cache:
       - ".cache/install_deps"
       - ".Renviron"
 
+# load packages
+before_script:
+  - mkdir -p $R_LIBS
+  - echo 'R_LIBS_USER="$R_LIBS"' > .Renviron
+  - R -e '.libPaths()'
+  - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install_deps(dependencies = TRUE,lib = Sys.getenv("R_LIBS"), upgrade = FALSE)'
 
 # create an archive 
 buildBinary:
   stage: build
-  before_script:
-   - mkdir -p $R_LIBS
-   - echo 'R_LIBS_USER="$R_LIBS"' > .Renviron
-   - R -e '.libPaths()'
-   - R -e 'devtools::install_deps(dep = TRUE,lib = Sys.getenv("R_LIBS"), upgrade = FALSE)'
   script:
    - R -e 'devtools::build(binary = TRUE)'
 
@@ -56,7 +57,7 @@ checkNotes:
   stage: check
   script:
     - mkdir -p $R_TMP_USER
-    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
+    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/notesFail"))'
     - if [ -f $R_TMP_USER/notesFail ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
 
 unitTests:
@@ -68,48 +69,19 @@ unitTests:
     - if [ -f $R_TMP_USER/testsFail ]; then echo "Check Tests"; exit 1 ; else echo "Tests passed"; fi
     
 codeCoverage:
+  allow_failure: true
   when: manual
   stage: test
   script:
     - R -e 'covr::codecov()'
 
 installFromGithub:
+  allow_failure: true
   stage: test
   script:
-    - R -e 'source("https://install-github.me/r-lib/desc");desc<-desc::description$new();remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref=desc$get("Version")[[1]])'
+    - R -e 'source("https://install-github.me/r-lib/desc");desc<-desc::description$new();remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref=paste0("v",desc$get("Version")[[1]]))'
 
 installLocally:
   stage: test
   script:
-    - R -e 'devtools::install(build_vignettes=TRUE)'
-
-deployOnTestRepository:
-  when: manual
-  stage: deploy
-  image: ilyasemenov/gitlab-ci-git-push
-  script:
-    - git-push niio972@github.com:niio972/phisWSClientR master
-  only:
-    - master
-    
-deployOnTestRepositoryTest: 
-  image: ilyasemenov/gitlab-ci-git-push
-  only: 
-    - master
-  script: 
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-    - eval $(ssh-agent -s)
-    - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 --decode)
-    - git config --global user.email "$GITHUB_USER_NAME"
-    - git config --global user.name "$GITHUB_USER_EMAIL"
-    - "mkdir -p ~/.ssh"
-    - chmod 700 ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - ssh-keyscan github.com >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-    - "git remote add upstream https://github.com/niio972/phisWSClientR"
-    - "git fetch upstream"
-    - "git push upstream HEAD:master --force"
-  stage: deploy
-  when: manual
+    - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install(build_vignettes=TRUE,dependencies = TRUE)'

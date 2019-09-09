@@ -4,19 +4,14 @@
 \alias{getExperimentById}
 \title{getExperimentById}
 \usage{
-getExperimentById(token, experimentURI = "", page = NULL,
-  pageSize = NULL, verbose = FALSE)
+getExperimentById(experimentURI = "", page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{token}{a token}
-
 \item{experimentURI}{URI of the experiment}
 
 \item{page}{displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{number of elements by page (pagination Plant Breeding API)}
-
-\item{verbose}{logical FALSE by default, if TRUE display information about the progress}
 }
 \value{
 WSResponse object
@@ -25,19 +20,23 @@ WSResponse object
 retrieves the informations for one experiment
 }
 \details{
-You have to execute the getToken() function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
-initializeClientConnection(apiID="ws_public")
- aToken <- getToken("guestphis@supagro.inra.fr","guestphis")
- publicExp<-getExperimentById(aToken$data,
+ connectToPHISWS(apiID="ws_1_public", 
+                 username = "guestphis@supagro.inra.fr",
+                 password = "guestphis")
+ Exp1<-getExperimentById(
         experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
- publicExp$data
+ Exp1$data
 }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }
 \keyword{internal}

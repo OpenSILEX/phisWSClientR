@@ -4,12 +4,10 @@
 \alias{getScientificObjects}
 \title{getScientificObjects}
 \usage{
-getScientificObjects(token, uri = "", experiment = "", alias = "",
-  rdfType = "", page = NULL, pageSize = NULL, verbose = FALSE)
+getScientificObjects(uri = "", experiment = "", alias = "",
+  rdfType = "", page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{uri}{character, search by the uri of an annotation (optional)}
 
 \item{experiment}{character, search by the uri of an experiment (optional)}
@@ -21,8 +19,6 @@ getScientificObjects(token, uri = "", experiment = "", alias = "",
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
-
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
 }
 \value{
 WSResponse object
@@ -31,18 +27,22 @@ WSResponse object
 retrieves the scientific objects based on search criterion
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
- aToken = getToken("guest@opensilex.org","guest")
- scientificObjects <- getScientificObjects(aToken$data,
-                              uri = "http://www.opensilex.org/demo/2018/o18000076")
- scientificObjects$data
+connectToPHISWS(apiID="ws_private",
+               url = "http://www.opensilex.org/openSilexAPI/rest/",
+               username="guest@opensilex.org",
+               password="guest")
+ test<-getScientificObjects(uri="http://www.opensilex.org/demo/2018/o18000076")
+ test$data
 }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }

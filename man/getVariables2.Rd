@@ -4,12 +4,10 @@
 \alias{getVariables2}
 \title{getVariables2}
 \usage{
-getVariables2(token, uri = "", label = "", trait = "", method = "",
-  unit = "", pageSize = NULL, page = NULL, verbose = FALSE)
+getVariables2(uri = "", label = "", trait = "", method = "",
+  unit = "", pageSize = NULL, page = NULL)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{uri}{character, search by the uri of a variable (optional)}
 
 \item{label}{character, search by label (optional)}
@@ -20,11 +18,9 @@ getVariables2(token, uri = "", label = "", trait = "", method = "",
 
 \item{unit}{character, search variables by unit uri (optional)}
 
-\item{pageSize}{character, number of elements by page (pagination Plant Breeding API)}
+\item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
-
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
 }
 \value{
 a WSResponse object. In the 'data' part of the returned object, a data.frame is
@@ -40,18 +36,23 @@ a WSResponse object. In the 'data' part of the returned object, a data.frame is
 Retrieves the variable descriptions, trait, method and unit covered by the variable
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
- aToken = getToken("guest@opensilex.org","guest")
- vars <- getVariables2(aToken$data, uri = "http://www.opensilex.org/demo/id/variables/v001")
- vars <- getVariables2(aToken$data,label = "Leaf-Area_LAI-Computation_LAI")
+connectToPHISWS(apiID="ws_private",
+               url = "http://www.opensilex.org/openSilexAPI/rest/",
+               username="guest@opensilex.org",
+               password="guest")
+ vars <- getVariables2(uri = "http://www.opensilex.org/demo/id/variables/v001")
+ vars <- getVariables2(label = "Leaf-Area_LAI-Computation_LAI")
  vars$data
 }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }

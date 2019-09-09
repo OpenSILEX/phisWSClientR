@@ -1,9 +1,10 @@
 #-------------------------------------------------------------------------------
 # Program: zzz.R
-# Objective:
+# Objective: defines a public configuration for the web service access in an 
+#             environment
 # Author: I. Sanchez
 # Creation: 19/03/2018
-# Update: 25/01/2019
+# Update: 06/09/2019
 #-------------------------------------------------------------------------------
 
 ## title defines a public configuration for the web service access
@@ -15,8 +16,7 @@
 ## # not run
 ## keywords internal
 # http://147.100.179.156:8080/phenomeapi/
-#   configWS <- list(BASE_PATH = "http://147.100.179.156:8080/phenomeapi/resources/",
-#                    TOKEN = "token",
+#   configWS <- list(
 #                    EXPERIMENT = "experiments",
 #                    VARIABLES = "variables",
 #                    ENVIRONMENT = "environment",
@@ -24,20 +24,23 @@
 #                    PLANTS = "plants",
 #                    IMAGESANALYSIS = "imagesAnalysis",
 #                    PHENOTYPES = "phenotypes",
-#                    WATERING = "watering",
-#                    DEFAULT_PAGE = 0,
-#                    DEFAULT_PAGESIZE = 100)
+#                    WATERING = "watering")
 
 # Define an environment for the phenomeapi configuration
 configWS<-new.env(emptyenv())
 
 .onLoad <- function(libname, pkgname){
-
-  assign("PUBLIC_PATH","http://147.100.179.156:8080/phenomeapi/resources/", configWS)
-  assign("BASE_PATH","", configWS)
-
+  
+  # connectToPHIS parameters
+  assign("WS_1_PUBLIC_PATH","http://147.100.179.156:8080/phenomeapi/resources/", configWS)
+  assign("WS_1_PUBLIC_USERNAME","guestphis@supagro.inra.fr", configWS)
+  assign("WS_1_PUBLIC_PASSWORD","guestphis", configWS)
+  
+  assign("WS_2_PUBLIC_PATH","http://www.opensilex.org/openSilexAPI/rest/", configWS)
+  assign("WS_2_PUBLIC_USERNAME","guest@opensilex.org", configWS)
+  assign("WS_2_PUBLIC_PASSWORD","guest", configWS)
+  
   # WS phis1
-  assign("TOKEN", "token", configWS)
   assign("EXPERIMENT", "experiments", configWS)
   assign("VARIABLES", "variables", configWS)
   assign("PLANTS", "plants", configWS)
@@ -46,7 +49,6 @@ configWS<-new.env(emptyenv())
   assign("WATERING", "watering", configWS)
 
   # WS phis2
-  assign("BRAPITOKEN", "brapi/v1/token", configWS)
   assign("AGROOBJECTS", "agronomicalObjects", configWS)
   assign("DATASETS", "datasets", configWS)
   assign("DATASEARCH", "data/search", configWS)
@@ -72,8 +74,4 @@ configWS<-new.env(emptyenv())
   assign("VARIABLES_DETAILS", "variables/details", configWS)
   assign("ENVIRONMENT", "environment", configWS)
   assign("PROJECTS", "projects", configWS)
-  assign("DEFAULT_PAGE", 0, configWS)
-  assign("DEFAULT_PAGESIZE", 100, configWS)
-
-  invisible()
 }

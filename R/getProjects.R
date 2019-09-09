@@ -8,45 +8,10 @@
 # Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
-##' @title getProjects retrieves the list of projects from the web service
-##'
-##' @description Retrieves the list of projects in the WS
-##' @param token a token
-##' @param projectName Name of the project to search
-##' @param page displayed page (pagination Plant Breeding API)
-##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
-##' @return WSResponse object
-##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
-##' service
-##' @examples
-##' \donttest{
-##'  initializeClientConnection(apiID="ws_public")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  getProjects(aToken$data)
-##'  getProjects(aToken$data, page = 1)
-##'  getProjects(aToken$data, page = 3, pageSize = 100)
-##'  getProjects(aToken$data, projectName = "PHIS_Publi")
-##' }
-##' @export
-getProjects<-function(token, projectName = "",page=NULL,pageSize=NULL,verbose=FALSE){
-  if(is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
-  
-  attributes = list(sessionId = token, page = page, pageSize = pageSize)
-  if (projectName != ""){
-    attributes <- c(attributes, projectName = projectName)
-  }
-  projectResponse<-getResponseFromWS(resource = get("PROJECTS",configWS),attributes=attributes,verbose=verbose)
-  return(projectResponse)
-}
-
 #---------------------------------------------------------------
 ##' @title getProjects2
 ##'
 ##' @description Retrieves the list of projects in the WS2 with the selected filters
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the URI of a project (optional)
 ##' @param name character, search by the name of a project (optional)
 ##' @param acronyme character, search by the acronyme of a project (optional)
@@ -60,24 +25,24 @@ getProjects<-function(token, projectName = "",page=NULL,pageSize=NULL,verbose=FA
 ##' @param website character, search by website of a project (optional)
 ##' @param page numeric, displayed page (pagination Plant Breeding API) (optional)
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API) (optional)
-##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_private",
-##'   url = "www.opensilex.org/openSilexAPI/rest/")
-##'  aToken = getToken("guest@opensilex.org","guest")
-##'  projects <- getProjects2(aToken$data,
-##'   uri="http://www.opensilex.org/demo/PHENOME-FPPN")
+##' connectToPHISWS(apiID="ws_private",
+##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'                username="guest@opensilex.org",
+##'                password="guest")
+##'  projects <- getProjects2(uri="http://www.opensilex.org/demo/PHENOME-FPPN")
 ##'  projects$data
 ##' }
 ##' @export
 
-getProjects2 <- function(token,
-                         page = NULL,
+getProjects2 <- function(page = NULL,
                          pageSize = NULL,
                          uri = "",
                          name = "",
@@ -89,14 +54,9 @@ getProjects2 <- function(token,
                          dateEnd = "",
                          keywords = "",
                          parentProject = "",
-                         website = "",
-                         verbose = FALSE){
-  if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
-  if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
+                         website = ""){
   
-  attributes <- list(page = page,
-                     pageSize = pageSize,
-                     Authorization = token)
+  attributes <- list(page = page, pageSize = pageSize)
   
   if (uri != "")              attributes <- c(attributes, uri = uri)
   if (name != "")             attributes <- c(attributes, name = name)
@@ -110,8 +70,7 @@ getProjects2 <- function(token,
   if (parentProject != "")    attributes <- c(attributes, parentProject = parentProject)
   if (website != "")          attributes <- c(attributes, website = website)
   
-  projectResponse <- getResponseFromWS2(resource = get("PROJECTS", configWS),
-                                        attributes = attributes,
-                                        verbose = verbose)
+  projectResponse <- opensilexWSClientR::getResponseFromWS(resource = get("PROJECTS", configWS), 
+                                                           attributes = attributes, wsVersion = 2)
   return(projectResponse)
 }

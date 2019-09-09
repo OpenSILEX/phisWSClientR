@@ -4,13 +4,12 @@
 #            * getVectors
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/01/2019
-# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 06/09/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getVectors
 ##'
 ##' @description retrieves the vectors based on search criterion
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param uri character, search by the uri of an annotation (optional)
 ##' @param rdfType character, search by the rdf type of a sensor (optional)
 ##' @param label character, search by the label of the measure (optional)
@@ -21,22 +20,24 @@
 ##' @param personInCharge character, search by the person in charge of a vector (optional)
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the getToken() function first to have access to the web
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-##' aToken = getToken("guest@opensilex.org","guest")
-##' vectors <- getVectors(aToken$data, uri = "http://www.opensilex.org/demo/2018/v1801")
-##' vectors <- getVectors(aToken$data, serialNumber = "01BD1DD71500001")
+##' connectToPHISWS(apiID="ws_private",
+##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'                username="guest@opensilex.org",
+##'                password="guest")
+##' vectors <- getVectors(uri = "http://www.opensilex.org/demo/2018/v1801")
+##' vectors <- getVectors(serialNumber = "01BD1DD71500001")
 ##' vectors$data
 ##' }
 ##' @export
-getVectors <- function(token,
-                       uri = "",
+getVectors <- function(uri = "",
                        rdfType = "",
                        label = "",
                        brand = "",
@@ -45,14 +46,9 @@ getVectors <- function(token,
                        dateOfPurchase = "",
                        personInCharge = "",
                        page = NULL,
-                       pageSize = NULL,
-                       verbose = FALSE){
-  if (is.null(page)) page <- get("DEFAULT_PAGE", configWS)
-  if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE", configWS)
-  
-  attributes <- list(pageSize = pageSize,
-                     page = page,
-                     Authorization=token)
+                       pageSize = NULL){
+
+  attributes <- list(pageSize = pageSize,page = page)
   if (uri!="")            attributes <- c(attributes, uri = uri)
   if (rdfType!="")        attributes <- c(attributes, rdfType = rdfType)
   if (label!="")          attributes <- c(attributes, label = label)
@@ -62,8 +58,7 @@ getVectors <- function(token,
   if (dateOfPurchase!="") attributes <- c(attributes, dateOfPurchase = dateOfPurchase)
   if (personInCharge!="") attributes <- c(attributes, personInCharge = personInCharge)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("VECTORS", configWS)),
-                                         attributes = attributes,
-                                         verbose = verbose)
-  return(variableResponse)
+  Response <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("VECTORS", configWS)),
+                                         attributes = attributes, wsVersion = 2)
+  return(Response)
 }

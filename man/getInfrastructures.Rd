@@ -4,12 +4,10 @@
 \alias{getInfrastructures}
 \title{getInfrastructures}
 \usage{
-getInfrastructures(token, uri = "", rdfType = "", label = "",
-  language = "en", page = NULL, pageSize = NULL, verbose = FALSE)
+getInfrastructures(uri = "", rdfType = "", label = "",
+  language = "en", page = NULL, pageSize = NULL)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{uri}{character, search by the uri of an infrastructure (optional)}
 
 \item{rdfType}{character, search by the rdf type of an infrastructure (optional)}
@@ -21,8 +19,6 @@ getInfrastructures(token, uri = "", rdfType = "", label = "",
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
 \item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
-
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
 }
 \value{
 WSResponse object
@@ -31,18 +27,22 @@ WSResponse object
 retrieves the infrastructures based on search criterion
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
-initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-aToken = getToken("guest@opensilex.org","guest")
-infrastructures <- getInfrastructures(aToken$data,
-                   uri = "https://emphasis.plant-phenotyping.eu")
-infrastructures$data
+connectToPHISWS(apiID="ws_private",
+               url = "http://www.opensilex.org/openSilexAPI/rest/",
+               username="guest@opensilex.org",
+               password="guest")
+test<-getInfrastructures(uri = "https://emphasis.plant-phenotyping.eu")
+test$data
 }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }

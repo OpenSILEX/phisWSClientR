@@ -5,14 +5,13 @@
 #            * getEnvironmentData for WS2
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/01/2019
-# Update: 01/02/2019 (by J-E.Hollebecq) ; 24/01/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 06/09/2019 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 
 ##' @title retrieves the environmental mesures of an experiment from the web service
 ##'
 ##' @description Retrieves environmental mesures of an experiment or by dates
-##' @param token a token
 ##' @param variableCategory character, a category of variables
 ##' @param startDate data > startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )
 ##' @param endDate data < startDate (Format: YYYY-MM-DD or YYYY-MM-DD HH:MM:SS )
@@ -21,35 +20,35 @@
 ##' @param experimentURI URI of the experiment
 ##' @param page displayed page (pagination Plant Breeding API)
 ##' @param pageSize number of elements by page (pagination Plant Breeding API)
-##' @param verbose logical FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
-##' @details You have to execute the getToken() function first to have access to the web
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
 ##' @examples
 ##' \donttest{
-##' initializeClientConnection(apiID="ws_public")
-##'  aToken = getToken("guestphis@supagro.inra.fr","guestphis")
-##'  getEnvironment(aToken$data,page=3,pageSize=100,startDate="2012-02-21",endDate = "2012-03-21")
-##'  test<-getEnvironment(aToken$data,
-##'        experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
+##'  connectToPHISWS(apiID="ws_1_public", 
+##'                  username = "guestphis@supagro.inra.fr",
+##'                  password = "guestphis")
+##'  getEnvironment(page=3,
+##'                 pageSize=100,
+##'                 startDate="2017-06-29",
+##'                 endDate = "2017-06-16")
+##'  test<-getEnvironment(experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23")
 ##'  test$data
-##'  getEnvironment(aToken$data,
-##'  experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
-##'  startDate="2012-02-21",
-##'  endDate="2012-02-15 19:20:30")
-##'  
-##'  getEnvironment(aToken$data, experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2012-01-01",
-##'     facility="http://www.phenome-fppn.fr/m3p/ec3",
+##'  getEnvironment( experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23",
+##'                  startDate="2017-06-16",
+##'                  endDate="2017-06-29")
+##'  getEnvironment(experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23",
+##'     facility="http://www.phenome-fppn.fr/m3p/es2",
 ##'     variables="wind speed_weather station_meter per second")
 ##' }
 ##' @export
-getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = "" ,variables = "",facility = "",
-                           experimentURI ="", page = NULL, pageSize = NULL,verbose=FALSE){
-  if (is.null(page)) page<-get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize<-get("DEFAULT_PAGESIZE",configWS)
+getEnvironment <- function(variableCategory ="",startDate = "",endDate = "" ,variables = "",facility = "",
+                           experimentURI ="", page = NULL, pageSize = NULL){
   
-  attributes = list(sessionId = token, page = page, pageSize=pageSize)
+  attributes = list(page = page, pageSize=pageSize)
   if (startDate != ""){
     attributes <- c(attributes, startDate = startDate)
   }
@@ -68,8 +67,8 @@ getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = 
   if (variables != ""){
     attributes <- c(attributes, variables = utils::URLencode(variables))
   }
-  environmentResponse <- getResponseFromWS(resource = get("ENVIRONMENT",configWS),
-                                           attributes = attributes,verbose=verbose)
+  environmentResponse <- opensilexWSClientR::getResponseFromWS(resource = get("ENVIRONMENT",configWS),
+                                           attributes = attributes, wsVersion = 1)
   return(environmentResponse)
 }
 
@@ -79,7 +78,6 @@ getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = 
 ##' @title getEnvironmentData
 ##'
 ##' @description retrieves the environmental data from a variable or a sensor
-##' @param token character, a token from \code{\link{getToken}} function
 ##' @param variable character, search by the uri of a variable. You can access the list of variables through the \code{\link{getVariables2}} function.
 ##' @param startDate character, search from start date (optional)
 ##' @param endDate character, search to end date (optional)
@@ -87,52 +85,52 @@ getEnvironment <- function(token ,variableCategory ="",startDate = "",endDate = 
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @param dateSortAsc logical, sort date in ascending order if TRUE
-##' @param verbose logical, FALSE by default, if TRUE display information about the progress
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
-##' @details You have to execute the \code{\link{getToken}} function first to have access to the web
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 ##' service
 ##' @examples
 ##' \donttest{
-##'  initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
-##'  aToken = getToken("guest@opensilex.org","guest")
+##' connectToPHISWS(apiID="ws_private",
+##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'                username="guest@opensilex.org",
+##'                password="guest")
 ##'  # Retrieve the number of available data
-##'  mycount <- getEnvironmentData(token=aToken$data, 
-##'       variable = "http://www.opensilex.org/demo/id/variables/v004")$totalCount
+##'  environmentData <-getEnvironmentData(
+##'                       variable = "http://www.opensilex.org/demo/id/variables/v004"
+##'                    )
+##'  mycount <-environmentData$totalCount
 ##'  # Retrieve the environmental data
-##'  myenvir <- getEnvironmentData(token=aToken$data, pageSize=mycount,
-##'          variable = "http://www.opensilex.org/demo/id/variables/v004")
-##'  myenvir <- getEnvironmentData(token=aToken$data,
-##'   pageSize=mycount,
-##'   variable = "http://www.opensilex.org/demo/id/variables/v004", 
-##'  startDate="2017-06-15T10:51:00+0200",
-##'  endDate="2017-06-17T10:51:00+0200")
+##'  myenvir <-getEnvironmentData(
+##'               pageSize=mycount,
+##'               variable = "http://www.opensilex.org/demo/id/variables/v004")
+##'  myenvir <-getEnvironmentData(
+##'               pageSize=mycount,
+##'               variable = "http://www.opensilex.org/demo/id/variables/v004", 
+##'               startDate="2017-06-15T10:51:00+0200",
+##'               endDate="2017-06-17T10:51:00+0200")
 ##'  str(myenvir$data)
 ##'  head(myenvir$data)
 ##' }
 ##' @export
-getEnvironmentData <- function(token,
+getEnvironmentData <- function(
                                variable = "",
                                startDate = "",
                                endDate = "",
                                sensor = "",
                                page = NULL,
                                pageSize = NULL,
-                               dateSortAsc = TRUE,
-                               verbose = FALSE){
-  if (is.null(page)) page <- get("DEFAULT_PAGE",configWS)
-  if (is.null(pageSize)) pageSize <- get("DEFAULT_PAGESIZE",configWS)
+                               dateSortAsc = TRUE){
   
-  attributes <- list(pageSize=pageSize,
-                     page = page,
-                     Authorization=token)
+  attributes <- list(pageSize=pageSize, page = page)
   if (variable!="")  attributes <- c(attributes, variable = variable)
   if (startDate!="") attributes <- c(attributes, startDate = startDate)
   if (endDate!="")   attributes <- c(attributes, endDate = endDate)
   if (sensor!="")    attributes <- c(attributes, sensor = sensor)
   
-  variableResponse <- getResponseFromWS2(resource = paste0(get("ENVIRONMENTS", configWS)),
-                                         attributes = attributes,
-                                         verbose = verbose)
+  variableResponse <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("ENVIRONMENTS", configWS)),
+                                         attributes = attributes, wsVersion = 2)
   return(variableResponse)
 }

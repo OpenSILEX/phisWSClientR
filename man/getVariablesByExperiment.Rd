@@ -4,19 +4,14 @@
 \alias{getVariablesByExperiment}
 \title{getVariablesByExperiment}
 \usage{
-getVariablesByExperiment(token, uri = "", pageSize = NULL,
-  page = NULL, verbose = FALSE)
+getVariablesByExperiment(uri = "", pageSize = NULL, page = NULL)
 }
 \arguments{
-\item{token}{character, a token from \code{\link{getToken}} function}
-
 \item{uri}{character, search by the uri of an experiment}
 
-\item{pageSize}{character, number of elements by page (pagination Plant Breeding API)}
+\item{pageSize}{numeric, number of elements by page (pagination Plant Breeding API)}
 
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
-
-\item{verbose}{logical, FALSE by default, if TRUE display information about the progress}
 }
 \value{
 a WSResponse object. In the 'data' part of the returned object, a data.frame is
@@ -33,17 +28,22 @@ Retrieves the variable descriptions, trait, method and unit covered by the varia
       for a given experiment URI
 }
 \details{
-You have to execute the \code{\link{getToken}} function first to have access to the web
+You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
 \examples{
 \donttest{
- initializeClientConnection(apiID="ws_private", url = "www.opensilex.org/openSilexAPI/rest/")
- aToken = getToken("guest@opensilex.org","guest")
- varExp<- getVariablesByExperiment(aToken$data, uri = "http://www.opensilex.org/demo/DIA2017-1")
+connectToPHISWS(apiID="ws_private",
+               url = "http://www.opensilex.org/openSilexAPI/rest/",
+               username="guest@opensilex.org",
+               password="guest")
+ varExp<- getVariablesByExperiment(uri="http://www.opensilex.org/demo/DIA2017-1")
  varExp$data
 }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
+
+You have to install the opensilexWSClientR before running any 
+         request on PHIS web service.
 }
