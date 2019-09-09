@@ -24,14 +24,16 @@ cache:
       - ".cache/install_deps"
       - ".Renviron"
 
+# load packages
+before_script:
+  - mkdir -p $R_LIBS
+  - echo 'R_LIBS_USER="$R_LIBS"' > .Renviron
+  - R -e '.libPaths()'
+  - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install_deps(dependencies = TRUE,lib = Sys.getenv("R_LIBS"), upgrade = FALSE)'
+
 # create an archive 
 buildBinary:
   stage: build
-  before_script:
-   - mkdir -p $R_LIBS
-   - echo 'R_LIBS_USER="$R_LIBS"' > .Renviron
-   - R -e '.libPaths()'
-   - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install_deps(dependencies = TRUE,lib = Sys.getenv("R_LIBS"), upgrade = FALSE)'
   script:
    - R -e 'devtools::build(binary = TRUE)'
 
