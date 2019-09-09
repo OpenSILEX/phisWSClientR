@@ -13,7 +13,7 @@
 ##' @param uri character, search by the uri of an provenance (optional)
 ##' @param label character, search by the label of an provenance (optional)
 ##' @param comment character, search by the comment in the provenance
-##' @param jsonValueFilter json object (as character), search by the json value
+##' @param jsonValueFilter list, json object (as R list), search by the json value
 ##' @param page numeric, displayed page (pagination Plant Breeding API)
 ##' @param pageSize numeric, number of elements by page (pagination Plant Breeding API)
 ##' @return WSResponse object
@@ -30,17 +30,21 @@
 ##'                password="guest")
 ##' provenances <- getProvenances(
 ##'    uri = "http://www.opensilex.org/demo/2018/pv181515071552",
-##'    pageSize=10)
+##'    pageSize = 10)
 ##' provenances <- getProvenances(
-##'                   label ="PROV2019-LEAF",
-##'                   pageSize=10)
+##'                   label = "MAU17-PG_NDVI_PUBLI",
+##'                   comment = "NDVI",
+##'                   pageSize = 10)
+##' provenances <- getProvenances(
+##'                   label = "PROV2019-LEAF",
+##'                   pageSize = 10)
 ##' provenances$data
 ##' }
 ##' @export
 getProvenances <- function(uri = "",
                       label = "",
                       comment = "",
-                      jsonValueFilter = "",
+                      jsonValueFilter = NULL,
                       page = NULL,
                       pageSize = NULL){
 
@@ -48,7 +52,14 @@ getProvenances <- function(uri = "",
   if (uri!="")             attributes <- c(attributes, uri = uri)
   if (label!="")           attributes <- c(attributes, label = label)
   if (comment!="")         attributes <- c(attributes, comment = comment)
-  if (jsonValueFilter!="") attributes <- c(attributes, jsonValueFilter = jsonValueFilter)
+  if (!is.null(jsonValueFilter) ){
+    if(is.list(jsonValueFilter)){
+      attributes <- c(attributes, jsonValueFilter = jsonlite::toJSON(list(sensor="test"),auto_unbox = TRUE))
+    }else{
+      logging::logwarn("jsonValueFilter is not a list. This parameter will not be taken in account
+                       for this call.")
+    }
+  }
   
   Response <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("PROVENANCES", configWS)),
                                                     attributes = attributes, wsVersion = 2)
