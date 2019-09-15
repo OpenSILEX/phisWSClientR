@@ -36,8 +36,7 @@ buildBinary:
   stage: build
   script:
    - R -e 'devtools::build(binary = TRUE)'
-  only:
-    - master
+
 
 checkErrors:
   stage: check

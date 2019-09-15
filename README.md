@@ -47,7 +47,7 @@ To install the **phisWSClientR** package, the easiest is to install it directly 
 
 ```R
 library(remotes)
-install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE, ref="v2.0.0")
+install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE, ref="v2.0.1")
 ```
 
 You can also download a tar.gz archive of "[v2.0.0](https://github.com/OpenSILEX/phisWSClientR/tree/v2.0.0)" version and install it with _install_packages()_.
