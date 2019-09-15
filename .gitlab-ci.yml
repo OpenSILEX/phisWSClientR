@@ -36,6 +36,8 @@ buildBinary:
   stage: build
   script:
    - R -e 'devtools::build(binary = TRUE)'
+  only:
+    - master
 
 checkErrors:
   stage: check
@@ -80,6 +82,8 @@ installFromGithub:
   stage: test
   script:
     - R -e 'source("https://install-github.me/r-lib/desc");desc<-desc::description$new();remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref=paste0("v",desc$get("Version")[[1]]))'
+  only:
+    - master
 
 installLocally:
   stage: test
