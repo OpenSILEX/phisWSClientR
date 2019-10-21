@@ -13,7 +13,7 @@
 ##' @param uri character, give an for this variable. If this is empty, the uri will me automatically generated.
 ##' @param comment character, give a comment for this variable
 ##' @param label character, give the label of this variable
-##' @param ontologiesReferences some metadata concerning the ontology of the variable. \n The format of the metadata is a list with every item being a different metadata. \n Exemple: list(property = "http://www.w3.org/2004/02/skos/core#closeMatch", object = "http://www.cropontology.org/rdf/CO_715:0000139", seeAlso = "http://www.cropontology.org/ontology/CO_715/")
+##' @param ontologiesReferences some metadata concerning the ontology of the variable.  The format of the metadata is a list with every item being a different metadata.  Exemple: list(property = "http://www.w3.org/2004/02/skos/core#closeMatch", object = "http://www.cropontology.org/rdf/CO_715:0000139", seeAlso = "http://www.cropontology.org/ontology/CO_715/")
 ##' @param trait the uri of the trait composing the variable 
 ##' @param method the uri of the method composing the 
 ##' @param unit the uri of the unit composing the 
@@ -45,7 +45,7 @@ postVariables <- function(uri, label, comment, ontologiesReferences, trait, meth
   if (uri!="")                  attributes <- c(attributes, uri = uri)           
   if (label!="")                attributes <- c(attributes, label = label)       else stop("You must provide a label")
   if (comment!="")              attributes <- c(attributes, comment = comment) 
-  if (ontologiesReferences!="") attributes <- c(attributes, ontologiesReferences = ontologiesReferences)  else stop("You must provide a correct property, written is the correct format. \n st be one of the following : http://www.w3.org/2008/05/skos#exactMatch, http://www.w3.org/2008/05/skos#closeMatch, http://www.w3.org/2008/05/skos#narrower, http://www.w3.org/2008/05/skos#broader. Given : http://www.w3.org/2008/05/skos/core#closeMatch")
+  if (ontologiesReferences!="") attributes <- c(attributes, ontologiesReferences = ontologiesReferences)  else stop("You must provide a correct property, written is the correct format.  st be one of the following : http://www.w3.org/2008/05/skos#exactMatch, http://www.w3.org/2008/05/skos#closeMatch, http://www.w3.org/2008/05/skos#narrower, http://www.w3.org/2008/05/skos#broader. Given : http://www.w3.org/2008/05/skos/core#closeMatch")
   if (trait!="")                attributes <- c(attributes, trait = trait)   else stop("You must provide a correct trait")
   if (method!="")               attributes <- c(attributes, method = method) else stop("You must provide a correct method")
   if (unit!="")                 attributes <- c(attributes, unit = unit)     else stop("You must provide a correct unit")

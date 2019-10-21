@@ -13,7 +13,7 @@ postMethods(uri, label, comment, ontologiesReferences)
 
 \item{comment}{character, give a comment for this method}
 
-\item{ontologiesReferences}{some metadata concerning the ontology of the method. \n The format of the metadata is a list with every item being a different metadata. \n Exemple: list(property = "http://www.w3.org/2004/02/skos/core#closeMatch", object = "http://www.cropontology.org/rdf/CO_715:0000139", seeAlso = "http://www.cropontology.org/ontology/CO_715/")}
+\item{ontologiesReferences}{some metadata concerning the ontology of the method. The format of the metadata is a list with every item being a different metadata.  Exemple: list(property = "http://www.w3.org/2004/02/skos/core#closeMatch", object = "http://www.cropontology.org/rdf/CO_715:0000139", seeAlso = "http://www.cropontology.org/ontology/CO_715/")}
 }
 \value{
 WSResponse object
@@ -31,14 +31,12 @@ connectToPHISWS(apiID="ws_private",
                url = "http://www.opensilex.org/openSilexAPI/rest/",
                username="guest@opensilex.org",
                password="guest")
-  postMethods(
-   label = "insertionmethod_label",
-   comment = "comment my method",
-   metadata = list(property = "http://www.w3.org/2004/02/skos/core#closeMatch",
-                   object = "http://www.cropontology.org/rdf/CO_715:0000139",
-                   seeAlso = "http://www.cropontology.org/ontology/CO_715/")
-                   )
-  }
+  postMethods(label = "insertionmethod_label",
+              comment = "comment my method",
+     metadata = list(property = "http://www.w3.org/2004/02/skos/core#closeMatch",
+     object = "http://www.cropontology.org/rdf/CO_715:0000139",
+     seeAlso = "http://www.cropontology.org/ontology/CO_715/"))
+     }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure

@@ -14,7 +14,7 @@ postVariables(uri, label, comment, ontologiesReferences, trait, method,
 
 \item{comment}{character, give a comment for this variable}
 
-\item{ontologiesReferences}{some metadata concerning the ontology of the variable. \n The format of the metadata is a list with every item being a different metadata. \n Exemple: list(property = "http://www.w3.org/2004/02/skos/core#closeMatch", object = "http://www.cropontology.org/rdf/CO_715:0000139", seeAlso = "http://www.cropontology.org/ontology/CO_715/")}
+\item{ontologiesReferences}{some metadata concerning the ontology of the variable.  The format of the metadata is a list with every item being a different metadata.  Exemple: list(property = "http://www.w3.org/2004/02/skos/core#closeMatch", object = "http://www.cropontology.org/rdf/CO_715:0000139", seeAlso = "http://www.cropontology.org/ontology/CO_715/")}
 
 \item{trait}{the uri of the trait composing the variable}
 

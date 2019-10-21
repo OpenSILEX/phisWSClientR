@@ -2,7 +2,7 @@
 % Please edit documentation in R/getVariables.R
 \name{getVariables2}
 \alias{getVariables2}
-\title{getVariables2}
+\title{getVariables2 (same as getVariablesDetails function)}
 \usage{
 getVariables2(uri = "", label = "", trait = "", method = "",
   unit = "", pageSize = NULL, page = NULL)
