@@ -112,21 +112,24 @@ getVariablesDetails <- function(uri = "",
   
   # Convert the JSON data.frame in real R data.frame
   tmp<-Response$data
+
   Response$data<-cbind.data.frame(as.data.frame(tmp$trait),
                                           as.data.frame(tmp$method),
                                           as.data.frame(tmp$unit),
-                                          tmp[,4:6])
+                                          as.data.frame(tmp$uri),
+                                          as.data.frame(tmp$label))
   colnames(Response$data)<-c(paste("trait",colnames(tmp$trait),sep="."),
                              paste("method",colnames(tmp$method),sep="."),
                              paste("unit",colnames(tmp$unit),sep="."),
-                             colnames(tmp)[4:6])
+                             "uri",
+                             "label")
   
   return(Response)
 }
 
 
 #----------------------------------------------------------------------------
-##' @title getVariables2
+##' @title getVariables2 (same as getVariablesDetails function)
 ##'
 ##' @description Retrieves the variable descriptions, trait, method and unit covered by the variable
 ##' @param uri character, search by the uri of a variable (optional)
@@ -167,29 +170,37 @@ getVariables2 <- function(uri = "",
                           unit = "",
                           pageSize = NULL,
                           page = NULL){
-
-  attributes <- list(pageSize=pageSize,page = page)
-  if (uri!="")    attributes <- c(attributes, uri = uri)
-  if (label!="")  attributes <- c(attributes, lavel = label)
-  if (trait!="")  attributes <- c(attributes, trait = trait)
-  if (method!="") attributes <- c(attributes, method = method)
-  if (unit!="")   attributes <- c(attributes, unit = unit)
-  
-  Response <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("VARIABLES", configWS)),
-                                         attributes = attributes, wsVersion = 2)
-  
-  # Convert the JSON data.frame in real R data.frame
-  tmp<-Response$data
-  Response$data<-cbind.data.frame(as.data.frame(tmp$trait),
-                                  as.data.frame(tmp$method),
-                                  as.data.frame(tmp$unit),
-                                  tmp[,4:6])
-  colnames(Response$data)<-c(paste("trait",colnames(tmp$trait),sep="."),
-                             paste("method",colnames(tmp$method),sep="."),
-                             paste("unit",colnames(tmp$unit),sep="."),
-                             colnames(tmp)[4:6])
-  
-  return(Response)
+  return(getVariablesDetails(uri = "",
+                      label = "",
+                      trait = "",
+                      method = "",
+                      unit = "",
+                      pageSize = NULL,
+                      page = NULL))
+  # 
+  # attributes <- list(pageSize=pageSize,page = page)
+  # if (uri!="")    attributes <- c(attributes, uri = uri)
+  # if (label!="")  attributes <- c(attributes, lavel = label)
+  # if (trait!="")  attributes <- c(attributes, trait = trait)
+  # if (method!="") attributes <- c(attributes, method = method)
+  # if (unit!="")   attributes <- c(attributes, unit = unit)
+  # 
+  # response <- opensilexWSClientR:::getResponseFromWS(resource = paste0(get("VARIABLES", configWS)),
+  #                                        attributes = attributes, wsVersion = 2)
+  # 
+  # # Convert the JSON data.frame in real R data.frame
+  # tmp<-response$data
+  # print(tmp[,1:4])
+  # response$data<-cbind.data.frame(as.data.frame(tmp$trait),
+  #                                 as.data.frame(tmp$method),
+  #                                 as.data.frame(tmp$unit),
+  #                                 tmp[,4:6])
+  # colnames(response$data)<-c(paste("trait",colnames(tmp$trait),sep="."),
+  #                            paste("method",colnames(tmp$method),sep="."),
+  #                            paste("unit",colnames(tmp$unit),sep="."),
+  #                            colnames(tmp)[4:6])
+  # 
+  # return(response)
 }
 
 #----------------------------------------------------------------------------

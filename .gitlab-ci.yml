@@ -46,7 +46,6 @@ checkErrors:
     - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
 
 checkWarnings:
-  allow_failure: true
   stage: check
   script:
     - mkdir -p $R_TMP_USER
