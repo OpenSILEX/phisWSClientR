@@ -23,6 +23,18 @@ send a provenance to the web service
 You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
+\examples{
+\donttest{
+connectToPHISWS(apiID="ws_private",
+               url = "http://www.opensilex.org/openSilexAPI/rest/",
+               username="guest@opensilex.org",
+               password="guest")
+  postProvenances(
+   label = "insertionProvenance_label",
+   comment = "comment my provenance",
+   metadata = list(meta1 = "15", meta2 = "owner1")
+   }
+}
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
 

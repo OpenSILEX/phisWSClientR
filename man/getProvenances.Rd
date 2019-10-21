@@ -5,7 +5,7 @@
 \title{getProvenance}
 \usage{
 getProvenances(uri = "", label = "", comment = "",
-  jsonValueFilter = "", page = NULL, pageSize = NULL)
+  jsonValueFilter = NULL, page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{uri}{character, search by the uri of an provenance (optional)}
@@ -14,7 +14,7 @@ getProvenances(uri = "", label = "", comment = "",
 
 \item{comment}{character, search by the comment in the provenance}
 
-\item{jsonValueFilter}{json object (as character), search by the json value}
+\item{jsonValueFilter}{list, json object (as R list), search by the json value}
 
 \item{page}{numeric, displayed page (pagination Plant Breeding API)}
 
@@ -38,10 +38,17 @@ connectToPHISWS(apiID="ws_private",
                password="guest")
 provenances <- getProvenances(
    uri = "http://www.opensilex.org/demo/2018/pv181515071552",
-   pageSize=10)
+   pageSize = 10)
 provenances <- getProvenances(
-                  label ="PROV2019-LEAF",
-                  pageSize=10)
+                  label = "MAU17-PG_NDVI_PUBLI",
+                  comment = "NDVI",
+                  pageSize = 10)
+provenances <- getProvenances(
+                  label = "PROV2019-LEAF",
+                  jsonValueFilter =
+                  list(SensingDevice = "http://www.opensilex.org/demo/s001",
+                  Vector = "http://www.opensilex.org/demo/v001")
+                  pageSize = 10)
 provenances$data
 }
 }
