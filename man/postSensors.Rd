@@ -27,7 +27,9 @@ postSensors(uri, rdfType, label, brand, model, serialNumber, inServiceDate,
 
 \item{personInCharge}{the mail of the person in charge of this sensor}
 
-\item{geometry}{character, give the geometry of this scientific object}
+\item{alias}{character, give an alias to the scientific object}
+
+\item{geometry}{character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"}
 
 \item{experiment}{character, uri of the experiment of the scientific object}
 
@@ -35,7 +37,9 @@ postSensors(uri, rdfType, label, brand, model, serialNumber, inServiceDate,
 
 \item{year}{character, the year of the scientific object}
 
-\item{properties}{list, a list}
+\item{properties}{list, a list for example: list(rdfType = "http://xmlns.com/foaf/0.1/Agent", 
+relation = "http://www.opensilex.org/vocabulary/2018#hasContact", 
+value = "http://www.opensilex.org/demo/id/agent/marie_dupond")}
 
 \item{rdfType}{character, the rdfType of the sensor ex: http://www.opensilex.org/vocabulary/oeso#Spectrometer}
 }
