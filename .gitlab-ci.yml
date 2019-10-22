@@ -19,7 +19,7 @@ variables:
 
 # Cache R directories in between jobs
 cache:
-    key: "$CI_COMMIT_REF_SLUG"
+    key: "Test_phisWSClientR_deps"
     paths:
       - ".cache/install_deps"
       - ".Renviron"
@@ -36,7 +36,6 @@ buildBinary:
   stage: build
   script:
    - R -e 'devtools::build(binary = TRUE)'
-
 
 checkErrors:
   stage: check
