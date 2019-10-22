@@ -37,7 +37,6 @@ buildBinary:
   script:
    - R -e 'devtools::build(binary = TRUE)'
 
-
 checkErrors:
   stage: check
   script:
