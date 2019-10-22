@@ -170,6 +170,7 @@ getVariables2 <- function(uri = "",
                           unit = "",
                           pageSize = NULL,
                           page = NULL){
+  # temporary code
   return(getVariablesDetails(uri = "",
                       label = "",
                       trait = "",
@@ -177,7 +178,7 @@ getVariables2 <- function(uri = "",
                       unit = "",
                       pageSize = NULL,
                       page = NULL))
-  # 
+  # temporary comments
   # attributes <- list(pageSize=pageSize,page = page)
   # if (uri!="")    attributes <- c(attributes, uri = uri)
   # if (label!="")  attributes <- c(attributes, lavel = label)
