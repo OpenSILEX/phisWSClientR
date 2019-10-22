@@ -52,7 +52,7 @@ install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE, ref="2.1.0")
 
 You can also download a tar.gz archive of "[2.1.0](https://github.com/OpenSILEX/phisWSClientR/tree/2.1.0)" version and install it with _install_packages()_.
 
-This package use [Semantic Versioning Specification](https://semver.org/).
+This package use [Semantic Versioning Specification](https://semver.org/) for versionning tags.
 
 # Usage
 
