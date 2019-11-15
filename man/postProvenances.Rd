@@ -33,6 +33,7 @@ connectToPHISWS(apiID="ws_private",
    label = "insertionProvenance_label",
    comment = "comment my provenance",
    metadata = list(meta1 = "15", meta2 = "owner1")
+   )
    }
 }
 \seealso{

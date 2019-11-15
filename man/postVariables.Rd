@@ -4,8 +4,7 @@
 \alias{postVariables}
 \title{postVariables}
 \usage{
-postVariables(uri, label, comment, ontologiesReferences, trait, method,
-  unit)
+postVariables(uri, label, comment, ontologiesReferences, trait, method, unit)
 }
 \arguments{
 \item{uri}{character, give an for this variable. If this is empty, the uri will me automatically generated.}
@@ -41,7 +40,7 @@ connectToPHISWS(apiID="ws_private",
   postVariables(
    label = "insertionvariable_label",
    comment = "comment my variable",
-   metadata = list(property = "http://www.w3.org/2004/02/skos/core#closeMatch",
+   ontologiesReferences = list(property = "http://www.w3.org/2004/02/skos/core#closeMatch",
                    object = "http://www.cropontology.org/rdf/CO_715:0000139",
                    seeAlso = "http://www.cropontology.org/ontology/CO_715/"),
   trait = "http://www.phenome-fppn.fr/test/id/traits/t008",

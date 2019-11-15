@@ -4,8 +4,13 @@
 \alias{getPlants}
 \title{retrieves the context of plant linked to an experiment from the web service}
 \usage{
-getPlants(plantAlias = "", experimentURI = "", germplasmURI = "",
-  page = NULL, pageSize = NULL)
+getPlants(
+  plantAlias = "",
+  experimentURI = "",
+  germplasmURI = "",
+  page = NULL,
+  pageSize = NULL
+)
 }
 \arguments{
 \item{plantAlias}{character, an alias of plant}

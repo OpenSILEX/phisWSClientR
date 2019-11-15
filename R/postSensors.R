@@ -3,11 +3,11 @@
 # Objective: functions to post a new sensor to the WS2
 #            * postSensors
 # Authors: Hollebecq Jean-Eudes
-# Creation: 24/09/2019
-# Update:
+# Creation: 24/09/2019 
+# Update: 15/11/2019 (JE.H)
 #-------------------------------------------------------------------------------
 
-##' @title postVectors
+##' @title postSensors
 ##'
 ##' @description send a sensor to the web service
 ##' @param rdfType character, the rdfType of the sensor ex: http://www.opensilex.org/vocabulary/oeso#Spectrometer
@@ -17,6 +17,7 @@
 ##' @param serialNumber character, the serial number of the sensor
 ##' @param inServiceDate character, date which the sensor has been in service. Format "AAAA-MM-DD"
 ##' @param dateOfPurchase character, date which the sensor has been purchased. Format "AAAA-MM-DD"
+##' @param dateOfLastCalibration character, date which the sensor has been last calibrated. Format "AAAA-MM-DD"
 ##' @param personInCharge the mail of the person in charge of this sensor
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
@@ -32,9 +33,9 @@
 ##'                password="guest")
 ##'   postSensors(
 ##'    rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
-##'    label = "aligot",
-##'    brand = "Fait maison",
-##'    model = "avec du  cantal",
+##'    label = "Sensor_label",
+##'    brand = "Sensor_brand",
+##'    model = "Sensor_model",
 ##'    serialNumber = "",
 ##'    inServiceDate = "2017-06-15",
 ##'    dateOfPurchase = "2017-06-15",
@@ -43,7 +44,7 @@
 ##'    )
 ##'    }
 ##' @export
-postSensors <- function(uri, rdfType, label, brand, model, serialNumber, inServiceDate, dateOfPurchase, personInCharge){
+postSensors <- function(rdfType, label, brand, model, serialNumber, inServiceDate, dateOfPurchase, dateOfLastCalibration, personInCharge){
   attributes <- list()
   if (rdfType!="")        attributes <- c(attributes, rdfType = rdfType)   else stop("You must provide a type of sensor")
   if (label!="")          attributes <- c(attributes, label = label)       else stop("You must provide a label")
@@ -52,6 +53,7 @@ postSensors <- function(uri, rdfType, label, brand, model, serialNumber, inServi
   if (serialNumber!="")   attributes <- c(attributes, serialNumber = serialNumber) 
   if (inServiceDate!="")  attributes <- c(attributes, inServiceDate = inServiceDate)   else stop("You must provide a date - and a correct format")
   if (dateOfPurchase!="") attributes <- c(attributes, dateOfPurchase = dateOfPurchase) else stop("You must provide a date - and correct format")
+  if (dateOfLastCalibration!="") attributes <- c(attributes, dateOfLastCalibration = dateOfLastCalibration) else stop("You must provide a date - and correct format")
   if (personInCharge!="") attributes <- c(attributes, personInCharge = personInCharge) else stop("You must provide a person e-mail in charge of this sensor")
   Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("SENSORS", configWS)),
                                                      attributes = attributes, wsVersion = 2)

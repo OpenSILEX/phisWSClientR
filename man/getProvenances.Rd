@@ -4,8 +4,14 @@
 \alias{getProvenances}
 \title{getProvenance}
 \usage{
-getProvenances(uri = "", label = "", comment = "",
-  jsonValueFilter = NULL, page = NULL, pageSize = NULL)
+getProvenances(
+  uri = "",
+  label = "",
+  comment = "",
+  jsonValueFilter = NULL,
+  page = NULL,
+  pageSize = NULL
+)
 }
 \arguments{
 \item{uri}{character, search by the uri of an provenance (optional)}
@@ -47,7 +53,7 @@ provenances <- getProvenances(
                   label = "PROV2019-LEAF",
                   jsonValueFilter =
                   list(SensingDevice = "http://www.opensilex.org/demo/s001",
-                  Vector = "http://www.opensilex.org/demo/v001")
+                  Vector = "http://www.opensilex.org/demo/v001"),
                   pageSize = 10)
 provenances$data
 }

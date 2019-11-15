@@ -4,8 +4,15 @@
 \alias{getVariablesDetails}
 \title{getVariablesDetails}
 \usage{
-getVariablesDetails(uri = "", label = "", trait = "", method = "",
-  unit = "", pageSize = NULL, page = NULL)
+getVariablesDetails(
+  uri = "",
+  label = "",
+  trait = "",
+  method = "",
+  unit = "",
+  pageSize = NULL,
+  page = NULL
+)
 }
 \arguments{
 \item{uri}{character, search by the uri of a variable (optional)}

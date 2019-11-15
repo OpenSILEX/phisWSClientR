@@ -4,7 +4,7 @@
 #            * postVectors
 # Authors: Hollebecq Jean-Eudes
 # Creation: 24/09/2019
-# Update:
+# Update: 15/11/2019 (JE.H)
 #-------------------------------------------------------------------------------
 
 ##' @title postVectors
@@ -31,27 +31,25 @@
 ##'                username="guest@opensilex.org",
 ##'                password="guest")
 ##'    postVectors(
+##'    uri="http://www.opensilex.org/vector/v001",
 ##'    rdfType = "http://www.opensilex.org/vocabulary/oeso#UAV",
-##'    label = "aligot",
-##'    brand = "Fait maison",
-##'    model = "avec du  cantal",
+##'    label = "Vector_label",
+##'    brand = "Vector_brand",
 ##'    serialNumber = "",
 ##'    inServiceDate = "2017-06-15",
 ##'    dateOfPurchase = "2017-06-15",
-##'    dateOfLastCalibration = "2017-06-15",
 ##'    personInCharge = "admin@opensilex.org"
 ##'    )
 ##'    }
 ##' @export
-postVectors <- function(uri, rdfType, label, brand, model, serialNumber, inServiceDate, dateOfPurchase, personInCharge){
+postVectors <- function(uri, rdfType, label, brand, serialNumber, inServiceDate, dateOfPurchase, personInCharge){
   attributes <- list()
   if (uri!="")            attributes <- c(attributes, uri = uri)           else stop("You must provide a variable")
   if (rdfType!="")        attributes <- c(attributes, rdfType = rdfType)   else stop("You must provide a type of vector")
   if (label!="")          attributes <- c(attributes, label = label)       else stop("You must provide a label")
   if (brand!="")          attributes <- c(attributes, brand = brand)       else stop("You must provide a brand")
-  if (model!="")          attributes <- c(attributes, model = model)       else stop("You must provide a model")
   if (serialNumber!="")   attributes <- c(attributes, serialNumber = serialNumber) 
-  if (inServiceDate!="")  attributes <- c(attributes, inServiceDate = inServiceDate)   else stop("You must provide a date - and a correct format")
+  if (inServiceDate!="")  attributes <- c(attributes, inServiceDate = inServiceDate)   else stop("You must provide a date - and correct format")
   if (dateOfPurchase!="") attributes <- c(attributes, dateOfPurchase = dateOfPurchase) else stop("You must provide a date - and correct format")
   if (personInCharge!="") attributes <- c(attributes, personInCharge = personInCharge) else stop("You must provide a person e-mail in charge of this vector")
   Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("VECTORS", configWS)),

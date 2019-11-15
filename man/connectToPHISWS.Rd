@@ -4,8 +4,13 @@
 \alias{connectToPHISWS}
 \title{connectToPHISWS}
 \usage{
-connectToPHISWS(apiID, username = NULL, password = NULL, url = NULL,
-  reconnection = TRUE)
+connectToPHISWS(
+  apiID,
+  username = NULL,
+  password = NULL,
+  url = NULL,
+  reconnection = TRUE
+)
 }
 \arguments{
 \item{apiID}{character, a character name of an API ("ws_public" or "ws_private")}

@@ -4,9 +4,17 @@
 \alias{getPlantEnvironment}
 \title{retrieves the environmental mesures of a plant from the web service}
 \usage{
-getPlantEnvironment(plantURI = "", variableCategory = "",
-  startDate = "", endDate = "", variables = "", facility = "",
-  experimentURI = "", page = NULL, pageSize = NULL)
+getPlantEnvironment(
+  plantURI = "",
+  variableCategory = "",
+  startDate = "",
+  endDate = "",
+  variables = "",
+  facility = "",
+  experimentURI = "",
+  page = NULL,
+  pageSize = NULL
+)
 }
 \arguments{
 \item{plantURI}{character, plant URI}

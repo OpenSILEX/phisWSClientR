@@ -7,7 +7,7 @@
 # Update:
 #-------------------------------------------------------------------------------
 
-##' @title postVectors
+##' @title postScientificObjects
 ##'
 ##' @description send a scientific object to the web service
 ##' @param rdfType character, the rdfType of the scientific object ex: http://www.opensilex.org/vocabulary/oeso#Plot
@@ -31,20 +31,19 @@
 ##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
 ##'                username="guest@opensilex.org",
 ##'                password="guest")
-##'   postSensors(
+##'   postScientificObjects(
 ##'    rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
-##'    label = "aligot",
-##'    brand = "Fait maison",
-##'    model = "avec du  cantal",
-##'    serialNumber = "",
-##'    inServiceDate = "2017-06-15",
-##'    dateOfPurchase = "2017-06-15",
-##'    dateOfLastCalibration = "2017-06-15",
-##'    personInCharge = "admin@opensilex.org"
-##'    )
+##'    alias="objectAlias",
+##'    geometry="POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))",
+##'    experiment="http://www.opensilex.org/demo/DIA2017-1",
+##'    isPartOf="string",
+##'    properties=list(rdfType = "http://xmlns.com/foaf/0.1/Agent",
+##'    relation = "http://www.opensilex.org/vocabulary/2018#hasContact",
+##'    value = "http://www.opensilex.org/demo/id/agent/marie_dupond"),
+##'    year=2009)
 ##'    }
 ##' @export
-postSensors <- function(rdfType, alias, geometry, brand, serialNumber, inServiceDate, dateOfPurchase, personInCharge){
+postScientificObjects <- function(rdfType, alias, geometry, experiment, isPartOf, year, properties){
   attributes <- list()
   if (rdfType!="")    attributes <- c(attributes, rdfType = rdfType)       else stop("You must provide a type of scientific object")
   if (alias!="")      attributes <- c(attributes, alias = alias)           else stop("You must provide an alias to the scientific object")

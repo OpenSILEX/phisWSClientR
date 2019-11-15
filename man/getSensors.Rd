@@ -4,10 +4,19 @@
 \alias{getSensors}
 \title{getSensors}
 \usage{
-getSensors(uri = "", rdfType = "", label = "", brand = "",
-  serialNumber = "", inServiceDate = "", dateOfPurchase = "",
-  dateOfLastCalibration = "", personInCharge = "", page = NULL,
-  pageSize = NULL)
+getSensors(
+  uri = "",
+  rdfType = "",
+  label = "",
+  brand = "",
+  serialNumber = "",
+  inServiceDate = "",
+  dateOfPurchase = "",
+  dateOfLastCalibration = "",
+  personInCharge = "",
+  page = NULL,
+  pageSize = NULL
+)
 }
 \arguments{
 \item{uri}{character, search by the uri of a sensor (optional)}

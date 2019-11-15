@@ -39,7 +39,7 @@
 ##'                   label = "PROV2019-LEAF",
 ##'                   jsonValueFilter =
 ##'                   list(SensingDevice = "http://www.opensilex.org/demo/s001",
-##'                   Vector = "http://www.opensilex.org/demo/v001")
+##'                   Vector = "http://www.opensilex.org/demo/v001"),
 ##'                   pageSize = 10)
 ##' provenances$data
 ##' }

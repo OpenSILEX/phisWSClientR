@@ -7,3 +7,4 @@
 .RData$
 ^.gitlab-ci.yml$
 ^\.Meta$
+test_post.R

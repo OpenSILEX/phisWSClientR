@@ -4,8 +4,16 @@
 \alias{postVectors}
 \title{postVectors}
 \usage{
-postVectors(uri, rdfType, label, brand, model, serialNumber, inServiceDate,
-  dateOfPurchase, personInCharge)
+postVectors(
+  uri,
+  rdfType,
+  label,
+  brand,
+  serialNumber,
+  inServiceDate,
+  dateOfPurchase,
+  personInCharge
+)
 }
 \arguments{
 \item{uri}{character, give the URI of the variable measured by the vector}
@@ -41,14 +49,13 @@ connectToPHISWS(apiID="ws_private",
                username="guest@opensilex.org",
                password="guest")
    postVectors(
+   uri="http://www.opensilex.org/vector/v001",
    rdfType = "http://www.opensilex.org/vocabulary/oeso#UAV",
-   label = "aligot",
-   brand = "Fait maison",
-   model = "avec du  cantal",
+   label = "Vector_label",
+   brand = "Vector_brand",
    serialNumber = "",
    inServiceDate = "2017-06-15",
    dateOfPurchase = "2017-06-15",
-   dateOfLastCalibration = "2017-06-15",
    personInCharge = "admin@opensilex.org"
    )
    }

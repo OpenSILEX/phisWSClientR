@@ -4,8 +4,15 @@
 \alias{getEnvironmentData}
 \title{getEnvironmentData}
 \usage{
-getEnvironmentData(variable = "", startDate = "", endDate = "",
-  sensor = "", page = NULL, pageSize = NULL, dateSortAsc = TRUE)
+getEnvironmentData(
+  variable = "",
+  startDate = "",
+  endDate = "",
+  sensor = "",
+  page = NULL,
+  pageSize = NULL,
+  dateSortAsc = TRUE
+)
 }
 \arguments{
 \item{variable}{character, search by the uri of a variable. You can access the list of variables through the \code{\link{getVariables2}} function.}

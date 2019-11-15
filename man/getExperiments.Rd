@@ -4,8 +4,13 @@
 \alias{getExperiments}
 \title{retrieves the experiments from the web service}
 \usage{
-getExperiments(projectName = "", season = "", sortOrder = "DESC",
-  page = NULL, pageSize = NULL)
+getExperiments(
+  projectName = "",
+  season = "",
+  sortOrder = "DESC",
+  page = NULL,
+  pageSize = NULL
+)
 }
 \arguments{
 \item{projectName}{project name}

@@ -4,8 +4,13 @@
 \alias{getVariablesByCategory}
 \title{getVariablesByCategory}
 \usage{
-getVariablesByCategory(category = "", experimentURI = "",
-  imageryProvider = "", page = NULL, pageSize = NULL)
+getVariablesByCategory(
+  category = "",
+  experimentURI = "",
+  imageryProvider = "",
+  page = NULL,
+  pageSize = NULL
+)
 }
 \arguments{
 \item{category}{character, Name of the category to search}

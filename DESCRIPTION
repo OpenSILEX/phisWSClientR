@@ -33,6 +33,6 @@ Suggests:
     knitr,
     rmarkdown
 Author: Isabelle Sanchez [aut, cre]
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.0
 VignetteBuilder: knitr
 Encoding: UTF-8

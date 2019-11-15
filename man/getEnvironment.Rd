@@ -4,9 +4,16 @@
 \alias{getEnvironment}
 \title{retrieves the environmental mesures of an experiment from the web service}
 \usage{
-getEnvironment(variableCategory = "", startDate = "", endDate = "",
-  variables = "", facility = "", experimentURI = "", page = NULL,
-  pageSize = NULL)
+getEnvironment(
+  variableCategory = "",
+  startDate = "",
+  endDate = "",
+  variables = "",
+  facility = "",
+  experimentURI = "",
+  page = NULL,
+  pageSize = NULL
+)
 }
 \arguments{
 \item{variableCategory}{character, a category of variables}
