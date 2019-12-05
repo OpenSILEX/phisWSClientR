@@ -48,16 +48,11 @@ connectToPHISWS(apiID="ws_private",
                url = "http://www.opensilex.org/openSilexAPI/rest/",
                username="guest@opensilex.org",
                password="guest")
-   postVectors(
-   uri="http://www.opensilex.org/vector/v001",
-   rdfType = "http://www.opensilex.org/vocabulary/oeso#UAV",
-   label = "Vector_label",
-   brand = "Vector_brand",
-   serialNumber = "",
-   inServiceDate = "2017-06-15",
-   dateOfPurchase = "2017-06-15",
-   personInCharge = "admin@opensilex.org"
-   )
+postVectors(
+  uri="http://www.opensilex.org/demo/2019/v1909",rdfType = "http://www.opensilex.org/vocabulary/oeso#UAV",
+  label = "Vector_label",brand = "Vector_brand",serialNumber = "1477",inServiceDate = "2017-06-15",
+ dateOfPurchase = "2017-06-15",personInCharge = "admin@opensilex.org"
+)
    }
 }
 \seealso{

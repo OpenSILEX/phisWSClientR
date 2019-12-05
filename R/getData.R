@@ -65,7 +65,7 @@ getData <- function(variableUri = "",
                                          attributes = attributes, wsVersion = 2)
   
   # convert value column from character to numeric
-  variableResponse$data[,"value"]<-as.numeric(variableResponse$data[,"value"])
+  #variableResponse$data[,"value"]<-as.numeric(variableResponse$data[,"value"])
   
   return(variableResponse)
 }

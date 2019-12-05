@@ -51,17 +51,11 @@ connectToPHISWS(apiID="ws_private",
                url = "http://www.opensilex.org/openSilexAPI/rest/",
                username="guest@opensilex.org",
                password="guest")
-  postSensors(
-   rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
-   label = "Sensor_label",
-   brand = "Sensor_brand",
-   model = "Sensor_model",
-   serialNumber = "",
-   inServiceDate = "2017-06-15",
-   dateOfPurchase = "2017-06-15",
-   dateOfLastCalibration = "2017-06-15",
-   personInCharge = "admin@opensilex.org"
-   )
+postSensors(rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",label = "Sensor_label",
+            brand = "Sensor_brand",model = "Sensor_model",serialNumber = "",
+            inServiceDate = "2017-06-15",dateOfPurchase = "2017-06-15",
+            dateOfLastCalibration = "2017-06-15",personInCharge = "admin@opensilex.org"
+)
    }
 }
 \seealso{

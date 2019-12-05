@@ -10,7 +10,7 @@
 ##' @title postUnits
 ##'
 ##' @description send a unit to the web service
-##' @param uri character, give a comment for this unit
+##' @param uri character, give an for this unit (not working now)
 ##' @param comment character, give a comment for this unit
 ##' @param label character, give the label of this unit
 ##' @param ontologiesReferences some metadata concerning the ontology of the unit.  The format of the metadata is a list with every item being a different metadata.  Exemple: list(property = "http://www.w3.org/2004/02/skos/core#closeMatch", object = "http://www.cropontology.org/rdf/CO_715:0000139", seeAlso = "http://www.cropontology.org/ontology/CO_715/")
@@ -29,13 +29,13 @@
 ##'   postUnits(
 ##'    label = "insertionunit_label",
 ##'    comment = "comment my unit",
-##'    metadata = list(property = "http://www.w3.org/2004/02/skos/core#closeMatch",
+##'    ontologiesReferences = list(property = "http://www.w3.org/2004/02/skos/core#closeMatch",
 ##'                    object = "http://www.cropontology.org/rdf/CO_715:0000139",
 ##'                    seeAlso = "http://www.cropontology.org/ontology/CO_715/")
 ##'                    )
 ##'                    }
 ##' @export
-postUnits <- function(uri, label, comment, ontologiesReferences ){
+postUnits <- function(uri = "", label, comment, ontologiesReferences ){
   attributes <- list()
   if (uri!="")                  attributes <- c(attributes, uri = uri)           
   if (label!="")                attributes <- c(attributes, label = label)       else stop("You must provide a label")

@@ -4,7 +4,7 @@
 \alias{postTraits}
 \title{postTraits}
 \usage{
-postTraits(uri, label, comment, ontologiesReferences)
+postTraits(uri = "", label, comment, ontologiesReferences)
 }
 \arguments{
 \item{uri}{character, give a comment for this trait}
@@ -34,7 +34,7 @@ connectToPHISWS(apiID="ws_private",
   postTraits(
    label = "insertiontrait_label",
    comment = "comment my trait",
-   metadata = list(property = "http://www.w3.org/2004/02/skos/core#closeMatch",
+   ontologiesReferences = list(property = "http://www.w3.org/2004/02/skos/core#closeMatch",
                    object = "http://www.cropontology.org/rdf/CO_715:0000139",
                    seeAlso = "http://www.cropontology.org/ontology/CO_715/")
                    )

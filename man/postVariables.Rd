@@ -37,15 +37,16 @@ connectToPHISWS(apiID="ws_private",
                url = "http://www.opensilex.org/openSilexAPI/rest/",
                username="guest@opensilex.org",
                password="guest")
-  postVariables(
-   label = "insertionvariable_label",
-   comment = "comment my variable",
-   ontologiesReferences = list(property = "http://www.w3.org/2004/02/skos/core#closeMatch",
-                   object = "http://www.cropontology.org/rdf/CO_715:0000139",
-                   seeAlso = "http://www.cropontology.org/ontology/CO_715/"),
-  trait = "http://www.phenome-fppn.fr/test/id/traits/t008",
-  method = "http://www.phenome-fppn.fr/test/id/methods/m008",
-  unit = "http://www.phenome-fppn.fr/test/id/units/u008")
+postVariables(uri="http://www.phenome-fppn.fr/mtpvm/2018/v1802",
+              label = "insertionvariable_label",
+              comment = "comment my variable",
+              ontologiesReferences = list(
+                property = "http://www.w3.org/2004/02/skos/core#closeMatch",
+                object = "http://www.cropontology.org/rdf/CO_715:0000139",
+                seeAlso = "http://www.cropontology.org/ontology/CO_715/"),
+              trait = "http://www.phenome-fppn.fr/test/id/traits/t008", 
+              method = "http://www.phenome-fppn.fr/test/id/methods/m008", 
+              unit = "http://www.phenome-fppn.fr/test/id/units/u008")
   }
 }
 \seealso{

@@ -23,7 +23,7 @@ postScientificObjects(
 
 \item{experiment}{character, uri of the experiment of the scientific object}
 
-\item{isPartOf}{character, a scientific object the scientific object is part of}
+\item{isPartOf}{character, a scientific object the scientific object is part of ???}
 
 \item{year}{character, the year of the scientific object}
 

@@ -4,10 +4,10 @@
 \alias{postUnits}
 \title{postUnits}
 \usage{
-postUnits(uri, label, comment, ontologiesReferences)
+postUnits(uri = "", label, comment, ontologiesReferences)
 }
 \arguments{
-\item{uri}{character, give a comment for this unit}
+\item{uri}{character, give an for this unit (not working now)}
 
 \item{label}{character, give the label of this unit}
 
@@ -34,7 +34,7 @@ connectToPHISWS(apiID="ws_private",
   postUnits(
    label = "insertionunit_label",
    comment = "comment my unit",
-   metadata = list(property = "http://www.w3.org/2004/02/skos/core#closeMatch",
+   ontologiesReferences = list(property = "http://www.w3.org/2004/02/skos/core#closeMatch",
                    object = "http://www.cropontology.org/rdf/CO_715:0000139",
                    seeAlso = "http://www.cropontology.org/ontology/CO_715/")
                    )

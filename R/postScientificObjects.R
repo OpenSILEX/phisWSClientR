@@ -14,7 +14,7 @@
 ##' @param alias character, give an alias to the scientific object
 ##' @param geometry character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"
 ##' @param experiment character, uri of the experiment of the scientific object
-##' @param isPartOf character, a scientific object the scientific object is part of
+##' @param isPartOf character, a scientific object the scientific object is part of ???
 ##' @param year character, the year of the scientific object
 ##' @param properties list, a list for example: list(rdfType = "http://xmlns.com/foaf/0.1/Agent", 
 ##'                                                   relation = "http://www.opensilex.org/vocabulary/2018#hasContact", 
@@ -52,7 +52,7 @@ postScientificObjects <- function(rdfType, alias, geometry, experiment, isPartOf
   if (isPartOf!="")   attributes <- c(attributes, isPartOf = isPartOf)       #else stop("You must provide a isPartOf")
   if (year!="")   attributes <- c(attributes, year = year) 
   if (properties!="")  attributes <- c(attributes, properties = properties)   
-  Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("SENSORS", configWS)),
+  Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("SCIENTIFIC_OBJECTS", configWS)),
                                                      attributes = attributes, wsVersion = 2)
   return(Response)
 }
