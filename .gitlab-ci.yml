@@ -198,6 +198,7 @@ unitTests:3.6:
 
 
 codeCoverage:3.6:
+  image: rocker/verse:3.6
   allow_failure: true
   when: manual
   stage: test
