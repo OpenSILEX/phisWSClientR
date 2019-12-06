@@ -82,7 +82,20 @@ installFromGithub:
   only:
     - master
 
-installLocally:
+installLocally3.4:
+  image: rocker/verse:3.4.4
+  stage: test
+  script:
+    - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install(build_vignettes=TRUE,dependencies = TRUE)'
+
+installLocally3.4:
+  image: rocker/verse:3.5
+  stage: test
+  script:
+    - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install(build_vignettes=TRUE,dependencies = TRUE)'
+    
+installLocally3.4:
+  image: rocker/verse:3.6
   stage: test
   script:
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install(build_vignettes=TRUE,dependencies = TRUE)'
