@@ -186,25 +186,25 @@ checkNotes:3.6:
     - if [ -f $R_TMP_USER/notesFail ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
   needs: ["buildBinary:3.6"]
     
-unitTests:3.6:
-  image: rocker/verse:3.6
-  when: manual
-  stage: test
-  script:
-    - mkdir -p $R_TMP_USER
-    - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) system("touch $R_TMP_USER/testsFail")
-    - if [ -f $R_TMP_USER/testsFail ]; then echo "Check Tests"; exit 1 ; else echo "Tests passed"; fi    
-  needs: ["checkErrors:3.6"]
+#unitTests:3.6:
+#  image: rocker/verse:3.6
+#  when: manual
+#  stage: test
+#  script:
+#    - mkdir -p $R_TMP_USER
+#    - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) system("touch $R_TMP_USER/testsFail")
+#    - if [ -f $R_TMP_USER/testsFail ]; then echo "Check Tests"; exit 1 ; else echo "Tests passed"; fi    
+#  needs: ["checkErrors:3.6"]
 
 
-codeCoverage:3.6:
-  image: rocker/verse:3.6
-  allow_failure: true
-  when: manual
-  stage: test
-  script:
-    - R -e 'covr::codecov()'
-  needs: ["unitTests:3.6"]
+#codeCoverage:3.6:
+#  image: rocker/verse:3.6
+#  allow_failure: true
+#  when: manual
+#  stage: test
+#  script:
+#    - R -e 'covr::codecov()'
+#  needs: ["unitTests:3.6"]
 
 
 installLocally:3.6:
