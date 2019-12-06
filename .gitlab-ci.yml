@@ -81,7 +81,7 @@ unitTests:3.4:
     - checkErrors:3.4  
 
 installFromGithub:3.4:
- image: rocker/verse:3.4
+  image: rocker/verse:3.4
   allow_failure: true
   stage: test
   script:
