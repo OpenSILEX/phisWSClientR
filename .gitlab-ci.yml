@@ -45,8 +45,7 @@ checkErrors:3.4:
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/errorsFail"), error = function(e) system("touch $R_TMP_USER/errorsFail"))'
     - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
-dependencies:
-    - buildBinary:3.4
+  needs: ["buildBinary:3.4"]
     
 checkWarnings:3.4:
   image: rocker/verse:3.4
@@ -55,8 +54,7 @@ checkWarnings:3.4:
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/warningsFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
     - if [ -f $R_TMP_USER/warningsFail ]; then echo "Check Warnings"; exit 1 ; else echo "No Warnings"; fi
-  dependencies:
-    - buildBinary:3.4
+  needs: ["buildBinary:3.4"]
     
 checkNotes:3.4:
   image: rocker/verse:3.4
@@ -66,8 +64,7 @@ checkNotes:3.4:
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/notesFail"))'
     - if [ -f $R_TMP_USER/notesFail ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
-  dependencies:
-    - buildBinary:3.4
+  needs: ["buildBinary:3.4"]
     
 unitTests:3.4:
   image: rocker/verse:3.4
@@ -77,8 +74,7 @@ unitTests:3.4:
     - mkdir -p $R_TMP_USER
     - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) system("touch $R_TMP_USER/testsFail")
     - if [ -f $R_TMP_USER/testsFail ]; then echo "Check Tests"; exit 1 ; else echo "Tests passed"; fi    
-  dependencies:
-    - checkErrors:3.4  
+  needs: ["checkErrors:3.4"]  
 
 installFromGithub:3.4:
   image: rocker/verse:3.4
@@ -88,8 +84,7 @@ installFromGithub:3.4:
     - R -e 'source("https://install-github.me/r-lib/desc");desc<-desc::description$new();remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref=paste0("v",desc$get("Version")[[1]]))'
   only:
     - master
-  dependencies:
-    - checkErrors:3.4  
+  needs: ["checkErrors:3.4"]  
     
     
 installLocally:3.4:
@@ -97,8 +92,7 @@ installLocally:3.4:
   stage: test
   script:
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install(build_vignettes=TRUE,dependencies = TRUE)'
-  dependencies:
-    - checkErrors:3.4
+  needs: ["checkErrors:3.4"]
     
 buildBinary:3.5:
   image: rocker/verse:3.5
@@ -114,8 +108,7 @@ checkErrors:3.5:
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/errorsFail"), error = function(e) system("touch $R_TMP_USER/errorsFail"))'
     - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
-  dependencies:
-    - buildBinary:3.5
+  needs: ["buildBinary:3.5"]
     
 checkWarnings:3.5:
   image: rocker/verse:3.5
@@ -124,8 +117,7 @@ checkWarnings:3.5:
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/warningsFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
     - if [ -f $R_TMP_USER/warningsFail ]; then echo "Check Warnings"; exit 1 ; else echo "No Warnings"; fi
-  dependencies:
-    - buildBinary:3.5
+  needs: ["buildBinary:3.5"]
     
 checkNotes:3.5:
   image: rocker/verse:3.5
@@ -135,8 +127,7 @@ checkNotes:3.5:
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/notesFail"))'
     - if [ -f $R_TMP_USER/notesFail ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
-  dependencies:
-    - buildBinary:3.5
+  needs: ["buildBinary:3.5"]
     
 unitTests:3.5:
   image: rocker/verse:3.5
@@ -146,8 +137,7 @@ unitTests:3.5:
     - mkdir -p $R_TMP_USER
     - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) system("touch $R_TMP_USER/testsFail")
     - if [ -f $R_TMP_USER/testsFail ]; then echo "Check Tests"; exit 1 ; else echo "Tests passed"; fi    
-  dependencies:
-    - checkErrors:3.5
+  needs: ["checkErrors:3.5"]
     
     
         
@@ -156,8 +146,7 @@ installLocally:3.5:
   stage: test
   script:
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install(build_vignettes=TRUE,dependencies = TRUE)'
-  dependencies:
-    - checkErrors:3.5
+  needs: ["checkErrors:3.5"]
     
     
     
@@ -176,8 +165,7 @@ checkErrors:3.6:
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/errorsFail"), error = function(e) system("touch $R_TMP_USER/errorsFail"))'
     - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
-  dependencies:
-    - buildBinary:3.6
+  needs: ["buildBinary:3.6"]
     
 checkWarnings:3.6:
   image: rocker/verse:3.6
@@ -186,8 +174,7 @@ checkWarnings:3.6:
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/warningsFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
     - if [ -f $R_TMP_USER/warningsFail ]; then echo "Check Warnings"; exit 1 ; else echo "No Warnings"; fi
-  dependencies:
-    - buildBinary:3.6
+  needs: ["buildBinary:3.6"]
     
 checkNotes:3.6:
   image: rocker/verse:3.6
@@ -197,8 +184,7 @@ checkNotes:3.6:
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/notesFail"))'
     - if [ -f $R_TMP_USER/notesFail ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
-  dependencies:
-    - buildBinary:3.6
+  needs: ["buildBinary:3.6"]
     
 unitTests:3.6:
   image: rocker/verse:3.6
@@ -208,8 +194,7 @@ unitTests:3.6:
     - mkdir -p $R_TMP_USER
     - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) system("touch $R_TMP_USER/testsFail")
     - if [ -f $R_TMP_USER/testsFail ]; then echo "Check Tests"; exit 1 ; else echo "Tests passed"; fi    
-  dependencies:
-    - checkErrors:3.6   
+  needs: ["checkErrors:3.6"]
 
 
 codeCoverage:3.6:
@@ -218,8 +203,7 @@ codeCoverage:3.6:
   stage: test
   script:
     - R -e 'covr::codecov()'
-  dependencies:
-    - unitTests:3.6
+  needs: ["unitTests:3.6"]
 
 
 installLocally:3.6:
@@ -227,5 +211,4 @@ installLocally:3.6:
   stage: test
   script:
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install(build_vignettes=TRUE,dependencies = TRUE)'
-  dependencies:
-    - checkErrors:3.6
+  needs: ["checkErrors:3.6"]
