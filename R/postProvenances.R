@@ -36,7 +36,7 @@ postProvenances <- function(label, comment, metadata ){
   attributes <- list()
   if (label!="")           attributes <- c(attributes, label = label)       else stop("You must provide a label")
   if (comment!="")         attributes <- c(attributes, comment = comment) 
-  if (metadata!="")        attributes <- c(attributes, metadata = metadata)       
+  if (length(metadata)!=0) attributes <- c(attributes, metadata = metadata)       
   Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("PROVENANCES", configWS)),
                                                     attributes = attributes, wsVersion = 2)
   return(Response)

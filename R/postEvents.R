@@ -44,11 +44,11 @@
 ##' @export
 postEvents <- function(rdfType, concernedItemsUris, date,properties, description, creator){
   attributes <- list()
-  if (rdfType!="")     attributes <- c(attributes, rdfType = rdfType)         else stop("You must provide a rdfType")
   if (concernedItemsUris!="") attributes <- c(attributes, concernedItemsUris = concernedItemsUris) else stop("You must provide a list o fconcerned objects")
-  if (date!="") attributes <- c(attributes, date = date) else stop("You must provide a date")
-  if (properties!="")  attributes <- c(attributes, properties = properties)   else stop("You must provide a body message")
-  if (description!="")     attributes <- c(attributes, description = description)         else stop("You must provide the description of this event")
+  if (length(properties)!=0)  attributes <- c(attributes, properties = properties)   else stop("You must provide a body message")
+  if (rdfType!="")     attributes <- c(attributes, rdfType = rdfType)         else stop("You must provide a rdfType")
+  if (date!="")        attributes <- c(attributes, date = date) else stop("You must provide a date")
+  if (description!="") attributes <- c(attributes, description = description)         else stop("You must provide the description of this event")
   if (creator!="")     attributes <- c(attributes, creator = creator)         else stop("You must the creator of this event")
   Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("EVENTS", configWS)),
                                                      attributes = attributes, wsVersion = 2)

@@ -40,7 +40,7 @@ postUnits <- function(uri = "", label, comment, ontologiesReferences ){
   if (uri!="")                  attributes <- c(attributes, uri = uri)           
   if (label!="")                attributes <- c(attributes, label = label)       else stop("You must provide a label")
   if (comment!="")              attributes <- c(attributes, comment = comment) 
-  if (ontologiesReferences!="") attributes <- c(attributes, ontologiesReferences = ontologiesReferences)  else stop("You must provide a correct property, written is the correct format.  st be one of the following : http://www.w3.org/2008/05/skos#exactMatch, http://www.w3.org/2008/05/skos#closeMatch, http://www.w3.org/2008/05/skos#narrower, http://www.w3.org/2008/05/skos#broader. Given : http://www.w3.org/2008/05/skos/core#closeMatch")
+  if (length(ontologiesReferences)!=0) attributes <- c(attributes, ontologiesReferences = ontologiesReferences)  else stop("You must provide a correct property, written is the correct format.  st be one of the following : http://www.w3.org/2008/05/skos#exactMatch, http://www.w3.org/2008/05/skos#closeMatch, http://www.w3.org/2008/05/skos#narrower, http://www.w3.org/2008/05/skos#broader. Given : http://www.w3.org/2008/05/skos/core#closeMatch")
   Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("UNITS", configWS)),
                                                      attributes = attributes, wsVersion = 2)
   return(Response)

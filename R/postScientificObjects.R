@@ -51,7 +51,7 @@ postScientificObjects <- function(rdfType, alias, geometry, experiment, isPartOf
   if (experiment!="") attributes <- c(attributes, experiment = experiment) else stop("You must provide a experiment")
   if (isPartOf!="")   attributes <- c(attributes, isPartOf = isPartOf)       #else stop("You must provide a isPartOf")
   if (year!="")   attributes <- c(attributes, year = year) 
-  if (properties!="")  attributes <- c(attributes, properties = properties)   
+  if (length(properties)!=0)  attributes <- c(attributes, properties = properties)   
   Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("SCIENTIFIC_OBJECTS", configWS)),
                                                      attributes = attributes, wsVersion = 2)
   return(Response)
