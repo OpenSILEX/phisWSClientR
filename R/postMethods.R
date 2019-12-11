@@ -13,7 +13,7 @@
 ##' @param uri character, give a comment for this method
 ##' @param comment character, give a comment for this method
 ##' @param label character, give the label of this method
-##' @param ontologiesReferences some metadata concerning the ontology of the method. The format of the metadata is a list with every item being a different metadata.  Exemple: list(property = "http://www.w3.org/2004/02/skos/core#closeMatch", object = "http://www.cropontology.org/rdf/CO_715:0000139", seeAlso = "http://www.cropontology.org/ontology/CO_715/")
+##' @param ontologiesReferences list, some metadata concerning the ontology of the method. The format of the metadata is a list with every item being a different metadata.  Exemple: list(property = "http://www.w3.org/2004/02/skos/core#closeMatch", object = "http://www.cropontology.org/rdf/CO_715:0000139", seeAlso = "http://www.cropontology.org/ontology/CO_715/")
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @seealso You have to install the opensilexWSClientR before running any 
@@ -26,11 +26,14 @@
 ##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
 ##'                username="guest@opensilex.org",
 ##'                password="guest")
-##'   postMethods(label = "insertionmethod_label",
-##'               comment = "comment my method",
-##'      metadata = list(property = "http://www.w3.org/2004/02/skos/core#closeMatch",
+##'   postMethods(
+##'   label = "insertionmethod_label",
+##'   comment = "comment my method",
+##'   ontologiesReferences = list(
+##'      property = "http://www.w3.org/2004/02/skos/core#closeMatch",
 ##'      object = "http://www.cropontology.org/rdf/CO_715:0000139",
-##'      seeAlso = "http://www.cropontology.org/ontology/CO_715/"))
+##'      seeAlso = "http://www.cropontology.org/ontology/CO_715/")
+##'   )
 ##'      }
 ##' @export
 postMethods <- function(uri, label, comment, ontologiesReferences ){
