@@ -11,11 +11,9 @@
 ##'
 ##' @description send a scientific object to the web service
 ##' @param rdfType character, the rdfType of the scientific object ex: http://www.opensilex.org/vocabulary/oeso#Plot
-##' @param alias character, give an alias to the scientific object
 ##' @param geometry character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"
 ##' @param experiment character, uri of the experiment of the scientific object
 ##' @param isPartOf character, a scientific object the scientific object is part of ???
-##' @param year character, the year of the scientific object
 ##' @param properties list, a list for example: list(rdfType = "http://xmlns.com/foaf/0.1/Agent", 
 ##'                                                   relation = "http://www.opensilex.org/vocabulary/2018#hasContact", 
 ##'                                                   value = "http://www.opensilex.org/demo/id/agent/marie_dupond")
@@ -31,27 +29,29 @@
 ##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
 ##'                username="guest@opensilex.org",
 ##'                password="guest")
-##'   postScientificObjects(
-##'    rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
-##'    alias="objectAlias",
-##'    geometry="POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))",
-##'    experiment="http://www.opensilex.org/demo/DIA2017-1",
-##'    isPartOf="string",
-##'    properties=list(rdfType = "http://xmlns.com/foaf/0.1/Agent",
-##'    relation = "http://www.opensilex.org/vocabulary/2018#hasContact",
-##'    value = "http://www.opensilex.org/demo/id/agent/marie_dupond"),
-##'    year=2009)
+##' postScientificObjects(
+##'   rdfType = "http://www.opensilex.org/vocabulary/oeso#Plot",
+##'   experiment="http://www.opensilex.org/demo/DIA2017-1",
+##'   properties=list(
+##'     list(
+##'       rdfType = "http://www.opensilex.org/vocabulary/oeso#Species",
+##'       relation = "http://www.opensilex.org/vocabulary/oeso#hasSpecies",
+##'       value = "http://www.phenome-fppn.fr/id/species/triticumaestivum"),
+##'     list(
+##'       rdfType = NA,
+##'       relation ="http://www.w3.org/2000/01/rdf-schema#label",
+##'       value ="objectAlias")
+##' )
+##' )
 ##'    }
 ##' @export
-postScientificObjects <- function(rdfType, alias, geometry, experiment, isPartOf, year, properties){
+postScientificObjects <- function(rdfType, experiment, geometry = "", isPartOf = "", properties){
   attributes <- list()
   if (rdfType!="")    attributes <- c(attributes, rdfType = rdfType)       else stop("You must provide a type of scientific object")
-  if (alias!="")      attributes <- c(attributes, alias = alias)           else stop("You must provide an alias to the scientific object")
-  if (geometry!="")   attributes <- c(attributes, geometry = geometry)     else stop("You must provide a geometry")
   if (experiment!="") attributes <- c(attributes, experiment = experiment) else stop("You must provide a experiment")
-  if (isPartOf!="")   attributes <- c(attributes, isPartOf = isPartOf)       #else stop("You must provide a isPartOf")
-  if (year!="")   attributes <- c(attributes, year = year) 
-  if (length(properties)!=0)  attributes <- c(attributes, properties = properties)   
+  if (geometry!="")   attributes <- c(attributes, geometry = geometry)    
+  if (isPartOf!="")   attributes <- c(attributes, isPartOf = isPartOf)
+  if (length(properties)!=0)  attributes <- c(attributes, properties = list(properties))
   Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("SCIENTIFIC_OBJECTS", configWS)),
                                                      attributes = attributes, wsVersion = 2)
   return(Response)

@@ -6,26 +6,20 @@
 \usage{
 postScientificObjects(
   rdfType,
-  alias,
-  geometry,
   experiment,
-  isPartOf,
-  year,
+  geometry = "",
+  isPartOf = "",
   properties
 )
 }
 \arguments{
 \item{rdfType}{character, the rdfType of the scientific object ex: http://www.opensilex.org/vocabulary/oeso#Plot}
 
-\item{alias}{character, give an alias to the scientific object}
+\item{experiment}{character, uri of the experiment of the scientific object}
 
 \item{geometry}{character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"}
 
-\item{experiment}{character, uri of the experiment of the scientific object}
-
 \item{isPartOf}{character, a scientific object the scientific object is part of ???}
-
-\item{year}{character, the year of the scientific object}
 
 \item{properties}{list, a list for example: list(rdfType = "http://xmlns.com/foaf/0.1/Agent", 
 relation = "http://www.opensilex.org/vocabulary/2018#hasContact", 
@@ -47,16 +41,20 @@ connectToPHISWS(apiID="ws_private",
                url = "http://www.opensilex.org/openSilexAPI/rest/",
                username="guest@opensilex.org",
                password="guest")
-  postScientificObjects(
-   rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
-   alias="objectAlias",
-   geometry="POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))",
-   experiment="http://www.opensilex.org/demo/DIA2017-1",
-   isPartOf="string",
-   properties=list(rdfType = "http://xmlns.com/foaf/0.1/Agent",
-   relation = "http://www.opensilex.org/vocabulary/2018#hasContact",
-   value = "http://www.opensilex.org/demo/id/agent/marie_dupond"),
-   year=2009)
+postScientificObjects(
+  rdfType = "http://www.opensilex.org/vocabulary/oeso#Plot",
+  experiment="http://www.opensilex.org/demo/DIA2017-1",
+  properties=list(
+    list(
+      rdfType = "http://www.opensilex.org/vocabulary/oeso#Species",
+      relation = "http://www.opensilex.org/vocabulary/oeso#hasSpecies",
+      value = "http://www.phenome-fppn.fr/id/species/triticumaestivum"),
+    list(
+      rdfType = NA,
+      relation ="http://www.w3.org/2000/01/rdf-schema#label",
+      value ="objectAlias")
+ )
+)
    }
 }
 \seealso{
