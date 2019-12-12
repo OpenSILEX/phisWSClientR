@@ -38,8 +38,8 @@ postAnnotations <- function(creator, motivatedBy, bodyValues, targets){
   attributes <- list()
   if (creator!="")     attributes <- c(attributes, creator = creator)         else stop("You must provide a creator")
   if (motivatedBy!="") attributes <- c(attributes, motivatedBy = motivatedBy) else stop("You must provide a motivation")
-  if (bodyValues!="")  attributes <- c(attributes, bodyValues = bodyValues)   else stop("You must provide a body message")
-  if (targets!="")     attributes <- c(attributes, targets = targets)         else stop("You must provide (at least) one scientific object targeted by this annotation")
+  if (bodyValues!="")  attributes <- c(attributes, bodyValues = list(bodyValues))   else stop("You must provide a body message")
+  if (targets!="")     attributes <- c(attributes, targets = list(targets))         else stop("You must provide (at least) one scientific object targeted by this annotation")
   Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("ANNOTATIONS", configWS)),
                                                      attributes = attributes, wsVersion = 2)
   return(Response)

@@ -10,7 +10,7 @@
 ##' @title postData
 ##'
 ##' @description send a data to the web service
-##' @param provenanceUri character, the URi of the provenance of the data. Accessed by from \code{\link{getProvenances}}
+##' @param provenanceUri character, the URI of the provenance of the data. Accessed by from \code{\link{getProvenances}}
 ##' @param objectUri character, give the uri of the scientific object concerned
 ##' @param variableUri character, give the uri of the variable concerned
 ##' @param date character, date of the measurement. Follow ISO 8601 format, see example

@@ -7,7 +7,7 @@
 postData(provenanceUri, objectUri, variableUri, date, value)
 }
 \arguments{
-\item{provenanceUri}{character, the URi of the provenance of the data. Accessed by from \code{\link{getProvenances}}}
+\item{provenanceUri}{character, the URI of the provenance of the data. Accessed by from \code{\link{getProvenances}}}
 
 \item{objectUri}{character, give the uri of the scientific object concerned}
 
