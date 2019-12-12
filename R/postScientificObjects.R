@@ -14,9 +14,10 @@
 ##' @param geometry character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"
 ##' @param experiment character, uri of the experiment of the scientific object
 ##' @param isPartOf character, a scientific object the scientific object is part of ???
-##' @param properties list, a list for example: list(rdfType = "http://xmlns.com/foaf/0.1/Agent", 
-##'                                                   relation = "http://www.opensilex.org/vocabulary/2018#hasContact", 
-##'                                                   value = "http://www.opensilex.org/demo/id/agent/marie_dupond")
+##' @param properties list, a list for the properties:
+##' !IMPORTANT! This list must contain the rdfs:label block ; also known as alias.
+##' See example.|
+##' Note: The object can also be a data.frame with the 3 named column rdfType, relation and value.
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @seealso You have to install the opensilexWSClientR before running any 

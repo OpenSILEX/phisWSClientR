@@ -21,9 +21,10 @@ postScientificObjects(
 
 \item{isPartOf}{character, a scientific object the scientific object is part of ???}
 
-\item{properties}{list, a list for example: list(rdfType = "http://xmlns.com/foaf/0.1/Agent", 
-relation = "http://www.opensilex.org/vocabulary/2018#hasContact", 
-value = "http://www.opensilex.org/demo/id/agent/marie_dupond")}
+\item{properties}{list, a list for the properties:
+!IMPORTANT! This list must contain the rdfs:label block ; also known as alias.
+See example.|
+Note: The object can also be a data.frame with the 3 named column rdfType, relation and value.}
 }
 \value{
 WSResponse object
@@ -53,7 +54,7 @@ postScientificObjects(
       rdfType = NA,
       relation ="http://www.w3.org/2000/01/rdf-schema#label",
       value ="objectAlias")
- )
+)
 )
    }
 }
