@@ -38,13 +38,13 @@
 ##'    value = "http://www.opensilex.org/demo/id/agent/marie_dupond"))
 ##'    }
 ##' @export
-postScientificObjects <- function(rdfType, geometry = "", experiment, isPartOf = "", properties){
+postScientificObjects <- function(rdfType, experiment, geometry = "", isPartOf = "", properties){
   attributes <- list()
   if (rdfType!="")    attributes <- c(attributes, rdfType = rdfType)       else stop("You must provide a type of scientific object")
   if (experiment!="") attributes <- c(attributes, experiment = experiment) else stop("You must provide a experiment")
   if (geometry!="")   attributes <- c(attributes, geometry = geometry)    
   if (isPartOf!="")   attributes <- c(attributes, isPartOf = isPartOf)
-  if (length(properties)!=0)  attributes <- c(attributes, properties = properties)
+  if (length(properties)!=0)  attributes <- c(attributes, properties = list(properties))
   Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("SCIENTIFIC_OBJECTS", configWS)),
                                                      attributes = attributes, wsVersion = 2)
   return(Response)
