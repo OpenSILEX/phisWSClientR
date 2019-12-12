@@ -29,13 +29,20 @@
 ##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
 ##'                username="guest@opensilex.org",
 ##'                password="guest")
-##'   postScientificObjects(
-##'    rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
-##'    geometry="POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))",
-##'    experiment="http://www.opensilex.org/demo/DIA2017-1",
-##'    properties=list(rdfType = "http://xmlns.com/foaf/0.1/Agent",
-##'    relation = "http://www.opensilex.org/vocabulary/2018#hasContact",
-##'    value = "http://www.opensilex.org/demo/id/agent/marie_dupond"))
+##' postScientificObjects(
+##'   rdfType = "http://www.opensilex.org/vocabulary/oeso#Plot",
+##'   experiment="http://www.opensilex.org/demo/DIA2017-1",
+##'   properties=list(
+##'     list(
+##'       rdfType = "http://www.opensilex.org/vocabulary/oeso#Species",
+##'       relation = "http://www.opensilex.org/vocabulary/oeso#hasSpecies",
+##'       value = "http://www.phenome-fppn.fr/id/species/triticumaestivum"),
+##'     list(
+##'       rdfType = NA,
+##'       relation ="http://www.w3.org/2000/01/rdf-schema#label",
+##'       value ="objectAlias")
+##' )
+##' )
 ##'    }
 ##' @export
 postScientificObjects <- function(rdfType, experiment, geometry = "", isPartOf = "", properties){
