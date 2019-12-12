@@ -14,7 +14,6 @@
 ##' @param geometry character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"
 ##' @param experiment character, uri of the experiment of the scientific object
 ##' @param isPartOf character, a scientific object the scientific object is part of ???
-##' @param year character, the year of the scientific object
 ##' @param properties list, a list for example: list(rdfType = "http://xmlns.com/foaf/0.1/Agent", 
 ##'                                                   relation = "http://www.opensilex.org/vocabulary/2018#hasContact", 
 ##'                                                   value = "http://www.opensilex.org/demo/id/agent/marie_dupond")
@@ -34,21 +33,18 @@
 ##'    rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
 ##'    geometry="POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))",
 ##'    experiment="http://www.opensilex.org/demo/DIA2017-1",
-##'    isPartOf="string",
 ##'    properties=list(rdfType = "http://xmlns.com/foaf/0.1/Agent",
 ##'    relation = "http://www.opensilex.org/vocabulary/2018#hasContact",
-##'    value = "http://www.opensilex.org/demo/id/agent/marie_dupond"),
-##'    year=2009)
+##'    value = "http://www.opensilex.org/demo/id/agent/marie_dupond"))
 ##'    }
 ##' @export
-postScientificObjects <- function(rdfType, geometry, experiment, isPartOf, year, properties){
+postScientificObjects <- function(rdfType, geometry = "", experiment, isPartOf = "", properties){
   attributes <- list()
   if (rdfType!="")    attributes <- c(attributes, rdfType = rdfType)       else stop("You must provide a type of scientific object")
-  if (geometry!="")   attributes <- c(attributes, geometry = geometry)     else stop("You must provide a geometry")
   if (experiment!="") attributes <- c(attributes, experiment = experiment) else stop("You must provide a experiment")
-  if (isPartOf!="")   attributes <- c(attributes, isPartOf = isPartOf)       #else stop("You must provide a isPartOf")
-  if (year!="")   attributes <- c(attributes, year = year) 
-  if (length(properties)!=0)  attributes <- c(attributes, properties = properties)   
+  if (geometry!="")   attributes <- c(attributes, geometry = geometry)    
+  if (isPartOf!="")   attributes <- c(attributes, isPartOf = isPartOf)
+  if (length(properties)!=0)  attributes <- c(attributes, properties = properties)
   Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("SCIENTIFIC_OBJECTS", configWS)),
                                                      attributes = attributes, wsVersion = 2)
   return(Response)
