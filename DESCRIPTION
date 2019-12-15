@@ -14,10 +14,11 @@ Description: a set of functions to connect R to the phenomeapi web service in Op
    with specific login as well as private access if the user has an account on an instance of the PHIS system information.
 Depends:
     R (>= 3.2.0),
-    opensilexWSClientR (>= 1.1.0)
+    opensilexWSClientR (>= 1.1.0),
+    phisWSClientRTools
 License: GPL-3 | file LICENSE
 LazyData: TRUE
-Remotes: github::opensilex/opensilex-ws-client-r@1.1.0
+Remotes: github::opensilex/opensilex-ws-client-r@1.1.0, github::opensilexphis-ws-client-r-tool@master
 Imports:
     ggplot2,
     tidyr,

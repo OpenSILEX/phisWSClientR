@@ -44,3 +44,46 @@ postAnnotations <- function(creator, motivatedBy, bodyValues, targets){
                                                      attributes = attributes, wsVersion = 2)
   return(Response)
 }
+
+
+#-------------------------------------------------------------------------------
+# Program: postAnnotations2.R
+# Objective: functions to post a new annotation to the WS2
+#            * postAnnotaions
+# Authors: Arnaud Charleroy
+# Creation: 16/12/2019
+# Update:
+#-------------------------------------------------------------------------------
+
+##' @title postAnnotations2
+##'
+##' @description send a list of annotation to the web service
+##' @param newAnnotations list, AnnotationDTO list 
+##' @return WSResponse object
+##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
+##' @seealso You have to install the opensilexWSClientR before running any 
+##'          request on PHIS web service.
+##' @details You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
+##' service
+##' @examples
+##' \donttest{
+##' connectToPHISWS(apiID="ws_private",
+##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
+##'                username="guest@opensilex.org",
+##'                password="guest")
+##'                
+##'  newAnnotation <- AnnotationDTO$new(
+##'    creator = "http://www.opensilex.org/demo/id/agent/marie_dupond",
+##'    targets = list("http://www.phenome-fppn.fr/test/2019/o19000074"),
+##'    motivatedBy = "http://www.w3.org/ns/oa#describing",
+##'    bodyValues =  list("the object has been observed")
+##'  )
+##' 
+##'  response <- postAnnotations(list(newAnnotation))
+##'  }
+##' @export
+postAnnotations2 <- function(newAnnotations){
+  annoService <- AnnotationsApi$new() 
+  Response <- annoService$post1(newAnnotations)
+  return(Response)
+}
