@@ -21,10 +21,8 @@ postScientificObjects(
 
 \item{isPartOf}{character, a scientific object the scientific object is part of ???}
 
-\item{properties}{list, a list for the properties:
-!IMPORTANT! This list must contain the rdfs:label block ; also known as alias.
-See example.|
-Note: The object can also be a data.frame with the 3 named column rdfType, relation and value.}
+\item{properties}{list, a list for the properties. 
+Note: The object can also be a data.frame with the 3 named column rdfType, relation and value. See example.}
 }
 \value{
 WSResponse object
@@ -36,6 +34,12 @@ send a scientific object to the web service
 You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
 }
+\section{Important}{
+
+This list must contain the rdfs:label block ; also known as alias.
+See example.
+}
+
 \examples{
 \donttest{
 connectToPHISWS(apiID="ws_private",

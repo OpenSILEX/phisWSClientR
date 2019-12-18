@@ -36,7 +36,7 @@
 ##'   )
 ##'      }
 ##' @export
-postMethods <- function(uri, label, comment, ontologiesReferences ){
+postMethods <- function(uri = "", label, comment, ontologiesReferences ){
   attributes <- list()
   if (uri!="")                  attributes <- c(attributes, uri = uri)           
   if (label!="")                attributes <- c(attributes, label = label)       else stop("You must provide a label")
