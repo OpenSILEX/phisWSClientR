@@ -36,7 +36,7 @@ service
 }
 \section{Important}{
 
-This list must contain the rdfs:label block ; also known as alias.
+The properties list must contain the rdfs:label block ; also known as alias.
 See example.
 }
 

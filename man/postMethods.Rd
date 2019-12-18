@@ -4,7 +4,7 @@
 \alias{postMethods}
 \title{postMethods}
 \usage{
-postMethods(uri, label, comment, ontologiesReferences)
+postMethods(uri = "", label, comment, ontologiesReferences)
 }
 \arguments{
 \item{uri}{character, give a comment for this method}
