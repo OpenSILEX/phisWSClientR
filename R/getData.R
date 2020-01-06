@@ -4,7 +4,7 @@
 #            * getData
 # Authors: Hollebecq Jean-Eudes
 # Creation: 12/03/2019
-# Update: 06/09/2019 (I.Sanchez)
+# Update: 06/09/2019 (I.Sanchez) 06/01/2020 (J-E Hollebecq)
 
 #-------------------------------------------------------------------------------
 
@@ -33,9 +33,9 @@
 ##'                username="guest@opensilex.org",
 ##'                password="guest")
 ##'  vars<-getVariables2()$data$uri
-##'  totalCount <- getData(variable = vars[4])$totalCount
-##'  data <- getData(variable = vars[4],pageSize = totalCount)
-##'  data <- getData(variable = vars[5],
+##'  totalCount <- getData(variableUri = vars[4])$totalCount
+##'  data <- getData(variableUri = vars[4],pageSize = totalCount)
+##'  data <- getData(variableUri = vars[5],
 ##'                  startDate = "2017-05-01",
 ##'                  endDate = "2017-06-01",
 ##'                  pageSize = totalCount)
@@ -52,6 +52,7 @@ getData <- function(variableUri = "",
                     page = NULL,
                     pageSize = NULL){
   
+  if(is.factor(variableUri)) variableUri <- as.character(variableUri)
   attributes <- list(pageSize=pageSize,  page = page)
   if (variableUri!="")     attributes <- c(attributes, variableUri = variableUri)
   if (objectUri!="")       attributes <- c(attributes, objectUri = objectUri)

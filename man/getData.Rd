@@ -52,9 +52,9 @@ connectToPHISWS(apiID="ws_private",
                username="guest@opensilex.org",
                password="guest")
  vars<-getVariables2()$data$uri
- totalCount <- getData(variable = vars[4])$totalCount
- data <- getData(variable = vars[4],pageSize = totalCount)
- data <- getData(variable = vars[5],
+ totalCount <- getData(variableUri = vars[4])$totalCount
+ data <- getData(variableUri = vars[4],pageSize = totalCount)
+ data <- getData(variableUri = vars[5],
                  startDate = "2017-05-01",
                  endDate = "2017-06-01",
                  pageSize = totalCount)
