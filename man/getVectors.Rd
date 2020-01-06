@@ -4,18 +4,9 @@
 \alias{getVectors}
 \title{getVectors}
 \usage{
-getVectors(
-  uri = "",
-  rdfType = "",
-  label = "",
-  brand = "",
-  serialNumber = "",
-  inServiceDate = "",
-  dateOfPurchase = "",
-  personInCharge = "",
-  page = NULL,
-  pageSize = NULL
-)
+getVectors(uri = "", rdfType = "", label = "", brand = "",
+  serialNumber = "", inServiceDate = "", dateOfPurchase = "",
+  personInCharge = "", page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{uri}{character, search by the uri of an annotation (optional)}

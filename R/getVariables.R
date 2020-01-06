@@ -6,7 +6,7 @@
 #             * getVariablesByExperiment: for WS2
 # Authors: A. Charleroy, I.Sanchez, J.E.Hollebecq, E.Chourrout
 # Creation: 24/01/2019
-# Last Update: 02/07/2019 (A. Charleroy) & 06/09/2019 (I.Sanchez)
+# Last Update: 02/07/2019 (A. Charleroy) & 06/01/2020 (I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getVariablesByCategory
@@ -26,11 +26,11 @@
 ##' service
 ##' @examples
 ##' \donttest{
-##'  connectToPHISWS(apiID="ws_public", 
+##'  connectToPHISWS(apiID="ws_1_public", 
 ##'                  username = "guestphis@supagro.inra.fr",
 ##'                  password = "guestphis")
 ##'  vars<-getVariablesByCategory(category="imagery",
-##'           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
+##'           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2017-03-30")
 ##'  vars$data
 ##' }
 ##' @export

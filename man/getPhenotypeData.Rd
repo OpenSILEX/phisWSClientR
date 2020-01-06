@@ -4,17 +4,9 @@
 \alias{getPhenotypeData}
 \title{getPhenotypeData}
 \usage{
-getPhenotypeData(
-  variable = "",
-  experiment = "",
-  scientificObject = "",
-  startDate = "",
-  endDate = "",
-  sensor = "",
-  incertitude = "",
-  page = NULL,
-  pageSize = NULL
-)
+getPhenotypeData(variable = "", experiment = "",
+  scientificObject = "", startDate = "", endDate = "", sensor = "",
+  incertitude = "", page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{variable}{character, search by the uri of a variable (optional). You can access the list of variables through \code{\link{getVariables2}} function.}

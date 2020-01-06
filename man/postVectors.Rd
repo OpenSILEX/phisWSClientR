@@ -4,16 +4,8 @@
 \alias{postVectors}
 \title{postVectors}
 \usage{
-postVectors(
-  uri,
-  rdfType,
-  label,
-  brand,
-  serialNumber,
-  inServiceDate,
-  dateOfPurchase,
-  personInCharge
-)
+postVectors(uri, rdfType, label, brand, serialNumber, inServiceDate,
+  dateOfPurchase, personInCharge)
 }
 \arguments{
 \item{uri}{character, give the URI of the variable measured by the vector}

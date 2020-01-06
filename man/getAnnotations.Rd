@@ -4,15 +4,8 @@
 \alias{getAnnotations}
 \title{getAnnotations}
 \usage{
-getAnnotations(
-  uri = "",
-  creator = "",
-  motivatedBy = "",
-  comment = "",
-  target = "",
-  page = NULL,
-  pageSize = NULL
-)
+getAnnotations(uri = "", creator = "", motivatedBy = "",
+  comment = "", target = "", page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{uri}{character, search by the uri of an annotation (optional)}

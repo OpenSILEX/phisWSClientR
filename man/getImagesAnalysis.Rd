@@ -4,15 +4,9 @@
 \alias{getImagesAnalysis}
 \title{retrieves the images analysis data from the web service}
 \usage{
-getImagesAnalysis(
-  experimentURI = "",
-  variablesName = list(),
-  labelView = "",
-  provider = "",
-  date = "",
-  page = NULL,
-  pageSize = NULL
-)
+getImagesAnalysis(experimentURI = "", variablesName = list(),
+  labelView = "", provider = "", date = "", page = NULL,
+  pageSize = NULL)
 }
 \arguments{
 \item{experimentURI}{URI of the experiment}

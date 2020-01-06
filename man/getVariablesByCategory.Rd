@@ -4,13 +4,8 @@
 \alias{getVariablesByCategory}
 \title{getVariablesByCategory}
 \usage{
-getVariablesByCategory(
-  category = "",
-  experimentURI = "",
-  imageryProvider = "",
-  page = NULL,
-  pageSize = NULL
-)
+getVariablesByCategory(category = "", experimentURI = "",
+  imageryProvider = "", page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{category}{character, Name of the category to search}
@@ -35,11 +30,11 @@ service
 }
 \examples{
 \donttest{
- connectToPHISWS(apiID="ws_public", 
+ connectToPHISWS(apiID="ws_1_public", 
                  username = "guestphis@supagro.inra.fr",
                  password = "guestphis")
  vars<-getVariablesByCategory(category="imagery",
-          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2012-01-01")
+          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2017-03-30")
  vars$data
 }
 }

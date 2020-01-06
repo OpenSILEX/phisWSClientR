@@ -4,15 +4,8 @@
 \alias{getVariables2}
 \title{getVariables2 (same as getVariablesDetails function)}
 \usage{
-getVariables2(
-  uri = "",
-  label = "",
-  trait = "",
-  method = "",
-  unit = "",
-  pageSize = NULL,
-  page = NULL
-)
+getVariables2(uri = "", label = "", trait = "", method = "",
+  unit = "", pageSize = NULL, page = NULL)
 }
 \arguments{
 \item{uri}{character, search by the uri of a variable (optional)}

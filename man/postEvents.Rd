@@ -4,7 +4,8 @@
 \alias{postEvents}
 \title{postEvents}
 \usage{
-postEvents(rdfType, concernedItemsUris, date, properties, description, creator)
+postEvents(rdfType, concernedItemsUris, date, properties, description,
+  creator)
 }
 \arguments{
 \item{rdfType}{character, give the rdfType of the event}
