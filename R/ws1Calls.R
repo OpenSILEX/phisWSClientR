@@ -196,7 +196,7 @@ getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = ""
 ##'
 ##' @description Retrieves data from image analysis
 ##' @param experimentURI URI of the experiment
-##' @param variablesName list, variable names of images analysis (ex : "objAreaSum")
+##' @param variablesName list, variable names of images analysis (ex : "objectSumArea")
 ##' @param labelView character, label view of an image
 ##' @param provider character, provider of data
 ##' @param date character, data for one day (format: YYYY-MM-DD)
@@ -213,10 +213,11 @@ getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = ""
 ##'  connectToPHISWS(apiID="ws_1_public", 
 ##'                  username = "guestphis@supagro.inra.fr",
 ##'                  password = "guestphis")
-##'  myImages<-getImagesAnalysis(
-##'            experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2017-11-23",
-##'            variablesName = list("objAreaSum"),pageSize = 100000)
-##'  head(myImages$data)
+##' myExp<-"http://www.phenome-fppn.fr/m3p/ARCH2017-03-30"
+##' getVariablesByCategory(category ="imagery",experimentURI=myExp)$data$name
+##' myImages<-getImagesAnalysis(experimentURI = myExp,
+##'            variablesName = list("objectSumArea"),pageSize = 100000)
+##' str(myImages$data)
 ##' }
 ##' @export
 getImagesAnalysis <- function(experimentURI ="", variablesName = list(),

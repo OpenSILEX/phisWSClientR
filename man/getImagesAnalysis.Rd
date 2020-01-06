@@ -11,7 +11,7 @@ getImagesAnalysis(experimentURI = "", variablesName = list(),
 \arguments{
 \item{experimentURI}{URI of the experiment}
 
-\item{variablesName}{list, variable names of images analysis (ex : "objAreaSum")}
+\item{variablesName}{list, variable names of images analysis (ex : "objectSumArea")}
 
 \item{labelView}{character, label view of an image}
 
@@ -38,10 +38,11 @@ service
  connectToPHISWS(apiID="ws_1_public", 
                  username = "guestphis@supagro.inra.fr",
                  password = "guestphis")
- myImages<-getImagesAnalysis(
-           experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2017-11-23",
-           variablesName = list("objAreaSum"),pageSize = 100000)
- head(myImages$data)
+myExp<-"http://www.phenome-fppn.fr/m3p/ARCH2017-03-30"
+getVariablesByCategory(category ="imagery",experimentURI=myExp)$data$name
+myImages<-getImagesAnalysis(experimentURI = myExp,
+           variablesName = list("objectSumArea"),pageSize = 100000)
+str(myImages$data)
 }
 }
 \seealso{
