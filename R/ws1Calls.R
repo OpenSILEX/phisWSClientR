@@ -57,7 +57,7 @@ getProjects<-function(projectName= "",page=NULL,pageSize=NULL){
 ##'  connectToPHISWS(apiID="ws_1_public", 
 ##'                  username = "guestphis@supagro.inra.fr",
 ##'                  password = "guestphis")
-##'  plantes<-getPlants(experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23")
+##'  plantes<-getPlants(experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30")
 ##' }
 ##' @export
 getPlants <- function(plantAlias ="", experimentURI = "", germplasmURI = "" ,
