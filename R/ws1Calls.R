@@ -267,13 +267,14 @@ getImagesAnalysis <- function(experimentURI ="", variablesName = list(),
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##'  connectToPHISWS(apiID="ws_1_public", 
-##'                  username = "guestphis@supagro.inra.fr",
-##'                  password = "guestphis")
-##'  mywater<-getWatering(
-##'          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2017-11-23",
-##'          variablesName = list("weightBefore"),pageSize=100000)
-##'  head(mywater$data)
+##' connectToPHISWS(apiID="ws_1_public", 
+##'                 username = "guestphis@supagro.inra.fr",
+##'                 password = "guestphis")
+##' myExp<-"http://www.phenome-fppn.fr/m3p/ARCH2017-03-30"
+##' getVariablesByCategory(category ="watering",experimentURI=myExp)$data$name
+##' mywater<-getWatering(experimentURI = myExp,
+##'             variablesName = list("weightBefore"),pageSize=100000)
+##' head(mywater$data)
 ##' }
 ##' @export
 getWatering <- function(experimentURI ="", variablesName = list(), provider = "", 
