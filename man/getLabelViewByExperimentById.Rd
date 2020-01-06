@@ -4,14 +4,8 @@
 \alias{getLabelViewByExperimentById}
 \title{getLabelViewByExperimentById}
 \usage{
-getLabelViewByExperimentById(
-  experimentURI = "",
-  viewType = "",
-  cameraAngle = "",
-  provider = "",
-  page = NULL,
-  pageSize = NULL
-)
+getLabelViewByExperimentById(experimentURI = "", viewType = "",
+  cameraAngle = "", provider = "", page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{experimentURI}{experiment unique identifier}

@@ -4,7 +4,8 @@
 \alias{postVariables}
 \title{postVariables}
 \usage{
-postVariables(uri, label, comment, ontologiesReferences, trait, method, unit)
+postVariables(uri, label, comment, ontologiesReferences, trait, method,
+  unit)
 }
 \arguments{
 \item{uri}{character, give an for this variable. If this is empty, the uri will me automatically generated.}

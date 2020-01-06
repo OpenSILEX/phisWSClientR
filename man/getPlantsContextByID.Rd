@@ -4,12 +4,8 @@
 \alias{getPlantsContextByID}
 \title{getPlantsContextByID}
 \usage{
-getPlantsContextByID(
-  plantURI = "",
-  experimentURI = "",
-  page = NULL,
-  pageSize = NULL
-)
+getPlantsContextByID(plantURI = "", experimentURI = "", page = NULL,
+  pageSize = NULL)
 }
 \arguments{
 \item{plantURI}{character, a URI identifier of a plant}

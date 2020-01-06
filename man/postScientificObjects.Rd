@@ -4,13 +4,8 @@
 \alias{postScientificObjects}
 \title{postScientificObjects}
 \usage{
-postScientificObjects(
-  rdfType,
-  experiment,
-  geometry = "",
-  isPartOf = "",
-  properties
-)
+postScientificObjects(rdfType, experiment, geometry = "",
+  isPartOf = "", properties)
 }
 \arguments{
 \item{rdfType}{character, the rdfType of the scientific object ex: http://www.opensilex.org/vocabulary/oeso#Plot}
