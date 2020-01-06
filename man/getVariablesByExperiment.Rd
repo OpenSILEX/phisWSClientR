@@ -37,8 +37,8 @@ connectToPHISWS(apiID="ws_private",
                url = "http://www.opensilex.org/openSilexAPI/rest/",
                username="guest@opensilex.org",
                password="guest")
- varExp<- getVariablesByExperiment(uri="http://www.opensilex.org/demo/DIA2017-1")
- varExp$data
+varExp<- getVariablesByExperiment(uri="http://www.opensilex.org/demo/DIA2017-1")
+varExp$data
 }
 }
 \seealso{
