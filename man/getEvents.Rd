@@ -4,9 +4,16 @@
 \alias{getEvents}
 \title{getEvents}
 \usage{
-getEvents(uri = "", type = "", concernsUri = "",
-  concernsLabel = "", startDate = "", endDate = "", page = NULL,
-  pageSize = NULL)
+getEvents(
+  uri = "",
+  type = "",
+  concernsUri = "",
+  concernsLabel = "",
+  startDate = "",
+  endDate = "",
+  page = NULL,
+  pageSize = NULL
+)
 }
 \arguments{
 \item{uri}{character, search by the uri of an event (optional)}

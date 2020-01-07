@@ -58,6 +58,7 @@ postAnnotations <- function(creator, motivatedBy, bodyValues, targets){
 ##' @title postAnnotations2
 ##'
 ##' @description send a list of annotation to the web service
+##' @import phisWSClientRTools
 ##' @param newAnnotations list, AnnotationDTO list 
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure

@@ -4,8 +4,14 @@
 \alias{getWatering}
 \title{retrieves the irrigation data from the web service}
 \usage{
-getWatering(experimentURI = "", variablesName = list(),
-  provider = "", date = "", page = NULL, pageSize = NULL)
+getWatering(
+  experimentURI = "",
+  variablesName = list(),
+  provider = "",
+  date = "",
+  page = NULL,
+  pageSize = NULL
+)
 }
 \arguments{
 \item{experimentURI}{character, URI of the experiment}

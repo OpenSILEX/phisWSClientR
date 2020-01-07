@@ -4,8 +4,7 @@
 \alias{getSpecies}
 \title{getSpecies}
 \usage{
-getSpecies(uri = "", label = "", language = "", page = NULL,
-  pageSize = NULL)
+getSpecies(uri = "", label = "", language = "", page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{uri}{character, search by the uri of a specie (optional)}

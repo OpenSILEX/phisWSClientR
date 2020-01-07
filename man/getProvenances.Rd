@@ -4,8 +4,14 @@
 \alias{getProvenances}
 \title{getProvenance}
 \usage{
-getProvenances(uri = "", label = "", comment = "",
-  jsonValueFilter = NULL, page = NULL, pageSize = NULL)
+getProvenances(
+  uri = "",
+  label = "",
+  comment = "",
+  jsonValueFilter = NULL,
+  page = NULL,
+  pageSize = NULL
+)
 }
 \arguments{
 \item{uri}{character, search by the uri of an provenance (optional)}

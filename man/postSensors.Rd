@@ -4,8 +4,17 @@
 \alias{postSensors}
 \title{postSensors}
 \usage{
-postSensors(rdfType, label, brand, model, serialNumber, inServiceDate,
-  dateOfPurchase, dateOfLastCalibration, personInCharge)
+postSensors(
+  rdfType,
+  label,
+  brand,
+  model,
+  serialNumber,
+  inServiceDate,
+  dateOfPurchase,
+  dateOfLastCalibration,
+  personInCharge
+)
 }
 \arguments{
 \item{rdfType}{character, the rdfType of the sensor ex: http://www.opensilex.org/vocabulary/oeso#Spectrometer}

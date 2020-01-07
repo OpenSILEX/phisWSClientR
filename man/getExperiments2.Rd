@@ -4,9 +4,18 @@
 \alias{getExperiments2}
 \title{getExperiments2}
 \usage{
-getExperiments2(uri = "", startDate = "", endDate = "", field = "",
-  campaign = "", place = "", alias = "", keywords = "",
-  page = NULL, pageSize = NULL)
+getExperiments2(
+  uri = "",
+  startDate = "",
+  endDate = "",
+  field = "",
+  campaign = "",
+  place = "",
+  alias = "",
+  keywords = "",
+  page = NULL,
+  pageSize = NULL
+)
 }
 \arguments{
 \item{uri}{character, search by the uri of an experiment (optional)}
