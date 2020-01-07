@@ -5,7 +5,7 @@
 #            * getEnvironmentData for WS2
 # Authors: Hollebecq Jean-Eudes
 # Creation: 21/01/2019
-# Update: 01/02/2019 (by J-E.Hollebecq) ; 06/09/2019 (by I.Sanchez)
+# Update: 01/02/2019 (by J-E.Hollebecq) ; 06/01/2020 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 
@@ -31,18 +31,16 @@
 ##'  connectToPHISWS(apiID="ws_1_public", 
 ##'                  username = "guestphis@supagro.inra.fr",
 ##'                  password = "guestphis")
-##'  getEnvironment(page=3,
-##'                 pageSize=100,
-##'                 startDate="2017-06-29",
-##'                 endDate = "2017-06-16")
 ##'  test<-getEnvironment(experimentURI="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23")
 ##'  test$data
+##'  
 ##'  getEnvironment( experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23",
-##'                  startDate="2017-06-16",
-##'                  endDate="2017-06-29")
+##'                  startDate="2017-06-28",
+##'                  endDate="2017-06-28")
+##'                  
 ##'  getEnvironment(experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23",
 ##'     facility="http://www.phenome-fppn.fr/m3p/es2",
-##'     variables="wind speed_weather station_meter per second")
+##'     variables="net irradiance_calculated variable_watt.m2")
 ##' }
 ##' @export
 getEnvironment <- function(variableCategory ="",startDate = "",endDate = "" ,variables = "",facility = "",

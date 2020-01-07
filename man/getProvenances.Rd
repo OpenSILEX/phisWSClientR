@@ -37,11 +37,10 @@ connectToPHISWS(apiID="ws_private",
                username="guest@opensilex.org",
                password="guest")
 provenances <- getProvenances(
-   uri = "http://www.opensilex.org/demo/2018/pv181515071552",
+   uri = "http://www.opensilex.org/demo/2018/pv181542817185",
    pageSize = 10)
 provenances <- getProvenances(
                   label = "MAU17-PG_NDVI_PUBLI",
-                  comment = "NDVI",
                   pageSize = 10)
 provenances <- getProvenances(
                   label = "PROV2019-LEAF",

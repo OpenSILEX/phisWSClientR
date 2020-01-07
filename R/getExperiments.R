@@ -7,7 +7,7 @@
 # Do we have to join getExperiments and getExperiments2????
 # Authors: A. Charleroy, I.Sanchez, J.E.Hollebecq, E.Chourrout
 # Creation: 24/01/2019
-# Update: 06/09/2019 (by I.Sanchez)
+# Update: 06/01/2020 (by I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getExperimentById
@@ -66,7 +66,7 @@ getExperimentById <- function( experimentURI ="", page = NULL,pageSize = NULL){
 ##'  connectToPHISWS(apiID="ws_1_public", 
 ##'                  username = "guestphis@supagro.inra.fr",
 ##'                  password = "guestphis")
-##'  getExperiments(page=3)
+##'  getExperiments()
 ##' }
 ##' @export
 getExperiments <- function( projectName ="", season = "", sortOrder = "DESC" ,

@@ -233,8 +233,8 @@ getVariables2 <- function(uri = "",
 ##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
 ##'                username="guest@opensilex.org",
 ##'                password="guest")
-##'  varExp<- getVariablesByExperiment(uri="http://www.opensilex.org/demo/DIA2017-1")
-##'  varExp$data
+##' varExp<- getVariablesByExperiment(uri="http://www.opensilex.org/demo/DIA2017-1")
+##' varExp$data
 ##' }
 ##' @export
 getVariablesByExperiment <- function(uri = "",pageSize = NULL,page = NULL){
@@ -244,13 +244,9 @@ getVariablesByExperiment <- function(uri = "",pageSize = NULL,page = NULL){
   tmpExp<-getExperiments2(uri = uri)
   
   # Some datamanagement to retrieve the names of the variables
-  # in THIS experiment
-  tmp<-select(tmpExp$data,starts_with("variables"))
-  tmp<-tmp[[1]]
-  tmp<-gather(tmp,"Name","label",1:ncol(tmp))
-  # We need only the uri of the variables: a vector
-  inputVar<-tmp[,1]
-  
+  # in THIS experiment (IS: 06/01/2020)
+  inputVar<-names(tmpExp$data$variables)
+    
   # Request on VARIABLES service to retrieve all the information
   # of the variables of ALL experiments
   tmpCountVar<-getVariables2()$totalCount

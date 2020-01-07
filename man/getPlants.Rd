@@ -33,7 +33,7 @@ service
  connectToPHISWS(apiID="ws_1_public", 
                  username = "guestphis@supagro.inra.fr",
                  password = "guestphis")
- plantes<-getPlants(experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23")
+ plantes<-getPlants(experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30")
 }
 }
 \seealso{

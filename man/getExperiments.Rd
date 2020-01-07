@@ -33,7 +33,7 @@ service
  connectToPHISWS(apiID="ws_1_public", 
                  username = "guestphis@supagro.inra.fr",
                  password = "guestphis")
- getExperiments(page=3)
+ getExperiments()
 }
 }
 \seealso{

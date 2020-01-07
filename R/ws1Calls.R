@@ -57,7 +57,7 @@ getProjects<-function(projectName= "",page=NULL,pageSize=NULL){
 ##'  connectToPHISWS(apiID="ws_1_public", 
 ##'                  username = "guestphis@supagro.inra.fr",
 ##'                  password = "guestphis")
-##'  plantes<-getPlants(experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-11-23")
+##'  plantes<-getPlants(experimentURI ="http://www.phenome-fppn.fr/m3p/ARCH2017-03-30")
 ##' }
 ##' @export
 getPlants <- function(plantAlias ="", experimentURI = "", germplasmURI = "" ,
@@ -196,7 +196,7 @@ getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = ""
 ##'
 ##' @description Retrieves data from image analysis
 ##' @param experimentURI URI of the experiment
-##' @param variablesName list, variable names of images analysis (ex : "objAreaSum")
+##' @param variablesName list, variable names of images analysis (ex : "objectSumArea")
 ##' @param labelView character, label view of an image
 ##' @param provider character, provider of data
 ##' @param date character, data for one day (format: YYYY-MM-DD)
@@ -213,10 +213,11 @@ getPlantEnvironment <- function(plantURI ="",variableCategory ="",startDate = ""
 ##'  connectToPHISWS(apiID="ws_1_public", 
 ##'                  username = "guestphis@supagro.inra.fr",
 ##'                  password = "guestphis")
-##'  myImages<-getImagesAnalysis(
-##'            experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2017-11-23",
-##'            variablesName = list("objAreaSum"),pageSize = 100000)
-##'  head(myImages$data)
+##' myExp<-"http://www.phenome-fppn.fr/m3p/ARCH2017-03-30"
+##' getVariablesByCategory(category ="imagery",experimentURI=myExp)$data$name
+##' myImages<-getImagesAnalysis(experimentURI = myExp,
+##'            variablesName = list("objectSumArea"),pageSize = 100000)
+##' str(myImages$data)
 ##' }
 ##' @export
 getImagesAnalysis <- function(experimentURI ="", variablesName = list(),
@@ -266,13 +267,14 @@ getImagesAnalysis <- function(experimentURI ="", variablesName = list(),
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @examples
 ##' \donttest{
-##'  connectToPHISWS(apiID="ws_1_public", 
-##'                  username = "guestphis@supagro.inra.fr",
-##'                  password = "guestphis")
-##'  mywater<-getWatering(
-##'          experimentURI = "http://www.phenome-fppn.fr/m3p/ARCH2017-11-23",
-##'          variablesName = list("weightBefore"),pageSize=100000)
-##'  head(mywater$data)
+##' connectToPHISWS(apiID="ws_1_public", 
+##'                 username = "guestphis@supagro.inra.fr",
+##'                 password = "guestphis")
+##' myExp<-"http://www.phenome-fppn.fr/m3p/ARCH2017-03-30"
+##' getVariablesByCategory(category ="watering",experimentURI=myExp)$data$name
+##' mywater<-getWatering(experimentURI = myExp,
+##'             variablesName = list("weightBefore"),pageSize=100000)
+##' head(mywater$data)
 ##' }
 ##' @export
 getWatering <- function(experimentURI ="", variablesName = list(), provider = "", 
