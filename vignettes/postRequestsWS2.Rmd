@@ -1,0 +1,306 @@
+---
+title: "POST Requests on the web service 2 - OpenSILEX"
+author: "I.Sanchez, A. Charleroy, Jean-Eudes Hollebecq (INRA MISTEA)"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+vignette: >
+  %\VignetteIndexEntry{POST Requests on the web service 2 - OpenSILEX}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<!---
+Program  : introWS2.Rmd
+Author   : I.Sanchez (MISTEA)
+Objective: a vignette for phisWSClientR library
+           an introduction to requesting the phenomeapi (phis web service) WS2
+Creation : 24/01/2019
+Update   : 14/02/2019
+-->
+
+***
+
+<div style="background-color:rgba(0, 255, 0,0.1); text-align:left; vertical-align: center; padding:10px 0;">
+This tutorial explains how to access to the second **phenomeapi** web service (PHIS system information).
+
+For this second web service, the available post functions are:
+
+*  postAnnotations()
+*  postData()
+*  postDataset()
+*  postEvents()
+*  postMethods()
+*  postProvenances()
+*  postScientificObjects()
+*  postSensors()
+*  postTraits()
+*  postUnits()
+*  postVariables()
+*  postVectors()
+</div>
+```{r option}
+knitr::opts_chunk$set( echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+
+```{r library, echo=TRUE,message=FALSE, warning=FALSE}
+  library(phisWSClientR)
+```
+
+# Generalities
+
+## HTTP request
+This package performs request to PHIS Web Service. We can distinguish two kinds of request:  
+1.  GET requests that retrieve data from the web service.  
+2.  POST requests that send data to the web service.  
+
+They are nammed accordingly to the HTTP method GET and POST associated to it.
+
+Because these functions rely on HTTP method, the first answer of the functions is the status of the request:  
+- 200 and family: means the request has succeded  
+- 300 and family: means the request was reoriented elsewhere  
+- 400 and family: means the request failed from your side (your fault)  
+- 500 and family: means that the request failed from the server (not your fault)  
+
+## Identifiers
+
+PHIS relies on URI (Uniform Resource Identifier) to identify resources. As an identifier, this is an un-ambiguous way to identify objects.  
+
+When inserting new data in the information system, a URI will be automaticaly given to the data/object/resource, based on a certain key (variable+date+provenance for a data value). Some functions will allow you to specify the URI of the resource when creating it. That is the case if the resource has been created somewhere else before.
+
+# Creation of a connection
+
+Ask permission to request to the web service:
+
+```{r connect}
+  # If you want to access to a private web service, you have to insert the address of the WS and the port
+  #connectToPHISWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
+  connectToPHISWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "http://www.opensilex.org/openSilexSandBoxAPI/rest/")
+```
+
+*aToken* is your identification and grants the access to some data according to your login information.
+
+```{r token, results="hide"}
+  aToken <- opensilexWSClientR::getToken("guest@opensilex.org","guest")
+```
+
+This token is handled automaticaly for you, but you can acces it using the following command :
+
+```{r get user info}
+getUserInformations()
+```
+
+# Send data to the web service
+
+Here we will detail the so called POST functions, that are used to send data to the web service.
+
+## Annotations
+
+```{r postAnnotations}
+  postAnnotations(    
+    creator = "http://www.opensilex.org/demo/id/agent/guest_phis",
+    motivatedBy = "http://www.w3.org/ns/oa#commenting",
+    bodyValues = list(paste("the object has been observed", rpois(n = 1, lambda = 5), sep = "")),
+    targets = list("http://www.opensilex.org/demo/2018/o18000076")
+  )
+```
+
+## Data
+
+Used to send data individually (usefull for testing if your dataset is correctly formated)
+
+```{r postData}
+postData(
+provenanceUri = "http://www.opensilex.org/demo/id/provenance/1553100217870",
+objectUri = "http://www.opensilex.org/demo/2018/o18000076",
+variableUri = "http://www.opensilex.org/demo/id/variables/v009",
+date = "2017-06-15T10:30:00+0200",
+value = 7.3)
+   
+```
+
+## Dataset
+
+A more usefull version of postData that takes a dataset as input, with the correct column names
+
+```{r postDataset}
+
+attri =data.frame(   
+  provenanceUri = c("http://www.opensilex.org/demo/id/provenance/1553100217870",
+                    "http://www.opensilex.org/demo/id/provenance/1553100217870",
+                    "http://www.opensilex.org/demo/id/provenance/1553100217870",
+                    "http://www.opensilex.org/demo/id/provenance/1553100217870"),
+  objectUri = c("http://www.opensilex.org/demo/2018/o18000076",
+                "http://www.opensilex.org/demo/2018/o18000076",
+                "http://www.opensilex.org/demo/2018/o18000076",
+                "http://www.opensilex.org/demo/2018/o18000076"),
+  variableUri = c("http://www.opensilex.org/demo/id/variables/v009",
+                  "http://www.opensilex.org/demo/id/variables/v009",
+                  "http://www.opensilex.org/demo/id/variables/v009",
+                  "http://www.opensilex.org/demo/id/variables/v009"),
+  date = c("2017-06-15T01:45:00+0200",
+           "2017-06-15T02:46:00+0200",
+           "2017-06-15T03:47:00+0200",
+           "2017-06-15T04:48:00+0200"),
+  value = c(11,
+            22,
+            33,
+            44)
+)
+  postDataset(data = attri)
+   
+```
+
+## Events	
+
+```{r postEvents}
+  postEvents(    
+    rdfType = "http://www.opensilex.org/vocabulary/oeev#MoveFrom",
+    concernedItemsUris = list("http://www.phenome-fppn.fr/test/2019/o19000076"),
+    date = "2017-09-08T12:00:00+01:00",
+    properties = list(
+      rdfType = "http://xmlns.com/foaf/0.1/Agent",
+      relation = "http://www.opensilex.org/vocabulary/2018#hasContact",
+      value= "http://www.opensilex.org/demo/id/agent/guest_phis"
+    ),
+    description = "The description of your event",
+    creator = "http://www.opensilex.org/demo/id/agent/guest_phis"
+  )
+```
+
+## Provenances	
+
+```{r postProvenances}
+  postProvenances(
+   label = "insertionProvenance_label",
+   comment = "comment my provenance",
+   metadata = list(meta1 = "15", meta2 = "owner1")
+   )
+```
+
+## ScientificObjects	
+
+Inserting Scientific objects has two variants, one accepting a list of lists, and the other beeing a data.frame with appropriate column names for the properties.
+**Important** the alias block (rdfs:label) is mandatory in order to insert a new scientific object.
+
+```{r postScienticObjects}
+postScientificObjects(
+  rdfType = "http://www.opensilex.org/vocabulary/oeso#Plot",
+  experiment="http://www.opensilex.org/demo/DIA2017-1",
+  properties=list(
+    list(
+      rdfType = "http://www.opensilex.org/vocabulary/oeso#Species",
+      relation = "http://www.opensilex.org/vocabulary/oeso#hasSpecies",
+      value = "http://www.phenome-fppn.fr/id/species/triticumaestivum"),
+    list(
+      rdfType = NA,
+      relation ="http://www.w3.org/2000/01/rdf-schema#label",
+      value ="objectAlias")
+)
+)
+```
+
+## Sensors	
+
+```{r postSensors}
+postSensors(rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
+            label = "Sensor_label",
+            brand = "Sensor_brand",model = "Sensor_model",serialNumber = "",
+            inServiceDate = "2017-06-15",dateOfPurchase = "2017-06-15",
+            dateOfLastCalibration = "2017-06-15",personInCharge = "admin@opensilex.org"
+)
+```
+
+## Traits
+
+```{r postTraits}
+  postTraits(
+   label = "insertionTrait_label",
+   comment = "comment my trait",
+   ontologiesReferences = list(property = "http://www.w3.org/2004/02/skos/core#closeMatch",
+                   object = "http://www.cropontology.org/rdf/CO_715:0000139",
+                   seeAlso = "http://www.cropontology.org/ontology/CO_715/")
+                   )
+```
+## Methods	
+
+```{r postMethods}
+  postMethods(
+    uri = "http://www.opensilex.org/demo/id/units/m016",
+  label = "insertionmethod_label",
+  comment = "comment my method",
+  ontologiesReferences = list(
+     property = "http://www.w3.org/2004/02/skos/core#closeMatch",
+     object = "http://www.cropontology.org/rdf/CO_715:0000139",
+     seeAlso = "http://www.cropontology.org/ontology/CO_715/")
+  )
+```
+
+
+## Units	
+
+```{r postUnits}
+  postUnits(
+   label = "insertionUnit_label",
+   comment = "comment my unit",
+   ontologiesReferences = list(property = "http://www.w3.org/2004/02/skos/core#closeMatch",
+                   object = "http://www.cropontology.org/rdf/CO_715:0000139",
+                   seeAlso = "http://www.cropontology.org/ontology/CO_715/")
+                   )
+                   
+```
+
+## Variables	
+
+```{r postVariables}
+postVariables(uri="http://www.opensilex.org/demo/id/variables/v0042",
+              label = "insertionVariable_label",
+              comment = "comment my variable",
+              ontologiesReferences = list(
+                property = "http://www.w3.org/2004/02/skos/core#closeMatch",
+                object = "http://www.cropontology.org/rdf/CO_715:0000139",
+                seeAlso = "http://www.cropontology.org/ontology/CO_715/"),
+              trait = "http://www.opensilex.org/demo/id/traits/t016", 
+              method = "http://www.opensilex.org/demo/id/units/m016", 
+              unit = "http://www.opensilex.org/demo/id/units/u007")
+  
+```
+
+## Vectors
+
+```{r postvectors}
+postVectors(
+  uri="http://www.opensilex.org/demo/2019/v1909",
+  rdfType = "http://www.opensilex.org/vocabulary/oeso#UAV",
+  label = "Vector_label",
+  brand = "Vector_brand",
+  serialNumber = "1477",
+  inServiceDate = "2017-06-15",
+  dateOfPurchase = "2017-06-15",
+  personInCharge = "admin@opensilex.org"
+)
+```
+
+ 
+ ------------ Developper part  ------------  
+ 
+# Get more informations on during a call
+## Can be useful to understand what append during a call
+```{r setLog level}
+  setLogLevel("DEBUG")
+  getEnvironmentData( variable = "http://www.opensilex.org/demo/id/variables/v050", pageSize=50)
+  setLogLevel("INFO")
+```
+## Session info
+
+```{r session,echo=FALSE}
+  sessionInfo()
+```
+
+# References
+1. R Development Core Team (2018). R: A language and environment for statistical computing. R Foundation for
+      Statistical Computing, Vienna, Austria. ISBN 3-900051-07-0, URL http://www.R-project.org.
+
