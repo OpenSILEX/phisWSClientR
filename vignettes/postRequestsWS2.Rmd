@@ -159,7 +159,7 @@ attri =data.frame(
 ```{r postEvents}
   postEvents(    
     rdfType = "http://www.opensilex.org/vocabulary/oeev#MoveFrom",
-    concernedItemsUris = list("http://www.phenome-fppn.fr/test/2019/o19000076"),
+    concernedItemsUris = list("http://www.opensilex.org/demo/2018/o18000076"),
     date = "2017-09-08T12:00:00+01:00",
     properties = list(
       rdfType = "http://xmlns.com/foaf/0.1/Agent",
@@ -198,7 +198,7 @@ postScientificObjects(
     list(
       rdfType = NA,
       relation ="http://www.w3.org/2000/01/rdf-schema#label",
-      value ="objectAlias")
+      value ="MyobjectAlias")
 )
 )
 ```
@@ -263,8 +263,8 @@ postVariables(uri="http://www.opensilex.org/demo/id/variables/v0042",
                 property = "http://www.w3.org/2004/02/skos/core#closeMatch",
                 object = "http://www.cropontology.org/rdf/CO_715:0000139",
                 seeAlso = "http://www.cropontology.org/ontology/CO_715/"),
-              trait = "http://www.opensilex.org/demo/id/traits/t016", 
-              method = "http://www.opensilex.org/demo/id/units/m016", 
+              trait = "http://www.opensilex.org/demo/id/traits/t010", 
+              method = "http://www.opensilex.org/demo/id/methods/m010", 
               unit = "http://www.opensilex.org/demo/id/units/u007")
   
 ```
