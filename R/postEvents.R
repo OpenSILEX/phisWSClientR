@@ -44,7 +44,7 @@
 ##' @export
 postEvents <- function(rdfType, concernedItemsUris, date,properties, description, creator){
   attributes <- list()
-  if (concernedItemsUris!="") attributes <- c(attributes, concernedItemsUris = concernedItemsUris) else stop("You must provide a list of concerned objects")
+  if (length(concernedItemsUris)!=0) attributes <- c(attributes, concernedItemsUris = list(concernedItemsUris)) else stop("You must provide a list of concerned objects")
   if (length(properties)!=0)  attributes <- c(attributes, properties = properties)   else stop("You must provide a body message")
   if (rdfType!="")     attributes <- c(attributes, rdfType = rdfType)         else stop("You must provide a rdfType")
   if (date!="")        attributes <- c(attributes, date = date) else stop("You must provide a date")
