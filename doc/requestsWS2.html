@@ -7,13 +7,12 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="I.Sanchez, A. Charleroy, Jean-Eudes Hollebecq (INRA MISTEA)" />
 
 
-<title>Requests on the web service 2 - OpenSILEX</title>
+<title>GET Requests on the web service 2 - OpenSILEX</title>
 
 <script>/*! jQuery v1.11.3 | (c) 2005, 2015 jQuery Foundation, Inc. | jquery.org/license */
 !function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error("jQuery requires a window with a document");return b(a)}:b(a)}("undefined"!=typeof window?window:this,function(a,b){var c=[],d=c.slice,e=c.concat,f=c.push,g=c.indexOf,h={},i=h.toString,j=h.hasOwnProperty,k={},l="1.11.3",m=function(a,b){return new m.fn.init(a,b)},n=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,o=/^-ms-/,p=/-([\da-z])/gi,q=function(a,b){return b.toUpperCase()};m.fn=m.prototype={jquery:l,constructor:m,selector:"",length:0,toArray:function(){return d.call(this)},get:function(a){return null!=a?0>a?this[a+this.length]:this[a]:d.call(this)},pushStack:function(a){var b=m.merge(this.constructor(),a);return b.prevObject=this,b.context=this.context,b},each:function(a,b){return m.each(this,a,b)},map:function(a){return this.pushStack(m.map(this,function(b,c){return a.call(b,c,b)}))},slice:function(){return this.pushStack(d.apply(this,arguments))},first:function(){return this.eq(0)},last:function(){return this.eq(-1)},eq:function(a){var b=this.length,c=+a+(0>a?b:0);return this.pushStack(c>=0&&b>c?[this[c]]:[])},end:function(){return this.prevObject||this.constructor(null)},push:f,sort:c.sort,splice:c.splice},m.extend=m.fn.extend=function(){var a,b,c,d,e,f,g=arguments[0]||{},h=1,i=arguments.length,j=!1;for("boolean"==typeof g&&(j=g,g=arguments[h]||{},h++),"object"==typeof g||m.isFunction(g)||(g={}),h===i&&(g=this,h--);i>h;h++)if(null!=(e=arguments[h]))for(d in e)a=g[d],c=e[d],g!==c&&(j&&c&&(m.isPlainObject(c)||(b=m.isArray(c)))?(b?(b=!1,f=a&&m.isArray(a)?a:[]):f=a&&m.isPlainObject(a)?a:{},g[d]=m.extend(j,f,c)):void 0!==c&&(g[d]=c));return g},m.extend({expando:"jQuery"+(l+Math.random()).replace(/\D/g,""),isReady:!0,error:function(a){throw new Error(a)},noop:function(){},isFunction:function(a){return"function"===m.type(a)},isArray:Array.isArray||function(a){return"array"===m.type(a)},isWindow:function(a){return null!=a&&a==a.window},isNumeric:function(a){return!m.isArray(a)&&a-parseFloat(a)+1>=0},isEmptyObject:function(a){var b;for(b in a)return!1;return!0},isPlainObject:function(a){var b;if(!a||"object"!==m.type(a)||a.nodeType||m.isWindow(a))return!1;try{if(a.constructor&&!j.call(a,"constructor")&&!j.call(a.constructor.prototype,"isPrototypeOf"))return!1}catch(c){return!1}if(k.ownLast)for(b in a)return j.call(a,b);for(b in a);return void 0===b||j.call(a,b)},type:function(a){return null==a?a+"":"object"==typeof a||"function"==typeof a?h[i.call(a)]||"object":typeof a},globalEval:function(b){b&&m.trim(b)&&(a.execScript||function(b){a.eval.call(a,b)})(b)},camelCase:function(a){return a.replace(o,"ms-").replace(p,q)},nodeName:function(a,b){return a.nodeName&&a.nodeName.toLowerCase()===b.toLowerCase()},each:function(a,b,c){var d,e=0,f=a.length,g=r(a);if(c){if(g){for(;f>e;e++)if(d=b.apply(a[e],c),d===!1)break}else for(e in a)if(d=b.apply(a[e],c),d===!1)break}else if(g){for(;f>e;e++)if(d=b.call(a[e],e,a[e]),d===!1)break}else for(e in a)if(d=b.call(a[e],e,a[e]),d===!1)break;return a},trim:function(a){return null==a?"":(a+"").replace(n,"")},makeArray:function(a,b){var c=b||[];return null!=a&&(r(Object(a))?m.merge(c,"string"==typeof a?[a]:a):f.call(c,a)),c},inArray:function(a,b,c){var d;if(b){if(g)return g.call(b,a,c);for(d=b.length,c=c?0>c?Math.max(0,d+c):c:0;d>c;c++)if(c in b&&b[c]===a)return c}return-1},merge:function(a,b){var c=+b.length,d=0,e=a.length;while(c>d)a[e++]=b[d++];if(c!==c)while(void 0!==b[d])a[e++]=b[d++];return a.length=e,a},grep:function(a,b,c){for(var d,e=[],f=0,g=a.length,h=!c;g>f;f++)d=!b(a[f],f),d!==h&&e.push(a[f]);return e},map:function(a,b,c){var d,f=0,g=a.length,h=r(a),i=[];if(h)for(;g>f;f++)d=b(a[f],f,c),null!=d&&i.push(d);else for(f in a)d=b(a[f],f,c),null!=d&&i.push(d);return e.apply([],i)},guid:1,proxy:function(a,b){var c,e,f;return"string"==typeof b&&(f=a[b],b=a,a=f),m.isFunction(a)?(c=d.call(arguments,2),e=function(){return a.apply(b||this,c.concat(d.call(arguments)))},e.guid=a.guid=a.guid||m.guid++,e):void 0},now:function(){return+new Date},support:k}),m.each("Boolean Number String Function Array Date RegExp Object Error".split(" "),function(a,b){h["[object "+b+"]"]=b.toLowerCase()});function r(a){var b="length"in a&&a.length,c=m.type(a);return"function"===c||m.isWindow(a)?!1:1===a.nodeType&&b?!0:"array"===c||0===b||"number"==typeof b&&b>0&&b-1 in a}var s=function(a){var b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u="sizzle"+1*new Date,v=a.document,w=0,x=0,y=ha(),z=ha(),A=ha(),B=function(a,b){return a===b&&(l=!0),0},C=1<<31,D={}.hasOwnProperty,E=[],F=E.pop,G=E.push,H=E.push,I=E.slice,J=function(a,b){for(var c=0,d=a.length;d>c;c++)if(a[c]===b)return c;return-1},K="checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",L="[\\x20\\t\\r\\n\\f]",M="(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+",N=M.replace("w","w#"),O="\\["+L+"*("+M+")(?:"+L+"*([*^$|!~]?=)"+L+"*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|("+N+"))|)"+L+"*\\]",P=":("+M+")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|"+O+")*)|.*)\\)|)",Q=new RegExp(L+"+","g"),R=new RegExp("^"+L+"+|((?:^|[^\\\\])(?:\\\\.)*)"+L+"+$","g"),S=new RegExp("^"+L+"*,"+L+"*"),T=new RegExp("^"+L+"*([>+~]|"+L+")"+L+"*"),U=new RegExp("="+L+"*([^\\]'\"]*?)"+L+"*\\]","g"),V=new RegExp(P),W=new RegExp("^"+N+"$"),X={ID:new RegExp("^#("+M+")"),CLASS:new RegExp("^\\.("+M+")"),TAG:new RegExp("^("+M.replace("w","w*")+")"),ATTR:new RegExp("^"+O),PSEUDO:new RegExp("^"+P),CHILD:new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\("+L+"*(even|odd|(([+-]|)(\\d*)n|)"+L+"*(?:([+-]|)"+L+"*(\\d+)|))"+L+"*\\)|)","i"),bool:new RegExp("^(?:"+K+")$","i"),needsContext:new RegExp("^"+L+"*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\("+L+"*((?:-\\d)?\\d*)"+L+"*\\)|)(?=[^-]|$)","i")},Y=/^(?:input|select|textarea|button)$/i,Z=/^h\d$/i,$=/^[^{]+\{\s*\[native \w/,_=/^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,aa=/[+~]/,ba=/'|\\/g,ca=new RegExp("\\\\([\\da-f]{1,6}"+L+"?|("+L+")|.)","ig"),da=function(a,b,c){var d="0x"+b-65536;return d!==d||c?b:0>d?String.fromCharCode(d+65536):String.fromCharCode(d>>10|55296,1023&d|56320)},ea=function(){m()};try{H.apply(E=I.call(v.childNodes),v.childNodes),E[v.childNodes.length].nodeType}catch(fa){H={apply:E.length?function(a,b){G.apply(a,I.call(b))}:function(a,b){var c=a.length,d=0;while(a[c++]=b[d++]);a.length=c-1}}}function ga(a,b,d,e){var f,h,j,k,l,o,r,s,w,x;if((b?b.ownerDocument||b:v)!==n&&m(b),b=b||n,d=d||[],k=b.nodeType,"string"!=typeof a||!a||1!==k&&9!==k&&11!==k)return d;if(!e&&p){if(11!==k&&(f=_.exec(a)))if(j=f[1]){if(9===k){if(h=b.getElementById(j),!h||!h.parentNode)return d;if(h.id===j)return d.push(h),d}else if(b.ownerDocument&&(h=b.ownerDocument.getElementById(j))&&t(b,h)&&h.id===j)return d.push(h),d}else{if(f[2])return H.apply(d,b.getElementsByTagName(a)),d;if((j=f[3])&&c.getElementsByClassName)return H.apply(d,b.getElementsByClassName(j)),d}if(c.qsa&&(!q||!q.test(a))){if(s=r=u,w=b,x=1!==k&&a,1===k&&"object"!==b.nodeName.toLowerCase()){o=g(a),(r=b.getAttribute("id"))?s=r.replace(ba,"\\$&"):b.setAttribute("id",s),s="[id='"+s+"'] ",l=o.length;while(l--)o[l]=s+ra(o[l]);w=aa.test(a)&&pa(b.parentNode)||b,x=o.join(",")}if(x)try{return H.apply(d,w.querySelectorAll(x)),d}catch(y){}finally{r||b.removeAttribute("id")}}}return i(a.replace(R,"$1"),b,d,e)}function ha(){var a=[];function b(c,e){return a.push(c+" ")>d.cacheLength&&delete b[a.shift()],b[c+" "]=e}return b}function ia(a){return a[u]=!0,a}function ja(a){var b=n.createElement("div");try{return!!a(b)}catch(c){return!1}finally{b.parentNode&&b.parentNode.removeChild(b),b=null}}function ka(a,b){var c=a.split("|"),e=a.length;while(e--)d.attrHandle[c[e]]=b}function la(a,b){var c=b&&a,d=c&&1===a.nodeType&&1===b.nodeType&&(~b.sourceIndex||C)-(~a.sourceIndex||C);if(d)return d;if(c)while(c=c.nextSibling)if(c===b)return-1;return a?1:-1}function ma(a){return function(b){var c=b.nodeName.toLowerCase();return"input"===c&&b.type===a}}function na(a){return function(b){var c=b.nodeName.toLowerCase();return("input"===c||"button"===c)&&b.type===a}}function oa(a){return ia(function(b){return b=+b,ia(function(c,d){var e,f=a([],c.length,b),g=f.length;while(g--)c[e=f[g]]&&(c[e]=!(d[e]=c[e]))})})}function pa(a){return a&&"undefined"!=typeof a.getElementsByTagName&&a}c=ga.support={},f=ga.isXML=function(a){var b=a&&(a.ownerDocument||a).documentElement;return b?"HTML"!==b.nodeName:!1},m=ga.setDocument=function(a){var b,e,g=a?a.ownerDocument||a:v;return g!==n&&9===g.nodeType&&g.documentElement?(n=g,o=g.documentElement,e=g.defaultView,e&&e!==e.top&&(e.addEventListener?e.addEventListener("unload",ea,!1):e.attachEvent&&e.attachEvent("onunload",ea)),p=!f(g),c.attributes=ja(function(a){return a.className="i",!a.getAttribute("className")}),c.getElementsByTagName=ja(function(a){return a.appendChild(g.createComment("")),!a.getElementsByTagName("*").length}),c.getElementsByClassName=$.test(g.getElementsByClassName),c.getById=ja(function(a){return o.appendChild(a).id=u,!g.getElementsByName||!g.getElementsByName(u).length}),c.getById?(d.find.ID=function(a,b){if("undefined"!=typeof b.getElementById&&p){var c=b.getElementById(a);return c&&c.parentNode?[c]:[]}},d.filter.ID=function(a){var b=a.replace(ca,da);return function(a){return a.getAttribute("id")===b}}):(delete d.find.ID,d.filter.ID=function(a){var b=a.replace(ca,da);return function(a){var c="undefined"!=typeof a.getAttributeNode&&a.getAttributeNode("id");return c&&c.value===b}}),d.find.TAG=c.getElementsByTagName?function(a,b){return"undefined"!=typeof b.getElementsByTagName?b.getElementsByTagName(a):c.qsa?b.querySelectorAll(a):void 0}:function(a,b){var c,d=[],e=0,f=b.getElementsByTagName(a);if("*"===a){while(c=f[e++])1===c.nodeType&&d.push(c);return d}return f},d.find.CLASS=c.getElementsByClassName&&function(a,b){return p?b.getElementsByClassName(a):void 0},r=[],q=[],(c.qsa=$.test(g.querySelectorAll))&&(ja(function(a){o.appendChild(a).innerHTML="<a id='"+u+"'></a><select id='"+u+"-\f]' msallowcapture=''><option selected=''></option></select>",a.querySelectorAll("[msallowcapture^='']").length&&q.push("[*^$]="+L+"*(?:''|\"\")"),a.querySelectorAll("[selected]").length||q.push("\\["+L+"*(?:value|"+K+")"),a.querySelectorAll("[id~="+u+"-]").length||q.push("~="),a.querySelectorAll(":checked").length||q.push(":checked"),a.querySelectorAll("a#"+u+"+*").length||q.push(".#.+[+~]")}),ja(function(a){var b=g.createElement("input");b.setAttribute("type","hidden"),a.appendChild(b).setAttribute("name","D"),a.querySelectorAll("[name=d]").length&&q.push("name"+L+"*[*^$|!~]?="),a.querySelectorAll(":enabled").length||q.push(":enabled",":disabled"),a.querySelectorAll("*,:x"),q.push(",.*:")})),(c.matchesSelector=$.test(s=o.matches||o.webkitMatchesSelector||o.mozMatchesSelector||o.oMatchesSelector||o.msMatchesSelector))&&ja(function(a){c.disconnectedMatch=s.call(a,"div"),s.call(a,"[s!='']:x"),r.push("!=",P)}),q=q.length&&new RegExp(q.join("|")),r=r.length&&new RegExp(r.join("|")),b=$.test(o.compareDocumentPosition),t=b||$.test(o.contains)?function(a,b){var c=9===a.nodeType?a.documentElement:a,d=b&&b.parentNode;return a===d||!(!d||1!==d.nodeType||!(c.contains?c.contains(d):a.compareDocumentPosition&&16&a.compareDocumentPosition(d)))}:function(a,b){if(b)while(b=b.parentNode)if(b===a)return!0;return!1},B=b?function(a,b){if(a===b)return l=!0,0;var d=!a.compareDocumentPosition-!b.compareDocumentPosition;return d?d:(d=(a.ownerDocument||a)===(b.ownerDocument||b)?a.compareDocumentPosition(b):1,1&d||!c.sortDetached&&b.compareDocumentPosition(a)===d?a===g||a.ownerDocument===v&&t(v,a)?-1:b===g||b.ownerDocument===v&&t(v,b)?1:k?J(k,a)-J(k,b):0:4&d?-1:1)}:function(a,b){if(a===b)return l=!0,0;var c,d=0,e=a.parentNode,f=b.parentNode,h=[a],i=[b];if(!e||!f)return a===g?-1:b===g?1:e?-1:f?1:k?J(k,a)-J(k,b):0;if(e===f)return la(a,b);c=a;while(c=c.parentNode)h.unshift(c);c=b;while(c=c.parentNode)i.unshift(c);while(h[d]===i[d])d++;return d?la(h[d],i[d]):h[d]===v?-1:i[d]===v?1:0},g):n},ga.matches=function(a,b){return ga(a,null,null,b)},ga.matchesSelector=function(a,b){if((a.ownerDocument||a)!==n&&m(a),b=b.replace(U,"='$1']"),!(!c.matchesSelector||!p||r&&r.test(b)||q&&q.test(b)))try{var d=s.call(a,b);if(d||c.disconnectedMatch||a.document&&11!==a.document.nodeType)return d}catch(e){}return ga(b,n,null,[a]).length>0},ga.contains=function(a,b){return(a.ownerDocument||a)!==n&&m(a),t(a,b)},ga.attr=function(a,b){(a.ownerDocument||a)!==n&&m(a);var e=d.attrHandle[b.toLowerCase()],f=e&&D.call(d.attrHandle,b.toLowerCase())?e(a,b,!p):void 0;return void 0!==f?f:c.attributes||!p?a.getAttribute(b):(f=a.getAttributeNode(b))&&f.specified?f.value:null},ga.error=function(a){throw new Error("Syntax error, unrecognized expression: "+a)},ga.uniqueSort=function(a){var b,d=[],e=0,f=0;if(l=!c.detectDuplicates,k=!c.sortStable&&a.slice(0),a.sort(B),l){while(b=a[f++])b===a[f]&&(e=d.push(f));while(e--)a.splice(d[e],1)}return k=null,a},e=ga.getText=function(a){var b,c="",d=0,f=a.nodeType;if(f){if(1===f||9===f||11===f){if("string"==typeof a.textContent)return a.textContent;for(a=a.firstChild;a;a=a.nextSibling)c+=e(a)}else if(3===f||4===f)return a.nodeValue}else while(b=a[d++])c+=e(b);return c},d=ga.selectors={cacheLength:50,createPseudo:ia,match:X,attrHandle:{},find:{},relative:{">":{dir:"parentNode",first:!0}," ":{dir:"parentNode"},"+":{dir:"previousSibling",first:!0},"~":{dir:"previousSibling"}},preFilter:{ATTR:function(a){return a[1]=a[1].replace(ca,da),a[3]=(a[3]||a[4]||a[5]||"").replace(ca,da),"~="===a[2]&&(a[3]=" "+a[3]+" "),a.slice(0,4)},CHILD:function(a){return a[1]=a[1].toLowerCase(),"nth"===a[1].slice(0,3)?(a[3]||ga.error(a[0]),a[4]=+(a[4]?a[5]+(a[6]||1):2*("even"===a[3]||"odd"===a[3])),a[5]=+(a[7]+a[8]||"odd"===a[3])):a[3]&&ga.error(a[0]),a},PSEUDO:function(a){var b,c=!a[6]&&a[2];return X.CHILD.test(a[0])?null:(a[3]?a[2]=a[4]||a[5]||"":c&&V.test(c)&&(b=g(c,!0))&&(b=c.indexOf(")",c.length-b)-c.length)&&(a[0]=a[0].slice(0,b),a[2]=c.slice(0,b)),a.slice(0,3))}},filter:{TAG:function(a){var b=a.replace(ca,da).toLowerCase();return"*"===a?function(){return!0}:function(a){return a.nodeName&&a.nodeName.toLowerCase()===b}},CLASS:function(a){var b=y[a+" "];return b||(b=new RegExp("(^|"+L+")"+a+"("+L+"|$)"))&&y(a,function(a){return b.test("string"==typeof a.className&&a.className||"undefined"!=typeof a.getAttribute&&a.getAttribute("class")||"")})},ATTR:function(a,b,c){return function(d){var e=ga.attr(d,a);return null==e?"!="===b:b?(e+="","="===b?e===c:"!="===b?e!==c:"^="===b?c&&0===e.indexOf(c):"*="===b?c&&e.indexOf(c)>-1:"$="===b?c&&e.slice(-c.length)===c:"~="===b?(" "+e.replace(Q," ")+" ").indexOf(c)>-1:"|="===b?e===c||e.slice(0,c.length+1)===c+"-":!1):!0}},CHILD:function(a,b,c,d,e){var f="nth"!==a.slice(0,3),g="last"!==a.slice(-4),h="of-type"===b;return 1===d&&0===e?function(a){return!!a.parentNode}:function(b,c,i){var j,k,l,m,n,o,p=f!==g?"nextSibling":"previousSibling",q=b.parentNode,r=h&&b.nodeName.toLowerCase(),s=!i&&!h;if(q){if(f){while(p){l=b;while(l=l[p])if(h?l.nodeName.toLowerCase()===r:1===l.nodeType)return!1;o=p="only"===a&&!o&&"nextSibling"}return!0}if(o=[g?q.firstChild:q.lastChild],g&&s){k=q[u]||(q[u]={}),j=k[a]||[],n=j[0]===w&&j[1],m=j[0]===w&&j[2],l=n&&q.childNodes[n];while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if(1===l.nodeType&&++m&&l===b){k[a]=[w,n,m];break}}else if(s&&(j=(b[u]||(b[u]={}))[a])&&j[0]===w)m=j[1];else while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if((h?l.nodeName.toLowerCase()===r:1===l.nodeType)&&++m&&(s&&((l[u]||(l[u]={}))[a]=[w,m]),l===b))break;return m-=e,m===d||m%d===0&&m/d>=0}}},PSEUDO:function(a,b){var c,e=d.pseudos[a]||d.setFilters[a.toLowerCase()]||ga.error("unsupported pseudo: "+a);return e[u]?e(b):e.length>1?(c=[a,a,"",b],d.setFilters.hasOwnProperty(a.toLowerCase())?ia(function(a,c){var d,f=e(a,b),g=f.length;while(g--)d=J(a,f[g]),a[d]=!(c[d]=f[g])}):function(a){return e(a,0,c)}):e}},pseudos:{not:ia(function(a){var b=[],c=[],d=h(a.replace(R,"$1"));return d[u]?ia(function(a,b,c,e){var f,g=d(a,null,e,[]),h=a.length;while(h--)(f=g[h])&&(a[h]=!(b[h]=f))}):function(a,e,f){return b[0]=a,d(b,null,f,c),b[0]=null,!c.pop()}}),has:ia(function(a){return function(b){return ga(a,b).length>0}}),contains:ia(function(a){return a=a.replace(ca,da),function(b){return(b.textContent||b.innerText||e(b)).indexOf(a)>-1}}),lang:ia(function(a){return W.test(a||"")||ga.error("unsupported lang: "+a),a=a.replace(ca,da).toLowerCase(),function(b){var c;do if(c=p?b.lang:b.getAttribute("xml:lang")||b.getAttribute("lang"))return c=c.toLowerCase(),c===a||0===c.indexOf(a+"-");while((b=b.parentNode)&&1===b.nodeType);return!1}}),target:function(b){var c=a.location&&a.location.hash;return c&&c.slice(1)===b.id},root:function(a){return a===o},focus:function(a){return a===n.activeElement&&(!n.hasFocus||n.hasFocus())&&!!(a.type||a.href||~a.tabIndex)},enabled:function(a){return a.disabled===!1},disabled:function(a){return a.disabled===!0},checked:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&!!a.checked||"option"===b&&!!a.selected},selected:function(a){return a.parentNode&&a.parentNode.selectedIndex,a.selected===!0},empty:function(a){for(a=a.firstChild;a;a=a.nextSibling)if(a.nodeType<6)return!1;return!0},parent:function(a){return!d.pseudos.empty(a)},header:function(a){return Z.test(a.nodeName)},input:function(a){return Y.test(a.nodeName)},button:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&"button"===a.type||"button"===b},text:function(a){var b;return"input"===a.nodeName.toLowerCase()&&"text"===a.type&&(null==(b=a.getAttribute("type"))||"text"===b.toLowerCase())},first:oa(function(){return[0]}),last:oa(function(a,b){return[b-1]}),eq:oa(function(a,b,c){return[0>c?c+b:c]}),even:oa(function(a,b){for(var c=0;b>c;c+=2)a.push(c);return a}),odd:oa(function(a,b){for(var c=1;b>c;c+=2)a.push(c);return a}),lt:oa(function(a,b,c){for(var d=0>c?c+b:c;--d>=0;)a.push(d);return a}),gt:oa(function(a,b,c){for(var d=0>c?c+b:c;++d<b;)a.push(d);return a})}},d.pseudos.nth=d.pseudos.eq;for(b in{radio:!0,checkbox:!0,file:!0,password:!0,image:!0})d.pseudos[b]=ma(b);for(b in{submit:!0,reset:!0})d.pseudos[b]=na(b);function qa(){}qa.prototype=d.filters=d.pseudos,d.setFilters=new qa,g=ga.tokenize=function(a,b){var c,e,f,g,h,i,j,k=z[a+" "];if(k)return b?0:k.slice(0);h=a,i=[],j=d.preFilter;while(h){(!c||(e=S.exec(h)))&&(e&&(h=h.slice(e[0].length)||h),i.push(f=[])),c=!1,(e=T.exec(h))&&(c=e.shift(),f.push({value:c,type:e[0].replace(R," ")}),h=h.slice(c.length));for(g in d.filter)!(e=X[g].exec(h))||j[g]&&!(e=j[g](e))||(c=e.shift(),f.push({value:c,type:g,matches:e}),h=h.slice(c.length));if(!c)break}return b?h.length:h?ga.error(a):z(a,i).slice(0)};function ra(a){for(var b=0,c=a.length,d="";c>b;b++)d+=a[b].value;return d}function sa(a,b,c){var d=b.dir,e=c&&"parentNode"===d,f=x++;return b.first?function(b,c,f){while(b=b[d])if(1===b.nodeType||e)return a(b,c,f)}:function(b,c,g){var h,i,j=[w,f];if(g){while(b=b[d])if((1===b.nodeType||e)&&a(b,c,g))return!0}else while(b=b[d])if(1===b.nodeType||e){if(i=b[u]||(b[u]={}),(h=i[d])&&h[0]===w&&h[1]===f)return j[2]=h[2];if(i[d]=j,j[2]=a(b,c,g))return!0}}}function ta(a){return a.length>1?function(b,c,d){var e=a.length;while(e--)if(!a[e](b,c,d))return!1;return!0}:a[0]}function ua(a,b,c){for(var d=0,e=b.length;e>d;d++)ga(a,b[d],c);return c}function va(a,b,c,d,e){for(var f,g=[],h=0,i=a.length,j=null!=b;i>h;h++)(f=a[h])&&(!c||c(f,d,e))&&(g.push(f),j&&b.push(h));return g}function wa(a,b,c,d,e,f){return d&&!d[u]&&(d=wa(d)),e&&!e[u]&&(e=wa(e,f)),ia(function(f,g,h,i){var j,k,l,m=[],n=[],o=g.length,p=f||ua(b||"*",h.nodeType?[h]:h,[]),q=!a||!f&&b?p:va(p,m,a,h,i),r=c?e||(f?a:o||d)?[]:g:q;if(c&&c(q,r,h,i),d){j=va(r,n),d(j,[],h,i),k=j.length;while(k--)(l=j[k])&&(r[n[k]]=!(q[n[k]]=l))}if(f){if(e||a){if(e){j=[],k=r.length;while(k--)(l=r[k])&&j.push(q[k]=l);e(null,r=[],j,i)}k=r.length;while(k--)(l=r[k])&&(j=e?J(f,l):m[k])>-1&&(f[j]=!(g[j]=l))}}else r=va(r===g?r.splice(o,r.length):r),e?e(null,g,r,i):H.apply(g,r)})}function xa(a){for(var b,c,e,f=a.length,g=d.relative[a[0].type],h=g||d.relative[" "],i=g?1:0,k=sa(function(a){return a===b},h,!0),l=sa(function(a){return J(b,a)>-1},h,!0),m=[function(a,c,d){var e=!g&&(d||c!==j)||((b=c).nodeType?k(a,c,d):l(a,c,d));return b=null,e}];f>i;i++)if(c=d.relative[a[i].type])m=[sa(ta(m),c)];else{if(c=d.filter[a[i].type].apply(null,a[i].matches),c[u]){for(e=++i;f>e;e++)if(d.relative[a[e].type])break;return wa(i>1&&ta(m),i>1&&ra(a.slice(0,i-1).concat({value:" "===a[i-2].type?"*":""})).replace(R,"$1"),c,e>i&&xa(a.slice(i,e)),f>e&&xa(a=a.slice(e)),f>e&&ra(a))}m.push(c)}return ta(m)}function ya(a,b){var c=b.length>0,e=a.length>0,f=function(f,g,h,i,k){var l,m,o,p=0,q="0",r=f&&[],s=[],t=j,u=f||e&&d.find.TAG("*",k),v=w+=null==t?1:Math.random()||.1,x=u.length;for(k&&(j=g!==n&&g);q!==x&&null!=(l=u[q]);q++){if(e&&l){m=0;while(o=a[m++])if(o(l,g,h)){i.push(l);break}k&&(w=v)}c&&((l=!o&&l)&&p--,f&&r.push(l))}if(p+=q,c&&q!==p){m=0;while(o=b[m++])o(r,s,g,h);if(f){if(p>0)while(q--)r[q]||s[q]||(s[q]=F.call(i));s=va(s)}H.apply(i,s),k&&!f&&s.length>0&&p+b.length>1&&ga.uniqueSort(i)}return k&&(w=v,j=t),r};return c?ia(f):f}return h=ga.compile=function(a,b){var c,d=[],e=[],f=A[a+" "];if(!f){b||(b=g(a)),c=b.length;while(c--)f=xa(b[c]),f[u]?d.push(f):e.push(f);f=A(a,ya(e,d)),f.selector=a}return f},i=ga.select=function(a,b,e,f){var i,j,k,l,m,n="function"==typeof a&&a,o=!f&&g(a=n.selector||a);if(e=e||[],1===o.length){if(j=o[0]=o[0].slice(0),j.length>2&&"ID"===(k=j[0]).type&&c.getById&&9===b.nodeType&&p&&d.relative[j[1].type]){if(b=(d.find.ID(k.matches[0].replace(ca,da),b)||[])[0],!b)return e;n&&(b=b.parentNode),a=a.slice(j.shift().value.length)}i=X.needsContext.test(a)?0:j.length;while(i--){if(k=j[i],d.relative[l=k.type])break;if((m=d.find[l])&&(f=m(k.matches[0].replace(ca,da),aa.test(j[0].type)&&pa(b.parentNode)||b))){if(j.splice(i,1),a=f.length&&ra(j),!a)return H.apply(e,f),e;break}}}return(n||h(a,o))(f,b,!p,e,aa.test(a)&&pa(b.parentNode)||b),e},c.sortStable=u.split("").sort(B).join("")===u,c.detectDuplicates=!!l,m(),c.sortDetached=ja(function(a){return 1&a.compareDocumentPosition(n.createElement("div"))}),ja(function(a){return a.innerHTML="<a href='#'></a>","#"===a.firstChild.getAttribute("href")})||ka("type|href|height|width",function(a,b,c){return c?void 0:a.getAttribute(b,"type"===b.toLowerCase()?1:2)}),c.attributes&&ja(function(a){return a.innerHTML="<input/>",a.firstChild.setAttribute("value",""),""===a.firstChild.getAttribute("value")})||ka("value",function(a,b,c){return c||"input"!==a.nodeName.toLowerCase()?void 0:a.defaultValue}),ja(function(a){return null==a.getAttribute("disabled")})||ka(K,function(a,b,c){var d;return c?void 0:a[b]===!0?b.toLowerCase():(d=a.getAttributeNode(b))&&d.specified?d.value:null}),ga}(a);m.find=s,m.expr=s.selectors,m.expr[":"]=m.expr.pseudos,m.unique=s.uniqueSort,m.text=s.getText,m.isXMLDoc=s.isXML,m.contains=s.contains;var t=m.expr.match.needsContext,u=/^<(\w+)\s*\/?>(?:<\/\1>|)$/,v=/^.[^:#\[\.,]*$/;function w(a,b,c){if(m.isFunction(b))return m.grep(a,function(a,d){return!!b.call(a,d,a)!==c});if(b.nodeType)return m.grep(a,function(a){return a===b!==c});if("string"==typeof b){if(v.test(b))return m.filter(b,a,c);b=m.filter(b,a)}return m.grep(a,function(a){return m.inArray(a,b)>=0!==c})}m.filter=function(a,b,c){var d=b[0];return c&&(a=":not("+a+")"),1===b.length&&1===d.nodeType?m.find.matchesSelector(d,a)?[d]:[]:m.find.matches(a,m.grep(b,function(a){return 1===a.nodeType}))},m.fn.extend({find:function(a){var b,c=[],d=this,e=d.length;if("string"!=typeof a)return this.pushStack(m(a).filter(function(){for(b=0;e>b;b++)if(m.contains(d[b],this))return!0}));for(b=0;e>b;b++)m.find(a,d[b],c);return c=this.pushStack(e>1?m.unique(c):c),c.selector=this.selector?this.selector+" "+a:a,c},filter:function(a){return this.pushStack(w(this,a||[],!1))},not:function(a){return this.pushStack(w(this,a||[],!0))},is:function(a){return!!w(this,"string"==typeof a&&t.test(a)?m(a):a||[],!1).length}});var x,y=a.document,z=/^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,A=m.fn.init=function(a,b){var c,d;if(!a)return this;if("string"==typeof a){if(c="<"===a.charAt(0)&&">"===a.charAt(a.length-1)&&a.length>=3?[null,a,null]:z.exec(a),!c||!c[1]&&b)return!b||b.jquery?(b||x).find(a):this.constructor(b).find(a);if(c[1]){if(b=b instanceof m?b[0]:b,m.merge(this,m.parseHTML(c[1],b&&b.nodeType?b.ownerDocument||b:y,!0)),u.test(c[1])&&m.isPlainObject(b))for(c in b)m.isFunction(this[c])?this[c](b[c]):this.attr(c,b[c]);return this}if(d=y.getElementById(c[2]),d&&d.parentNode){if(d.id!==c[2])return x.find(a);this.length=1,this[0]=d}return this.context=y,this.selector=a,this}return a.nodeType?(this.context=this[0]=a,this.length=1,this):m.isFunction(a)?"undefined"!=typeof x.ready?x.ready(a):a(m):(void 0!==a.selector&&(this.selector=a.selector,this.context=a.context),m.makeArray(a,this))};A.prototype=m.fn,x=m(y);var B=/^(?:parents|prev(?:Until|All))/,C={children:!0,contents:!0,next:!0,prev:!0};m.extend({dir:function(a,b,c){var d=[],e=a[b];while(e&&9!==e.nodeType&&(void 0===c||1!==e.nodeType||!m(e).is(c)))1===e.nodeType&&d.push(e),e=e[b];return d},sibling:function(a,b){for(var c=[];a;a=a.nextSibling)1===a.nodeType&&a!==b&&c.push(a);return c}}),m.fn.extend({has:function(a){var b,c=m(a,this),d=c.length;return this.filter(function(){for(b=0;d>b;b++)if(m.contains(this,c[b]))return!0})},closest:function(a,b){for(var c,d=0,e=this.length,f=[],g=t.test(a)||"string"!=typeof a?m(a,b||this.context):0;e>d;d++)for(c=this[d];c&&c!==b;c=c.parentNode)if(c.nodeType<11&&(g?g.index(c)>-1:1===c.nodeType&&m.find.matchesSelector(c,a))){f.push(c);break}return this.pushStack(f.length>1?m.unique(f):f)},index:function(a){return a?"string"==typeof a?m.inArray(this[0],m(a)):m.inArray(a.jquery?a[0]:a,this):this[0]&&this[0].parentNode?this.first().prevAll().length:-1},add:function(a,b){return this.pushStack(m.unique(m.merge(this.get(),m(a,b))))},addBack:function(a){return this.add(null==a?this.prevObject:this.prevObject.filter(a))}});function D(a,b){do a=a[b];while(a&&1!==a.nodeType);return a}m.each({parent:function(a){var b=a.parentNode;return b&&11!==b.nodeType?b:null},parents:function(a){return m.dir(a,"parentNode")},parentsUntil:function(a,b,c){return m.dir(a,"parentNode",c)},next:function(a){return D(a,"nextSibling")},prev:function(a){return D(a,"previousSibling")},nextAll:function(a){return m.dir(a,"nextSibling")},prevAll:function(a){return m.dir(a,"previousSibling")},nextUntil:function(a,b,c){return m.dir(a,"nextSibling",c)},prevUntil:function(a,b,c){return m.dir(a,"previousSibling",c)},siblings:function(a){return m.sibling((a.parentNode||{}).firstChild,a)},children:function(a){return m.sibling(a.firstChild)},contents:function(a){return m.nodeName(a,"iframe")?a.contentDocument||a.contentWindow.document:m.merge([],a.childNodes)}},function(a,b){m.fn[a]=function(c,d){var e=m.map(this,b,c);return"Until"!==a.slice(-5)&&(d=c),d&&"string"==typeof d&&(e=m.filter(d,e)),this.length>1&&(C[a]||(e=m.unique(e)),B.test(a)&&(e=e.reverse())),this.pushStack(e)}});var E=/\S+/g,F={};function G(a){var b=F[a]={};return m.each(a.match(E)||[],function(a,c){b[c]=!0}),b}m.Callbacks=function(a){a="string"==typeof a?F[a]||G(a):m.extend({},a);var b,c,d,e,f,g,h=[],i=!a.once&&[],j=function(l){for(c=a.memory&&l,d=!0,f=g||0,g=0,e=h.length,b=!0;h&&e>f;f++)if(h[f].apply(l[0],l[1])===!1&&a.stopOnFalse){c=!1;break}b=!1,h&&(i?i.length&&j(i.shift()):c?h=[]:k.disable())},k={add:function(){if(h){var d=h.length;!function f(b){m.each(b,function(b,c){var d=m.type(c);"function"===d?a.unique&&k.has(c)||h.push(c):c&&c.length&&"string"!==d&&f(c)})}(arguments),b?e=h.length:c&&(g=d,j(c))}return this},remove:function(){return h&&m.each(arguments,function(a,c){var d;while((d=m.inArray(c,h,d))>-1)h.splice(d,1),b&&(e>=d&&e--,f>=d&&f--)}),this},has:function(a){return a?m.inArray(a,h)>-1:!(!h||!h.length)},empty:function(){return h=[],e=0,this},disable:function(){return h=i=c=void 0,this},disabled:function(){return!h},lock:function(){return i=void 0,c||k.disable(),this},locked:function(){return!i},fireWith:function(a,c){return!h||d&&!i||(c=c||[],c=[a,c.slice?c.slice():c],b?i.push(c):j(c)),this},fire:function(){return k.fireWith(this,arguments),this},fired:function(){return!!d}};return k},m.extend({Deferred:function(a){var b=[["resolve","done",m.Callbacks("once memory"),"resolved"],["reject","fail",m.Callbacks("once memory"),"rejected"],["notify","progress",m.Callbacks("memory")]],c="pending",d={state:function(){return c},always:function(){return e.done(arguments).fail(arguments),this},then:function(){var a=arguments;return m.Deferred(function(c){m.each(b,function(b,f){var g=m.isFunction(a[b])&&a[b];e[f[1]](function(){var a=g&&g.apply(this,arguments);a&&m.isFunction(a.promise)?a.promise().done(c.resolve).fail(c.reject).progress(c.notify):c[f[0]+"With"](this===d?c.promise():this,g?[a]:arguments)})}),a=null}).promise()},promise:function(a){return null!=a?m.extend(a,d):d}},e={};return d.pipe=d.then,m.each(b,function(a,f){var g=f[2],h=f[3];d[f[1]]=g.add,h&&g.add(function(){c=h},b[1^a][2].disable,b[2][2].lock),e[f[0]]=function(){return e[f[0]+"With"](this===e?d:this,arguments),this},e[f[0]+"With"]=g.fireWith}),d.promise(e),a&&a.call(e,e),e},when:function(a){var b=0,c=d.call(arguments),e=c.length,f=1!==e||a&&m.isFunction(a.promise)?e:0,g=1===f?a:m.Deferred(),h=function(a,b,c){return function(e){b[a]=this,c[a]=arguments.length>1?d.call(arguments):e,c===i?g.notifyWith(b,c):--f||g.resolveWith(b,c)}},i,j,k;if(e>1)for(i=new Array(e),j=new Array(e),k=new Array(e);e>b;b++)c[b]&&m.isFunction(c[b].promise)?c[b].promise().done(h(b,k,c)).fail(g.reject).progress(h(b,j,i)):--f;return f||g.resolveWith(k,c),g.promise()}});var H;m.fn.ready=function(a){return m.ready.promise().done(a),this},m.extend({isReady:!1,readyWait:1,holdReady:function(a){a?m.readyWait++:m.ready(!0)},ready:function(a){if(a===!0?!--m.readyWait:!m.isReady){if(!y.body)return setTimeout(m.ready);m.isReady=!0,a!==!0&&--m.readyWait>0||(H.resolveWith(y,[m]),m.fn.triggerHandler&&(m(y).triggerHandler("ready"),m(y).off("ready")))}}});function I(){y.addEventListener?(y.removeEventListener("DOMContentLoaded",J,!1),a.removeEventListener("load",J,!1)):(y.detachEvent("onreadystatechange",J),a.detachEvent("onload",J))}function J(){(y.addEventListener||"load"===event.type||"complete"===y.readyState)&&(I(),m.ready())}m.ready.promise=function(b){if(!H)if(H=m.Deferred(),"complete"===y.readyState)setTimeout(m.ready);else if(y.addEventListener)y.addEventListener("DOMContentLoaded",J,!1),a.addEventListener("load",J,!1);else{y.attachEvent("onreadystatechange",J),a.attachEvent("onload",J);var c=!1;try{c=null==a.frameElement&&y.documentElement}catch(d){}c&&c.doScroll&&!function e(){if(!m.isReady){try{c.doScroll("left")}catch(a){return setTimeout(e,50)}I(),m.ready()}}()}return H.promise(b)};var K="undefined",L;for(L in m(k))break;k.ownLast="0"!==L,k.inlineBlockNeedsLayout=!1,m(function(){var a,b,c,d;c=y.getElementsByTagName("body")[0],c&&c.style&&(b=y.createElement("div"),d=y.createElement("div"),d.style.cssText="position:absolute;border:0;width:0;height:0;top:0;left:-9999px",c.appendChild(d).appendChild(b),typeof b.style.zoom!==K&&(b.style.cssText="display:inline;margin:0;border:0;padding:1px;width:1px;zoom:1",k.inlineBlockNeedsLayout=a=3===b.offsetWidth,a&&(c.style.zoom=1)),c.removeChild(d))}),function(){var a=y.createElement("div");if(null==k.deleteExpando){k.deleteExpando=!0;try{delete a.test}catch(b){k.deleteExpando=!1}}a=null}(),m.acceptData=function(a){var b=m.noData[(a.nodeName+" ").toLowerCase()],c=+a.nodeType||1;return 1!==c&&9!==c?!1:!b||b!==!0&&a.getAttribute("classid")===b};var M=/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,N=/([A-Z])/g;function O(a,b,c){if(void 0===c&&1===a.nodeType){var d="data-"+b.replace(N,"-$1").toLowerCase();if(c=a.getAttribute(d),"string"==typeof c){try{c="true"===c?!0:"false"===c?!1:"null"===c?null:+c+""===c?+c:M.test(c)?m.parseJSON(c):c}catch(e){}m.data(a,b,c)}else c=void 0}return c}function P(a){var b;for(b in a)if(("data"!==b||!m.isEmptyObject(a[b]))&&"toJSON"!==b)return!1;
@@ -256,7 +255,9 @@ h6 {
 </style>
 
 
+</head>
 
+<body>
 
 <style type="text/css">
 .main-container {
@@ -287,6 +288,8 @@ summary {
 </style>
 
 
+
+<div class="container-fluid main-container">
 
 <!-- tabsets -->
 
@@ -344,17 +347,20 @@ summary {
 }
 </style>
 
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
 <!-- code folding -->
 
-
-
-
-</head>
-
-<body>
-
-
-<div class="container-fluid main-container">
 
 
 
@@ -363,35 +369,44 @@ summary {
 
 
 
-<h1 class="title toc-ignore">Requests on the web service 2 - OpenSILEX</h1>
-<h4 class="author">I.Sanchez, A. Charleroy, Jean-Eudes Hollebecq (INRA MISTEA)</h4>
-<h4 class="date">septembre 06, 2019</h4>
+<h1 class="title toc-ignore">GET Requests on the web service 2 - OpenSILEX</h1>
+<h4 class="author"><em>I.Sanchez, A. Charleroy, Jean-Eudes Hollebecq (INRA MISTEA)</em></h4>
+<h4 class="date"><em>février 04, 2020</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
-<li><a href="#creation-of-an-identifier"><span class="toc-section-number">1</span> Creation of an identifier</a></li>
-<li><a href="#fetch-informations-about-elements-in-the-web-service"><span class="toc-section-number">2</span> Fetch informations about elements in the web service</a><ul>
-<li><a href="#projects"><span class="toc-section-number">2.1</span> Projects</a></li>
-<li><a href="#experiments"><span class="toc-section-number">2.2</span> Experiments</a></li>
-<li><a href="#scientific-object"><span class="toc-section-number">2.3</span> Scientific Object</a></li>
-<li><a href="#variables"><span class="toc-section-number">2.4</span> Variables</a></li>
-<li><a href="#traits"><span class="toc-section-number">2.5</span> Traits</a></li>
-<li><a href="#methods"><span class="toc-section-number">2.6</span> Methods</a></li>
-<li><a href="#units"><span class="toc-section-number">2.7</span> Units</a></li>
-<li><a href="#species"><span class="toc-section-number">2.8</span> Species</a></li>
-<li><a href="#sensors"><span class="toc-section-number">2.9</span> Sensors</a></li>
-<li><a href="#vectors"><span class="toc-section-number">2.10</span> Vectors</a></li>
-<li><a href="#events"><span class="toc-section-number">2.11</span> Events</a></li>
-<li><a href="#annotations"><span class="toc-section-number">2.12</span> Annotations</a></li>
+<li><a href="#generalities"><span class="toc-section-number">1</span> Generalities</a><ul>
+<li><a href="#http-request"><span class="toc-section-number">1.1</span> HTTP request</a></li>
+<li><a href="#identifiers"><span class="toc-section-number">1.2</span> Identifiers</a></li>
 </ul></li>
-<li><a href="#fetch-data-from-the-webservice"><span class="toc-section-number">3</span> Fetch Data from the webservice</a><ul>
-<li><a href="#environment-data"><span class="toc-section-number">3.1</span> Environment data</a></li>
-<li><a href="#phenotypic-data"><span class="toc-section-number">3.2</span> Phenotypic data</a></li>
+<li><a href="#creation-of-a-connection"><span class="toc-section-number">2</span> Creation of a connection</a></li>
+<li><a href="#fetch-informations-about-elements-in-the-web-service"><span class="toc-section-number">3</span> Fetch informations about elements in the web service</a><ul>
+<li><a href="#projects"><span class="toc-section-number">3.1</span> Projects</a></li>
+<li><a href="#experiments"><span class="toc-section-number">3.2</span> Experiments</a></li>
+<li><a href="#scientific-object"><span class="toc-section-number">3.3</span> Scientific Object</a></li>
+<li><a href="#infrastructures"><span class="toc-section-number">3.4</span> Infrastructures</a></li>
+<li><a href="#variables"><span class="toc-section-number">3.5</span> Variables</a></li>
+<li><a href="#traits"><span class="toc-section-number">3.6</span> Traits</a></li>
+<li><a href="#methods"><span class="toc-section-number">3.7</span> Methods</a></li>
+<li><a href="#units"><span class="toc-section-number">3.8</span> Units</a></li>
+<li><a href="#provenances"><span class="toc-section-number">3.9</span> Provenances</a></li>
+<li><a href="#species"><span class="toc-section-number">3.10</span> Species</a></li>
+<li><a href="#sensors"><span class="toc-section-number">3.11</span> Sensors</a></li>
+<li><a href="#vectors"><span class="toc-section-number">3.12</span> Vectors</a></li>
+<li><a href="#events"><span class="toc-section-number">3.13</span> Events</a></li>
+<li><a href="#annotations"><span class="toc-section-number">3.14</span> Annotations</a></li>
 </ul></li>
-<li><a href="#session-info"><span class="toc-section-number">4</span> Session info</a></li>
-<li><a href="#references"><span class="toc-section-number">5</span> References</a></li>
+<li><a href="#fetch-data-from-the-webservice"><span class="toc-section-number">4</span> Fetch Data from the webservice</a><ul>
+<li><a href="#environment-data"><span class="toc-section-number">4.1</span> Environment data</a></li>
+<li><a href="#phenotypic-data"><span class="toc-section-number">4.2</span> Phenotypic data</a></li>
+</ul></li>
+<li><a href="#get-more-informations-on-during-a-call"><span class="toc-section-number">5</span> Get more informations on during a call</a><ul>
+<li><a href="#can-be-useful-to-understand-what-append-ruing-a-call"><span class="toc-section-number">5.1</span> Can be useful to understand what append ruing a call</a></li>
+<li><a href="#session-info"><span class="toc-section-number">5.2</span> Session info</a></li>
+</ul></li>
+<li><a href="#references"><span class="toc-section-number">6</span> References</a></li>
 </ul>
 </div>
 
@@ -416,6 +431,7 @@ Update   : 14/02/2019
 <li>getMethods2()</li>
 <li>getPhenotypeData()</li>
 <li>getProjects2()</li>
+<li>getProvenances()</li>
 <li>getScientificObjects()</li>
 <li>getSensors()</li>
 <li>getSpecies()</li>
@@ -426,61 +442,91 @@ Update   : 14/02/2019
 </ul>
 </div>
 <pre class="r"><code>  library(phisWSClientR)</code></pre>
-<div id="creation-of-an-identifier" class="section level1">
-<h1><span class="header-section-number">1</span> Creation of an identifier</h1>
+<div id="generalities" class="section level1">
+<h1><span class="header-section-number">1</span> Generalities</h1>
+<div id="http-request" class="section level2">
+<h2><span class="header-section-number">1.1</span> HTTP request</h2>
+<p>This package performs request to PHIS Web Service. We can distinguish two kinds of request:<br />
+1. GET requests that retrieve data from the web service.<br />
+2. POST requests that send data to the web service.</p>
+<p>They are nammed accordingly to the HTTP method GET and POST associated to it.</p>
+<p>Because these functions rely on HTTP method, the first answer of the functions is the status of the request:<br />
+- 200 and family: means the request has succeded<br />
+- 300 and family: means the request was reoriented elsewhere<br />
+- 400 and family: means the request failed from your side (your fault)<br />
+- 500 and family: means that the request failed from the server (not your fault)</p>
+<p>What is distinct between the functions is the value taken in the $data list.<br />
+Because this package aim at providing the most generic functions, the format has to be compatible with a lot of data structures. For examples list containing another list (a properties argument typically). That is to say, data.frames are not always compliant enough.</p>
+</div>
+<div id="identifiers" class="section level2">
+<h2><span class="header-section-number">1.2</span> Identifiers</h2>
+<p>PHIS relies on URI (Uniform Resource Identifier) to identify resources. As an identifier, this is an un-ambiguous way to identify objects.</p>
+<p>When collecting data through the <code>getData</code> function, you will need to retrieve metadata of the variables through the <code>getVariables2</code> function if you want the label, unit and method used to create those data.</p>
+</div>
+</div>
+<div id="creation-of-a-connection" class="section level1">
+<h1><span class="header-section-number">2</span> Creation of a connection</h1>
 <p>Ask permission to request to the web service:</p>
 <pre class="r"><code>  # If you want to access to a private web service, you have to insert the address of the WS and the port
-  connectToPHISWS(apiID=&quot;ws_private&quot;,username=&quot;guest@opensilex.org&quot;,password=&quot;guest&quot;, url = &quot;www.opensilex.org/openSilexAPI/rest/&quot;)</code></pre>
-<pre><code>## 2019-09-06 09:40:12 INFO::Query executed and data recovered - WS2</code></pre>
+  #connectToPHISWS(apiID=&quot;ws_private&quot;,username=&quot;guest@opensilex.org&quot;,password=&quot;guest&quot;, url = &quot;www.opensilex.org/openSilexAPI/rest/&quot;)
+  connectToPHISWS(apiID=&quot;ws_private&quot;,username=&quot;guest@opensilex.org&quot;,password=&quot;guest&quot;, url = &quot;http://www.opensilex.org/openSilexSandBoxAPI/rest/&quot;)</code></pre>
+<pre><code>## 2020-02-04 10:08:16 INFO::Query executed and data recovered - WS2</code></pre>
 <p><em>aToken</em> is your identification and grants the access to some data according to your login information.</p>
 <pre class="r"><code>  aToken &lt;- opensilexWSClientR::getToken(&quot;guest@opensilex.org&quot;,&quot;guest&quot;)</code></pre>
-<pre><code>## 2019-09-06 09:40:12 INFO::Query executed and data recovered - WS2</code></pre>
+<p>This token is handled automaticaly for you, but you can acces it using the following command :</p>
+<pre class="r"><code>getUserInformations()</code></pre>
+<pre><code>##                                            BASE_PATH            USERNAME
+## 1 http://www.opensilex.org/openSilexSandBoxAPI/rest/ guest@opensilex.org
+##                        TOKEN_VALUE TOKEN_VALID_TIME TOKEN_EXPIRE_TIME
+## 1 c89ad9a9c2bd53b8f43cf0d255787cdd            11097             11097
+##   TOKEN_VALID WS_VERSION
+## 1        TRUE          2</code></pre>
 </div>
 <div id="fetch-informations-about-elements-in-the-web-service" class="section level1">
-<h1><span class="header-section-number">2</span> Fetch informations about elements in the web service</h1>
+<h1><span class="header-section-number">3</span> Fetch informations about elements in the web service</h1>
 <div id="projects" class="section level2">
-<h2><span class="header-section-number">2.1</span> Projects</h2>
-<pre class="r"><code>  getProjects2( uri=&quot;http://www.opensilex.org/demo/PHENOME-FPPN&quot;)</code></pre>
-<pre><code>## 2019-09-06 09:40:12 INFO::Query executed and data recovered</code></pre>
-<pre><code>## $currentPage
-## NULL
+<h2><span class="header-section-number">3.1</span> Projects</h2>
+<pre class="r"><code>  getProjects2( acronyme = &quot;PHENOME-FPPN&quot;)$data</code></pre>
+<pre><code>## 2020-02-04 10:08:18 INFO::Query executed and data recovered</code></pre>
+<pre><code>## $uri
+## [1] &quot;http://www.opensilex.org/demo/PHENOME-FPPN&quot;
+## [2] &quot;http://www.opensilex.org/demo/L40&quot;         
 ## 
-## $totalCount
-## NULL
+## $name
+## [1] &quot;French plant phenomic network (FPPN)&quot;
+## [2] &quot;Test L40&quot;                            
 ## 
-## $totalPages
-## NULL
+## $shortname
+## [1] &quot;PHENOME-FPPN&quot; &quot;L40&quot;         
 ## 
-## $codeHttp
-## [1] 200
+## $financialFunding
+##                                            uri label
+## 1 http://www.opensilex.org/vocabulary/oeso#anr   ANR
+## 2    http://www.opensilex.org/vocabulary/oeso#      
 ## 
-## $codeHttpMessage
-## [1] &quot;Query executed and data recovered&quot;
+## $financialReference
+## [1] &quot;ANR-11-INBS-0012&quot; &quot;&quot;                
 ## 
-## $codeStatusMessage
-## NULL
+## $description
+## [1] &quot;PHENOME, the French plant phenomic network (FPPN).PHENOME will provide France with an up-to-date, versatile, high throughput infrastructure and suite of methods allowing characterisation of panels of genotypes of different species under scenarios associated with climate changes. Phenotyping has become the major limitation in programmes aimed at building genotypes that maintain / increase crop performance under climate change and reduced inputs. The project objectives are to: Build or upgrade highly instrumented platforms in seven French sites able as a whole to deal with the most important crop species, biological questions and environmental stresses, develop hardware and software applications with technological jumps, including the development of new sensors, methods, data analysis and databases able to cope with millions of data points, Disseminate techniques and methods towards the French phenotyping community (seed companies, technical institutes, public research groups), Enhance emergence of French SMEs involved in the development of phenotyping methods. PHENOME is a “national biology and health infrastructure” of the “Investments for the future” program certified by the GIS Biotechnologies Vertes and the competitiveness poles Céréales Vallée, Qualiméditerranée, Végépolys and Vitagora&quot;
+## [2] &quot;&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 ## 
-## $data
-##                                          uri
-## 1 http://www.opensilex.org/demo/PHENOME-FPPN
-##                                   name     acronyme subprojectType
-## 1 French plant phenomic network (FPPN) PHENOME-FPPN               
-##   financialSupport    financialName  dateStart    dateEnd keywords
-## 1              ANR ANR-11-INBS-0012 2012-01-01 2019-12-31         
-##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      description
-## 1 PHENOME, the French plant phenomic network (FPPN).PHENOME will provide France with an up-to-date, versatile, high throughput infrastructure and suite of methods allowing characterisation of panels of genotypes of different species under scenarios associated with climate changes. Phenotyping has become the major limitation in programmes aimed at building genotypes that maintain / increase crop performance under climate change and reduced inputs. The project objectives are to: Build or upgrade highly instrumented platforms in seven French sites able as a whole to deal with the most important crop species, biological questions and environmental stresses, develop hardware and software applications with technological jumps, including the development of new sensors, methods, data analysis and databases able to cope with millions of data points, Disseminate techniques and methods towards the French phenotyping community (seed companies, technical institutes, public research groups), Enhance emergence of French SMEs involved in the development of phenotyping methods. PHENOME is a “national biology and health infrastructure” of the “Investments for the future” program certified by the GIS Biotechnologies Vertes and the competitiveness poles Céréales Vallée, Qualiméditerranée, Végépolys and Vitagora
-##   objective parentProject                      website
-## 1                         https://www.phenome-fppn.fr/
-##                                                                                                            contacts
-## 1 francois.tardieu@supagro.inra.fr, François, Tardieu, http://www.opensilex.org/vocabulary/oeso/#ProjectCoordinator
+## $startDate
+## [1] &quot;2012-01-01&quot; &quot;2018-10-01&quot;
 ## 
-## attr(,&quot;class&quot;)
-## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
+## $endDate
+## [1] &quot;2019-12-31&quot; &quot;2019-07-06&quot;
+## 
+## $homePage
+## [1] &quot;https://www.phenome-fppn.fr/&quot; NA                            
+## 
+## $objective
+## [1] &quot;&quot; &quot;&quot;</code></pre>
 </div>
 <div id="experiments" class="section level2">
-<h2><span class="header-section-number">2.2</span> Experiments</h2>
+<h2><span class="header-section-number">3.2</span> Experiments</h2>
 <pre class="r"><code>  getExperiments2( uri=&quot;http://www.opensilex.org/demo/DIA2017-1&quot;)</code></pre>
-<pre><code>## 2019-09-06 09:40:12 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2020-02-04 10:08:18 INFO::Query executed and data recovered</code></pre>
 <pre><code>## $currentPage
 ## NULL
 ## 
@@ -500,60 +546,114 @@ Update   : 14/02/2019
 ## NULL
 ## 
 ## $data
-##                                       uri  startDate    endDate
-## 1 http://www.opensilex.org/demo/DIA2017-1 2017-05-19 2017-09-22
-##                           field campaign place    alias comment
-## 1 http://www.opensilex.org/demo     2017       MAU17-PG        
-##                                             keywords objective cropSpecies
-## 1 Genetic gain, maize, water deficit, field, diaphen                 Maize
-##                                                                                               projects
-## 1 http://www.opensilex.org/demo/PHENOME-FPPN, NA, PHENOME-FPPN, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA
-##   groups
-## 1   NULL
-##                                                                                                                                                                                                                                                                                                                                                                                                                                         contacts
-## 1 cabrera@supagro.inra.fr, chapuis@supagro.inra.fr, chapuis@supagro.inra.fr, welcker@supagro.inra.fr, Llorenç, Romain, Romain, Claude, Cabrera-Bosquet, Chapuis, Chapuis, Welcker, http://www.opensilex.org/vocabulary/oeso/#ScientificSupervisor, http://www.opensilex.org/vocabulary/oeso/#TechnicalSupervisor, http://www.opensilex.org/vocabulary/oeso/#ScientificSupervisor, http://www.opensilex.org/vocabulary/oeso/#ScientificSupervisor
-##       variables.http://www.opensilex.org/demo/id/variables/v007
+## $data$uri
+## [1] &quot;http://www.opensilex.org/demo/DIA2017-1&quot;
+## 
+## $data$startDate
+## [1] &quot;2017-05-19&quot;
+## 
+## $data$endDate
+## [1] &quot;2017-09-22&quot;
+## 
+## $data$field
+## [1] &quot;http://www.opensilex.org/demo&quot;
+## 
+## $data$campaign
+## [1] &quot;2017&quot;
+## 
+## $data$place
+## [1] &quot;&quot;
+## 
+## $data$alias
+## [1] &quot;MAU17-PG&quot;
+## 
+## $data$comment
+## [1] &quot;&quot;
+## 
+## $data$keywords
+## [1] &quot;Genetic gain, maize, water deficit, field, diaphen&quot;
+## 
+## $data$objective
+## [1] &quot;&quot;
+## 
+## $data$cropSpecies
+## [1] &quot;Maize&quot;
+## 
+## $data$projects
+## $data$projects[[1]]
+##                                          uri name    shortname relatedProjects
+## 1 http://www.opensilex.org/demo/PHENOME-FPPN   NA PHENOME-FPPN            NULL
+##   financialFunding financialReference description startDate endDate keywords
+## 1               NA                 NA          NA        NA      NA     NULL
+##   homePage administrativeContacts coordinators scientificContacts objective
+## 1       NA                   NULL         NULL               NULL        NA
+## 
+## 
+## $data$groups
+## $data$groups[[1]]
+## list()
+## 
+## 
+## $data$contacts
+## $data$contacts[[1]]
+##                     email firstName      familyName
+## 1 cabrera@supagro.inra.fr   Llorenç Cabrera-Bosquet
+## 2 chapuis@supagro.inra.fr    Romain         Chapuis
+## 3 chapuis@supagro.inra.fr    Romain         Chapuis
+## 4 welcker@supagro.inra.fr    Claude         Welcker
+##                                                             type
+## 1 http://www.opensilex.org/vocabulary/oeso/#ScientificSupervisor
+## 2  http://www.opensilex.org/vocabulary/oeso/#TechnicalSupervisor
+## 3 http://www.opensilex.org/vocabulary/oeso/#ScientificSupervisor
+## 4 http://www.opensilex.org/vocabulary/oeso/#ScientificSupervisor
+## 
+## 
+## $data$variables
+##                 http://www.opensilex.org/demo/id/variables/v007
 ## 1 radiation_hourly global radiation_joule per square centimeter
-##           variables.http://www.opensilex.org/demo/id/variables/v008
+##                     http://www.opensilex.org/demo/id/variables/v008
 ## 1 radiation_hourly global PAR radiation_joule per square centimeter
-##   variables.http://www.opensilex.org/demo/id/variables/v009
-## 1                  precipitation_hourly rainfall_millimeter
-##   variables.http://www.opensilex.org/demo/id/variables/v004
-## 1           wind_hourly maximum wind speed_meter per second
-##   variables.http://www.opensilex.org/demo/id/variables/v005
-## 1     temperature_hourly instant temperature_degree celsius
-##    variables.http://www.opensilex.org/demo/id/variables/v006
+##   http://www.opensilex.org/demo/id/variables/v009
+## 1        precipitation_hourly rainfall_millimeter
+##   http://www.opensilex.org/demo/id/variables/v004
+## 1 wind_hourly maximum wind speed_meter per second
+##         http://www.opensilex.org/demo/id/variables/v005
+## 1 temperature_hourly instant temperature_degree celsius
+##              http://www.opensilex.org/demo/id/variables/v006
 ## 1 temperature_hourly actinothermic index 50cm_degree celsius
-##   variables.http://www.opensilex.org/demo/id/variables/v010
-## 1                   precipitation_daily rainfall_millimeter
-##   variables.http://www.opensilex.org/demo/id/variables/v011
-## 1                  humidity_hourly instant humidity_percent
-##   variables.http://www.opensilex.org/demo/id/variables/v001
-## 1                             Leaf-Area_LAI-Computation_LAI
-##   variables.http://www.opensilex.org/demo/id/variables/v002
-## 1                               NDVI_NDVI-Measurement_index
-##   sensors.http://www.opensilex.org/demo/2018/s18006
-## 1                                         rgpre0001
-##   sensors.http://www.opensilex.org/demo/2018/s18005
-## 1                                         rapar0001
-##   sensors.http://www.opensilex.org/demo/2018/s18007
-## 1                                         hcair0011
-##   sensors.http://www.opensilex.org/demo/2018/s18002
-## 1                                         tpair0011
-##   sensors.http://www.opensilex.org/demo/2018/s18001
-## 1                                         wcwsm0001
-##   sensors.http://www.opensilex.org/demo/2018/s18004
-## 1                                         raglo0001
-##   sensors.http://www.opensilex.org/demo/2018/s18003
-## 1                                         tpact0002
+##   http://www.opensilex.org/demo/id/variables/v010
+## 1         precipitation_daily rainfall_millimeter
+##   http://www.opensilex.org/demo/id/variables/v011
+## 1        humidity_hourly instant humidity_percent
+##   http://www.opensilex.org/demo/id/variables/v001
+## 1                   Leaf-Area_LAI-Computation_LAI
+##   http://www.opensilex.org/demo/id/variables/v002
+## 1                     NDVI_NDVI-Measurement_index
+## 
+## $data$sensors
+##   http://www.opensilex.org/demo/2018/s18006
+## 1                                 rgpre0001
+##   http://www.opensilex.org/demo/2018/s18005
+## 1                                 rapar0001
+##   http://www.opensilex.org/demo/2018/s18007
+## 1                                 hcair0011
+##   http://www.opensilex.org/demo/2018/s18002
+## 1                                 tpair0011
+##   http://www.opensilex.org/demo/2018/s18001
+## 1                                 wcwsm0001
+##   http://www.opensilex.org/demo/2018/s18004
+## 1                                 raglo0001
+##   http://www.opensilex.org/demo/2018/s18003
+## 1                                 tpact0002
+## 
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
 </div>
 <div id="scientific-object" class="section level2">
-<h2><span class="header-section-number">2.3</span> Scientific Object</h2>
+<h2><span class="header-section-number">3.3</span> Scientific Object</h2>
 <pre class="r"><code>  getScientificObjects( uri=&quot;http://www.opensilex.org/demo/2018/o18000076&quot;)</code></pre>
-<pre><code>## 2019-09-06 09:40:14 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2020-02-04 10:08:19 INFO::Query executed and data recovered</code></pre>
 <pre><code>## $currentPage
 ## NULL
 ## 
@@ -573,24 +673,60 @@ Update   : 14/02/2019
 ## NULL
 ## 
 ## $data
-##                                            uri
-## 1 http://www.opensilex.org/demo/2018/o18000076
-##                                         rdfType
+## $data$uri
+## [1] &quot;http://www.opensilex.org/demo/2018/o18000076&quot;
+## 
+## $data$rdfType
+## [1] &quot;http://www.opensilex.org/vocabulary/oeso#Plot&quot;
+## 
+## $data$geometry
+## [1] &quot;{\&quot;type\&quot;:\&quot;Polygon\&quot;,\&quot;coordinates\&quot;:[[[3.974115668,43.61274998],[3.974145919,43.61273138],[3.974193916,43.6127726],[3.974163666,43.61279119],[3.974115668,43.61274998]]]}&quot;
+## 
+## $data$experiment
+## [1] &quot;http://www.opensilex.org/demo/DIA2017-1&quot;
+## 
+## $data$isPartOf
+## [1] NA
+## 
+## $data$label
+## [1] &quot;76/DZ_PG_31/ZM4347/WW/2/DIA2017-05-19&quot;
+## 
+## $data$properties
+## $data$properties[[1]]
+##                                            rdfType
+## 1              http://www.w3.org/2002/07/owl#Class
+## 2                                             &lt;NA&gt;
+## 3                                             &lt;NA&gt;
+## 4                                             &lt;NA&gt;
+## 5 http://www.opensilex.org/vocabulary/oeso#Species
+## 6 http://www.opensilex.org/vocabulary/oeso#Variety
+## 7                                             &lt;NA&gt;
+##                                                           relation
+## 1                  http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+## 2                       http://www.w3.org/2000/01/rdf-schema#label
+## 3 http://www.opensilex.org/vocabulary/oeso#hasExperimentModalities
+## 4          http://www.opensilex.org/vocabulary/oeso#hasReplication
+## 5              http://www.opensilex.org/vocabulary/oeso#hasSpecies
+## 6              http://www.opensilex.org/vocabulary/oeso#hasVariety
+## 7          http://www.opensilex.org/vocabulary/oeso#participatesIn
+##                                           value
 ## 1 http://www.opensilex.org/vocabulary/oeso#Plot
-##                                                                                                                                                                geometry
-## 1 {&quot;type&quot;:&quot;Polygon&quot;,&quot;coordinates&quot;:[[[3.974115668,43.61274998],[3.974145919,43.61273138],[3.974193916,43.6127726],[3.974163666,43.61279119],[3.974115668,43.61274998]]]}
-##                                experiment isPartOf
-## 1 http://www.opensilex.org/demo/DIA2017-1       NA
-##                                   label
-## 1 76/DZ_PG_31/ZM4347/WW/2/DIA2017-05-19
-##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      properties
-## 1 http://www.w3.org/2002/07/owl#Class, NA, NA, NA, NA, http://www.opensilex.org/vocabulary/oeso#Species, http://www.opensilex.org/vocabulary/oeso#Variety, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#label, http://www.opensilex.org/vocabulary/oeso#hasExperimentModalities, http://www.opensilex.org/vocabulary/oeso#participatesIn, http://www.opensilex.org/vocabulary/oeso#hasReplication, http://www.opensilex.org/vocabulary/oeso#hasSpecies, http://www.opensilex.org/vocabulary/oeso#hasVariety, http://www.opensilex.org/vocabulary/oeso#Plot, 76/DZ_PG_31/ZM4347/WW/2/DIA2017-05-19, WW, http://www.opensilex.org/demo/DIA2017-1, 2, http://www.opensilex.org/id/species/zeamays, http://www.opensilex.org/demo/v/ipg153
+## 2         76/DZ_PG_31/ZM4347/WW/2/DIA2017-05-19
+## 3                                            WW
+## 4                                             2
+## 5   http://www.opensilex.org/id/species/zeamays
+## 6        http://www.opensilex.org/demo/v/ipg153
+## 7       http://www.opensilex.org/demo/DIA2017-1
+## 
+## 
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
-<p>##Infrastructures</p>
+</div>
+<div id="infrastructures" class="section level2">
+<h2><span class="header-section-number">3.4</span> Infrastructures</h2>
 <pre class="r"><code>  getInfrastructures(uri=&quot;https://emphasis.plant-phenotyping.eu&quot;)</code></pre>
-<pre><code>## 2019-09-06 09:40:14 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2020-02-04 10:08:19 INFO::Query executed and data recovered</code></pre>
 <pre><code>## $currentPage
 ## NULL
 ## 
@@ -610,28 +746,42 @@ Update   : 14/02/2019
 ## NULL
 ## 
 ## $data
-##                                                           rdfType
-## 1 http://www.opensilex.org/vocabulary/oeso#EuropeanInfrastructure
-##              rdfTypeLabel parent properties
-## 1 european infrastructure     NA       NULL
-##                                     uri    label
-## 1 https://emphasis.plant-phenotyping.eu EMPHASIS
+## $data$rdfType
+## [1] &quot;http://www.opensilex.org/vocabulary/oeso#EuropeanInfrastructure&quot;
+## 
+## $data$rdfTypeLabel
+## [1] &quot;european infrastructure&quot;
+## 
+## $data$parent
+## [1] NA
+## 
+## $data$properties
+## $data$properties[[1]]
+## list()
+## 
+## 
+## $data$uri
+## [1] &quot;https://emphasis.plant-phenotyping.eu&quot;
+## 
+## $data$label
+## [1] &quot;EMPHASIS&quot;
+## 
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
 </div>
 <div id="variables" class="section level2">
-<h2><span class="header-section-number">2.4</span> Variables</h2>
+<h2><span class="header-section-number">3.5</span> Variables</h2>
 <pre class="r"><code>  getVariables2( uri=&quot;http://www.opensilex.org/demo/id/variables/v010&quot;)</code></pre>
-<pre><code>## 2019-09-06 09:40:14 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2020-02-04 10:08:20 INFO::Query executed and data recovered</code></pre>
 <pre><code>## $currentPage
-## NULL
+## [1] 0
 ## 
 ## $totalCount
-## NULL
+## [1] 12
 ## 
 ## $totalPages
-## NULL
+## [1] 1
 ## 
 ## $codeHttp
 ## [1] 200
@@ -643,18 +793,157 @@ Update   : 14/02/2019
 ## NULL
 ## 
 ## $data
-##   trait. method. unit.                                             uri
-## 1     NA      NA    NA http://www.opensilex.org/demo/id/variables/v010
-##                                     label       comment
-## 1 precipitation_daily rainfall_millimeter precipitation
+##                                       trait.uri     trait.label
+## 1  http://www.opensilex.org/demo/id/traits/t004              VX
+## 2  http://www.opensilex.org/demo/id/traits/t005               T
+## 3  http://www.opensilex.org/demo/id/traits/t006              I5
+## 4  http://www.opensilex.org/demo/id/traits/t007              RG
+## 5  http://www.opensilex.org/demo/id/traits/t008           PAR_H
+## 6  http://www.opensilex.org/demo/id/traits/t009              RR
+## 7  http://www.opensilex.org/demo/id/traits/t010   precipitation
+## 8  http://www.opensilex.org/demo/id/traits/t011               U
+## 9  http://www.opensilex.org/demo/id/traits/t001 Leaf_Area_Index
+## 10 http://www.opensilex.org/demo/id/traits/t002            NDVI
+## 11 http://www.opensilex.org/demo/id/traits/t003     GroundCover
+## 12 http://www.opensilex.org/demo/id/traits/t010   precipitation
+##                      trait.comment
+## 1        hourly maximum wind speed
+## 2       hourly instant temperature
+## 3  hourly actinothermic index 50cm
+## 4          hourly global radiation
+## 5             hourly PAR radiation
+## 6                  hourly rainfall
+## 7                   daily rainfall
+## 8          hourly instant humidity
+## 9                             &lt;NA&gt;
+## 10                            &lt;NA&gt;
+## 11                            &lt;NA&gt;
+## 12                  daily rainfall
+##                                                                                                                                                                                                                                                                                                                                                                                        trait.ontologiesReferences
+## 1                                                                                                                                                                                                                                                                                                                                                                                                            NULL
+## 2                                                                                                                                                                                                                                                                                                                                                                                                            NULL
+## 3                                                                                                                                                                                                                                                                                                                                                                                                            NULL
+## 4                                                                                                                                                                                                                                                                                                                                                                                                            NULL
+## 5                                                                                                                                                                                                                                                                                                                                                                                                            NULL
+## 6                                                                                                                                                                                                                                                                                                                                                                                                            NULL
+## 7                                                                                                                                                                                                                                                                                                                                                                                                            NULL
+## 8                                                                                                                                                                                                                                                                                                                                                                                                            NULL
+## 9  http://www.w3.org/2008/05/skos#closeMatch, http://www.w3.org/2008/05/skos#closeMatch, http://purl.obolibrary.org/obo/TO_0012001, http://www.cropontology.org/rdf/CO_321:0000184, &quot;http://www.ontobee.org/ontology/TO?iri=http://purl.obolibrary.org/obo/TO_0012001&quot;^^&lt;http://www.w3.org/2001/XMLSchema#string&gt;, &quot;http://www.cropontology.org/terms/CO_321:0000184/&quot;^^&lt;http://www.w3.org/2001/XMLSchema#string&gt;
+## 10                                                                                                                                                                                                                      http://www.w3.org/2008/05/skos#exactMatch, http://www.cropontology.org/rdf/CO_322:0000132, &quot;http://www.cropontology.org/terms/CO_322:0000132/&quot;^^&lt;http://www.w3.org/2001/XMLSchema#string&gt;
+## 11                                                                                                                                                                                                                      http://www.w3.org/2008/05/skos#exactMatch, http://www.cropontology.org/rdf/CO_321:0000014, &quot;http://www.cropontology.org/terms/CO_321:0000014/&quot;^^&lt;http://www.w3.org/2001/XMLSchema#string&gt;
+## 12                                                                                                                                                                                                                                                                                                                                                                                                           NULL
+##    trait.properties                                    method.uri
+## 1              NULL http://www.opensilex.org/demo/id/methods/m004
+## 2              NULL http://www.opensilex.org/demo/id/methods/m005
+## 3              NULL http://www.opensilex.org/demo/id/methods/m006
+## 4              NULL http://www.opensilex.org/demo/id/methods/m007
+## 5              NULL http://www.opensilex.org/demo/id/methods/m008
+## 6              NULL http://www.opensilex.org/demo/id/methods/m009
+## 7              NULL http://www.opensilex.org/demo/id/methods/m010
+## 8              NULL http://www.opensilex.org/demo/id/methods/m011
+## 9              NULL http://www.opensilex.org/demo/id/methods/m001
+## 10             NULL http://www.opensilex.org/demo/id/methods/m002
+## 11             NULL http://www.opensilex.org/demo/id/methods/m003
+## 12             NULL http://www.opensilex.org/demo/id/methods/m010
+##                       method.label                  method.comment
+## 1        hourly maximum wind speed       hourly maximum wind speed
+## 2       hourly instant temperature      hourly instant temperature
+## 3  hourly actinothermic index 50cm hourly actinothermic index 50cm
+## 4          hourly global radiation         hourly global radiation
+## 5      hourly global PAR radiation            hourly PAR radiation
+## 6                  hourly rainfall                 hourly rainfall
+## 7                   daily rainfall                  daily rainfall
+## 8          hourly instant humidity         hourly instant humidity
+## 9                  LAI_Computation                            &lt;NA&gt;
+## 10                NDVI-Measurement                            &lt;NA&gt;
+## 11                         GrndCov                            &lt;NA&gt;
+## 12                  daily rainfall                  daily rainfall
+##                                                                                                                                                                        method.ontologiesReferences
+## 1                                                                                                                                                                                             NULL
+## 2                                                                                                                                                                                             NULL
+## 3                                                                                                                                                                                             NULL
+## 4                                                                                                                                                                                             NULL
+## 5                                                                                                                                                                                             NULL
+## 6                                                                                                                                                                                             NULL
+## 7                                                                                                                                                                                             NULL
+## 8                                                                                                                                                                                             NULL
+## 9        http://www.w3.org/2008/05/skos#closeMatch, http://www.cropontology.org/rdf/CO_321:0000362, &quot;http://www.cropontology.org/terms/CO_321:0000362/&quot;^^&lt;http://www.w3.org/2001/XMLSchema#string&gt;
+## 10 http://www.w3.org/2008/05/skos#exactMatch, http://www.cropontology.org/rdf/CO_322:0000361, &quot;http://http//www.cropontology.org/terms/CO_322:0000361/&quot;^^&lt;http://www.w3.org/2001/XMLSchema#string&gt;
+## 11       http://www.w3.org/2008/05/skos#exactMatch, http://www.cropontology.org/rdf/CO_321:0000405, &quot;http://www.cropontology.org/terms/CO_321:0000405/&quot;^^&lt;http://www.w3.org/2001/XMLSchema#string&gt;
+## 12                                                                                                                                                                                            NULL
+##    method.properties                                    unit.uri
+## 1               NULL http://www.opensilex.org/demo/id/units/u004
+## 2               NULL http://www.opensilex.org/demo/id/units/u005
+## 3               NULL http://www.opensilex.org/demo/id/units/u005
+## 4               NULL http://www.opensilex.org/demo/id/units/u006
+## 5               NULL http://www.opensilex.org/demo/id/units/u006
+## 6               NULL http://www.opensilex.org/demo/id/units/u007
+## 7               NULL http://www.opensilex.org/demo/id/units/u007
+## 8               NULL http://www.opensilex.org/demo/id/units/u008
+## 9               NULL http://www.opensilex.org/demo/id/units/u001
+## 10              NULL http://www.opensilex.org/demo/id/units/u002
+## 11              NULL http://www.opensilex.org/demo/id/units/u003
+## 12              NULL http://www.opensilex.org/demo/id/units/u007
+##                     unit.label unit.comment
+## 1             meter per second        m.s-1
+## 2               degree celsius           °C
+## 3               degree celsius           °C
+## 4  joule per square centimeter       J.cm-2
+## 5  joule per square centimeter       J.cm-2
+## 6                   millimeter           mm
+## 7                   millimeter           mm
+## 8                      percent            %
+## 9                          LAI         &lt;NA&gt;
+## 10                       index         &lt;NA&gt;
+## 11                  percentage         &lt;NA&gt;
+## 12                  millimeter           mm
+##                                                                                                                                                                    unit.ontologiesReferences
+## 1                                                                                                                                                                                       NULL
+## 2                                                                                                                                                                                       NULL
+## 3                                                                                                                                                                                       NULL
+## 4                                                                                                                                                                                       NULL
+## 5                                                                                                                                                                                       NULL
+## 6                                                                                                                                                                                       NULL
+## 7                                                                                                                                                                                       NULL
+## 8                                                                                                                                                                                       NULL
+## 9                                                                                                                                                                                       NULL
+## 10 http://www.w3.org/2008/05/skos#exactMatch, http://www.cropontology.org/rdf/CO_322:0000372, &quot;http://www.cropontology.org/terms/CO_322:0000372/&quot;^^&lt;http://www.w3.org/2001/XMLSchema#string&gt;
+## 11                                                                                                                                                                                      NULL
+## 12                                                                                                                                                                                      NULL
+##    unit.properties                                             uri
+## 1             NULL http://www.opensilex.org/demo/id/variables/v004
+## 2             NULL http://www.opensilex.org/demo/id/variables/v005
+## 3             NULL http://www.opensilex.org/demo/id/variables/v006
+## 4             NULL http://www.opensilex.org/demo/id/variables/v007
+## 5             NULL http://www.opensilex.org/demo/id/variables/v008
+## 6             NULL http://www.opensilex.org/demo/id/variables/v009
+## 7             NULL http://www.opensilex.org/demo/id/variables/v010
+## 8             NULL http://www.opensilex.org/demo/id/variables/v011
+## 9             NULL http://www.opensilex.org/demo/id/variables/v001
+## 10            NULL http://www.opensilex.org/demo/id/variables/v002
+## 11            NULL http://www.opensilex.org/demo/id/variables/v003
+## 12            NULL http://www.opensilex.org/demo/id/variables/v012
+##                                                                label
+## 1                    wind_hourly maximum wind speed_meter per second
+## 2              temperature_hourly instant temperature_degree celsius
+## 3         temperature_hourly actinothermic index 50cm_degree celsius
+## 4      radiation_hourly global radiation_joule per square centimeter
+## 5  radiation_hourly global PAR radiation_joule per square centimeter
+## 6                           precipitation_hourly rainfall_millimeter
+## 7                            precipitation_daily rainfall_millimeter
+## 8                           humidity_hourly instant humidity_percent
+## 9                                      Leaf-Area_LAI-Computation_LAI
+## 10                                       NDVI_NDVI-Measurement_index
+## 11                                    GroundCover_GrndCov_percentage
+## 12                                           insertionVariable_label
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
 </div>
 <div id="traits" class="section level2">
-<h2><span class="header-section-number">2.5</span> Traits</h2>
+<h2><span class="header-section-number">3.6</span> Traits</h2>
 <pre class="r"><code>  getTraits( uri=&quot;http://www.opensilex.org/demo/id/traits/t010&quot;)</code></pre>
-<pre><code>## 2019-09-06 09:40:14 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2020-02-04 10:08:20 INFO::Query executed and data recovered</code></pre>
 <pre><code>## $currentPage
 ## NULL
 ## 
@@ -674,18 +963,33 @@ Update   : 14/02/2019
 ## NULL
 ## 
 ## $data
-##                                            uri         label
-## 1 http://www.opensilex.org/demo/id/traits/t010 precipitation
-##          comment ontologiesReferences properties
-## 1 daily rainfall                 NULL       NULL
+## $data$uri
+## [1] &quot;http://www.opensilex.org/demo/id/traits/t010&quot;
+## 
+## $data$label
+## [1] &quot;precipitation&quot;
+## 
+## $data$comment
+## [1] &quot;daily rainfall&quot;
+## 
+## $data$ontologiesReferences
+## $data$ontologiesReferences[[1]]
+## list()
+## 
+## 
+## $data$properties
+## $data$properties[[1]]
+## list()
+## 
+## 
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
 </div>
 <div id="methods" class="section level2">
-<h2><span class="header-section-number">2.6</span> Methods</h2>
+<h2><span class="header-section-number">3.7</span> Methods</h2>
 <pre class="r"><code>  getMethods2( uri=&quot;http://www.opensilex.org/demo/id/methods/m010&quot;)</code></pre>
-<pre><code>## 2019-09-06 09:40:14 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2020-02-04 10:08:20 INFO::Query executed and data recovered</code></pre>
 <pre><code>## $currentPage
 ## NULL
 ## 
@@ -705,18 +1009,33 @@ Update   : 14/02/2019
 ## NULL
 ## 
 ## $data
-##                                             uri          label
-## 1 http://www.opensilex.org/demo/id/methods/m010 daily rainfall
-##          comment ontologiesReferences properties
-## 1 daily rainfall                 NULL       NULL
+## $data$uri
+## [1] &quot;http://www.opensilex.org/demo/id/methods/m010&quot;
+## 
+## $data$label
+## [1] &quot;daily rainfall&quot;
+## 
+## $data$comment
+## [1] &quot;daily rainfall&quot;
+## 
+## $data$ontologiesReferences
+## $data$ontologiesReferences[[1]]
+## list()
+## 
+## 
+## $data$properties
+## $data$properties[[1]]
+## list()
+## 
+## 
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
 </div>
 <div id="units" class="section level2">
-<h2><span class="header-section-number">2.7</span> Units</h2>
+<h2><span class="header-section-number">3.8</span> Units</h2>
 <pre class="r"><code>  getUnits( uri=&quot;http://www.opensilex.org/demo/id/units/u007&quot;)</code></pre>
-<pre><code>## 2019-09-06 09:40:14 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2020-02-04 10:08:20 INFO::Query executed and data recovered</code></pre>
 <pre><code>## $currentPage
 ## NULL
 ## 
@@ -736,18 +1055,65 @@ Update   : 14/02/2019
 ## NULL
 ## 
 ## $data
-##                                           uri      label comment
-## 1 http://www.opensilex.org/demo/id/units/u007 millimeter      mm
-##   ontologiesReferences properties
-## 1                 NULL       NULL
+## $data$uri
+## [1] &quot;http://www.opensilex.org/demo/id/units/u007&quot;
+## 
+## $data$label
+## [1] &quot;millimeter&quot;
+## 
+## $data$comment
+## [1] &quot;mm&quot;
+## 
+## $data$ontologiesReferences
+## $data$ontologiesReferences[[1]]
+## list()
+## 
+## 
+## $data$properties
+## $data$properties[[1]]
+## list()
+## 
+## 
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
+</div>
+<div id="provenances" class="section level2">
+<h2><span class="header-section-number">3.9</span> Provenances</h2>
+<pre class="r"><code>getProvenances(label = &quot;ImageAnalysis-ZA17-Maize&quot; )</code></pre>
+<pre><code>## 2020-02-04 10:08:20 WARNING::Data not found
+## 2020-02-04 10:08:20 INFO::Additional Request information :
+## 2020-02-04 10:08:20 INFO::status: No results
+##  2020-02-04 10:08:20 INFO::status: list(type = &quot;Info&quot;, href = NA, details = &quot;No result found.&quot;)</code></pre>
+<pre><code>## $currentPage
+## NULL
+## 
+## $totalCount
+## NULL
+## 
+## $totalPages
+## NULL
+## 
+## $codeHttp
+## [1] 404
+## 
+## $codeHttpMessage
+## [1] &quot;Data not found&quot;
+## 
+## $codeStatusMessage
+##      message exception.type exception.href exception.details
+## 1 No results           Info             NA  No result found.
+## 
+## $data
+## NULL
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
 </div>
 <div id="species" class="section level2">
-<h2><span class="header-section-number">2.8</span> Species</h2>
+<h2><span class="header-section-number">3.10</span> Species</h2>
 <pre class="r"><code>  getSpecies( uri=&quot;http://www.opensilex.org/id/species/helianthusannuus&quot;, language = &quot;en&quot;)</code></pre>
-<pre><code>## 2019-09-06 09:40:14 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2020-02-04 10:08:20 INFO::Query executed and data recovered</code></pre>
 <pre><code>## $currentPage
 ## NULL
 ## 
@@ -767,16 +1133,20 @@ Update   : 14/02/2019
 ## NULL
 ## 
 ## $data
-##                                                    uri     label
-## 1 http://www.opensilex.org/id/species/helianthusannuus Sunflower
+## $data$uri
+## [1] &quot;http://www.opensilex.org/id/species/helianthusannuus&quot;
+## 
+## $data$label
+## [1] &quot;Sunflower&quot;
+## 
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
 </div>
 <div id="sensors" class="section level2">
-<h2><span class="header-section-number">2.9</span> Sensors</h2>
+<h2><span class="header-section-number">3.11</span> Sensors</h2>
 <pre class="r"><code>  getSensors( uri=&quot;http://www.opensilex.org/demo/2018/s18001&quot;)</code></pre>
-<pre><code>## 2019-09-06 09:40:18 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2020-02-04 10:08:23 INFO::Query executed and data recovered</code></pre>
 <pre><code>## $currentPage
 ## NULL
 ## 
@@ -796,22 +1166,44 @@ Update   : 14/02/2019
 ## NULL
 ## 
 ## $data
-##                                         uri
-## 1 http://www.opensilex.org/demo/2018/s18001
-##                                                  rdfType     label brand
-## 1 http://www.opensilex.org/vocabulary/oeso#CupAnemometer wcwsm0001 Cimel
-##   model serialNumber inServiceDate dateOfPurchase dateOfLastCalibration
-## 1    NA       CES155    2011-01-01             NA            2017-01-01
-##            personInCharge
-## 1 chapuis@supagro.inra.fr
+## $data$uri
+## [1] &quot;http://www.opensilex.org/demo/2018/s18001&quot;
+## 
+## $data$rdfType
+## [1] &quot;http://www.opensilex.org/vocabulary/oeso#CupAnemometer&quot;
+## 
+## $data$label
+## [1] &quot;wcwsm0001&quot;
+## 
+## $data$brand
+## [1] &quot;Cimel&quot;
+## 
+## $data$model
+## [1] NA
+## 
+## $data$serialNumber
+## [1] &quot;CES155&quot;
+## 
+## $data$inServiceDate
+## [1] &quot;2011-01-01&quot;
+## 
+## $data$dateOfPurchase
+## [1] NA
+## 
+## $data$dateOfLastCalibration
+## [1] &quot;2017-01-01&quot;
+## 
+## $data$personInCharge
+## [1] &quot;chapuis@supagro.inra.fr&quot;
+## 
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
 </div>
 <div id="vectors" class="section level2">
-<h2><span class="header-section-number">2.10</span> Vectors</h2>
+<h2><span class="header-section-number">3.12</span> Vectors</h2>
 <pre class="r"><code>  getVectors( serialNumber = &quot;01BD1DD71500001&quot;)</code></pre>
-<pre><code>## 2019-09-06 09:40:18 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2020-02-04 10:08:23 INFO::Query executed and data recovered</code></pre>
 <pre><code>## $currentPage
 ## NULL
 ## 
@@ -831,22 +1223,40 @@ Update   : 14/02/2019
 ## NULL
 ## 
 ## $data
-##                                        uri
-## 1 http://www.opensilex.org/demo/2018/v1801
-##                                           rdfType     label      brand
-## 1 http://www.opensilex.org/vocabulary/oeso#Vector ensol0001 EnviroSCAN
-##      serialNumber inServiceDate dateOfPurchase           personInCharge
-## 1 01BD1DD71500001    2013-01-01     2014-01-01 florence.meunier@inra.fr
+## $data$uri
+## [1] &quot;http://www.opensilex.org/demo/2018/v1801&quot;
+## 
+## $data$rdfType
+## [1] &quot;http://www.opensilex.org/vocabulary/oeso#Vector&quot;
+## 
+## $data$label
+## [1] &quot;ensol0001&quot;
+## 
+## $data$brand
+## [1] &quot;EnviroSCAN&quot;
+## 
+## $data$serialNumber
+## [1] &quot;01BD1DD71500001&quot;
+## 
+## $data$inServiceDate
+## [1] &quot;2013-01-01&quot;
+## 
+## $data$dateOfPurchase
+## [1] &quot;2014-01-01&quot;
+## 
+## $data$personInCharge
+## [1] &quot;florence.meunier@inra.fr&quot;
+## 
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
 </div>
 <div id="events" class="section level2">
-<h2><span class="header-section-number">2.11</span> Events</h2>
+<h2><span class="header-section-number">3.13</span> Events</h2>
 <pre class="r"><code># Where to find the &quot;type&quot; URL ?
 # Where is the ontology access  https://github.com/OpenSILEX/ontology-vocabularies/blob/master/oeev.owl
   getEvents( type = &quot;http://www.opensilex.org/vocabulary/oeev#Fertilization&quot;, pageSize=10)</code></pre>
-<pre><code>## 2019-09-06 09:40:20 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2020-02-04 10:08:25 INFO::Query executed and data recovered</code></pre>
 <pre><code>## $currentPage
 ## [1] 0
 ## 
@@ -866,260 +1276,344 @@ Update   : 14/02/2019
 ## NULL
 ## 
 ## $data
-##                                                                       uri
-## 1  http://www.opensilex.org/id/event/7a7265a2-b045-44a4-be00-ddad37ed6e58
-## 2  http://www.opensilex.org/id/event/4c2c3640-7613-49b5-88d4-eb136ef52d1d
-## 3  http://www.opensilex.org/id/event/f56132ca-4746-4528-9918-7a2e9ccbdb48
-## 4  http://www.opensilex.org/id/event/6744adea-c53d-4f6c-9f01-403e115001ce
-## 5  http://www.opensilex.org/id/event/3c874a2c-2f91-434e-b107-be3b2a9d2c41
-## 6  http://www.opensilex.org/id/event/6d3a30f7-f665-4c88-aa67-3c57b2bb1ee2
-## 7  http://www.opensilex.org/id/event/480f1ba3-bae2-48d2-a94f-3876164b657d
-## 8  http://www.opensilex.org/id/event/b508db6a-8154-4c7e-938a-4c13a6a68931
-## 9  http://www.opensilex.org/id/event/79292cb1-027a-4671-a4a0-8cc84c382f8e
-## 10 http://www.opensilex.org/id/event/3af353d7-084d-4ec7-ada3-07c54d756000
-##                                                   rdfType
-## 1  http://www.opensilex.org/vocabulary/oeev#Fertilization
-## 2  http://www.opensilex.org/vocabulary/oeev#Fertilization
-## 3  http://www.opensilex.org/vocabulary/oeev#Fertilization
-## 4  http://www.opensilex.org/vocabulary/oeev#Fertilization
-## 5  http://www.opensilex.org/vocabulary/oeev#Fertilization
-## 6  http://www.opensilex.org/vocabulary/oeev#Fertilization
-## 7  http://www.opensilex.org/vocabulary/oeev#Fertilization
-## 8  http://www.opensilex.org/vocabulary/oeev#Fertilization
-## 9  http://www.opensilex.org/vocabulary/oeev#Fertilization
-## 10 http://www.opensilex.org/vocabulary/oeev#Fertilization
-##                                                                                                                          concernedItems
-## 1    30/DZ_PG_04/ZM4366/WW/1/DIA2017-05-19, http://www.opensilex.org/demo/2018/o18000030, http://www.opensilex.org/vocabulary/oeso#Plot
-## 2  352/DZ_PG_74/ZM4397/WD2/2/DIA2017-05-19, http://www.opensilex.org/demo/2018/o18000352, http://www.opensilex.org/vocabulary/oeso#Plot
-## 3  387/DZ_PG_23/ZM4388/WD2/2/DIA2017-05-19, http://www.opensilex.org/demo/2018/o18000387, http://www.opensilex.org/vocabulary/oeso#Plot
-## 4       46/DKC4590/XXXX/WW/1/DIA2017-05-19, http://www.opensilex.org/demo/2018/o18000046, http://www.opensilex.org/vocabulary/oeso#Plot
-## 5    54/DZ_PG_45/ZM4385/WW/1/DIA2017-05-19, http://www.opensilex.org/demo/2018/o18000054, http://www.opensilex.org/vocabulary/oeso#Plot
-## 6    72/DZ_PG_39/ZM4371/WW/2/DIA2017-05-19, http://www.opensilex.org/demo/2018/o18000072, http://www.opensilex.org/vocabulary/oeso#Plot
-## 7  271/DZ_PG_34/ZM4384/WD2/1/DIA2017-05-19, http://www.opensilex.org/demo/2018/o18000271, http://www.opensilex.org/vocabulary/oeso#Plot
-## 8  207/DZ_PG_69/ZM4396/WD1/2/DIA2017-05-19, http://www.opensilex.org/demo/2018/o18000207, http://www.opensilex.org/vocabulary/oeso#Plot
-## 9  158/DZ_PG_06/ZM4376/WD1/1/DIA2017-05-19, http://www.opensilex.org/demo/2018/o18000158, http://www.opensilex.org/vocabulary/oeso#Plot
-## 10  130/DZ_PG_05/ZM4357/WW/2/DIA2017-05-19, http://www.opensilex.org/demo/2018/o18000130, http://www.opensilex.org/vocabulary/oeso#Plot
-##                         date
-## 1  2017-05-22T12:00:00+01:00
-## 2  2017-05-22T12:00:00+01:00
-## 3  2017-05-22T12:00:00+01:00
-## 4  2017-05-22T12:00:00+01:00
-## 5  2017-05-22T12:00:00+01:00
-## 6  2017-05-22T12:00:00+01:00
-## 7  2017-05-22T12:00:00+01:00
-## 8  2017-05-22T12:00:00+01:00
-## 9  2017-05-22T12:00:00+01:00
-## 10 2017-05-22T12:00:00+01:00
-##                                                                                                                                                                                    properties
-## 1  NA, NA, NA, http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit, http://www.opensilex.org/vocabulary/oeev#hasAmount, http://www.opensilex.org/vocabulary/oeev#hasProduct, U.ha-1, 200, N
-## 2  NA, NA, NA, http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit, http://www.opensilex.org/vocabulary/oeev#hasAmount, http://www.opensilex.org/vocabulary/oeev#hasProduct, U.ha-1, 200, N
-## 3  NA, NA, NA, http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit, http://www.opensilex.org/vocabulary/oeev#hasAmount, http://www.opensilex.org/vocabulary/oeev#hasProduct, U.ha-1, 200, N
-## 4  NA, NA, NA, http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit, http://www.opensilex.org/vocabulary/oeev#hasAmount, http://www.opensilex.org/vocabulary/oeev#hasProduct, U.ha-1, 200, N
-## 5  NA, NA, NA, http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit, http://www.opensilex.org/vocabulary/oeev#hasAmount, http://www.opensilex.org/vocabulary/oeev#hasProduct, U.ha-1, 200, N
-## 6  NA, NA, NA, http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit, http://www.opensilex.org/vocabulary/oeev#hasAmount, http://www.opensilex.org/vocabulary/oeev#hasProduct, U.ha-1, 200, N
-## 7  NA, NA, NA, http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit, http://www.opensilex.org/vocabulary/oeev#hasAmount, http://www.opensilex.org/vocabulary/oeev#hasProduct, U.ha-1, 200, N
-## 8  NA, NA, NA, http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit, http://www.opensilex.org/vocabulary/oeev#hasAmount, http://www.opensilex.org/vocabulary/oeev#hasProduct, U.ha-1, 200, N
-## 9  NA, NA, NA, http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit, http://www.opensilex.org/vocabulary/oeev#hasAmount, http://www.opensilex.org/vocabulary/oeev#hasProduct, U.ha-1, 200, N
-## 10 NA, NA, NA, http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit, http://www.opensilex.org/vocabulary/oeev#hasAmount, http://www.opensilex.org/vocabulary/oeev#hasProduct, U.ha-1, 200, N
+## $data$uri
+##  [1] &quot;http://www.opensilex.org/id/event/7a7265a2-b045-44a4-be00-ddad37ed6e58&quot;
+##  [2] &quot;http://www.opensilex.org/id/event/4c2c3640-7613-49b5-88d4-eb136ef52d1d&quot;
+##  [3] &quot;http://www.opensilex.org/id/event/f56132ca-4746-4528-9918-7a2e9ccbdb48&quot;
+##  [4] &quot;http://www.opensilex.org/id/event/6744adea-c53d-4f6c-9f01-403e115001ce&quot;
+##  [5] &quot;http://www.opensilex.org/id/event/3c874a2c-2f91-434e-b107-be3b2a9d2c41&quot;
+##  [6] &quot;http://www.opensilex.org/id/event/6d3a30f7-f665-4c88-aa67-3c57b2bb1ee2&quot;
+##  [7] &quot;http://www.opensilex.org/id/event/b508db6a-8154-4c7e-938a-4c13a6a68931&quot;
+##  [8] &quot;http://www.opensilex.org/id/event/480f1ba3-bae2-48d2-a94f-3876164b657d&quot;
+##  [9] &quot;http://www.opensilex.org/id/event/79292cb1-027a-4671-a4a0-8cc84c382f8e&quot;
+## [10] &quot;http://www.opensilex.org/id/event/3af353d7-084d-4ec7-ada3-07c54d756000&quot;
+## 
+## $data$rdfType
+##  [1] &quot;http://www.opensilex.org/vocabulary/oeev#Fertilization&quot;
+##  [2] &quot;http://www.opensilex.org/vocabulary/oeev#Fertilization&quot;
+##  [3] &quot;http://www.opensilex.org/vocabulary/oeev#Fertilization&quot;
+##  [4] &quot;http://www.opensilex.org/vocabulary/oeev#Fertilization&quot;
+##  [5] &quot;http://www.opensilex.org/vocabulary/oeev#Fertilization&quot;
+##  [6] &quot;http://www.opensilex.org/vocabulary/oeev#Fertilization&quot;
+##  [7] &quot;http://www.opensilex.org/vocabulary/oeev#Fertilization&quot;
+##  [8] &quot;http://www.opensilex.org/vocabulary/oeev#Fertilization&quot;
+##  [9] &quot;http://www.opensilex.org/vocabulary/oeev#Fertilization&quot;
+## [10] &quot;http://www.opensilex.org/vocabulary/oeev#Fertilization&quot;
+## 
+## $data$concernedItems
+## $data$concernedItems[[1]]
+##                                  labels
+## 1 30/DZ_PG_04/ZM4366/WW/1/DIA2017-05-19
+##                                            uri
+## 1 http://www.opensilex.org/demo/2018/o18000030
+##                                         typeURI
+## 1 http://www.opensilex.org/vocabulary/oeso#Plot
+## 
+## $data$concernedItems[[2]]
+##                                    labels
+## 1 352/DZ_PG_74/ZM4397/WD2/2/DIA2017-05-19
+##                                            uri
+## 1 http://www.opensilex.org/demo/2018/o18000352
+##                                         typeURI
+## 1 http://www.opensilex.org/vocabulary/oeso#Plot
+## 
+## $data$concernedItems[[3]]
+##                                    labels
+## 1 387/DZ_PG_23/ZM4388/WD2/2/DIA2017-05-19
+##                                            uri
+## 1 http://www.opensilex.org/demo/2018/o18000387
+##                                         typeURI
+## 1 http://www.opensilex.org/vocabulary/oeso#Plot
+## 
+## $data$concernedItems[[4]]
+##                               labels
+## 1 46/DKC4590/XXXX/WW/1/DIA2017-05-19
+##                                            uri
+## 1 http://www.opensilex.org/demo/2018/o18000046
+##                                         typeURI
+## 1 http://www.opensilex.org/vocabulary/oeso#Plot
+## 
+## $data$concernedItems[[5]]
+##                                  labels
+## 1 54/DZ_PG_45/ZM4385/WW/1/DIA2017-05-19
+##                                            uri
+## 1 http://www.opensilex.org/demo/2018/o18000054
+##                                         typeURI
+## 1 http://www.opensilex.org/vocabulary/oeso#Plot
+## 
+## $data$concernedItems[[6]]
+##                                  labels
+## 1 72/DZ_PG_39/ZM4371/WW/2/DIA2017-05-19
+##                                            uri
+## 1 http://www.opensilex.org/demo/2018/o18000072
+##                                         typeURI
+## 1 http://www.opensilex.org/vocabulary/oeso#Plot
+## 
+## $data$concernedItems[[7]]
+##                                    labels
+## 1 207/DZ_PG_69/ZM4396/WD1/2/DIA2017-05-19
+##                                            uri
+## 1 http://www.opensilex.org/demo/2018/o18000207
+##                                         typeURI
+## 1 http://www.opensilex.org/vocabulary/oeso#Plot
+## 
+## $data$concernedItems[[8]]
+##                                    labels
+## 1 271/DZ_PG_34/ZM4384/WD2/1/DIA2017-05-19
+##                                            uri
+## 1 http://www.opensilex.org/demo/2018/o18000271
+##                                         typeURI
+## 1 http://www.opensilex.org/vocabulary/oeso#Plot
+## 
+## $data$concernedItems[[9]]
+##                                    labels
+## 1 158/DZ_PG_06/ZM4376/WD1/1/DIA2017-05-19
+##                                            uri
+## 1 http://www.opensilex.org/demo/2018/o18000158
+##                                         typeURI
+## 1 http://www.opensilex.org/vocabulary/oeso#Plot
+## 
+## $data$concernedItems[[10]]
+##                                   labels
+## 1 130/DZ_PG_05/ZM4357/WW/2/DIA2017-05-19
+##                                            uri
+## 1 http://www.opensilex.org/demo/2018/o18000130
+##                                         typeURI
+## 1 http://www.opensilex.org/vocabulary/oeso#Plot
+## 
+## 
+## $data$date
+##  [1] &quot;2017-05-22T12:00:00+01:00&quot; &quot;2017-05-22T12:00:00+01:00&quot;
+##  [3] &quot;2017-05-22T12:00:00+01:00&quot; &quot;2017-05-22T12:00:00+01:00&quot;
+##  [5] &quot;2017-05-22T12:00:00+01:00&quot; &quot;2017-05-22T12:00:00+01:00&quot;
+##  [7] &quot;2017-05-22T12:00:00+01:00&quot; &quot;2017-05-22T12:00:00+01:00&quot;
+##  [9] &quot;2017-05-22T12:00:00+01:00&quot; &quot;2017-05-22T12:00:00+01:00&quot;
+## 
+## $data$properties
+## $data$properties[[1]]
+##   rdfType                                              relation  value
+## 1      NA    http://www.opensilex.org/vocabulary/oeev#hasAmount    200
+## 2      NA   http://www.opensilex.org/vocabulary/oeev#hasProduct      N
+## 3      NA http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit U.ha-1
+## 
+## $data$properties[[2]]
+##   rdfType                                              relation  value
+## 1      NA    http://www.opensilex.org/vocabulary/oeev#hasAmount    200
+## 2      NA   http://www.opensilex.org/vocabulary/oeev#hasProduct      N
+## 3      NA http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit U.ha-1
+## 
+## $data$properties[[3]]
+##   rdfType                                              relation  value
+## 1      NA    http://www.opensilex.org/vocabulary/oeev#hasAmount    200
+## 2      NA   http://www.opensilex.org/vocabulary/oeev#hasProduct      N
+## 3      NA http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit U.ha-1
+## 
+## $data$properties[[4]]
+##   rdfType                                              relation  value
+## 1      NA    http://www.opensilex.org/vocabulary/oeev#hasAmount    200
+## 2      NA   http://www.opensilex.org/vocabulary/oeev#hasProduct      N
+## 3      NA http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit U.ha-1
+## 
+## $data$properties[[5]]
+##   rdfType                                              relation  value
+## 1      NA    http://www.opensilex.org/vocabulary/oeev#hasAmount    200
+## 2      NA   http://www.opensilex.org/vocabulary/oeev#hasProduct      N
+## 3      NA http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit U.ha-1
+## 
+## $data$properties[[6]]
+##   rdfType                                              relation  value
+## 1      NA    http://www.opensilex.org/vocabulary/oeev#hasAmount    200
+## 2      NA   http://www.opensilex.org/vocabulary/oeev#hasProduct      N
+## 3      NA http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit U.ha-1
+## 
+## $data$properties[[7]]
+##   rdfType                                              relation  value
+## 1      NA    http://www.opensilex.org/vocabulary/oeev#hasAmount    200
+## 2      NA   http://www.opensilex.org/vocabulary/oeev#hasProduct      N
+## 3      NA http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit U.ha-1
+## 
+## $data$properties[[8]]
+##   rdfType                                              relation  value
+## 1      NA    http://www.opensilex.org/vocabulary/oeev#hasAmount    200
+## 2      NA   http://www.opensilex.org/vocabulary/oeev#hasProduct      N
+## 3      NA http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit U.ha-1
+## 
+## $data$properties[[9]]
+##   rdfType                                              relation  value
+## 1      NA    http://www.opensilex.org/vocabulary/oeev#hasAmount    200
+## 2      NA   http://www.opensilex.org/vocabulary/oeev#hasProduct      N
+## 3      NA http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit U.ha-1
+## 
+## $data$properties[[10]]
+##   rdfType                                              relation  value
+## 1      NA    http://www.opensilex.org/vocabulary/oeev#hasAmount    200
+## 2      NA   http://www.opensilex.org/vocabulary/oeev#hasProduct      N
+## 3      NA http://www.opensilex.org/vocabulary/oeso/oepo#hasUnit U.ha-1
+## 
+## 
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
 </div>
 <div id="annotations" class="section level2">
-<h2><span class="header-section-number">2.12</span> Annotations</h2>
-<pre class="r"><code># Where to find the &quot;type&quot; URL ?
-# Where is the ontology access https://github.com/OpenSILEX/ontology-vocabularies/blob/master/oeev.owl
-  getAnnotations( comment = &quot;Ustilago maydis infection&quot; , pageSize=10)</code></pre>
+<h2><span class="header-section-number">3.14</span> Annotations</h2>
+<pre class="r"><code>  getAnnotations( comment = &quot;Ustilago maydis infection&quot; , pageSize=10)</code></pre>
 </div>
 </div>
 <div id="fetch-data-from-the-webservice" class="section level1">
-<h1><span class="header-section-number">3</span> Fetch Data from the webservice</h1>
+<h1><span class="header-section-number">4</span> Fetch Data from the webservice</h1>
 <div id="environment-data" class="section level2">
-<h2><span class="header-section-number">3.1</span> Environment data</h2>
-<pre class="r"><code>  getEnvironmentData( variable = &quot;http://www.opensilex.org/demo/id/variables/v010&quot;, pageSize=50)</code></pre>
-<pre><code>## 2019-09-06 09:40:20 INFO::Query executed and data recovered</code></pre>
-<pre><code>## $currentPage
-## [1] 0
+<h2><span class="header-section-number">4.1</span> Environment data</h2>
+<pre class="r"><code>getData(variableUri = &quot;http://www.opensilex.org/demo/id/variables/v014&quot;)$data</code></pre>
+<pre><code>## 2020-02-04 10:08:25 WARNING::Data not found
+## 2020-02-04 10:08:25 INFO::Additional Request information :
+## 2020-02-04 10:08:25 INFO::status: Data error
+##  2020-02-04 10:08:25 INFO::status: list(type = &quot;Error&quot;, href = NA, details = &quot;Unknown variable URI : http://www.opensilex.org/demo/id/variables/v014&quot;)</code></pre>
+<pre><code>## NULL</code></pre>
+<pre class="r"><code>  getEnvironmentData( variable = &quot;http://www.opensilex.org/demo/id/variables/v010&quot;, pageSize=50)$data</code></pre>
+<pre><code>## 2020-02-04 10:08:25 INFO::Query executed and data recovered</code></pre>
+<pre><code>## $sensorUri
+##  [1] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+##  [2] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+##  [3] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+##  [4] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+##  [5] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+##  [6] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+##  [7] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+##  [8] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+##  [9] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [10] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [11] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [12] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [13] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [14] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [15] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [16] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [17] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [18] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [19] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [20] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [21] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [22] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [23] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [24] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [25] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [26] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [27] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [28] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [29] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [30] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [31] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [32] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [33] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [34] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [35] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [36] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [37] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [38] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [39] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [40] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [41] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [42] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [43] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [44] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [45] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [46] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [47] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [48] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [49] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
+## [50] &quot;http://www.opensilex.org/demo/2018/s18006&quot;
 ## 
-## $totalCount
-## [1] 126
+## $variableUri
+##  [1] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+##  [2] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+##  [3] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+##  [4] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+##  [5] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+##  [6] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+##  [7] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+##  [8] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+##  [9] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [10] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [11] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [12] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [13] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [14] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [15] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [16] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [17] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [18] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [19] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [20] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [21] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [22] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [23] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [24] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [25] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [26] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [27] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [28] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [29] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [30] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [31] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [32] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [33] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [34] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [35] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [36] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [37] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [38] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [39] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [40] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [41] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [42] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [43] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [44] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [45] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [46] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [47] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [48] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [49] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
+## [50] &quot;http://www.opensilex.org/demo/id/variables/v010&quot;
 ## 
-## $totalPages
-## [1] 3
+## $date
+##  [1] &quot;2017-09-21T12:00:00+0200&quot; &quot;2017-09-20T12:00:00+0200&quot;
+##  [3] &quot;2017-09-19T12:00:00+0200&quot; &quot;2017-09-18T12:00:00+0200&quot;
+##  [5] &quot;2017-09-17T12:00:00+0200&quot; &quot;2017-09-16T12:00:00+0200&quot;
+##  [7] &quot;2017-09-15T12:00:00+0200&quot; &quot;2017-09-14T12:00:00+0200&quot;
+##  [9] &quot;2017-09-13T12:00:00+0200&quot; &quot;2017-09-12T12:00:00+0200&quot;
+## [11] &quot;2017-09-11T12:00:00+0200&quot; &quot;2017-09-10T12:00:00+0200&quot;
+## [13] &quot;2017-09-09T12:00:00+0200&quot; &quot;2017-09-08T12:00:00+0200&quot;
+## [15] &quot;2017-09-07T12:00:00+0200&quot; &quot;2017-09-06T12:00:00+0200&quot;
+## [17] &quot;2017-09-05T12:00:00+0200&quot; &quot;2017-09-04T12:00:00+0200&quot;
+## [19] &quot;2017-09-03T12:00:00+0200&quot; &quot;2017-09-02T12:00:00+0200&quot;
+## [21] &quot;2017-09-01T12:00:00+0200&quot; &quot;2017-08-31T12:00:00+0200&quot;
+## [23] &quot;2017-08-30T12:00:00+0200&quot; &quot;2017-08-29T12:00:00+0200&quot;
+## [25] &quot;2017-08-28T12:00:00+0200&quot; &quot;2017-08-27T12:00:00+0200&quot;
+## [27] &quot;2017-08-26T12:00:00+0200&quot; &quot;2017-08-25T12:00:00+0200&quot;
+## [29] &quot;2017-08-24T12:00:00+0200&quot; &quot;2017-08-23T12:00:00+0200&quot;
+## [31] &quot;2017-08-22T12:00:00+0200&quot; &quot;2017-08-21T12:00:00+0200&quot;
+## [33] &quot;2017-08-20T12:00:00+0200&quot; &quot;2017-08-19T12:00:00+0200&quot;
+## [35] &quot;2017-08-18T12:00:00+0200&quot; &quot;2017-08-17T12:00:00+0200&quot;
+## [37] &quot;2017-08-16T12:00:00+0200&quot; &quot;2017-08-15T12:00:00+0200&quot;
+## [39] &quot;2017-08-14T12:00:00+0200&quot; &quot;2017-08-13T12:00:00+0200&quot;
+## [41] &quot;2017-08-12T12:00:00+0200&quot; &quot;2017-08-11T12:00:00+0200&quot;
+## [43] &quot;2017-08-10T12:00:00+0200&quot; &quot;2017-08-09T12:00:00+0200&quot;
+## [45] &quot;2017-08-08T12:00:00+0200&quot; &quot;2017-08-07T12:00:00+0200&quot;
+## [47] &quot;2017-08-06T12:00:00+0200&quot; &quot;2017-08-05T12:00:00+0200&quot;
+## [49] &quot;2017-08-04T12:00:00+0200&quot; &quot;2017-08-03T12:00:00+0200&quot;
 ## 
-## $codeHttp
-## [1] 200
-## 
-## $codeHttpMessage
-## [1] &quot;Query executed and data recovered&quot;
-## 
-## $codeStatusMessage
-## NULL
-## 
-## $data
-##                                    sensorUri
-## 1  http://www.opensilex.org/demo/2018/s18006
-## 2  http://www.opensilex.org/demo/2018/s18006
-## 3  http://www.opensilex.org/demo/2018/s18006
-## 4  http://www.opensilex.org/demo/2018/s18006
-## 5  http://www.opensilex.org/demo/2018/s18006
-## 6  http://www.opensilex.org/demo/2018/s18006
-## 7  http://www.opensilex.org/demo/2018/s18006
-## 8  http://www.opensilex.org/demo/2018/s18006
-## 9  http://www.opensilex.org/demo/2018/s18006
-## 10 http://www.opensilex.org/demo/2018/s18006
-## 11 http://www.opensilex.org/demo/2018/s18006
-## 12 http://www.opensilex.org/demo/2018/s18006
-## 13 http://www.opensilex.org/demo/2018/s18006
-## 14 http://www.opensilex.org/demo/2018/s18006
-## 15 http://www.opensilex.org/demo/2018/s18006
-## 16 http://www.opensilex.org/demo/2018/s18006
-## 17 http://www.opensilex.org/demo/2018/s18006
-## 18 http://www.opensilex.org/demo/2018/s18006
-## 19 http://www.opensilex.org/demo/2018/s18006
-## 20 http://www.opensilex.org/demo/2018/s18006
-## 21 http://www.opensilex.org/demo/2018/s18006
-## 22 http://www.opensilex.org/demo/2018/s18006
-## 23 http://www.opensilex.org/demo/2018/s18006
-## 24 http://www.opensilex.org/demo/2018/s18006
-## 25 http://www.opensilex.org/demo/2018/s18006
-## 26 http://www.opensilex.org/demo/2018/s18006
-## 27 http://www.opensilex.org/demo/2018/s18006
-## 28 http://www.opensilex.org/demo/2018/s18006
-## 29 http://www.opensilex.org/demo/2018/s18006
-## 30 http://www.opensilex.org/demo/2018/s18006
-## 31 http://www.opensilex.org/demo/2018/s18006
-## 32 http://www.opensilex.org/demo/2018/s18006
-## 33 http://www.opensilex.org/demo/2018/s18006
-## 34 http://www.opensilex.org/demo/2018/s18006
-## 35 http://www.opensilex.org/demo/2018/s18006
-## 36 http://www.opensilex.org/demo/2018/s18006
-## 37 http://www.opensilex.org/demo/2018/s18006
-## 38 http://www.opensilex.org/demo/2018/s18006
-## 39 http://www.opensilex.org/demo/2018/s18006
-## 40 http://www.opensilex.org/demo/2018/s18006
-## 41 http://www.opensilex.org/demo/2018/s18006
-## 42 http://www.opensilex.org/demo/2018/s18006
-## 43 http://www.opensilex.org/demo/2018/s18006
-## 44 http://www.opensilex.org/demo/2018/s18006
-## 45 http://www.opensilex.org/demo/2018/s18006
-## 46 http://www.opensilex.org/demo/2018/s18006
-## 47 http://www.opensilex.org/demo/2018/s18006
-## 48 http://www.opensilex.org/demo/2018/s18006
-## 49 http://www.opensilex.org/demo/2018/s18006
-## 50 http://www.opensilex.org/demo/2018/s18006
-##                                        variableUri
-## 1  http://www.opensilex.org/demo/id/variables/v010
-## 2  http://www.opensilex.org/demo/id/variables/v010
-## 3  http://www.opensilex.org/demo/id/variables/v010
-## 4  http://www.opensilex.org/demo/id/variables/v010
-## 5  http://www.opensilex.org/demo/id/variables/v010
-## 6  http://www.opensilex.org/demo/id/variables/v010
-## 7  http://www.opensilex.org/demo/id/variables/v010
-## 8  http://www.opensilex.org/demo/id/variables/v010
-## 9  http://www.opensilex.org/demo/id/variables/v010
-## 10 http://www.opensilex.org/demo/id/variables/v010
-## 11 http://www.opensilex.org/demo/id/variables/v010
-## 12 http://www.opensilex.org/demo/id/variables/v010
-## 13 http://www.opensilex.org/demo/id/variables/v010
-## 14 http://www.opensilex.org/demo/id/variables/v010
-## 15 http://www.opensilex.org/demo/id/variables/v010
-## 16 http://www.opensilex.org/demo/id/variables/v010
-## 17 http://www.opensilex.org/demo/id/variables/v010
-## 18 http://www.opensilex.org/demo/id/variables/v010
-## 19 http://www.opensilex.org/demo/id/variables/v010
-## 20 http://www.opensilex.org/demo/id/variables/v010
-## 21 http://www.opensilex.org/demo/id/variables/v010
-## 22 http://www.opensilex.org/demo/id/variables/v010
-## 23 http://www.opensilex.org/demo/id/variables/v010
-## 24 http://www.opensilex.org/demo/id/variables/v010
-## 25 http://www.opensilex.org/demo/id/variables/v010
-## 26 http://www.opensilex.org/demo/id/variables/v010
-## 27 http://www.opensilex.org/demo/id/variables/v010
-## 28 http://www.opensilex.org/demo/id/variables/v010
-## 29 http://www.opensilex.org/demo/id/variables/v010
-## 30 http://www.opensilex.org/demo/id/variables/v010
-## 31 http://www.opensilex.org/demo/id/variables/v010
-## 32 http://www.opensilex.org/demo/id/variables/v010
-## 33 http://www.opensilex.org/demo/id/variables/v010
-## 34 http://www.opensilex.org/demo/id/variables/v010
-## 35 http://www.opensilex.org/demo/id/variables/v010
-## 36 http://www.opensilex.org/demo/id/variables/v010
-## 37 http://www.opensilex.org/demo/id/variables/v010
-## 38 http://www.opensilex.org/demo/id/variables/v010
-## 39 http://www.opensilex.org/demo/id/variables/v010
-## 40 http://www.opensilex.org/demo/id/variables/v010
-## 41 http://www.opensilex.org/demo/id/variables/v010
-## 42 http://www.opensilex.org/demo/id/variables/v010
-## 43 http://www.opensilex.org/demo/id/variables/v010
-## 44 http://www.opensilex.org/demo/id/variables/v010
-## 45 http://www.opensilex.org/demo/id/variables/v010
-## 46 http://www.opensilex.org/demo/id/variables/v010
-## 47 http://www.opensilex.org/demo/id/variables/v010
-## 48 http://www.opensilex.org/demo/id/variables/v010
-## 49 http://www.opensilex.org/demo/id/variables/v010
-## 50 http://www.opensilex.org/demo/id/variables/v010
-##                        date value
-## 1  2017-09-21T12:00:00+0200   0.0
-## 2  2017-09-20T12:00:00+0200   0.0
-## 3  2017-09-19T12:00:00+0200   0.0
-## 4  2017-09-18T12:00:00+0200   1.5
-## 5  2017-09-17T12:00:00+0200   0.0
-## 6  2017-09-16T12:00:00+0200   0.0
-## 7  2017-09-15T12:00:00+0200   0.0
-## 8  2017-09-14T12:00:00+0200   0.0
-## 9  2017-09-13T12:00:00+0200   0.0
-## 10 2017-09-12T12:00:00+0200   0.0
-## 11 2017-09-11T12:00:00+0200   0.0
-## 12 2017-09-10T12:00:00+0200   0.0
-## 13 2017-09-09T12:00:00+0200   0.0
-## 14 2017-09-08T12:00:00+0200   0.0
-## 15 2017-09-07T12:00:00+0200   0.0
-## 16 2017-09-06T12:00:00+0200   0.0
-## 17 2017-09-05T12:00:00+0200   0.0
-## 18 2017-09-04T12:00:00+0200   0.0
-## 19 2017-09-03T12:00:00+0200   0.0
-## 20 2017-09-02T12:00:00+0200   0.0
-## 21 2017-09-01T12:00:00+0200   0.0
-## 22 2017-08-31T12:00:00+0200   2.5
-## 23 2017-08-30T12:00:00+0200   1.5
-## 24 2017-08-29T12:00:00+0200   0.0
-## 25 2017-08-28T12:00:00+0200   0.0
-## 26 2017-08-27T12:00:00+0200   0.0
-## 27 2017-08-26T12:00:00+0200   0.0
-## 28 2017-08-25T12:00:00+0200   0.0
-## 29 2017-08-24T12:00:00+0200   0.0
-## 30 2017-08-23T12:00:00+0200   0.0
-## 31 2017-08-22T12:00:00+0200   0.0
-## 32 2017-08-21T12:00:00+0200   0.0
-## 33 2017-08-20T12:00:00+0200   0.0
-## 34 2017-08-19T12:00:00+0200   0.0
-## 35 2017-08-18T12:00:00+0200   0.0
-## 36 2017-08-17T12:00:00+0200   0.0
-## 37 2017-08-16T12:00:00+0200   0.0
-## 38 2017-08-15T12:00:00+0200   0.0
-## 39 2017-08-14T12:00:00+0200   0.0
-## 40 2017-08-13T12:00:00+0200   0.0
-## 41 2017-08-12T12:00:00+0200   0.0
-## 42 2017-08-11T12:00:00+0200   0.0
-## 43 2017-08-10T12:00:00+0200   0.0
-## 44 2017-08-09T12:00:00+0200   0.0
-## 45 2017-08-08T12:00:00+0200   0.0
-## 46 2017-08-07T12:00:00+0200   0.0
-## 47 2017-08-06T12:00:00+0200   0.0
-## 48 2017-08-05T12:00:00+0200   6.5
-## 49 2017-08-04T12:00:00+0200   0.0
-## 50 2017-08-03T12:00:00+0200   0.0
-## 
-## attr(,&quot;class&quot;)
-## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
+## $value
+##  [1] 0.0 0.0 0.0 1.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+## [20] 0.0 0.0 2.5 1.5 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+## [39] 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 6.5 0.0 0.0</code></pre>
 </div>
 <div id="phenotypic-data" class="section level2">
-<h2><span class="header-section-number">3.2</span> Phenotypic data</h2>
+<h2><span class="header-section-number">4.2</span> Phenotypic data</h2>
 <pre class="r"><code>  head(getPhenotypeData( 
                         variable = &quot;http://www.opensilex.org/demo/id/variables/v001&quot;, 
                         pageSize=10)$data)</code></pre>
-<pre><code>## 2019-09-06 09:40:20 INFO::Query executed and data recovered</code></pre>
+<pre><code>## 2020-02-04 10:08:26 INFO::Query executed and data recovered</code></pre>
 <pre><code>##                               scientificObject
 ## 1 http://www.opensilex.org/demo/2018/o18000076
 ## 2 http://www.opensilex.org/demo/2018/o18000076
@@ -1134,202 +1628,59 @@ Update   : 14/02/2019
 ## 4 http://www.opensilex.org/demo/id/variables/v001 2017-05-26         0.0
 ## 5 http://www.opensilex.org/demo/id/variables/v001 2017-05-28         0.0
 ## 6 http://www.opensilex.org/demo/id/variables/v001 2017-05-29         0.0</code></pre>
-<p>———— Developper part ———— # Get more informations on during a call # Can be useful to understand what append ruing a call</p>
+<p>———— Developper part ————</p>
+</div>
+</div>
+<div id="get-more-informations-on-during-a-call" class="section level1">
+<h1><span class="header-section-number">5</span> Get more informations on during a call</h1>
+<div id="can-be-useful-to-understand-what-append-ruing-a-call" class="section level2">
+<h2><span class="header-section-number">5.1</span> Can be useful to understand what append ruing a call</h2>
 <pre class="r"><code>  setLogLevel(&quot;DEBUG&quot;)</code></pre>
 <pre><code>## [1] &quot;Log level set to DEBUG&quot;</code></pre>
-<pre class="r"><code>  getEnvironmentData( variable = &quot;http://www.opensilex.org/demo/id/variables/v010&quot;, pageSize=50)</code></pre>
-<pre><code>## 2019-09-06 09:40:21 DEBUG::Request Time :
+<pre class="r"><code>  getEnvironmentData( variable = &quot;http://www.opensilex.org/demo/id/variables/v050&quot;, pageSize=50)</code></pre>
+<pre><code>## 2020-02-04 10:08:27 DEBUG::Request Time :
 ## utilisateur     système      écoulé 
-##       0.004       0.000       0.025 
-## Response [http://www.opensilex.org/openSilexAPI/rest/environments?pageSize=50&amp;page=0&amp;variable=http%3A%2F%2Fwww.opensilex.org%2Fdemo%2Fid%2Fvariables%2Fv010]
-##   Date: 2019-09-06 07:37
-##   Status: 200
+##       0.004       0.000       0.027 
+## Response [http://www.opensilex.org/openSilexSandBoxAPI/rest/environments?pageSize=50&amp;page=0&amp;variable=http%3A%2F%2Fwww.opensilex.org%2Fdemo%2Fid%2Fvariables%2Fv050]
+##   Date: 2020-02-04 09:08
+##   Status: 404
 ##   Content-Type: application/json
-##   Size: 8.54 kB
+##   Size: 173 B
 ## 
-## 2019-09-06 09:40:21 INFO::Query executed and data recovered</code></pre>
+## 2020-02-04 10:08:27 WARNING::Data not found
+## 2020-02-04 10:08:27 INFO::Additional Request information :
+## 2020-02-04 10:08:27 INFO::status: No results
+##  2020-02-04 10:08:27 INFO::status: list(type = &quot;Info&quot;, href = NA, details = &quot;No result found.&quot;)</code></pre>
 <pre><code>## $currentPage
-## [1] 0
-## 
-## $totalCount
-## [1] 126
-## 
-## $totalPages
-## [1] 3
-## 
-## $codeHttp
-## [1] 200
-## 
-## $codeHttpMessage
-## [1] &quot;Query executed and data recovered&quot;
-## 
-## $codeStatusMessage
 ## NULL
 ## 
+## $totalCount
+## NULL
+## 
+## $totalPages
+## NULL
+## 
+## $codeHttp
+## [1] 404
+## 
+## $codeHttpMessage
+## [1] &quot;Data not found&quot;
+## 
+## $codeStatusMessage
+##      message exception.type exception.href exception.details
+## 1 No results           Info             NA  No result found.
+## 
 ## $data
-##                                    sensorUri
-## 1  http://www.opensilex.org/demo/2018/s18006
-## 2  http://www.opensilex.org/demo/2018/s18006
-## 3  http://www.opensilex.org/demo/2018/s18006
-## 4  http://www.opensilex.org/demo/2018/s18006
-## 5  http://www.opensilex.org/demo/2018/s18006
-## 6  http://www.opensilex.org/demo/2018/s18006
-## 7  http://www.opensilex.org/demo/2018/s18006
-## 8  http://www.opensilex.org/demo/2018/s18006
-## 9  http://www.opensilex.org/demo/2018/s18006
-## 10 http://www.opensilex.org/demo/2018/s18006
-## 11 http://www.opensilex.org/demo/2018/s18006
-## 12 http://www.opensilex.org/demo/2018/s18006
-## 13 http://www.opensilex.org/demo/2018/s18006
-## 14 http://www.opensilex.org/demo/2018/s18006
-## 15 http://www.opensilex.org/demo/2018/s18006
-## 16 http://www.opensilex.org/demo/2018/s18006
-## 17 http://www.opensilex.org/demo/2018/s18006
-## 18 http://www.opensilex.org/demo/2018/s18006
-## 19 http://www.opensilex.org/demo/2018/s18006
-## 20 http://www.opensilex.org/demo/2018/s18006
-## 21 http://www.opensilex.org/demo/2018/s18006
-## 22 http://www.opensilex.org/demo/2018/s18006
-## 23 http://www.opensilex.org/demo/2018/s18006
-## 24 http://www.opensilex.org/demo/2018/s18006
-## 25 http://www.opensilex.org/demo/2018/s18006
-## 26 http://www.opensilex.org/demo/2018/s18006
-## 27 http://www.opensilex.org/demo/2018/s18006
-## 28 http://www.opensilex.org/demo/2018/s18006
-## 29 http://www.opensilex.org/demo/2018/s18006
-## 30 http://www.opensilex.org/demo/2018/s18006
-## 31 http://www.opensilex.org/demo/2018/s18006
-## 32 http://www.opensilex.org/demo/2018/s18006
-## 33 http://www.opensilex.org/demo/2018/s18006
-## 34 http://www.opensilex.org/demo/2018/s18006
-## 35 http://www.opensilex.org/demo/2018/s18006
-## 36 http://www.opensilex.org/demo/2018/s18006
-## 37 http://www.opensilex.org/demo/2018/s18006
-## 38 http://www.opensilex.org/demo/2018/s18006
-## 39 http://www.opensilex.org/demo/2018/s18006
-## 40 http://www.opensilex.org/demo/2018/s18006
-## 41 http://www.opensilex.org/demo/2018/s18006
-## 42 http://www.opensilex.org/demo/2018/s18006
-## 43 http://www.opensilex.org/demo/2018/s18006
-## 44 http://www.opensilex.org/demo/2018/s18006
-## 45 http://www.opensilex.org/demo/2018/s18006
-## 46 http://www.opensilex.org/demo/2018/s18006
-## 47 http://www.opensilex.org/demo/2018/s18006
-## 48 http://www.opensilex.org/demo/2018/s18006
-## 49 http://www.opensilex.org/demo/2018/s18006
-## 50 http://www.opensilex.org/demo/2018/s18006
-##                                        variableUri
-## 1  http://www.opensilex.org/demo/id/variables/v010
-## 2  http://www.opensilex.org/demo/id/variables/v010
-## 3  http://www.opensilex.org/demo/id/variables/v010
-## 4  http://www.opensilex.org/demo/id/variables/v010
-## 5  http://www.opensilex.org/demo/id/variables/v010
-## 6  http://www.opensilex.org/demo/id/variables/v010
-## 7  http://www.opensilex.org/demo/id/variables/v010
-## 8  http://www.opensilex.org/demo/id/variables/v010
-## 9  http://www.opensilex.org/demo/id/variables/v010
-## 10 http://www.opensilex.org/demo/id/variables/v010
-## 11 http://www.opensilex.org/demo/id/variables/v010
-## 12 http://www.opensilex.org/demo/id/variables/v010
-## 13 http://www.opensilex.org/demo/id/variables/v010
-## 14 http://www.opensilex.org/demo/id/variables/v010
-## 15 http://www.opensilex.org/demo/id/variables/v010
-## 16 http://www.opensilex.org/demo/id/variables/v010
-## 17 http://www.opensilex.org/demo/id/variables/v010
-## 18 http://www.opensilex.org/demo/id/variables/v010
-## 19 http://www.opensilex.org/demo/id/variables/v010
-## 20 http://www.opensilex.org/demo/id/variables/v010
-## 21 http://www.opensilex.org/demo/id/variables/v010
-## 22 http://www.opensilex.org/demo/id/variables/v010
-## 23 http://www.opensilex.org/demo/id/variables/v010
-## 24 http://www.opensilex.org/demo/id/variables/v010
-## 25 http://www.opensilex.org/demo/id/variables/v010
-## 26 http://www.opensilex.org/demo/id/variables/v010
-## 27 http://www.opensilex.org/demo/id/variables/v010
-## 28 http://www.opensilex.org/demo/id/variables/v010
-## 29 http://www.opensilex.org/demo/id/variables/v010
-## 30 http://www.opensilex.org/demo/id/variables/v010
-## 31 http://www.opensilex.org/demo/id/variables/v010
-## 32 http://www.opensilex.org/demo/id/variables/v010
-## 33 http://www.opensilex.org/demo/id/variables/v010
-## 34 http://www.opensilex.org/demo/id/variables/v010
-## 35 http://www.opensilex.org/demo/id/variables/v010
-## 36 http://www.opensilex.org/demo/id/variables/v010
-## 37 http://www.opensilex.org/demo/id/variables/v010
-## 38 http://www.opensilex.org/demo/id/variables/v010
-## 39 http://www.opensilex.org/demo/id/variables/v010
-## 40 http://www.opensilex.org/demo/id/variables/v010
-## 41 http://www.opensilex.org/demo/id/variables/v010
-## 42 http://www.opensilex.org/demo/id/variables/v010
-## 43 http://www.opensilex.org/demo/id/variables/v010
-## 44 http://www.opensilex.org/demo/id/variables/v010
-## 45 http://www.opensilex.org/demo/id/variables/v010
-## 46 http://www.opensilex.org/demo/id/variables/v010
-## 47 http://www.opensilex.org/demo/id/variables/v010
-## 48 http://www.opensilex.org/demo/id/variables/v010
-## 49 http://www.opensilex.org/demo/id/variables/v010
-## 50 http://www.opensilex.org/demo/id/variables/v010
-##                        date value
-## 1  2017-09-21T12:00:00+0200   0.0
-## 2  2017-09-20T12:00:00+0200   0.0
-## 3  2017-09-19T12:00:00+0200   0.0
-## 4  2017-09-18T12:00:00+0200   1.5
-## 5  2017-09-17T12:00:00+0200   0.0
-## 6  2017-09-16T12:00:00+0200   0.0
-## 7  2017-09-15T12:00:00+0200   0.0
-## 8  2017-09-14T12:00:00+0200   0.0
-## 9  2017-09-13T12:00:00+0200   0.0
-## 10 2017-09-12T12:00:00+0200   0.0
-## 11 2017-09-11T12:00:00+0200   0.0
-## 12 2017-09-10T12:00:00+0200   0.0
-## 13 2017-09-09T12:00:00+0200   0.0
-## 14 2017-09-08T12:00:00+0200   0.0
-## 15 2017-09-07T12:00:00+0200   0.0
-## 16 2017-09-06T12:00:00+0200   0.0
-## 17 2017-09-05T12:00:00+0200   0.0
-## 18 2017-09-04T12:00:00+0200   0.0
-## 19 2017-09-03T12:00:00+0200   0.0
-## 20 2017-09-02T12:00:00+0200   0.0
-## 21 2017-09-01T12:00:00+0200   0.0
-## 22 2017-08-31T12:00:00+0200   2.5
-## 23 2017-08-30T12:00:00+0200   1.5
-## 24 2017-08-29T12:00:00+0200   0.0
-## 25 2017-08-28T12:00:00+0200   0.0
-## 26 2017-08-27T12:00:00+0200   0.0
-## 27 2017-08-26T12:00:00+0200   0.0
-## 28 2017-08-25T12:00:00+0200   0.0
-## 29 2017-08-24T12:00:00+0200   0.0
-## 30 2017-08-23T12:00:00+0200   0.0
-## 31 2017-08-22T12:00:00+0200   0.0
-## 32 2017-08-21T12:00:00+0200   0.0
-## 33 2017-08-20T12:00:00+0200   0.0
-## 34 2017-08-19T12:00:00+0200   0.0
-## 35 2017-08-18T12:00:00+0200   0.0
-## 36 2017-08-17T12:00:00+0200   0.0
-## 37 2017-08-16T12:00:00+0200   0.0
-## 38 2017-08-15T12:00:00+0200   0.0
-## 39 2017-08-14T12:00:00+0200   0.0
-## 40 2017-08-13T12:00:00+0200   0.0
-## 41 2017-08-12T12:00:00+0200   0.0
-## 42 2017-08-11T12:00:00+0200   0.0
-## 43 2017-08-10T12:00:00+0200   0.0
-## 44 2017-08-09T12:00:00+0200   0.0
-## 45 2017-08-08T12:00:00+0200   0.0
-## 46 2017-08-07T12:00:00+0200   0.0
-## 47 2017-08-06T12:00:00+0200   0.0
-## 48 2017-08-05T12:00:00+0200   6.5
-## 49 2017-08-04T12:00:00+0200   0.0
-## 50 2017-08-03T12:00:00+0200   0.0
+## NULL
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;       &quot;WSResponse&quot;</code></pre>
 <pre class="r"><code>  setLogLevel(&quot;INFO&quot;)</code></pre>
 <pre><code>## [1] &quot;Log level set to INFO&quot;</code></pre>
 </div>
-</div>
-<div id="session-info" class="section level1">
-<h1><span class="header-section-number">4</span> Session info</h1>
-<pre><code>## R version 3.6.1 (2019-07-05)
+<div id="session-info" class="section level2">
+<h2><span class="header-section-number">5.2</span> Session info</h2>
+<pre><code>## R version 3.6.2 (2019-12-12)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 16.04.6 LTS
 ## 
@@ -1349,29 +1700,27 @@ Update   : 14/02/2019
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] phisWSClientR_2.0.0      opensilexWSClientR_1.0.0
+## [1] phisWSClientR_2.0.0      phisWSClientRTools_3.3.0 opensilexWSClientR_1.1.0
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.2        later_0.8.0       pillar_1.4.2     
-##  [4] compiler_3.6.1    prettyunits_1.0.2 remotes_2.1.0    
-##  [7] tools_3.6.1       testthat_2.1.1    digest_0.6.20    
-## [10] pkgbuild_1.0.3    pkgload_1.0.2     jsonlite_1.6     
-## [13] tibble_2.1.3      memoise_1.1.0     evaluate_0.14    
-## [16] pkgconfig_2.0.2   rlang_0.4.0       cli_1.1.0        
-## [19] rstudioapi_0.10   curl_4.0          yaml_2.2.0       
-## [22] xfun_0.8          httr_1.4.1        withr_2.1.2      
-## [25] stringr_1.4.0     dplyr_0.8.3       knitr_1.23       
-## [28] desc_1.2.0        fs_1.3.1          askpass_1.1      
-## [31] devtools_2.1.0    tidyselect_0.2.5  rprojroot_1.3-2  
-## [34] glue_1.3.1        R6_2.4.0          processx_3.4.0   
-## [37] rmarkdown_1.14    sessioninfo_1.1.1 tidyr_0.8.3      
-## [40] purrr_0.3.2       callr_3.3.0       magrittr_1.5     
-## [43] backports_1.1.4   ps_1.3.0          htmltools_0.3.6  
-## [46] usethis_1.5.1     assertthat_0.2.1  logging_0.10-108 
-## [49] stringi_1.4.3     openssl_1.4.1     crayon_1.3.4</code></pre>
+##  [1] Rcpp_1.0.3        later_1.0.0       pillar_1.4.2      compiler_3.6.2   
+##  [5] prettyunits_1.0.2 remotes_2.1.0     tools_3.6.2       testthat_2.3.1   
+##  [9] digest_0.6.23     pkgbuild_1.0.6    pkgload_1.0.2     lifecycle_0.1.0  
+## [13] tibble_2.1.3      jsonlite_1.6      memoise_1.1.0     evaluate_0.14    
+## [17] pkgconfig_2.0.3   rlang_0.4.4       cli_1.1.0         rstudioapi_0.10  
+## [21] curl_4.3          yaml_2.2.0        xfun_0.6          httr_1.4.1       
+## [25] dplyr_0.8.3       withr_2.1.2       stringr_1.4.0     knitr_1.27       
+## [29] vctrs_0.2.2       desc_1.2.0        fs_1.3.1          askpass_1.1      
+## [33] devtools_2.2.1    tidyselect_1.0.0  rprojroot_1.3-2   glue_1.3.1       
+## [37] R6_2.4.0          processx_3.4.1    rmarkdown_1.11    sessioninfo_1.1.1
+## [41] tidyr_1.0.2       purrr_0.3.3       callr_3.3.2       magrittr_1.5     
+## [45] backports_1.1.5   ps_1.3.0          ellipsis_0.3.0    htmltools_0.4.0  
+## [49] usethis_1.5.1     assertthat_0.2.1  logging_0.10-108  stringi_1.4.5    
+## [53] openssl_1.4.1     crayon_1.3.4</code></pre>
+</div>
 </div>
 <div id="references" class="section level1">
-<h1><span class="header-section-number">5</span> References</h1>
+<h1><span class="header-section-number">6</span> References</h1>
 <ol style="list-style-type: decimal">
 <li>R Development Core Team (2018). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. ISBN 3-900051-07-0, URL <a href="http://www.R-project.org" class="uri">http://www.R-project.org</a>.</li>
 </ol>
@@ -1394,23 +1743,6 @@ $(document).ready(function () {
 
 
 </script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
-<!-- code folding -->
-
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

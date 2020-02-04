@@ -1,5 +1,5 @@
 ---
-title: "Requests on the web service 2 - OpenSILEX"
+title: "GET Requests on the web service 2 - OpenSILEX"
 author: "I.Sanchez, A. Charleroy, Jean-Eudes Hollebecq (INRA MISTEA)"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
@@ -7,7 +7,7 @@ output:
     number_sections: yes
     toc: yes
 vignette: >
-  %\VignetteIndexEntry{Requests on the web service 2 - OpenSILEX}
+  %\VignetteIndexEntry{GET Requests on the web service 2 - OpenSILEX}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -28,113 +28,155 @@ This tutorial explains how to access to the second **phenomeapi** web service (P
 
 For this second web service, the available functions are:
 
-* getAnnotations()
-* getEnvironmentData()
-* getEvents()
-* getExperiments2()
-* getInfrastructures()
-* getMethods2()
-* getPhenotypeData()
-* getProjects2()
-* getScientificObjects()
-* getSensors()
-* getSpecies()
-* getTraits()
-* getUnits()
-* getVariables2()
-* getVectors()
+*  getAnnotations()
+*  getEnvironmentData()
+*  getEvents()
+*  getExperiments2()
+*  getInfrastructures()
+*  getMethods2()
+*  getPhenotypeData()
+*  getProjects2()
+*  getProvenances()
+*  getScientificObjects()
+*  getSensors()
+*  getSpecies()
+*  getTraits()
+*  getUnits()
+*  getVariables2()
+*  getVectors()
 </div>
+```{r option, include = FALSE}
+knitr::opts_chunk$set( echo = TRUE, message = FALSE, warning = FALSE)
+```
 
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r library, echo=TRUE,message=FALSE, warning=FALSE}
   library(phisWSClientR)
 ```
 
-# Creation of an identifier
+# Generalities
+
+## HTTP request
+This package performs request to PHIS Web Service. We can distinguish two kinds of request:  
+1.  GET requests that retrieve data from the web service.  
+2.  POST requests that send data to the web service.  
+
+They are nammed accordingly to the HTTP method GET and POST associated to it.
+
+Because these functions rely on HTTP method, the first answer of the functions is the status of the request:  
+- 200 and family: means the request has succeded  
+- 300 and family: means the request was reoriented elsewhere  
+- 400 and family: means the request failed from your side (your fault)  
+- 500 and family: means that the request failed from the server (not your fault)  
+  
+What is distinct between the functions is the value taken in the $data list.  
+Because this package aim at providing the most generic functions, the format has to be compatible with a lot of data structures. For examples list containing another list (a properties argument typically). That is to say, data.frames are not always compliant enough.
+
+## Identifiers
+
+PHIS relies on URI (Uniform Resource Identifier) to identify resources. As an identifier, this is an un-ambiguous way to identify objects.  
+
+When collecting data through the `getData` function, you will need to retrieve metadata of the variables through the `getVariables2` function if you want the label, unit and method used to create those data.
+
+# Creation of a connection
 
 Ask permission to request to the web service:
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r connect}
   # If you want to access to a private web service, you have to insert the address of the WS and the port
-  connectToPHISWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
+  #connectToPHISWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
+  connectToPHISWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "http://www.opensilex.org/openSilexSandBoxAPI/rest/")
 ```
 
 *aToken* is your identification and grants the access to some data according to your login information.
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r token, results = "hide"}
   aToken <- opensilexWSClientR::getToken("guest@opensilex.org","guest")
+```
+
+This token is handled automaticaly for you, but you can acces it using the following command :
+
+```{r get user info}
+getUserInformations()
 ```
 
 # Fetch informations about elements in the web service
 
 ## Projects
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getProjects2( uri="http://www.opensilex.org/demo/PHENOME-FPPN")
+```{r getProject}
+  getProjects2( acronyme = "PHENOME-FPPN")$data
 ```
 
 ## Experiments
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r getExperiments}
   getExperiments2( uri="http://www.opensilex.org/demo/DIA2017-1")
 ```
 ## Scientific Object
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r getScientificObjects}
   getScientificObjects( uri="http://www.opensilex.org/demo/2018/o18000076")
 ```
 
-##Infrastructures
+## Infrastructures
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r getInfrastructures}
   getInfrastructures(uri="https://emphasis.plant-phenotyping.eu")
 ```
 
 ## Variables 
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r getVariables}
   getVariables2( uri="http://www.opensilex.org/demo/id/variables/v010")
 ```
 
 ## Traits
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r getTraits}
   getTraits( uri="http://www.opensilex.org/demo/id/traits/t010")
 ```
 
 ## Methods
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r getMethods}
   getMethods2( uri="http://www.opensilex.org/demo/id/methods/m010")
 ```
 
 ## Units
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r getUnits}
   getUnits( uri="http://www.opensilex.org/demo/id/units/u007")
 ```
 
+## Provenances
+
+```{r getProvenances}
+getProvenances(label = "ImageAnalysis-ZA17-Maize" )
+```
+
+
 ## Species
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r getSpecies}
   getSpecies( uri="http://www.opensilex.org/id/species/helianthusannuus", language = "en")
 ```
 
 ## Sensors
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r getSensors}
   getSensors( uri="http://www.opensilex.org/demo/2018/s18001")
 ```
 
 ## Vectors
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r getVectors}
   getVectors( serialNumber = "01BD1DD71500001")
 ```
 
 ## Events
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r getEvents}
 # Where to find the "type" URL ?
 # Where is the ontology access  https://github.com/OpenSILEX/ontology-vocabularies/blob/master/oeev.owl
   getEvents( type = "http://www.opensilex.org/vocabulary/oeev#Fertilization", pageSize=10)
@@ -142,9 +184,8 @@ Ask permission to request to the web service:
 
 ## Annotations
 
-```{r,echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE}
-# Where to find the "type" URL ?
-# Where is the ontology access https://github.com/OpenSILEX/ontology-vocabularies/blob/master/oeev.owl
+```{r getAnnotations, eval=FALSE}
+
   getAnnotations( comment = "Ustilago maydis infection" , pageSize=10)
 ```
 
@@ -152,28 +193,34 @@ Ask permission to request to the web service:
 
 ## Environment data
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
-  getEnvironmentData( variable = "http://www.opensilex.org/demo/id/variables/v010", pageSize=50)
+```{r getData}
+getData(variableUri = "http://www.opensilex.org/demo/id/variables/v014")$data
+```
+
+```{r getEnvironmentData}
+  getEnvironmentData( variable = "http://www.opensilex.org/demo/id/variables/v010", pageSize=50)$data
 ```
 
 ## Phenotypic data
 
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+```{r getPhenotypeData}
   head(getPhenotypeData( 
                         variable = "http://www.opensilex.org/demo/id/variables/v001", 
                         pageSize=10)$data)
 ```
- ------------ Developper part  ------------
+
+ ------------ Developper part  ------------  
+ 
 # Get more informations on during a call
-# Can be useful to understand what append ruing a call
-```{r,echo=TRUE,message=FALSE, warning=FALSE}
+## Can be useful to understand what append ruing a call
+```{r setLog level}
   setLogLevel("DEBUG")
-  getEnvironmentData( variable = "http://www.opensilex.org/demo/id/variables/v010", pageSize=50)
+  getEnvironmentData( variable = "http://www.opensilex.org/demo/id/variables/v050", pageSize=50)
   setLogLevel("INFO")
 ```
-# Session info
+## Session info
 
-```{r session,echo=FALSE,message=FALSE, warning=FALSE}
+```{r session,echo=FALSE}
   sessionInfo()
 ```
 

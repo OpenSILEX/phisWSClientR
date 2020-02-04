@@ -13,12 +13,12 @@ vignette: >
 ---
 
 <!---
-Program  : introWS2.Rmd
-Author   : I.Sanchez (MISTEA)
+Program  : postRequestsWS2.Rmd
+Author   : J-E.HOLLEBECQ (MISTEA)
 Objective: a vignette for phisWSClientR library
            an introduction to requesting the phenomeapi (phis web service) WS2
-Creation : 24/01/2019
-Update   : 14/02/2019
+Creation : 15/01/2020
+Update   : 04/02/2020
 -->
 
 ***
@@ -99,7 +99,7 @@ Here we will detail the so called POST functions, that are used to send data to 
 
 ## Annotations
 
-```{r postAnnotations}
+```{r postAnnotations, eval = FALSE}
   postAnnotations(    
     creator = "http://www.opensilex.org/demo/id/agent/guest_phis",
     motivatedBy = "http://www.w3.org/ns/oa#commenting",
@@ -112,7 +112,7 @@ Here we will detail the so called POST functions, that are used to send data to 
 
 Used to send data individually (usefull for testing if your dataset is correctly formated)
 
-```{r postData}
+```{r postData, eval = FALSE}
 postData(
 provenanceUri = "http://www.opensilex.org/demo/id/provenance/1553100217870",
 objectUri = "http://www.opensilex.org/demo/2018/o18000076",
@@ -183,7 +183,7 @@ attri =data.frame(
 
 ## ScientificObjects	
 
-Inserting Scientific objects has two variants, one accepting a list of lists, and the other beeing a data.frame with appropriate column names for the properties.
+Inserting Scientific objects has two variants, one accepting a list of lists, and the other beeing a data.frame with appropriate column names for the properties.  
 **Important** the alias block (rdfs:label) is mandatory in order to insert a new scientific object.
 
 ```{r postScienticObjects}
