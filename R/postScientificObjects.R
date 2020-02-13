@@ -11,11 +11,12 @@
 ##' @title postScientificObjects
 ##'
 ##' @description send a scientific object to the web service
-##' @param rdfType character, the rdfType of the scientific object ex: http://www.opensilex.org/vocabulary/oeso#Plot
-##' @param geometry character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"
-##' @param experiment character, uri of the experiment of the scientific object
-##' @param isPartOf character, a scientific object the scientific object is part of ???
-##' @param properties list, a list for the properties. 
+##' @param expDesign a dataframe containing the following columns 
+##'        rdfType character, the rdfType of the scientific object ex: http://www.opensilex.org/vocabulary/oeso#Plot
+##'        geometry character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"
+##'        experiment character, uri of the experiment of the scientific object
+##'        isPartOf character, a scientific object the scientific object is part of ???
+##'        properties list, a list for the properties. 
 ##' Note: The object can also be a data.frame with the 3 named column rdfType, relation and value. See example.
 ##' @section Important:
 ##' The properties list must contain the rdfs:label block ; also known as alias.
@@ -32,31 +33,88 @@
 ##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
 ##'                username="guest@opensilex.org",
 ##'                password="guest")
-##' postScientificObjects(
-##'   rdfType = "http://www.opensilex.org/vocabulary/oeso#Plot",
-##'   experiment="http://www.opensilex.org/demo/DIA2017-1",
-##'   properties=list(
-##'     list(
-##'       rdfType = "http://www.opensilex.org/vocabulary/oeso#Species",
-##'       relation = "http://www.opensilex.org/vocabulary/oeso#hasSpecies",
-##'       value = "http://www.phenome-fppn.fr/id/species/triticumaestivum"),
-##'     list(
-##'       rdfType = NA,
-##'       relation ="http://www.w3.org/2000/01/rdf-schema#label",
-##'       value ="objectAlias")
-##' )
-##' )
+##' expDesign = data.frame(Alias = c("1/DZ_PG_67/ZM4394/WW/1/DIA2017-05-19", "2/DZ_PG_30/ZM4361/WW/1/DIA2017-05-19", "3/DZ_PG_49/ZM4389/WW/1/DIA2017-05-19"),
+##'                   type = c("Plot", "Plot", "Plot")
+##'                   experiment =c("http://www.opensilex.org/demo/DMO2000-1", "http://www.opensilex.org/demo/DMO2000-1", "http://www.opensilex.org/demo/DMO2000-1"),
+##'                   Geometry = c("Polygon ((3.973359402 43.61321499, 3.973389651 43.61319639, 3.973437651 43.6132376, 3.973407402 43.6132562, 3.973359402 43.61321499))", "Polygon ((3.973389651 43.61319639, 3.9734199 43.61317779, 3.973467901 43.61321899, 3.973437651 43.6132376, 3.973389651 43.61319639)))", "Polygon ((3.9734199 43.61317779, 3.973450149 43.61315919, 3.97349815 43.61320039, 3.973467901 43.61321899, 3.9734199 43.61317779))",
+##'                   Species = c("Maize", "Maize", "Maize"),
+##'                   Variety = c("iPG310", "iPG152", "iPG228")
+##'  )
 ##'    }
 ##' @export
-postScientificObjects <- function(rdfType, experiment, geometry = "", isPartOf = "", properties){
-  attributes <- list()
-  if (rdfType!="")    attributes <- c(attributes, rdfType = rdfType)       else stop("You must provide a type of scientific object")
-  if (experiment!="") attributes <- c(attributes, experiment = experiment) else stop("You must provide a experiment")
-  if (geometry!="")   attributes <- c(attributes, geometry = geometry)    
-  if (isPartOf!="")   attributes <- c(attributes, isPartOf = isPartOf)
-  if (length(properties)!=0)  attributes <- c(attributes, properties = list(properties))
-  Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("SCIENTIFIC_OBJECTS", configWS)),
-                                                     attributes = attributes, wsVersion = 2)
+postScientificObjects <- function(expDesign){
+  if(sum(c("alias","type", "experiment", "geometry")%in%names(expDesign)) > 4 ) stop(" Authorized columns Required => alias,type, experiment, parent, variety, geometry.  Optional => (species, treatement, replication)")
+  scientificObjectsFormatted <- list()
+
+  if("species" %in% colnames(expDesign)){
+    
+  }
+  species <- as.data.frame(getSpecies()$data, stringsAsFactors=FALSE)
+ if(is.null(species) || missing(species) ){
+   stop("Missing species")
+ }
+
+  for(sp in  species$data){
+    print(sp)
+  }
+  
+  species$data$label
+  
+  # TODO get Vocabulary namespaces
+  
+  for(numSO in 1:nrow(expDesign)){
+    scientificObject <- ScientificObjectPostDTO$new(
+      rdfType = expDesign[numSO,]$rdfType,
+      experiment = expDesign[numSO,]$experiment
+    )
+    if(!missing(expDesign[numSO,]$parent)){
+      scientificObject$isPartOf = expDesign[numSO,]$parent
+    }
+    if(!missing(year)){
+      scientificObject$year = expDesign[numSO,]$year
+    }
+    if(!missing(geometry)){
+      scientificObject$geometry = expDesign[numSO,]$geometry
+    }
+    PropertyList <- list()
+    if(!missing(expDesign[numSO,]$alias)){
+      aliasProperty = PropertyPostDTO$new()
+      aliasProperty$rdfType =   NA
+      aliasProperty$relation = "http://www.w3.org/2000/01/rdf-schema#label"
+      aliasProperty$value = expDesign[numSO,]$alias 
+    }
+    
+    if(!missing(expDesign[numSO,]$variety)){
+      nPo = PropertyPostDTO$new(
+        rdfType = "http://www.opensilex.org/vocabulary/oeso#Species",
+        relation = "http://www.opensilex.org/vocabulary/oeso#hasSpecies",
+        value = "http://www.opensilex.org/vocabulary/oeso#zea_mays"
+      )
+    }
+      
+    
+    nPo2 = PropertyPostDTO$new(
+      rdfType =  "http://www.opensilex.org/vocabulary/oeso#Variety",
+      relation = "http://www.opensilex.org/vocabulary/oeso#hasVariety",
+      value = sub_SO$Variety[1]
+    )
+   
+    
+    if(!missing(species)){
+      scientificObject$year = expDesign[numSO,]$species
+    }
+    if(!missing(treatment)){
+      scientificObject$year = expDesign[numSO,]$treatment
+    }
+    if(!missing(replication)){
+      scientificObject$year = expDesign[numSO,]$replication
+    }
+    
+    scientificObjectsFormatted <- append(scientificObjectsFormatted,scientificObject)
+  }     
+  
+  
+  
   return(Response)
 }
 

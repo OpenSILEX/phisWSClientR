@@ -2,21 +2,22 @@
 # Program: postData.R
 # Objective: functions to post data to the WS2
 #            * postData
-# Authors: Hollebecq Jean-Eudes
+# Authors: Hollebecq Jean-Eudes, Arnaud Charleroy
 # Creation: 26/11/2019
-# Update:
+# Update: 10/02/2020
 #-------------------------------------------------------------------------------
 
 ##' @title postData
 ##'
 ##' @description send a data to the web service
-##' @param provenanceUri character, the URI of the provenance of the data. Accessed by from \code{\link{getProvenances}}
-##' @param objectUri character, give the uri of the scientific object concerned
-##' @param variableUri character, give the uri of the variable concerned
-##' @param date character, date of the measurement. Follow ISO 8601 format, see example
-##' @param value character, the value of the measurement
+##' @param data a data.frame containing the following columns :
+##'        provenanceUri character, the URI of the provenance of the data. Accessed by from \code{\link{getProvenances}}
+##'        objectUri character, give the uri of the scientific object concerned
+##'        variableUri character, give the uri of the variable concerned
+##'        date character, date of the measurement. Follow ISO 8601 format, see example
+##'        value character, the value of the measurement
 
-##' @return WSResponse object
+##' @return Response object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
 ##' @seealso You have to install the opensilexWSClientR before running any 
 ##'          request on PHIS web service.
@@ -28,23 +29,32 @@
 ##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
 ##'                username="guest@opensilex.org",
 ##'                password="guest")
-##'   postData(
-##' provenanceUri = "http://www.opensilex.org/demo/2018/pv181515071552",
-##' objectUri = "http://www.opensilex.org/demo/2018/o18000076",
-##' variableUri = "http://www.opensilex.org/demo/id/variable/v0000001",
-##' date = "2017-06-15T10:51:00+0200",
-##' value = 1.3)
-##'    }
+##' data = data.frame(   
+##'   provenanceUri = c("http://www.phenome-fppn.fr/test/id/provenance/1569422784579", "http://www.phenome-fppn.fr/test/id/provenance/1569422784579", "http://www.phenome-fppn.fr/test/id/provenance/1569422784579", "http://www.phenome-fppn.fr/test/id/provenance/1569422784579"),
+##'   objectUri = c("http://www.phenome-fppn.fr/test/2019/o19000076","http://www.phenome-fppn.fr/test/2019/o19000076", "http://www.phenome-fppn.fr/test/2019/o19000076","http://www.phenome-fppn.fr/test/2019/o19000076"),
+##'   variableUri = c("http://www.phenome-fppn.fr/test/id/variables/v027","http://www.phenome-fppn.fr/test/id/variables/v027", "http://www.phenome-fppn.fr/test/id/variables/v027","http://www.phenome-fppn.fr/test/id/variables/v027"),
+##'   date = c("2017-06-15T10:45:00+0200","2017-06-15T10:46:00+0200", "2017-06-15T11:47:00+0200","2017-06-15T11:48:00+0200"),
+##'   value = c(1111.3, 1010, 3030, 4040)
+##' )
+##' postData(
+##'   data
+##' )
 ##' @export
 postData <- function(provenanceUri, objectUri, variableUri, date, value){
-  attributes <- list()
-  if (provenanceUri!="")    attributes <- c(attributes, provenanceUri = provenanceUri) else stop("You must provide a provenance for the data")
-  if (objectUri!="")      attributes <- c(attributes, objectUri = objectUri)           else stop("You must provide an object to the data")
-  if (variableUri!="")   attributes <- c(attributes, variableUri = variableUri)        else stop("You must provide a variable")
-  if (date!="") attributes <- c(attributes, date = date)        else stop("You must provide a date. In correct format (ISO 8601)")
-  if (value!="")   attributes <- c(attributes, value = value)   else stop("You must provide a value")
-  
-  Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("DATA", configWS)),
-                                                     attributes = attributes, wsVersion = 2)
-  return(Response)
+  if(sum(c("provenanceUri", "objectUri", "variableUri", "date", "value")%in%names(data))!=5 ) stop(" You should name the columns after the arguments provenanceUri, objectUri, variableUri, date, value")
+  # transform data into R6 object 
+  dataFormatted <- list()
+  for(numData in 1:nrow(data)){
+    dataObject <- DataPostDTO$new(
+      provenanceUri =  data[numData,]$provenanceUri,
+      objectUri = data[numData,]$objectUri,
+      variableUri = data[numData,]$variableUri,
+      date = data[numData,]$date,
+      value = ObjectDTO$new(data[numData,]$value))
+    dataFormatted <- append(dataFormatted,dataObject)
+  }            
+  # insert R6 object 
+  dataApi <- DataApi$new()
+  response <- dataApi$post_data(dataFormatted)
+  return(response)
 }
