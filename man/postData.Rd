@@ -4,21 +4,18 @@
 \alias{postData}
 \title{postData}
 \usage{
-postData(provenanceUri, objectUri, variableUri, date, value)
+postData(data)
 }
 \arguments{
-\item{provenanceUri}{character, the URI of the provenance of the data. Accessed by from \code{\link{getProvenances}}}
-
-\item{objectUri}{character, give the uri of the scientific object concerned}
-
-\item{variableUri}{character, give the uri of the variable concerned}
-
-\item{date}{character, date of the measurement. Follow ISO 8601 format, see example}
-
-\item{value}{character, the value of the measurement}
+\item{data}{a data.frame containing the following columns :
+provenanceUri character, the URI of the provenance of the data. Accessed by from \code{\link{getProvenances}}
+objectUri character, give the uri of the scientific object concerned
+variableUri character, give the uri of the variable concerned
+date character, date of the measurement. Follow ISO 8601 format, see example
+value character, the value of the measurement}
 }
 \value{
-WSResponse object
+Response object
 }
 \description{
 send a data to the web service
@@ -26,20 +23,6 @@ send a data to the web service
 \details{
 You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
 service
-}
-\examples{
-\donttest{
-connectToPHISWS(apiID="ws_private",
-               url = "http://www.opensilex.org/openSilexAPI/rest/",
-               username="guest@opensilex.org",
-               password="guest")
-  postData(
-provenanceUri = "http://www.opensilex.org/demo/2018/pv181515071552",
-objectUri = "http://www.opensilex.org/demo/2018/o18000076",
-variableUri = "http://www.opensilex.org/demo/id/variable/v0000001",
-date = "2017-06-15T10:51:00+0200",
-value = 1.3)
-   }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure

@@ -30,17 +30,33 @@
 ##'                username="guest@opensilex.org",
 ##'                password="guest")
 ##' data = data.frame(   
-##'   provenanceUri = c("http://www.phenome-fppn.fr/test/id/provenance/1569422784579", "http://www.phenome-fppn.fr/test/id/provenance/1569422784579", "http://www.phenome-fppn.fr/test/id/provenance/1569422784579", "http://www.phenome-fppn.fr/test/id/provenance/1569422784579"),
-##'   objectUri = c("http://www.phenome-fppn.fr/test/2019/o19000076","http://www.phenome-fppn.fr/test/2019/o19000076", "http://www.phenome-fppn.fr/test/2019/o19000076","http://www.phenome-fppn.fr/test/2019/o19000076"),
-##'   variableUri = c("http://www.phenome-fppn.fr/test/id/variables/v027","http://www.phenome-fppn.fr/test/id/variables/v027", "http://www.phenome-fppn.fr/test/id/variables/v027","http://www.phenome-fppn.fr/test/id/variables/v027"),
-##'   date = c("2017-06-15T10:45:00+0200","2017-06-15T10:46:00+0200", "2017-06-15T11:47:00+0200","2017-06-15T11:48:00+0200"),
+##'   provenanceUri = c(
+##'   "http://www.phenome-fppn.fr/test/id/provenance/1569422784579", 
+##'   "http://www.phenome-fppn.fr/test/id/provenance/1569422784579", 
+##'   "http://www.phenome-fppn.fr/test/id/provenance/1569422784579", 
+##'   "http://www.phenome-fppn.fr/test/id/provenance/1569422784579"),
+##'   objectUri = c(
+##'   "http://www.phenome-fppn.fr/test/2019/o19000076",
+##'   "http://www.phenome-fppn.fr/test/2019/o19000076", 
+##'   "http://www.phenome-fppn.fr/test/2019/o19000076",
+##'   "http://www.phenome-fppn.fr/test/2019/o19000076"),
+##'   variableUri = c(
+##'   "http://www.phenome-fppn.fr/test/id/variables/v027",
+##'   "http://www.phenome-fppn.fr/test/id/variables/v027", 
+##'   "http://www.phenome-fppn.fr/test/id/variables/v027",
+##'   "http://www.phenome-fppn.fr/test/id/variables/v027"),
+##'   date = c(
+##'   "2017-06-15T10:45:00+0200",
+##'   "2017-06-15T10:46:00+0200", 
+##'   "2017-06-15T11:47:00+0200",
+##'   "2017-06-15T11:48:00+0200"),
 ##'   value = c(1111.3, 1010, 3030, 4040)
 ##' )
 ##' postData(
 ##'   data
 ##' )
 ##' @export
-postData <- function(provenanceUri, objectUri, variableUri, date, value){
+postData <- function(data){
   if(sum(c("provenanceUri", "objectUri", "variableUri", "date", "value")%in%names(data))!=5 ) stop(" You should name the columns after the arguments provenanceUri, objectUri, variableUri, date, value")
   # transform data into R6 object 
   dataFormatted <- list()
