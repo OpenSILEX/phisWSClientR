@@ -71,6 +71,7 @@ configWS<-new.env(emptyenv())
   
   # commun
   assign("VARIABLES", "variables", configWS)
+  assign("VOCABULARY", "vocabularies/namespaces", configWS)
   assign("VARIABLES_DETAILS", "variables/details", configWS)
   assign("ENVIRONMENT", "environment", configWS)
   assign("PROJECTS", "projects", configWS)
