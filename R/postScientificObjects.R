@@ -9,7 +9,7 @@
 #-------------------------------------------------------------------------------
 
 ##' @title postScientificObjects
-##'
+##' @import stringr
 ##' @description send a scientific object to the web service
 ##' @param expDesign a dataframe containing the following columns 
 ##'        rdfType character, the rdfType of the scientific object ex: http://www.opensilex.org/vocabulary/oeso#Plot
@@ -68,10 +68,7 @@ postScientificObjects <- function(expDesign){
   }
   
   species$data$label
-  
-  # TODO get Vocabulary namespaces
   vocabularies = getVocabulary()$data
-   # essai pour le préfixe à la place de l'appel de fonction - comment savoir lequel sera oeso? / rdfs?
   
   for(numSO in 1:nrow(expDesign)){
     scientificObject <- ScientificObjectPostDTO$new(
@@ -91,7 +88,7 @@ postScientificObjects <- function(expDesign){
     if(!is.null(expDesign[numSO,]$Alias)){
       aliasProperty = PropertyPostDTO$new()
       aliasProperty$rdfType =   NA
-      aliasProperty$relation = "rdfs:"
+      aliasProperty$relation = paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "rdf-schema")], "label", sep="")
       # aliasProperty$relation = "http://www.w3.org/2000/01/rdf-schema#label"
       aliasProperty$value = expDesign[numSO,]$Alias
       PropertyList <- append( PropertyList, aliasProperty)
@@ -100,9 +97,9 @@ postScientificObjects <- function(expDesign){
     if(!is.null(expDesign[numSO,]$Species)){
       nPo = PropertyPostDTO$new(
         #rdfType = "http://www.opensilex.org/vocabulary/oeso#Species",
-        rdfType = "vocabulary:Species",
+        rdfType = unique(paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "oeso")],"Species", sep = "")),
         #relation = "http://www.opensilex.org/vocabulary/oeso#hasSpecies",
-        relation = "vocabulary:hasSpecies",
+        relation = unique(paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "oeso")],"hasSpecies", sep = "")),
         value = expDesign[numSO,]$Species
       )
       PropertyList <- append( PropertyList, nPo)
@@ -111,9 +108,9 @@ postScientificObjects <- function(expDesign){
     if(!is.null(expDesign[numSO,]$Variety)){
       nPo2 = PropertyPostDTO$new(
         #rdfType =  "http://www.opensilex.org/vocabulary/oeso#Variety",
-        rdfType =  "vocabulary:Variety",
+        rdfType =  unique(paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "oeso")],"Variety", sep = "")),
         #relation = "http://www.opensilex.org/vocabulary/oeso#hasVariety",
-        relation = "vocabulary:hasVariety",
+        relation = unique(paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "oeso")], "hasVariety", sep = "")),
         value = expDesign[numSO,]$Variety
       )
       PropertyList <- append( PropertyList, nPo2)
@@ -123,7 +120,7 @@ postScientificObjects <- function(expDesign){
       nPo3 = PropertyPostDTO$new(
         rdfType =  NA, 
         #relation = "http://www.opensilex.org/vocabulary/oeso#hasExperimentModalities",
-        relation = "vocabulary:hasExperimentModalities",
+        relation =  unique(paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "oeso")], "hasExperimentModalities", sep = "")),
         value = expDesign[numSO,]$Treatment
       )
       PropertyList <- append( PropertyList, nPo3)
@@ -133,16 +130,15 @@ postScientificObjects <- function(expDesign){
       nPo4 = PropertyPostDTO$new(
         rdfType =  NA, 
         #relation = "http://www.opensilex.org/vocabulary/oeso#hasReplication",
-        relation = "vocabulary:hasReplication",
+        relation = unique(paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "oeso")], "hasReplication", sep = "")),
         value = expDesign[numSO,]$Treatment
       )
       PropertyList <- append( PropertyList, nPo4)
     }
     scientificObject$properties = PropertyList
 
-    scientificObjectsFormatted <- append(scientificObjectsFormatted,scientificObject)
     postScientificObject = ScientificObjectsApi$new()
-    wsResponse = postScientificObject$post_scientific_object(scientificObjectsFormatted)
+    wsResponse = postScientificObject$post_scientific_object(scientificObject)
     Response = append(Response, wsResponse$metadata)
   }
   
