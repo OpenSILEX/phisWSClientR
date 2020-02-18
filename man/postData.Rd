@@ -7,18 +7,15 @@
 postData(provenanceUri, objectUri, variableUri, date, value)
 }
 \arguments{
-\item{provenanceUri}{character, the URI of the provenance of the data. Accessed by from \code{\link{getProvenances}}}
-
-\item{objectUri}{character, give the uri of the scientific object concerned}
-
-\item{variableUri}{character, give the uri of the variable concerned}
-
-\item{date}{character, date of the measurement. Follow ISO 8601 format, see example}
-
-\item{value}{character, the value of the measurement}
+\item{data}{a data.frame containing the following columns :
+provenanceUri character, the URI of the provenance of the data. Accessed by from \code{\link{getProvenances}}
+objectUri character, give the uri of the scientific object concerned
+variableUri character, give the uri of the variable concerned
+date character, date of the measurement. Follow ISO 8601 format, see example
+value character, the value of the measurement}
 }
 \value{
-WSResponse object
+Response object
 }
 \description{
 send a data to the web service
@@ -33,13 +30,17 @@ connectToPHISWS(apiID="ws_private",
                url = "http://www.opensilex.org/openSilexAPI/rest/",
                username="guest@opensilex.org",
                password="guest")
-  postData(
-provenanceUri = "http://www.opensilex.org/demo/2018/pv181515071552",
-objectUri = "http://www.opensilex.org/demo/2018/o18000076",
-variableUri = "http://www.opensilex.org/demo/id/variable/v0000001",
-date = "2017-06-15T10:51:00+0200",
-value = 1.3)
-   }
+data = data.frame(   
+  provenanceUri = c("http://www.phenome-fppn.fr/test/id/provenance/1569422784579", "http://www.phenome-fppn.fr/test/id/provenance/1569422784579", "http://www.phenome-fppn.fr/test/id/provenance/1569422784579", "http://www.phenome-fppn.fr/test/id/provenance/1569422784579"),
+  objectUri = c("http://www.phenome-fppn.fr/test/2019/o19000076","http://www.phenome-fppn.fr/test/2019/o19000076", "http://www.phenome-fppn.fr/test/2019/o19000076","http://www.phenome-fppn.fr/test/2019/o19000076"),
+  variableUri = c("http://www.phenome-fppn.fr/test/id/variables/v027","http://www.phenome-fppn.fr/test/id/variables/v027", "http://www.phenome-fppn.fr/test/id/variables/v027","http://www.phenome-fppn.fr/test/id/variables/v027"),
+  date = c("2017-06-15T10:45:00+0200","2017-06-15T10:46:00+0200", "2017-06-15T11:47:00+0200","2017-06-15T11:48:00+0200"),
+  value = c(1111.3, 1010, 3030, 4040)
+)
+postData(
+  data
+)
+}
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure

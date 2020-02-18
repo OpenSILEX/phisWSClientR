@@ -39,8 +39,9 @@
 ##' postData(
 ##'   data
 ##' )
+##' }
 ##' @export
-postData <- function(provenanceUri, objectUri, variableUri, date, value){
+postData <- function(data){
   if(sum(c("provenanceUri", "objectUri", "variableUri", "date", "value")%in%names(data))!=5 ) stop(" You should name the columns after the arguments provenanceUri, objectUri, variableUri, date, value")
   # transform data into R6 object 
   dataFormatted <- list()

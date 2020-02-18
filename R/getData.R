@@ -2,10 +2,8 @@
 # Program: getData.R
 # Objective: functions to get the Data service from WS2
 #            * getData
-# Authors: Hollebecq Jean-Eudes
+# Authors: Hollebecq Jean-Eudes, Isabelle Sanchez
 # Creation: 12/03/2019
-# Update: 06/09/2019 (I.Sanchez) 06/01/2020 (J-E Hollebecq)
-
 #-------------------------------------------------------------------------------
 
 ##' @title getData
@@ -64,9 +62,6 @@ getData <- function(variableUri = "",
   
   variableResponse <- opensilexWSClientR::getResponseFromWS(resource = paste0(get("DATASEARCH", configWS)),
                                          attributes = attributes, wsVersion = 2)
-  
-  # convert value column from character to numeric
-  #variableResponse$data[,"value"]<-as.numeric(variableResponse$data[,"value"])
   
   return(variableResponse)
 }

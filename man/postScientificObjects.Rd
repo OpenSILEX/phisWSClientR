@@ -4,24 +4,15 @@
 \alias{postScientificObjects}
 \title{postScientificObjects}
 \usage{
-postScientificObjects(
-  rdfType,
-  experiment,
-  geometry = "",
-  isPartOf = "",
-  properties
-)
+postScientificObjects(expDesign)
 }
 \arguments{
-\item{rdfType}{character, the rdfType of the scientific object ex: http://www.opensilex.org/vocabulary/oeso#Plot}
-
-\item{experiment}{character, uri of the experiment of the scientific object}
-
-\item{geometry}{character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"}
-
-\item{isPartOf}{character, a scientific object the scientific object is part of ???}
-
-\item{properties}{list, a list for the properties. 
+\item{expDesign}{a dataframe containing the following columns 
+       rdfType character, the rdfType of the scientific object ex: http://www.opensilex.org/vocabulary/oeso#Plot
+       geometry character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"
+       experiment character, uri of the experiment of the scientific object
+       isPartOf character, a scientific object the scientific object is part of ???
+       properties list, a list for the properties. 
 Note: The object can also be a data.frame with the 3 named column rdfType, relation and value. See example.}
 }
 \value{
@@ -46,20 +37,13 @@ connectToPHISWS(apiID="ws_private",
                url = "http://www.opensilex.org/openSilexAPI/rest/",
                username="guest@opensilex.org",
                password="guest")
-postScientificObjects(
-  rdfType = "http://www.opensilex.org/vocabulary/oeso#Plot",
-  experiment="http://www.opensilex.org/demo/DIA2017-1",
-  properties=list(
-    list(
-      rdfType = "http://www.opensilex.org/vocabulary/oeso#Species",
-      relation = "http://www.opensilex.org/vocabulary/oeso#hasSpecies",
-      value = "http://www.phenome-fppn.fr/id/species/triticumaestivum"),
-    list(
-      rdfType = NA,
-      relation ="http://www.w3.org/2000/01/rdf-schema#label",
-      value ="objectAlias")
-)
-)
+expDesign = data.frame(Alias = c("1/DZ_PG_67/ZM4394/WW/1/DIA2017-05-19", "2/DZ_PG_30/ZM4361/WW/1/DIA2017-05-19", "3/DZ_PG_49/ZM4389/WW/1/DIA2017-05-19"),
+                  type = c("Plot", "Plot", "Plot")
+                  experiment =c("http://www.opensilex.org/demo/DMO2000-1", "http://www.opensilex.org/demo/DMO2000-1", "http://www.opensilex.org/demo/DMO2000-1"),
+                  Geometry = c("Polygon ((3.973359402 43.61321499, 3.973389651 43.61319639, 3.973437651 43.6132376, 3.973407402 43.6132562, 3.973359402 43.61321499))", "Polygon ((3.973389651 43.61319639, 3.9734199 43.61317779, 3.973467901 43.61321899, 3.973437651 43.6132376, 3.973389651 43.61319639)))", "Polygon ((3.9734199 43.61317779, 3.973450149 43.61315919, 3.97349815 43.61320039, 3.973467901 43.61321899, 3.9734199 43.61317779))",
+                  Species = c("Maize", "Maize", "Maize"),
+                  Variety = c("iPG310", "iPG152", "iPG228")
+ )
    }
 }
 \seealso{

@@ -6,7 +6,6 @@
 #             * getVariablesByExperiment: for WS2
 # Authors: A. Charleroy, I.Sanchez, J.E.Hollebecq, E.Chourrout
 # Creation: 24/01/2019
-# Last Update: 02/07/2019 (A. Charleroy) & 06/01/2020 (I.Sanchez)
 #-------------------------------------------------------------------------------
 
 ##' @title getVariablesByCategory
@@ -102,7 +101,7 @@ getVariablesDetails <- function(uri = "",
   attributes <- list(pageSize=pageSize,
                      page = page)
   if (uri!="")    attributes <- c(attributes, uri = uri)
-  if (label!="")  attributes <- c(attributes, lavel = label)
+  if (label!="")  attributes <- c(attributes, label = label)
   if (trait!="")  attributes <- c(attributes, trait = trait)
   if (method!="") attributes <- c(attributes, method = method)
   if (unit!="")   attributes <- c(attributes, unit = unit)
@@ -162,6 +161,7 @@ getVariablesDetails <- function(uri = "",
 ##'  vars <- getVariables2(label = "Leaf-Area_LAI-Computation_LAI")
 ##'  vars$data
 ##' }
+##' @name getVariables2-deprecated
 ##' @export
 getVariables2 <- function(uri = "",
                           label = "",
@@ -170,14 +170,15 @@ getVariables2 <- function(uri = "",
                           unit = "",
                           pageSize = NULL,
                           page = NULL){
+      .Deprecated(msg = "'getVariables2' will change in the next version")
   # temporary code
-  return(getVariablesDetails(uri = "",
-                      label = "",
-                      trait = "",
-                      method = "",
-                      unit = "",
-                      pageSize = NULL,
-                      page = NULL))
+  return(getVariablesDetails(uri = uri,
+                      label = label,
+                      trait = trait,
+                      method = method,
+                      unit = unit,
+                      pageSize = pageSize,
+                      page = page))
   # temporary comments
   # attributes <- list(pageSize=pageSize,page = page)
   # if (uri!="")    attributes <- c(attributes, uri = uri)
