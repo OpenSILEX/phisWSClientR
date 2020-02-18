@@ -9,17 +9,17 @@
 #-------------------------------------------------------------------------------
 
 ##' @title postScientificObjects
-##'
+##' @import stringr
 ##' @description send a scientific object to the web service
 ##' @param expDesign a dataframe containing the following columns 
 ##'        rdfType character, the rdfType of the scientific object ex: http://www.opensilex.org/vocabulary/oeso#Plot
-##'        geometry character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"
-##'        experiment character, uri of the experiment of the scientific object
-##'        isPartOf character, a scientific object the scientific object is part of ???
-##'        properties list, a list for the properties. 
+##'        Geometry character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"
+##'        Experiment character, uri of the experiment of the scientific object
+##'        parent character, an other scientific object the disignated scientific object is part of ???
+##'        properties list, a column for the different properties avaliable. To see the different properties use \link{\code{getVocabulary}} 
 ##' Note: The object can also be a data.frame with the 3 named column rdfType, relation and value. See example.
 ##' @section Important:
-##' The properties list must contain the rdfs:label block ; also known as alias.
+##' The properties list must contain the rdfs:label block ; also known as Alias.
 ##' See example.
 ##' @return WSResponse object
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure
@@ -33,20 +33,29 @@
 ##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
 ##'                username="guest@opensilex.org",
 ##'                password="guest")
-##' expDesign = data.frame(Alias = c("1/DZ_PG_67/ZM4394/WW/1/DIA2017-05-19", "2/DZ_PG_30/ZM4361/WW/1/DIA2017-05-19", "3/DZ_PG_49/ZM4389/WW/1/DIA2017-05-19"),
-##'                   type = c("Plot", "Plot", "Plot")
-##'                   experiment =c("http://www.opensilex.org/demo/DMO2000-1", "http://www.opensilex.org/demo/DMO2000-1", "http://www.opensilex.org/demo/DMO2000-1"),
-##'                   Geometry = c("Polygon ((3.973359402 43.61321499, 3.973389651 43.61319639, 3.973437651 43.6132376, 3.973407402 43.6132562, 3.973359402 43.61321499))", "Polygon ((3.973389651 43.61319639, 3.9734199 43.61317779, 3.973467901 43.61321899, 3.973437651 43.6132376, 3.973389651 43.61319639)))", "Polygon ((3.9734199 43.61317779, 3.973450149 43.61315919, 3.97349815 43.61320039, 3.973467901 43.61321899, 3.9734199 43.61317779))",
-##'                   Species = c("Maize", "Maize", "Maize"),
-##'                   Variety = c("iPG310", "iPG152", "iPG228")
+##' expDesign = data.frame(
+##'      Alias = c(
+##'       "1/DZ_PG_67/ZM4394/WW/1/DIA2017-05-19",
+##'       "2/DZ_PG_30/ZM4361/WW/1/DIA2017-05-19",
+##'       "3/DZ_PG_49/ZM4389/WW/1/DIA2017-05-19"),
+##'      Type = c("Plot", "Plot", "Plot"),
+##'      Experiment = c(
+##'      "http://www.opensilex.org/demo/DMO2000-1", 
+##'      "http://www.opensilex.org/demo/DMO2000-1", 
+##'      "http://www.opensilex.org/demo/DMO2000-1"),
+##'      Geometry = c("Polygon ((3.973359402 43.61321499, 3.973389651 43.61319639, 3.973437651 43.6132376, 3.973407402 43.6132562, 3.973359402 43.61321499))", 
+##'      "Polygon ((3.973389651 43.61319639, 3.9734199 43.61317779, 3.973467901 43.61321899, 3.973437651 43.6132376, 3.973389651 43.61319639))", 
+##'      "Polygon ((3.9734199 43.61317779, 3.973450149 43.61315919, 3.97349815 43.61320039, 3.973467901 43.61321899, 3.9734199 43.61317779))"),
+##'      Species = c("Maize", "Maize", "Maize"),
+##'      Variety = c("iPG310", "iPG152", "iPG228")
 ##'  )
 ##'    }
 ##' @export
 postScientificObjects <- function(expDesign){
-  if(sum(c("alias","type", "experiment", "geometry")%in%names(expDesign)) > 4 ) stop(" Authorized columns Required => alias,type, experiment, parent, variety, geometry.  Optional => (species, treatement, replication)")
+  if(sum(c("Alias","rdfType", "Experiment", "Geometry")%in%names(expDesign)) < 4 ) stop(" Authorized columns Required => Alias, rdfType, Experiment, Parent, Variety, Geometry.  Optional => (Species, Treatement, Replication)")
   scientificObjectsFormatted <- list()
-
-  if("species" %in% colnames(expDesign)){
+  Response = list()
+  if("Species" %in% colnames(expDesign)){
     
   }
   species <- as.data.frame(getSpecies()$data, stringsAsFactors=FALSE)
@@ -59,59 +68,79 @@ postScientificObjects <- function(expDesign){
   }
   
   species$data$label
-  
-  # TODO get Vocabulary namespaces
+  vocabularies = getVocabulary()$data
   
   for(numSO in 1:nrow(expDesign)){
     scientificObject <- ScientificObjectPostDTO$new(
       rdfType = expDesign[numSO,]$rdfType,
-      experiment = expDesign[numSO,]$experiment
+      experiment = expDesign[numSO,]$Experiment
     )
-    if(!missing(expDesign[numSO,]$parent)){
-      scientificObject$isPartOf = expDesign[numSO,]$parent
+    if(!is.null(expDesign[numSO,]$Parent)){
+      scientificObject$isPartOf = expDesign[numSO,]$Parent
     }
-    if(!missing(year)){
-      scientificObject$year = expDesign[numSO,]$year
+    if(!is.null(expDesign[numSO,]$Year)){
+      scientificObject$year = expDesign[numSO,]$Year
     }
-    if(!missing(geometry)){
-      scientificObject$geometry = expDesign[numSO,]$geometry
+    if(!is.null(expDesign[numSO,]$Geometry)){
+      scientificObject$geometry = expDesign[numSO,]$Geometry
     }
     PropertyList <- list()
-    if(!missing(expDesign[numSO,]$alias)){
+    if(!is.null(expDesign[numSO,]$Alias)){
       aliasProperty = PropertyPostDTO$new()
       aliasProperty$rdfType =   NA
-      aliasProperty$relation = "http://www.w3.org/2000/01/rdf-schema#label"
-      aliasProperty$value = expDesign[numSO,]$alias 
+      aliasProperty$relation = paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "rdf-schema")], "label", sep="")
+      # aliasProperty$relation = "http://www.w3.org/2000/01/rdf-schema#label"
+      aliasProperty$value = expDesign[numSO,]$Alias
+      PropertyList <- append( PropertyList, aliasProperty)
     }
     
-    if(!missing(expDesign[numSO,]$variety)){
+    if(!is.null(expDesign[numSO,]$Species)){
       nPo = PropertyPostDTO$new(
-        rdfType = "http://www.opensilex.org/vocabulary/oeso#Species",
-        relation = "http://www.opensilex.org/vocabulary/oeso#hasSpecies",
-        value = "http://www.opensilex.org/vocabulary/oeso#zea_mays"
+        #rdfType = "http://www.opensilex.org/vocabulary/oeso#Species",
+        rdfType = unique(paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "oeso")],"Species", sep = "")),
+        #relation = "http://www.opensilex.org/vocabulary/oeso#hasSpecies",
+        relation = unique(paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "oeso")],"hasSpecies", sep = "")),
+        value = expDesign[numSO,]$Species
       )
+      PropertyList <- append( PropertyList, nPo)
     }
-      
-    
-    nPo2 = PropertyPostDTO$new(
-      rdfType =  "http://www.opensilex.org/vocabulary/oeso#Variety",
-      relation = "http://www.opensilex.org/vocabulary/oeso#hasVariety",
-      value = sub_SO$Variety[1]
-    )
-   
-    
-    if(!missing(species)){
-      scientificObject$year = expDesign[numSO,]$species
+
+    if(!is.null(expDesign[numSO,]$Variety)){
+      nPo2 = PropertyPostDTO$new(
+        #rdfType =  "http://www.opensilex.org/vocabulary/oeso#Variety",
+        rdfType =  unique(paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "oeso")],"Variety", sep = "")),
+        #relation = "http://www.opensilex.org/vocabulary/oeso#hasVariety",
+        relation = unique(paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "oeso")], "hasVariety", sep = "")),
+        value = expDesign[numSO,]$Variety
+      )
+      PropertyList <- append( PropertyList, nPo2)
     }
-    if(!missing(treatment)){
-      scientificObject$year = expDesign[numSO,]$treatment
+
+    if(!is.null(expDesign[numSO,]$Treatment)){
+      nPo3 = PropertyPostDTO$new(
+        rdfType =  NA, 
+        #relation = "http://www.opensilex.org/vocabulary/oeso#hasExperimentModalities",
+        relation =  unique(paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "oeso")], "hasExperimentModalities", sep = "")),
+        value = expDesign[numSO,]$Treatment
+      )
+      PropertyList <- append( PropertyList, nPo3)
     }
-    if(!missing(replication)){
-      scientificObject$year = expDesign[numSO,]$replication
+
+    if(!is.null(expDesign[numSO,]$Replication)){
+      nPo4 = PropertyPostDTO$new(
+        rdfType =  NA, 
+        #relation = "http://www.opensilex.org/vocabulary/oeso#hasReplication",
+        relation = unique(paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "oeso")], "hasReplication", sep = "")),
+        value = expDesign[numSO,]$Treatment
+      )
+      PropertyList <- append( PropertyList, nPo4)
     }
-    
-    scientificObjectsFormatted <- append(scientificObjectsFormatted,scientificObject)
-  }     
+    scientificObject$properties = PropertyList
+
+    postScientificObject = ScientificObjectsApi$new()
+    wsResponse = postScientificObject$post_scientific_object(scientificObject)
+    Response = append(Response, wsResponse$metadata)
+  }
   
   
   
@@ -138,46 +167,28 @@ postScientificObjects <- function(expDesign){
 ##'                url = "http://www.opensilex.org/openSilexAPI/rest/",
 ##'                username="guest@opensilex.org",
 ##'                password="guest")
-##' expDesign = data.frame(Alias = c("1/DZ_PG_67/ZM4394/WW/1/DIA2017-05-19", "2/DZ_PG_30/ZM4361/WW/1/DIA2017-05-19", "3/DZ_PG_49/ZM4389/WW/1/DIA2017-05-19"),
-##'                   Type = c("Plot", "Plot", "Plot")
-##'                   Experiment =c("http://www.opensilex.org/demo/DMO2000-1", "http://www.opensilex.org/demo/DMO2000-1", "http://www.opensilex.org/demo/DMO2000-1"),
-##'                   Geometry = c("Polygon ((3.973359402 43.61321499, 3.973389651 43.61319639, 3.973437651 43.6132376, 3.973407402 43.6132562, 3.973359402 43.61321499))", "Polygon ((3.973389651 43.61319639, 3.9734199 43.61317779, 3.973467901 43.61321899, 3.973437651 43.6132376, 3.973389651 43.61319639)))", "Polygon ((3.9734199 43.61317779, 3.973450149 43.61315919, 3.97349815 43.61320039, 3.973467901 43.61321899, 3.9734199 43.61317779))",
-##'                   Species = c("Maize", "Maize", "Maize"),
-##'                   Variety = c("iPG310", "iPG152", "iPG228")
-##'                   )
+##' expDesign = data.frame(
+##'     Alias = c(
+##'       "1/DZ_PG_67/ZM4394/WW/1/DIA2017-05-19",
+##'       "2/DZ_PG_30/ZM4361/WW/1/DIA2017-05-19",
+##'       "3/DZ_PG_49/ZM4389/WW/1/DIA2017-05-19"),
+##'      Type = c("Plot", "Plot", "Plot"),
+##'      Experiment = c(
+##'      "http://www.opensilex.org/demo/DMO2000-1", 
+##'      "http://www.opensilex.org/demo/DMO2000-1", 
+##'      "http://www.opensilex.org/demo/DMO2000-1"),
+##'      Geometry = c("Polygon ((3.973359402 43.61321499, 3.973389651 43.61319639, 3.973437651 43.6132376, 3.973407402 43.6132562, 3.973359402 43.61321499))", 
+##'      "Polygon ((3.973389651 43.61319639, 3.9734199 43.61317779, 3.973467901 43.61321899, 3.973437651 43.6132376, 3.973389651 43.61319639))", 
+##'      "Polygon ((3.9734199 43.61317779, 3.973450149 43.61315919, 3.97349815 43.61320039, 3.973467901 43.61321899, 3.9734199 43.61317779))"),
+##'      Species = c("Maize", "Maize", "Maize"),
+##'      Variety = c("iPG310", "iPG152", "iPG228")
+##'  )
 ##' insert = data.frame(
 ##'   rdfType = expDesign$Type,
 ##'   experiment = expDesign$Experiment,
 ##'   geometry = expDesign$Geometry,
 ##'   properties = expDesign$ExperimentModalities
 ##' )
-##' initProperties = function(table, template, line = 1){
-##'   prop = eval(parse(text = template))
-##'   svt = line
-##'   if(line<dim(table)[1]){
-##'     svt = svt + 1
-##'     svtProp = initProperties(table = table, template = template, line = svt)
-##'     prop = append(prop, svtProp)
-##'   }
-##'   return(prop)
-##' }
-##' template = 'list(
-##'  data.frame(
-##'       rdfType = c("http://www.opensilex.org/vocabulary/oeso#Species", "http://www.opensilex.org/vocabulary/oeso#Variety", NA),
-##'       relation = c("http://www.opensilex.org/vocabulary/oeso#hasSpecies", "http://www.opensilex.org/vocabulary/oeso#hasVariety", "http://www.w3.org/2000/01/rdf-schema#label"),
-##'       value = c(table$Species[line],table$Variety[line], table$Alias[line])
-##'  )
-##' )'
-##' 
-##' parseProperties = initProperties(table = p1, template = template, line = 1)
-##' 
-##' insert$properties = parseProperties
-##' insert
-##' postScientificObjectsTable(insert)
-# apply(X = insert, MARGIN = 1, FUN = function(X){
-#   postScientificObjects(experiment = X["experiment"], rdfType = X["rdfType"], geometry = X["geometry"], properties = X["properties"])
-# }
-# )
 ##'    }
 ##' @export
 postScientificObjectsTable <- function(table){

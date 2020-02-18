@@ -9,10 +9,10 @@ postScientificObjects(expDesign)
 \arguments{
 \item{expDesign}{a dataframe containing the following columns 
        rdfType character, the rdfType of the scientific object ex: http://www.opensilex.org/vocabulary/oeso#Plot
-       geometry character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"
-       experiment character, uri of the experiment of the scientific object
-       isPartOf character, a scientific object the scientific object is part of ???
-       properties list, a list for the properties. 
+       Geometry character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"
+       Experiment character, uri of the experiment of the scientific object
+       parent character, an other scientific object the disignated scientific object is part of ???
+       properties list, a column for the different properties avaliable. To see the different properties use \link{\code{getVocabulary}} 
 Note: The object can also be a data.frame with the 3 named column rdfType, relation and value. See example.}
 }
 \value{
@@ -27,7 +27,7 @@ service
 }
 \section{Important}{
 
-The properties list must contain the rdfs:label block ; also known as alias.
+The properties list must contain the rdfs:label block ; also known as Alias.
 See example.
 }
 
@@ -37,12 +37,21 @@ connectToPHISWS(apiID="ws_private",
                url = "http://www.opensilex.org/openSilexAPI/rest/",
                username="guest@opensilex.org",
                password="guest")
-expDesign = data.frame(Alias = c("1/DZ_PG_67/ZM4394/WW/1/DIA2017-05-19", "2/DZ_PG_30/ZM4361/WW/1/DIA2017-05-19", "3/DZ_PG_49/ZM4389/WW/1/DIA2017-05-19"),
-                  type = c("Plot", "Plot", "Plot")
-                  experiment =c("http://www.opensilex.org/demo/DMO2000-1", "http://www.opensilex.org/demo/DMO2000-1", "http://www.opensilex.org/demo/DMO2000-1"),
-                  Geometry = c("Polygon ((3.973359402 43.61321499, 3.973389651 43.61319639, 3.973437651 43.6132376, 3.973407402 43.6132562, 3.973359402 43.61321499))", "Polygon ((3.973389651 43.61319639, 3.9734199 43.61317779, 3.973467901 43.61321899, 3.973437651 43.6132376, 3.973389651 43.61319639)))", "Polygon ((3.9734199 43.61317779, 3.973450149 43.61315919, 3.97349815 43.61320039, 3.973467901 43.61321899, 3.9734199 43.61317779))",
-                  Species = c("Maize", "Maize", "Maize"),
-                  Variety = c("iPG310", "iPG152", "iPG228")
+expDesign = data.frame(
+     Alias = c(
+      "1/DZ_PG_67/ZM4394/WW/1/DIA2017-05-19",
+      "2/DZ_PG_30/ZM4361/WW/1/DIA2017-05-19",
+      "3/DZ_PG_49/ZM4389/WW/1/DIA2017-05-19"),
+     Type = c("Plot", "Plot", "Plot"),
+     Experiment = c(
+     "http://www.opensilex.org/demo/DMO2000-1", 
+     "http://www.opensilex.org/demo/DMO2000-1", 
+     "http://www.opensilex.org/demo/DMO2000-1"),
+     Geometry = c("Polygon ((3.973359402 43.61321499, 3.973389651 43.61319639, 3.973437651 43.6132376, 3.973407402 43.6132562, 3.973359402 43.61321499))", 
+     "Polygon ((3.973389651 43.61319639, 3.9734199 43.61317779, 3.973467901 43.61321899, 3.973437651 43.6132376, 3.973389651 43.61319639))", 
+     "Polygon ((3.9734199 43.61317779, 3.973450149 43.61315919, 3.97349815 43.61320039, 3.973467901 43.61321899, 3.9734199 43.61317779))"),
+     Species = c("Maize", "Maize", "Maize"),
+     Variety = c("iPG310", "iPG152", "iPG228")
  )
    }
 }

@@ -4,7 +4,7 @@
 \alias{postData}
 \title{postData}
 \usage{
-postData(provenanceUri, objectUri, variableUri, date, value)
+postData(data)
 }
 \arguments{
 \item{data}{a data.frame containing the following columns :

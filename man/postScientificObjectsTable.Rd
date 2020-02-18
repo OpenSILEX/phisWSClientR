@@ -31,42 +31,28 @@ connectToPHISWS(apiID="ws_private",
                url = "http://www.opensilex.org/openSilexAPI/rest/",
                username="guest@opensilex.org",
                password="guest")
-expDesign = data.frame(Alias = c("1/DZ_PG_67/ZM4394/WW/1/DIA2017-05-19", "2/DZ_PG_30/ZM4361/WW/1/DIA2017-05-19", "3/DZ_PG_49/ZM4389/WW/1/DIA2017-05-19"),
-                  Type = c("Plot", "Plot", "Plot")
-                  Experiment =c("http://www.opensilex.org/demo/DMO2000-1", "http://www.opensilex.org/demo/DMO2000-1", "http://www.opensilex.org/demo/DMO2000-1"),
-                  Geometry = c("Polygon ((3.973359402 43.61321499, 3.973389651 43.61319639, 3.973437651 43.6132376, 3.973407402 43.6132562, 3.973359402 43.61321499))", "Polygon ((3.973389651 43.61319639, 3.9734199 43.61317779, 3.973467901 43.61321899, 3.973437651 43.6132376, 3.973389651 43.61319639)))", "Polygon ((3.9734199 43.61317779, 3.973450149 43.61315919, 3.97349815 43.61320039, 3.973467901 43.61321899, 3.9734199 43.61317779))",
-                  Species = c("Maize", "Maize", "Maize"),
-                  Variety = c("iPG310", "iPG152", "iPG228")
-                  )
+expDesign = data.frame(
+    Alias = c(
+      "1/DZ_PG_67/ZM4394/WW/1/DIA2017-05-19",
+      "2/DZ_PG_30/ZM4361/WW/1/DIA2017-05-19",
+      "3/DZ_PG_49/ZM4389/WW/1/DIA2017-05-19"),
+     Type = c("Plot", "Plot", "Plot"),
+     Experiment = c(
+     "http://www.opensilex.org/demo/DMO2000-1", 
+     "http://www.opensilex.org/demo/DMO2000-1", 
+     "http://www.opensilex.org/demo/DMO2000-1"),
+     Geometry = c("Polygon ((3.973359402 43.61321499, 3.973389651 43.61319639, 3.973437651 43.6132376, 3.973407402 43.6132562, 3.973359402 43.61321499))", 
+     "Polygon ((3.973389651 43.61319639, 3.9734199 43.61317779, 3.973467901 43.61321899, 3.973437651 43.6132376, 3.973389651 43.61319639))", 
+     "Polygon ((3.9734199 43.61317779, 3.973450149 43.61315919, 3.97349815 43.61320039, 3.973467901 43.61321899, 3.9734199 43.61317779))"),
+     Species = c("Maize", "Maize", "Maize"),
+     Variety = c("iPG310", "iPG152", "iPG228")
+ )
 insert = data.frame(
   rdfType = expDesign$Type,
   experiment = expDesign$Experiment,
   geometry = expDesign$Geometry,
   properties = expDesign$ExperimentModalities
 )
-initProperties = function(table, template, line = 1){
-  prop = eval(parse(text = template))
-  svt = line
-  if(line<dim(table)[1]){
-    svt = svt + 1
-    svtProp = initProperties(table = table, template = template, line = svt)
-    prop = append(prop, svtProp)
-  }
-  return(prop)
-}
-template = 'list(
- data.frame(
-      rdfType = c("http://www.opensilex.org/vocabulary/oeso#Species", "http://www.opensilex.org/vocabulary/oeso#Variety", NA),
-      relation = c("http://www.opensilex.org/vocabulary/oeso#hasSpecies", "http://www.opensilex.org/vocabulary/oeso#hasVariety", "http://www.w3.org/2000/01/rdf-schema#label"),
-      value = c(table$Species[line],table$Variety[line], table$Alias[line])
- )
-)'
-
-parseProperties = initProperties(table = p1, template = template, line = 1)
-
-insert$properties = parseProperties
-insert
-postScientificObjectsTable(insert)
    }
 }
 \seealso{
