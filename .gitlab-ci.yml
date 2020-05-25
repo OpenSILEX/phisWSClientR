@@ -37,7 +37,6 @@ buildBinary:3.4:
   stage: build
   script:
    - R -e 'devtools::build(binary = TRUE)'
-  when: manual
 
 checkErrors:3.4:
   image: rocker/verse:3.4
@@ -76,16 +75,6 @@ unitTests:3.4:
     - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) system("touch $R_TMP_USER/testsFail")
     - if [ -f $R_TMP_USER/testsFail ]; then echo "Check Tests"; exit 1 ; else echo "Tests passed"; fi    
   needs: ["checkErrors:3.4"]  
-
-installFromGithub:3.4:
-  image: rocker/verse:3.4
-  allow_failure: true
-  stage: test
-  script:
-    - R -e 'source("https://install-github.me/r-lib/desc");desc<-desc::description$new();remotes::install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE,ref=paste0("v",desc$get("Version")[[1]]))'
-  only:
-    - master
-  needs: ["checkErrors:3.4"]  
     
     
 installLocally:3.4:
@@ -94,13 +83,14 @@ installLocally:3.4:
   script:
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install(build_vignettes=TRUE,dependencies = TRUE)'
   needs: ["checkErrors:3.4"]
+  
+
     
 buildBinary:3.5:
   image: rocker/verse:3.5
   stage: build
   script:
    - R -e 'devtools::build(binary = TRUE)'
-  when: manual
 
     
 checkErrors:3.5:
@@ -150,16 +140,12 @@ installLocally:3.5:
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install(build_vignettes=TRUE,dependencies = TRUE)'
   needs: ["checkErrors:3.5"]
     
-    
-    
 
 buildBinary:3.6:
   image: rocker/verse:3.6
   stage: build
   script:
    - R -e 'devtools::build(binary = TRUE)'
-  when: manual
-
 
 checkErrors:3.6:
   image: rocker/verse:3.6
