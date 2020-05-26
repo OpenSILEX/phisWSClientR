@@ -24,6 +24,7 @@ Imports:
     tidyr,
     dplyr,
     lubridate,
+    stringr,
     jsonlite,
     httr,
     urltools,

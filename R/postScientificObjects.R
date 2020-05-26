@@ -56,15 +56,15 @@ postScientificObjects <- function(expDesign){
   scientificObjectsFormatted <- list()
   Response = list()
   if("Species" %in% colnames(expDesign)){
-    
-  }
-  species <- as.data.frame(getSpecies()$data, stringsAsFactors=FALSE)
- if(is.null(species) || missing(species) ){
-   stop("Missing species")
- }
-
-  for(sp in  species$data){
-    print(sp)
+      
+    species <- as.data.frame(getSpecies()$data, stringsAsFactors=FALSE)
+    if(is.null(species) || missing(species) ){
+      stop("Missing species")
+    }
+  
+    for(sp in  species$data){
+      print(sp)
+    }
   }
   
   species$data$label
@@ -88,7 +88,7 @@ postScientificObjects <- function(expDesign){
     if(!is.null(expDesign[numSO,]$Alias)){
       aliasProperty = PropertyPostDTO$new()
       aliasProperty$rdfType =   NA
-      aliasProperty$relation = paste(vocabularies$namespace[str_detect(vocabularies$namespace, pattern = "rdf-schema")], "label", sep="")
+      aliasProperty$relation = paste(vocabularies$namespace[stringr::str_detect(vocabularies$namespace, pattern = "rdf-schema")], "label", sep="")
       # aliasProperty$relation = "http://www.w3.org/2000/01/rdf-schema#label"
       aliasProperty$value = expDesign[numSO,]$Alias
       PropertyList <- append( PropertyList, aliasProperty)
