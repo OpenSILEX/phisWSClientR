@@ -25,7 +25,7 @@ cache:
 
 # load packages
 before_script:
-  - chmod -R 777 "$R_LIBS"
+  - chmod -R 777 $R_LIBS_USER
   - echo 'R_LIBS_USER="$R_LIBS_USER"' > .Renviron
   - R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)' # create personal library
   - R -e '.libPaths()'
