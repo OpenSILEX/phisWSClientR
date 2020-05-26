@@ -43,11 +43,8 @@
 ##'      "http://www.opensilex.org/demo/DMO2000-1", 
 ##'      "http://www.opensilex.org/demo/DMO2000-1", 
 ##'      "http://www.opensilex.org/demo/DMO2000-1"),
-##'      Geometry = c("Polygon ((3.973359402 43.61321499, 3.973389651 43.61319639, 3.973437651 43.6132376, 3.973407402 43.6132562, 3.973359402 43.61321499))", 
-##'      "Polygon ((3.973389651 43.61319639, 3.9734199 43.61317779, 3.973467901 43.61321899, 3.973437651 43.6132376, 3.973389651 43.61319639))", 
-##'      "Polygon ((3.9734199 43.61317779, 3.973450149 43.61315919, 3.97349815 43.61320039, 3.973467901 43.61321899, 3.9734199 43.61317779))"),
-##'      Species = c("Maize", "Maize", "Maize"),
-##'      Variety = c("iPG310", "iPG152", "iPG228")
+##'      Species = c("Maize", "Maize", "Maize"), 
+##'      Variety = c("iPG310", "iPG152", "iPG228") 
 ##'  )
 ##'    }
 ##' @export
@@ -177,9 +174,6 @@ postScientificObjects <- function(expDesign){
 ##'      "http://www.opensilex.org/demo/DMO2000-1", 
 ##'      "http://www.opensilex.org/demo/DMO2000-1", 
 ##'      "http://www.opensilex.org/demo/DMO2000-1"),
-##'      Geometry = c("Polygon ((3.973359402 43.61321499, 3.973389651 43.61319639, 3.973437651 43.6132376, 3.973407402 43.6132562, 3.973359402 43.61321499))", 
-##'      "Polygon ((3.973389651 43.61319639, 3.9734199 43.61317779, 3.973467901 43.61321899, 3.973437651 43.6132376, 3.973389651 43.61319639))", 
-##'      "Polygon ((3.9734199 43.61317779, 3.973450149 43.61315919, 3.97349815 43.61320039, 3.973467901 43.61321899, 3.9734199 43.61317779))"),
 ##'      Species = c("Maize", "Maize", "Maize"),
 ##'      Variety = c("iPG310", "iPG152", "iPG228")
 ##'  )
@@ -192,7 +186,7 @@ postScientificObjects <- function(expDesign){
 ##'    }
 ##' @export
 postScientificObjectsTable <- function(table){
-  if(sum(c("rdfType", "experiment", "isPartOf", "properties", "geometry")%in%names(table))!=5 ) stop(" You should name the columns after the arguments rdfType, experiment, isPartOf, properties, geometry")
+  if(sum(c("rdfType", "experiment", "isPartOf", "properties")%in%names(table))!=4 ) stop(" You should name the columns after the arguments rdfType, experiment, isPartOf, properties, geometry")
   
   attributes <- table[, c("rdfType", "experiment", "isPartOf", "geometry", "properties")]
   Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("SCIENTIFIC_OBJECTS", configWS)),
