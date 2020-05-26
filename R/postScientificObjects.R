@@ -15,8 +15,8 @@
 ##'        rdfType character, the rdfType of the scientific object ex: http://www.opensilex.org/vocabulary/oeso#Plot
 ##'        Geometry character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"
 ##'        Experiment character, uri of the experiment of the scientific object
-##'        parent character, an other scientific object the disignated scientific object is part of ???
-##'        properties list, a column for the different properties avaliable. To see the different properties use \link{\code{getVocabulary}} 
+##'        parent character, an other scientific object the disignated scientific object is part of
+##'        properties list, a column for the different properties avaliable. To see the different properties use \code{\link{getVocabulary}} 
 ##' Note: The object can also be a data.frame with the 3 named column rdfType, relation and value. See example.
 ##' @section Important:
 ##' The properties list must contain the rdfs:label block ; also known as Alias.
@@ -52,7 +52,7 @@
 ##'    }
 ##' @export
 postScientificObjects <- function(expDesign){
-  if(sum(c("Alias","rdfType", "Experiment", "Geometry")%in%names(expDesign)) < 4 ) stop(" Authorized columns Required => Alias, rdfType, Experiment, Parent, Variety, Geometry.  Optional => (Species, Treatement, Replication)")
+  if(sum(c("Alias","rdfType", "Experiment")%in%names(expDesign)) < 3 ) stop(" Authorized columns Required => Alias, rdfType, Experiment ;  Optional => (Species, Treatement, Replication, Parent, Variety, Geometry.)")
   scientificObjectsFormatted <- list()
   Response = list()
   if("Species" %in% colnames(expDesign)){

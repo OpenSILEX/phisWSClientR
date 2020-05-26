@@ -11,8 +11,8 @@ postScientificObjects(expDesign)
        rdfType character, the rdfType of the scientific object ex: http://www.opensilex.org/vocabulary/oeso#Plot
        Geometry character, give the geometry of this scientific object. For example a plot can be : "POLYGON((0 0, 10 0, 10 10, 0 10, 0 0))"
        Experiment character, uri of the experiment of the scientific object
-       parent character, an other scientific object the disignated scientific object is part of ???
-       properties list, a column for the different properties avaliable. To see the different properties use \link{\code{getVocabulary}} 
+       parent character, an other scientific object the disignated scientific object is part of
+       properties list, a column for the different properties avaliable. To see the different properties use \code{\link{getVocabulary}} 
 Note: The object can also be a data.frame with the 3 named column rdfType, relation and value. See example.}
 }
 \value{
