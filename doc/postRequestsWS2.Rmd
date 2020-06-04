@@ -1,6 +1,6 @@
 ---
 title: "POST Requests on the web service 2 - OpenSILEX"
-author: "I.Sanchez, A. Charleroy, Jean-Eudes Hollebecq (INRAE MISTEA)"
+author: "I.Sanchez, A. Charleroy, Jean-Eudes Hollebecq (INRA MISTEA)"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
   html_document:
@@ -18,7 +18,7 @@ Author   : J-E.HOLLEBECQ (MISTEA)
 Objective: a vignette for phisWSClientR library
            an introduction to requesting the phenomeapi (phis web service) WS2
 Creation : 15/01/2020
-Update   : 04/06/2020
+Update   : 04/02/2020
 -->
 
 ***

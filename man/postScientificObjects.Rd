@@ -48,8 +48,17 @@ expDesign = data.frame(
      "http://www.opensilex.org/demo/DMO2000-1", 
      "http://www.opensilex.org/demo/DMO2000-1"),
      Species = c("Maize", "Maize", "Maize"), 
-     Variety = c("iPG310", "iPG152", "iPG228") 
+     Variety = c("iPG310", "iPG152", "iPG228"),
+     Geometry = c(
+     "POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))",
+     "POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))",
+     "POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))"
+     ),
+     stringsAsFactors = FALSE
  )
+ r<- postScientificObjects(expDesign)
+ r$success
+ r$metadata 
    }
 }
 \seealso{

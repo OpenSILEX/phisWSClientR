@@ -4,14 +4,15 @@
 \alias{postProvenances}
 \title{postProvenance}
 \usage{
-postProvenances(label, comment, metadata)
+postProvenances(provs)
 }
 \arguments{
-\item{label}{character, give the label of this provenance}
-
-\item{comment}{character, give a comment for this provenance}
-
-\item{metadata}{some metadata concerning the provenance. The format of the metadata is a list with every item being a different metadata. Exemple: list(meta1 = "15", meta2 = "owner1")}
+\item{provs}{list of ProvenanceDTO object comment character, 
+give a comment for this provenance label character, 
+give the label of this provenance 
+some metadata concerning the provenance. 
+The format of the metadata is a list with every item being a different metadata. 
+Exemple: ObjectDTO$new(list(meta1 = "15", meta2 = "owner1")}
 }
 \value{
 WSResponse object
@@ -25,20 +26,20 @@ service
 }
 \examples{
 \donttest{
-connectToPHISWS(apiID="ws_private",
+    connectToPHISWS(apiID="ws_private",
                url = "http://www.opensilex.org/openSilexAPI/rest/",
                username="guest@opensilex.org",
                password="guest")
-  postProvenances(
-   label = "insertionProvenance_label",
-   comment = "comment my provenance",
-   metadata = list(meta1 = "15", meta2 = "owner1")
-   )
+    prov = ProvenanceDTO$new(
+      label = "insertionProvenance_label",
+      comment = "comment my provenance",
+      metadata = ObjectDTO$new(list(meta1 = "15", meta2 = "owner1"))
+    )
+    response <- postProvenances(list(prov))
+    response$success
+    response$metadata
    }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
-
-You have to install the opensilexWSClientR before running any 
-         request on PHIS web service.
 }

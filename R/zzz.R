@@ -75,4 +75,5 @@ configWS<-new.env(emptyenv())
   assign("VARIABLES_DETAILS", "variables/details", configWS)
   assign("ENVIRONMENT", "environment", configWS)
   assign("PROJECTS", "projects", configWS)
+  assign("RECONNECT_ON_DISCONNECTION", TRUE, configWS)
 }

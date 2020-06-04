@@ -51,7 +51,7 @@
 ##'     data
 ##'   )
 ##'    }
-##' @export
+##' @noRd
 postDataset <- function(data){
   if(sum(c("provenanceUri", "objectUri", "variableUri", "date", "value")%in%names(data))!=5 ) stop(" You should name the columns after the arguments provenanceUri, objectUri, variableUri, date, value")
   

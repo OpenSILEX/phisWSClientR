@@ -1,41 +1,41 @@
-## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
+## ----echo=TRUE,message=FALSE, warning=FALSE-----------------------------------
   library(phisWSClientR)
 
-## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
+## ----echo=TRUE,message=FALSE, warning=FALSE-----------------------------------
   # If you want to access to the public web service 
   connectToPHISWS(apiID="ws_1_public")
 
-## ----echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE-------------------
+## ----echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE------------------------
 #    # If you want to access to a private web service, you have to insert the address of the WS and the port
 #    connectToPHISWS(apiID="ws_private","guestphis@supagro.inra.fr","guestphis",url = "147.99.7.5:8080/phenomeapi/resources/")
 
-## ----echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE-------------------
+## ----echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE------------------------
 #    getUserInformations()
 
-## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
+## ----echo=TRUE,message=FALSE, warning=FALSE-----------------------------------
   getProjects()$data
   
   getExperiments(projectName = "PHIS_Publi")
 
-## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
+## ----echo=TRUE,message=FALSE, warning=FALSE-----------------------------------
   myExp<-getExperiments(projectName = "XYZ")$data$experimentURI
   print(myExp)
 
-## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
+## ----echo=TRUE,message=FALSE, warning=FALSE-----------------------------------
   vars <- getVariablesByCategory(category = "environment",experimentURI = myExp)
 
   # Only the first rows of the data.frame containing the 'environment' variables...
   head(vars$data)
 
-## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
+## ----echo=TRUE,message=FALSE, warning=FALSE-----------------------------------
   # first rows of 'imagery' variables
   head(getVariablesByCategory(category ="imagery",experimentURI=myExp)$data)
 
-## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
+## ----echo=TRUE,message=FALSE, warning=FALSE-----------------------------------
   # first rows of 'watering' variables
   head(getVariablesByCategory(category ="watering",experimentURI=myExp)$data)
 
-## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
+## ----echo=TRUE,message=FALSE, warning=FALSE-----------------------------------
   # first we count the number of observation in the dataset
   tpCount<-getImagesAnalysis(experimentURI=myExp,
                              variablesName = list("plantHeight"),
@@ -54,7 +54,7 @@
                      pageSize=10)$data
   head(idManip)
 
-## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
+## ----echo=TRUE,message=FALSE, warning=FALSE-----------------------------------
   myFacility<-"http://www.phenome-fppn.fr/m3p/es2"
   tpCount<-getEnvironment(
                      experimentURI = myExp,
@@ -68,7 +68,7 @@
                      variables="air humidity_weather station_percentage",
                      pageSize=10)$data
 
-## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
+## ----echo=TRUE,message=FALSE, warning=FALSE-----------------------------------
   tpCount<-getWatering(experimentURI=myExp,
                        variablesName = list("weightAfter"))$totalCount
   # we retrieve this number with $totalcount
@@ -77,12 +77,12 @@
                            variablesName = list("weightAfter"),
                            pageSize=10)$data
 
-## ----echo=TRUE,message=FALSE, warning=FALSE------------------------------
+## ----echo=TRUE,message=FALSE, warning=FALSE-----------------------------------
   setLogLevel("DEBUG")
   tpCount<-getWatering(experimentURI=myExp,
                        variablesName = list("weightAfter"))$totalCount
   setLogLevel("INFO")
 
-## ----session,echo=FALSE,message=FALSE, warning=FALSE---------------------
+## ----session,echo=FALSE,message=FALSE, warning=FALSE--------------------------
   sessionInfo()
 

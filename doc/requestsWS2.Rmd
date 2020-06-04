@@ -1,6 +1,6 @@
 ---
 title: "GET Requests on the web service 2 - OpenSILEX"
-author: "I.Sanchez, A. Charleroy, Jean-Eudes Hollebecq (INRA MISTEA)"
+author: "I.Sanchez, A. Charleroy, Jean-Eudes Hollebecq (INRAE MISTEA)"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
   html_document:

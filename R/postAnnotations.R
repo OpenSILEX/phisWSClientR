@@ -1,13 +1,13 @@
 #-------------------------------------------------------------------------------
 # Program: postAnnotations.R
 # Objective: functions to post a new annotation to the WS2
-#            * postAnnotaions
+#            * postAnnotations
 # Authors: Hollebecq Jean-Eudes
 # Creation: 11/12/2019
-# Update:
+# Update: 04/06/2020
 #-------------------------------------------------------------------------------
 
-##' @title postAnnotations
+##' @title postAnnotations2
 ##'
 ##' @description send an annotation to the web service
 ##' @param creator character, give the creator of the annotation
@@ -33,8 +33,8 @@
 ##'     targets = list("http://www.phenome-fppn.fr/test/2019/o19000074")
 ##'   )
 ##'      }
-##' @export
-postAnnotations <- function(creator, motivatedBy, bodyValues, targets){
+##' @noRd
+postAnnotations2 <- function(creator, motivatedBy, bodyValues, targets){
   attributes <- list()
   if (creator!="")     attributes <- c(attributes, creator = creator)         else stop("You must provide a creator")
   if (motivatedBy!="") attributes <- c(attributes, motivatedBy = motivatedBy) else stop("You must provide a motivation")
@@ -47,15 +47,15 @@ postAnnotations <- function(creator, motivatedBy, bodyValues, targets){
 
 
 #-------------------------------------------------------------------------------
-# Program: postAnnotations2.R
+# Program: postAnnotations.R
 # Objective: functions to post a new annotation to the WS2
 #            * postAnnotaions
 # Authors: Arnaud Charleroy
-# Creation: 16/12/2019
+# Creation: 04/06/2020
 # Update:
 #-------------------------------------------------------------------------------
 
-##' @title postAnnotations2
+##' @title postAnnotations
 ##'
 ##' @description send a list of annotation to the web service
 ##' @import phisWSClientRTools
@@ -81,9 +81,11 @@ postAnnotations <- function(creator, motivatedBy, bodyValues, targets){
 ##'  )
 ##' 
 ##'  response <- postAnnotations(list(newAnnotation))
+##'  response$success
+##'  response$metadata
 ##'  }
 ##' @export
-postAnnotations2 <- function(newAnnotations){
+postAnnotations <- function(newAnnotations){
   annoService <- AnnotationsApi$new() 
   Response <- annoService$post1(newAnnotations)
   return(Response)

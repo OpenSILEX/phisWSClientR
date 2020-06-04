@@ -52,7 +52,7 @@ install_github("OpenSILEX/phisWSClientR", build_vignettes=TRUE, ref="2.3.1")
 
 You can also download a tar.gz archive of "[2.3.1](https://github.com/OpenSILEX/phisWSClientR/tree/2.3.1)" version and install it with _install_packages()_.
 
-This package use [Semantic Versioning Specification](https://semver.org/) for versionning tags.
+This package use [Semantic Versioning Specification](https://semver.org/) for versioning tags.
 
 # Usage
 
@@ -69,6 +69,10 @@ You can give a test to the package using the available vignettes (/doc directory
 
 - [https://github.com/OpenSILEX/phisWSClientR/blob/master/doc/requestsWS2.html](https://htmlpreview.github.io/?https://github.com/OpenSILEX/phisWSClientR/blob/master/doc/requestsWS2.html)
 - [https://github.com/OpenSILEX/phisWSClientR/blob/master/doc/requestsWS1.html](https://htmlpreview.github.io/?https://github.com/OpenSILEX/phisWSClientR/blob/master/doc/requestsWS1.html)
+
+# Experimental functions
+
+- [https://github.com/OpenSILEX/phisWSClientR/blob/master/doc/postRequestsWS2.html](https://htmlpreview.github.io/?https://github.com/OpenSILEX/phisWSClientR/blob/master/doc/postRequestsWS2.html)
 
 # Citation
 

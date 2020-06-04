@@ -4,22 +4,16 @@
 \alias{postAnnotations}
 \title{postAnnotations}
 \usage{
-postAnnotations(creator, motivatedBy, bodyValues, targets)
+postAnnotations(newAnnotations)
 }
 \arguments{
-\item{creator}{character, give the creator of the annotation}
-
-\item{motivatedBy}{character, give the motivation of the annotation, from w3c ontology oa}
-
-\item{bodyValues}{list, The annotation message}
-
-\item{targets}{list, the scientific object(s) targeted by this annotation}
+\item{newAnnotations}{list, AnnotationDTO list}
 }
 \value{
 WSResponse object
 }
 \description{
-send an annotation to the web service
+send a list of annotation to the web service
 }
 \details{
 You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
@@ -31,13 +25,18 @@ connectToPHISWS(apiID="ws_private",
                url = "http://www.opensilex.org/openSilexAPI/rest/",
                username="guest@opensilex.org",
                password="guest")
-  postAnnotations(    
-    creator = "http://www.opensilex.org/demo/id/agent/marie_dupond",
-    motivatedBy = "http://www.w3.org/ns/oa#commenting",
-    bodyValues = list("the object has been observed"),
-    targets = list("http://www.phenome-fppn.fr/test/2019/o19000074")
-  )
-     }
+               
+ newAnnotation <- AnnotationDTO$new(
+   creator = "http://www.opensilex.org/demo/id/agent/marie_dupond",
+   targets = list("http://www.phenome-fppn.fr/test/2019/o19000074"),
+   motivatedBy = "http://www.w3.org/ns/oa#describing",
+   bodyValues =  list("the object has been observed")
+ )
+
+ response <- postAnnotations(list(newAnnotation))
+ response$success
+ response$metadata
+ }
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
