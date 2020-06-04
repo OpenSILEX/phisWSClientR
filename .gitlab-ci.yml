@@ -25,28 +25,27 @@ variables:
       - ".Renviron"
 
 # load packages
-.before_script: &before_script
 #   - echo "creating cache dir"
- #  - mkdir -p  $R_LIBS_USER
- #  - chmod -R 777 $R_LIBS_USER
-  - echo 'R_LIBS_USER="$R_LIBS_USER/$R_VERSION"' > .Renviron
-  - R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)' # create personal library
-  - R -e '.libPaths()'
-  - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
-
+#  - mkdir -p  $R_LIBS_USER
+#  - chmod -R 777 $R_LIBS_USER
+.prepare_script: &prepare_script
+  <<: *cache_dependencies
+  before_script:
+    - echo 'R_LIBS_USER="$R_LIBS_USER/$R_VERSION"' > .Renviron
+    - R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)' # create personal library
+    - R -e '.libPaths()'
+    - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
 
 # create an archive 
 .build:binary: &build_r
-  <<: *before_script
-  <<: *cache_dependencies
+  <<: *prepare_script
   image: rocker/verse:$R_VERSION
   stage: build
   script:
    - R -e 'devtools::build(binary = TRUE)'
 
 .check:errors: &errors_r
-  <<: *before_script
-  <<: *cache_dependencies
+  <<: *prepare_script
   image: rocker/verse:$R_VERSION
   stage: check
   script:
@@ -56,8 +55,7 @@ variables:
   needs: ["buildBinary:$R_VERSION"]
     
 .check:warnings: &warnings_r
-  <<: *before_script
-  <<: *cache_dependencies
+  <<: *prepare_script
   image: rocker/verse:$R_VERSION
   stage: check
   script:
@@ -67,8 +65,7 @@ variables:
   needs: ["buildBinary:$R_VERSION"]
     
 .check:notes: &notes_r
-  <<: *before_script
-  <<: *cache_dependencies
+  <<: *prepare_script
   image: rocker/verse:$R_VERSION
   allow_failure: true
   stage: check
@@ -79,8 +76,7 @@ variables:
   needs: ["buildBinary:$R_VERSION"]
     
 .unit:tests: &unit_r
-  <<: *before_script
-  <<: *cache_dependencies
+  <<: *prepare_script
   image: rocker/verse:$R_VERSION
   when: manual
   stage: test
@@ -91,8 +87,7 @@ variables:
   needs: ["checkErrors:$R_VERSION"]  
 
 .install:locally: &install_local_r
-  <<: *before_script
-  <<: *cache_dependencies
+  <<: *prepare_script
   image: rocker/verse:$R_VERSION
   stage: test
   script:
@@ -100,8 +95,7 @@ variables:
   needs: ["checkErrors:$R_VERSION"]
 
 .code:coverage: &coverage_r
-  <<: *before_script
-  <<: *cache_dependencies
+  <<: *prepare_script
   image: rocker/verse:$R_VERSION
   allow_failure: true
   when: manual
@@ -111,8 +105,7 @@ variables:
   needs: ["unitTests:$R_VERSION"]
 
 .build:vignette: &build_vignette_r
-  <<: *before_script
-  <<: *cache_dependencies
+  <<: *prepare_script
   image: rocker/verse:$R_VERSION
   stage: document
   script:
