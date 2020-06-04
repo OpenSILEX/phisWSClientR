@@ -32,9 +32,11 @@ variables:
 .prepare_script_r: &prepare_script_r
   <<: *cache_dependencies
   before_script:   
+    - apt-get update && apt-get install -y libcurl4-openssl-dev
     - echo "$R_LIBS_USER > ${R_ENVIRON}"
     - echo "R_LIBS_USER=$R_LIBS_USER" > ${R_ENVIRON} 
-    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"))'
+    - R -e '.libPaths(c(Sys.getenv("R_LIBS_USER")))'
+    - R -e '.libPaths()'
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));install.packages("devtools");devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
 
 # create an archive 
