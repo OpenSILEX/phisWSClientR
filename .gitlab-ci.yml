@@ -13,7 +13,7 @@ stages:
 # define system environment variables
 variables:
   R_REPOS: "http://cloud.R-project.org/"
-  R_LIBS_USER : "$CI_PROJECT_DIR/.cache/install_deps" # dependencies cache
+  R_LIBS_USER_DIR : "$CI_PROJECT_DIR/.cache/install_deps" # dependencies cache
   R_ENVIRON : "$CI_PROJECT_DIR/.Renviron" # R environment cache
   R_TMP_USER: "$CI_PROJECT_DIR/tmp"  # temporary directory
 
@@ -26,14 +26,15 @@ variables:
 
 # load packages
 #   - echo "creating cache dir"
- #  - mkdir -p  $R_LIBS_USER
- #  - chmod -R 777 $R_LIBS_USER
+#  - mkdir -p  $R_LIBS_USER
+#  - chmod -R 777 $R_LIBS_USER
+# - R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)' # create personal library
 .prepare_script_r: &prepare_script_r
   <<: *cache_dependencies
-  before_script:  
-    - echo 'R_LIBS_USER="${R_LIBS_USER}/${R_VERSION}"' > .Renviron
-    - R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)' # create personal library
-    - R -e '.libPaths()'
+  before_script:   
+    - echo 'R_LIBS_USER="${R_LIBS_USER_DIR}/${R_VERSION}"' > .Renviron
+    - R -e '.libPaths("")'
+    - R -e '.libPaths(${R_LIBS_USER_DIR}/${R_VERSION})'
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
 
 # create an archive 
