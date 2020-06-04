@@ -32,7 +32,6 @@ variables:
 .prepare_script_r: &prepare_script_r
   <<: *cache_dependencies
   before_script:   
-    - R CMD check
     - echo "${R_LIBS_USER}/${R_VERSION} > ${R_ENVIRON}"
     - echo "R_LIBS_USER=${R_LIBS_USER}/${R_VERSION}" > ${R_ENVIRON} 
     - echo $R_LIBS_USER_DIR > R_ENVIRON
