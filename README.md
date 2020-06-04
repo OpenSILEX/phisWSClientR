@@ -65,10 +65,10 @@ help(package="phisWSClientR")
 
 # Test
 
-You can give a test to the package using the available vignettes (/doc directory) and use the documentation. if you have some difficulties to retrieve the html vignettes, you can use https://rawgit.com on the github file paths:
+You can give a test to the package using the available vignettes (/doc directory) and use the documentation. if you have some difficulties to retrieve the html vignettes, you can use https://htmlpreview.github.io on the github file paths:
 
-- https://github.com/OpenSILEX/phisWSClientR/blob/master/doc/requestsWS2.html
-- https://github.com/OpenSILEX/phisWSClientR/blob/master/doc/requestsWS1.html
+- [https://github.com/OpenSILEX/phisWSClientR/blob/master/doc/requestsWS2.html](https://htmlpreview.github.io/?https://github.com/OpenSILEX/phisWSClientR/blob/master/doc/requestsWS2.html)
+- [https://github.com/OpenSILEX/phisWSClientR/blob/master/doc/requestsWS1.html](https://htmlpreview.github.io/?https://github.com/OpenSILEX/phisWSClientR/blob/master/doc/requestsWS1.html)
 
 # Citation
 
