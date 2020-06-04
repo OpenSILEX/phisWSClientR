@@ -110,19 +110,20 @@ variables:
   
 .with_r34: &with_r34
   variables: 
-   R_VERSION: "3.4"
+   R_VERSION: "3.4.4"
 
 .with_r35: &with_r35
   variables: 
-   R_VERSION: "3.5"
+   R_VERSION: "3.5.3"
 
 .with_r36: &with_r36
   variables: 
-   R_VERSION: "3.6"
+   R_VERSION: "3.6.3"
 
-.with_r37: &with_r37
+.with_r40: &with_r40
   variables: 
-   R_VERSION: "3.7"
+   R_VERSION: "4.0.0"
+
 
 buildBinary:3.4:
   <<: *with_r34
