@@ -13,7 +13,7 @@ stages:
 # define system environment variables
 variables:
   R_REPOS: "http://cloud.R-project.org/"
-  R_LIBS_USER : "$CI_PROJECT_DIR/.cache/install_deps" # dependencies cache
+  R_LIBS_CACHE : "$CI_PROJECT_DIR/.cache/install_deps" # dependencies cache
   R_ENVIRON : "$CI_PROJECT_DIR/.Renviron" # R environment cache
   R_TMP_USER: "$CI_PROJECT_DIR/tmp"  # temporary directory
 
@@ -32,9 +32,9 @@ variables:
 .prepare_script_r: &prepare_script_r
   <<: *cache_dependencies
   before_script:   
-    - echo "${R_LIBS_USER}/${R_VERSION} > ${R_ENVIRON}"
-    - echo "R_LIBS_USER=${R_LIBS_USER}/${R_VERSION}" > ${R_ENVIRON} 
-    - R -e '.libPaths()'
+    - echo "$R_LIBS_USER > ${R_ENVIRON}"
+    - echo "R_LIBS_USER=$R_LIBS_USER" > ${R_ENVIRON} 
+    - R -e '.libPaths(Sys.getenv("R_LIBS_USER"))'
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));install.packages("devtools");devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
 
 # create an archive 
@@ -111,18 +111,22 @@ variables:
 .with_r34: &with_r34
   variables: 
    R_VERSION: "3.4.4"
+   R_LIBS_USER: "$R_LIBS_CACHE/3.4.4"
 
 .with_r35: &with_r35
   variables: 
    R_VERSION: "3.5.3"
+   R_LIBS_USER: "$R_LIBS_CACHE/3.5.3"
 
 .with_r36: &with_r36
   variables: 
    R_VERSION: "3.6.3"
+   R_LIBS_USER: "$R_LIBS_CACHE/3.6.3"
 
 .with_r40: &with_r40
   variables: 
    R_VERSION: "4.0.0"
+   R_LIBS_USER: "$R_LIBS_CACHE/4.0.0"
 
 
 buildBinary:3.4:
