@@ -29,7 +29,8 @@ Imports:
     httr,
     urltools,
     logging,
-    openssl
+    openssl,
+    wicket
 Suggests:
     roxygen2,
     knitr,
