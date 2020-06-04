@@ -32,9 +32,9 @@ variables:
 .prepare_script_r: &prepare_script_r
   <<: *cache_dependencies
   before_script:   
-    - echo "cache ${R_LIBS_USER_DIR}/${R_VERSION} > ${R_ENVIRON}"
-    - echo 'R_LIBS_USER="${R_LIBS_USER_DIR}/${R_VERSION}"' > $R_ENVIRON
-    - R -e ".libPaths()"
+    - echo "cache ${R_LIBS_USER}/${R_VERSION} > ${R_ENVIRON}"
+    - R_LIBS_USER_DIR="${R_LIBS_USER}/${R_VERSION}"
+    - R -e '.libPaths(Sys.getenv("R_LIBS_USER_DIR"), .libPaths())'
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
 
 # create an archive 
