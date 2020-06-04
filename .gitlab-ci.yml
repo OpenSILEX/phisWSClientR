@@ -27,6 +27,7 @@ variables:
 # - R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)' # create personal library
 .prepare_script_r: &prepare_script_r
   <<: *cache_dependencies
+  image: r-base:$R_VERSION
   before_script:   
     - apt-get update && apt-get install -y libcurl4-openssl-dev
     - echo "$R_LIBS_USER > ${R_ENVIRON}"
@@ -38,14 +39,12 @@ variables:
 # create an archive 
 .build:binary: &build_r
   <<: *prepare_script_r
-  image: r-base:$R_VERSION
   stage: build
   script:
    - R -e 'devtools::build(binary = TRUE)'
 
 .check:errors: &errors_r
   <<: *prepare_script_r
-  image: r-base:$R_VERSION
   stage: check
   script:
     - mkdir -p $R_TMP_USER
@@ -54,7 +53,6 @@ variables:
     
 .check:warnings: &warnings_r
   <<: *prepare_script_r
-  image: r-base:$R_VERSION
   stage: check
   script:
     - mkdir -p $R_TMP_USER
@@ -63,7 +61,6 @@ variables:
 
 .check:notes: &notes_r
   <<: *prepare_script_r
-  image: r-base:$R_VERSION
   allow_failure: true
   stage: check
   script:
@@ -73,7 +70,6 @@ variables:
 
 .unit:tests: &unit_r
   <<: *prepare_script_r
-  image: r-base:$R_VERSION
   when: manual
   stage: test
   script:
@@ -83,14 +79,12 @@ variables:
 
 .install:locally: &install_local_r
   <<: *prepare_script_r
-  image: r-base:$R_VERSION
   stage: test
   script:
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install(build_vignettes=TRUE,dependencies = TRUE)'
 
 .code:coverage: &coverage_r
   <<: *prepare_script_r
-  image: r-base:$R_VERSION
   allow_failure: true
   when: manual
   stage: test
@@ -99,7 +93,6 @@ variables:
 
 .build:vignette: &build_vignette_r
   <<: *prepare_script_r
-  image: r-base:$R_VERSION
   stage: document
   script:
     - mkdir -p $R_TMP_USER
@@ -107,6 +100,7 @@ variables:
     - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
   
 .with_r34: &with_r34
+  image: r-base:$R_VERSION
   variables: 
    R_VERSION: "3.4.4"
    R_LIBS_USER: "$R_LIBS_CACHE/3.4.4"
