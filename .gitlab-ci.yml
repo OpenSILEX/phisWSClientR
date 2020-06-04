@@ -25,7 +25,7 @@ variables:
       - ".Renviron"
 
 # load packages
-before_script: &before_script
+.before_script: &before_script
 #   - echo "creating cache dir"
  #  - mkdir -p  $R_LIBS_USER
  #  - chmod -R 777 $R_LIBS_USER
