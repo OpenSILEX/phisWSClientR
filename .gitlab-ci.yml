@@ -35,7 +35,7 @@ variables:
     - echo "${R_LIBS_USER}/${R_VERSION} > ${R_ENVIRON}"
     - echo "R_LIBS_USER=${R_LIBS_USER}/${R_VERSION}" > ${R_ENVIRON} 
     - R -e '.libPaths()'
-    - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
+    - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));install.packages("devtools");devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
 
 # create an archive 
 .build:binary: &build_r
