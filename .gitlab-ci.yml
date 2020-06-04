@@ -26,11 +26,11 @@ variables:
 
 # load packages
 #   - echo "creating cache dir"
-#  - mkdir -p  $R_LIBS_USER
-#  - chmod -R 777 $R_LIBS_USER
-.prepare_script: &prepare_script
+ #  - mkdir -p  $R_LIBS_USER
+ #  - chmod -R 777 $R_LIBS_USER
+.prepare_script_r: &prepare_script_r
   <<: *cache_dependencies
-  before_script:
+  before_script:  
     - echo 'R_LIBS_USER="$R_LIBS_USER/$R_VERSION"' > .Renviron
     - R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)' # create personal library
     - R -e '.libPaths()'
@@ -38,14 +38,14 @@ variables:
 
 # create an archive 
 .build:binary: &build_r
-  <<: *prepare_script
+  <<: *prepare_script_r
   image: rocker/verse:$R_VERSION
   stage: build
   script:
    - R -e 'devtools::build(binary = TRUE)'
 
 .check:errors: &errors_r
-  <<: *prepare_script
+  <<: *prepare_script_r
   image: rocker/verse:$R_VERSION
   stage: check
   script:
@@ -55,7 +55,7 @@ variables:
   needs: ["buildBinary:$R_VERSION"]
     
 .check:warnings: &warnings_r
-  <<: *prepare_script
+  <<: *prepare_script_r
   image: rocker/verse:$R_VERSION
   stage: check
   script:
@@ -65,7 +65,7 @@ variables:
   needs: ["buildBinary:$R_VERSION"]
     
 .check:notes: &notes_r
-  <<: *prepare_script
+  <<: *prepare_script_r
   image: rocker/verse:$R_VERSION
   allow_failure: true
   stage: check
@@ -76,7 +76,7 @@ variables:
   needs: ["buildBinary:$R_VERSION"]
     
 .unit:tests: &unit_r
-  <<: *prepare_script
+  <<: *prepare_script_r
   image: rocker/verse:$R_VERSION
   when: manual
   stage: test
@@ -87,7 +87,7 @@ variables:
   needs: ["checkErrors:$R_VERSION"]  
 
 .install:locally: &install_local_r
-  <<: *prepare_script
+  <<: *prepare_script_r
   image: rocker/verse:$R_VERSION
   stage: test
   script:
@@ -95,7 +95,7 @@ variables:
   needs: ["checkErrors:$R_VERSION"]
 
 .code:coverage: &coverage_r
-  <<: *prepare_script
+  <<: *prepare_script_r
   image: rocker/verse:$R_VERSION
   allow_failure: true
   when: manual
@@ -105,7 +105,7 @@ variables:
   needs: ["unitTests:$R_VERSION"]
 
 .build:vignette: &build_vignette_r
-  <<: *prepare_script
+  <<: *prepare_script_r
   image: rocker/verse:$R_VERSION
   stage: document
   script:
@@ -116,19 +116,19 @@ variables:
   
 .with_r34: &with_r34
   variables: 
-   R_VERSION: 3.4
+   R_VERSION: "3.4"
 
 .with_r35: &with_r35
   variables: 
-   R_VERSION: 3.5
+   R_VERSION: "3.5"
 
 .with_r36: &with_r36
   variables: 
-   R_VERSION: 3.6
+   R_VERSION: "3.6"
 
 .with_r37: &with_r37
   variables: 
-   R_VERSION: 3.7
+   R_VERSION: "3.7"
 
 buildBinary:3.4:
   <<: *with_r34
