@@ -5,8 +5,8 @@ image: ubuntu:18.04
 # order of the different jobs
 stages:
   - build
-  - document
   - check
+  - document
   - test
   - deploy
 
