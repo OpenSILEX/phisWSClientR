@@ -13,7 +13,7 @@ stages:
 # define system environment variables
 variables:
   R_REPOS: "http://cloud.R-project.org/"
-  R_LIBS_USER_DIR : "$CI_PROJECT_DIR/.cache/install_deps" # dependencies cache
+  R_LIBS_USER : "$CI_PROJECT_DIR/.cache/install_deps" # dependencies cache
   R_ENVIRON : "$CI_PROJECT_DIR/.Renviron" # R environment cache
   R_TMP_USER: "$CI_PROJECT_DIR/tmp"  # temporary directory
 
@@ -32,9 +32,8 @@ variables:
 .prepare_script_r: &prepare_script_r
   <<: *cache_dependencies
   before_script:   
-    - echo 'R_LIBS_USER="${R_LIBS_USER_DIR}/${R_VERSION}"' > .Renviron
-    - R -e ".libPaths('')"
-    - R -e '.libPaths(paste0(Sys.getenv("R_LIBS_USER_DIR"),"/",Sys.getenv("R_VERSION")))'
+    - echo "cache ${R_LIBS_USER_DIR}/${R_VERSION} > ${R_ENVIRON}"
+    - echo 'R_LIBS_USER="${R_LIBS_USER_DIR}/${R_VERSION}"' > $R_ENVIRON
     - R -e ".libPaths()"
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
 
