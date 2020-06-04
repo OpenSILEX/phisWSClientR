@@ -52,7 +52,6 @@ variables:
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/errorsFail"), error = function(e) system("touch $R_TMP_USER/errorsFail"))'
     - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
-  needs: ["buildBinary:$R_VERSION"]
     
 .check:warnings: &warnings_r
   <<: *prepare_script_r
@@ -62,8 +61,7 @@ variables:
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/warningsFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
     - if [ -f $R_TMP_USER/warningsFail ]; then echo "Check Warnings"; exit 1 ; else echo "No Warnings"; fi
-  needs: ["buildBinary:$R_VERSION"]
-    
+
 .check:notes: &notes_r
   <<: *prepare_script_r
   image: rocker/verse:$R_VERSION
@@ -73,8 +71,7 @@ variables:
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/notesFail"))'
     - if [ -f $R_TMP_USER/notesFail ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
-  needs: ["buildBinary:$R_VERSION"]
-    
+
 .unit:tests: &unit_r
   <<: *prepare_script_r
   image: rocker/verse:$R_VERSION
@@ -84,7 +81,6 @@ variables:
     - mkdir -p $R_TMP_USER
     - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) system("touch $R_TMP_USER/testsFail")
     - if [ -f $R_TMP_USER/testsFail ]; then echo "Check Tests"; exit 1 ; else echo "Tests passed"; fi    
-  needs: ["checkErrors:$R_VERSION"]  
 
 .install:locally: &install_local_r
   <<: *prepare_script_r
@@ -92,7 +88,6 @@ variables:
   stage: test
   script:
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install(build_vignettes=TRUE,dependencies = TRUE)'
-  needs: ["checkErrors:$R_VERSION"]
 
 .code:coverage: &coverage_r
   <<: *prepare_script_r
@@ -102,7 +97,6 @@ variables:
   stage: test
   script:
     - R -e 'covr::codecov()'
-  needs: ["unitTests:$R_VERSION"]
 
 .build:vignette: &build_vignette_r
   <<: *prepare_script_r
@@ -112,7 +106,6 @@ variables:
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/errorsFail"), error = function(e) system("touch $R_TMP_USER/errorsFail"))'
     - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
-  needs: ["buildBinary:$R_VERSION"]
   
 .with_r34: &with_r34
   variables: 
@@ -137,29 +130,36 @@ buildBinary:3.4:
 checkErrors:3.4:
   <<: *with_r34
   <<: *errors_r
+  needs: ["buildBinary:3.4"]
 
 checkWarnings:3.4:
   <<: *with_r34
   <<: *warnings_r
+  needs: ["buildBinary:3.4"]
 
 checkNotes:3.4:
   <<: *with_r34
   <<: *notes_r
+  needs: ["buildBinary:3.4"]
 
 test_unit:3.4:
   <<: *with_r34
   <<: *unit_r
-  
+  needs: ["checkErrors:3.4"]
+ 
 install_local:3.4:
   <<: *with_r34
   <<: *install_local_r
-
+  needs: ["checkErrors:3.4"]
+ 
 code_coverage:3.4:
   <<: *with_r34
   <<: *coverage_r
-
-code_coverage:3.4:
+  needs: ["checkErrors:3.4"]
+ 
+build_vignette_r:3.4:
   <<: *with_r34
-  <<: *coverage_r
-
+  <<: *build_vignette_r
+  needs: ["checkErrors:3.4"]
+ 
  
