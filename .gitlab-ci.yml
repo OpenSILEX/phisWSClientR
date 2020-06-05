@@ -100,7 +100,6 @@ variables:
     - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
   
 .with_r34: &with_r34
-  image: r-base:$R_VERSION
   variables: 
    R_VERSION: "3.4.4"
    R_LIBS_USER: "$R_LIBS_CACHE/3.4.4"
