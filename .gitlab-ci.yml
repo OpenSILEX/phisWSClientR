@@ -35,7 +35,7 @@ variables:
   before_script:
     - mkdir -p  $R_LIBS_CACHE
     - chmod -R 777 $R_LIBS_CACHE
-    - cp -R $R_LIBS_CACHE/* /usr/local/lib/R/site-library
+    - cp -R $R_LIBS_CACHE /usr/local/lib/R/site-library
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));install.packages("devtools");devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
   after_script:
     - cp -R /usr/local/lib/R/site-library/* $R_LIBS_CACHE
