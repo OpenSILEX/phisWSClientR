@@ -9,7 +9,7 @@ stages:
 # define system environment variables
 variables:
   R_REPOS: "http://cloud.R-project.org/"
-  R_LIBS_CACHE : "$CI_PROJECT_DIR/.cache/install_deps" # dependencies cache
+  R_LIBS_CACHE : ".cache/install_deps/$R_VERSION" # dependencies cache
   R_ENVIRON : "$CI_PROJECT_DIR/.Renviron" # R environment cache
   R_TMP_USER: "$CI_PROJECT_DIR/tmp"  # temporary directory
 
@@ -17,25 +17,27 @@ variables:
 .cache_dependencies: &cache_dependencies
   cache:  
      paths:
-      - ".cache/install_deps/$R_VERSION"
-      - ".Renviron"
+      - $R_LIBS_CACHE
+      - $R_ENVIRON
 
 # load packages
 #   - echo "creating cache dir"
 #  - mkdir -p  $R_LIBS_USER
 #  - chmod -R 777 $R_LIBS_USER
 # - R -e 'dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)' # create personal library
+#  - echo "$R_LIBS_USER > ${R_ENVIRON}"
+#     - echo "R_LIBS_USER=$R_LIBS_USER" > ${R_ENVIRON} 
+#     - R -e '.libPaths(c(Sys.getenv("R_LIBS_USER")))'
+#    - R -e '.libPaths()'
 .prepare_script_r: &prepare_script_r
   <<: *cache_dependencies
-  image: r-base:$R_VERSION
-  before_script:   
-    - apt-get install -y libcurl4-openssl-dev
-    - echo "$R_LIBS_USER > ${R_ENVIRON}"
-    - echo "R_LIBS_USER=$R_LIBS_USER" > ${R_ENVIRON} 
-    - R -e '.libPaths(c(Sys.getenv("R_LIBS_USER")))'
-    - R -e '.libPaths()'
+  image: rocker/tidyverse:$R_VERSION
+  before_script:
+    - mv $R_LIBS_CACHE/* /usr/local/lib/R/site-library
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));install.packages("devtools");devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
-
+  after_script:
+    - cp -R /usr/local/lib/R/site-library/* $R_LIBS_CACHE
+    
 # create an archive 
 .build:binary: &build_r
   <<: *prepare_script_r
