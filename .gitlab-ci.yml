@@ -29,7 +29,6 @@ variables:
   <<: *cache_dependencies
   image: r-base:$R_VERSION
   before_script:   
-    - apt-get update && apt-get install -y libcurl4-openssl-dev
     - echo "$R_LIBS_USER > ${R_ENVIRON}"
     - echo "R_LIBS_USER=$R_LIBS_USER" > ${R_ENVIRON} 
     - R -e '.libPaths(c(Sys.getenv("R_LIBS_USER")))'
