@@ -33,6 +33,8 @@ variables:
   <<: *cache_dependencies
   image: rocker/tidyverse:$R_VERSION
   before_script:
+    - mkdir -p  $R_LIBS_CACHE
+    - chmod -R 777 $R_LIBS_CACHE
     - mv $R_LIBS_CACHE/* /usr/local/lib/R/site-library
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));install.packages("devtools");devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
   after_script:
