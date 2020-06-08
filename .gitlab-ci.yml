@@ -15,6 +15,7 @@ variables:
   R_TMP_USER: "$CI_PROJECT_DIR/tmp"  # temporary directory
   R_IMG_LIB: "/usr/local/lib/R/site-library"  # temporary directory
   BUILT_PACKAGE: "$CI_PROJECT_DIR/../phisWSClientR_${PACKAGE_VERSION}_R_x86_64-pc-linux-gnu.tar.gz"  # temporary directory
+  BUILT_PACKAGE_DIR: "$BUILT_PACKAGE_ARTIFACTS/.BUILT_PACKAGE"
   BUILT_PACKAGE_PATH: "$BUILT_PACKAGE_ARTIFACTS/.BUILT_PACKAGE/phisWSClientR_${PACKAGE_VERSION}_R_x86_64-pc-linux-gnu.tar.gz"
 
 # Cache R directories in between jobs
@@ -49,6 +50,8 @@ variables:
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));install.packages("devtools");devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
     - R -e 'devtools::build(binary = TRUE)'
     - cp $BUILT_PACKAGE $BUILT_PACKAGE_PATH
+    - mkdir -p $BUILT_PACKAGE_DIR
+    - chmod -R 777 $R_LIBS_CACHE
   artifacts:
     paths:
       - $BUILT_PACKAGE_PATH
