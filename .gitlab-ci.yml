@@ -14,10 +14,9 @@ variables:
   R_ENVIRON : "$CI_PROJECT_DIR/.Renviron" # R environment cache
   R_TMP_USER: "$CI_PROJECT_DIR/tmp"  # temporary directory
   R_IMG_LIB: "/usr/local/lib/R/site-library"  # temporary directory
-  BUILT_PACKAGE_NAME: "phisWSClientR_${PACKAGE_VERSION}_R_x86_64-pc-linux-gnu.tar.gz"
-  BUILT_PACKAGE: "$CI_PROJECT_DIR/../$BUILT_PACKAGE_NAME"  # temporary directory
+  BUILT_PACKAGE: "$CI_PROJECT_DIR/../phisWSClientR_${PACKAGE_VERSION}_R_x86_64-pc-linux-gnu.tar.gz"  # temporary directory
   BUILT_PACKAGE_ARTIFACTS: "$CI_PROJECT_DIR/.BUILT_PACKAGE"
-  BUILT_PACKAGE_PATH: "$BUILT_PACKAGE_ARTIFACTS/.BUILT_PACKAGE/$BUILT_PACKAGE_NAME"
+  BUILT_PACKAGE_PATH: "$BUILT_PACKAGE_ARTIFACTS/.BUILT_PACKAGE/phisWSClientR_${PACKAGE_VERSION}_R_x86_64-pc-linux-gnu.tar.gz"
 
 # Cache R directories in between jobs
 .cache_dependencies: &cache_dependencies
