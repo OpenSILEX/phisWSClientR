@@ -52,7 +52,7 @@ variables:
   <<: *prepare_script_r
   stage: build
   script:
-    - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));install.packages("devtools");devtools::install_deps(dependencies = TRUE, upgrade = FALSE, lib=Sys.getenv("R_LIBS_CACHE"))'
+    - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));install.packages("devtools");devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
     - R -e 'devtools::build(binary = TRUE)'
     - mkdir -p $BUILT_PACKAGE_DIR
     - cp $BUILT_PACKAGE $BUILT_PACKAGE_DIR
