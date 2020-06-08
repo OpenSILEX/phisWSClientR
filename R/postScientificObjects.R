@@ -12,6 +12,7 @@
 ##' @import stringr
 ##' @import dplyr
 ##' @import wicket
+##' @import tibble
 ##' @description send a scientific object to the web service
 ##' @param expDesign a dataframe containing the following columns 
 ##'        rdfType character, the rdfType of the scientific object ex: http://www.opensilex.org/vocabulary/oeso#Plot
