@@ -35,7 +35,7 @@ variables:
     - chmod -R 777 $R_LIBS_CACHE $R_IMG_LIB
     - echo "Number of files in $R_LIBS_CACHE:$(ls -1 $R_LIBS_CACHE | wc -l)"
     - echo "create copy cache in r libs "
-    - cp -R $R_LIBS_CACHE $R_IMG_LIB
+    - cp -R $R_LIBS_CACHE/* $R_IMG_LIB
     - rm -R $R_LIBS_CACHE
     - echo "Number of files in $R_IMG_LIB:$(ls -1 $R_IMG_LIB | wc -l)"
   after_script:
@@ -52,8 +52,8 @@ variables:
   <<: *prepare_script_r
   stage: build
   script:
-    - R -e '.libPaths(c(Sys.getenv("R_LIBS_CACHE"),.libPaths()));options(repos =c(CRAN=Sys.getenv("R_REPOS")));install.packages("devtools");devtools::install_deps(dependencies = TRUE, upgrade = FALSE, lib=Sys.getenv("R_LIBS_CACHE"))'
-    - R -e '.libPaths(c(Sys.getenv("R_LIBS_CACHE"),.libPaths()));devtools::build(binary = TRUE)'
+    - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));install.packages("devtools");devtools::install_deps(dependencies = TRUE, upgrade = FALSE, lib=Sys.getenv("R_LIBS_CACHE"))'
+    - R -e 'devtools::build(binary = TRUE)'
     - mkdir -p $BUILT_PACKAGE_DIR
     - cp $BUILT_PACKAGE $BUILT_PACKAGE_DIR
     - chmod -R 777 $BUILT_PACKAGE_PATH
@@ -66,7 +66,7 @@ variables:
   stage: check
   script:
     - mkdir -p $R_TMP_USER
-    - R -e '.libPaths(c(Sys.getenv("R_LIBS_CACHE"),.libPaths()));tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[errors], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/errorsFail"), error = function(e) system("touch $R_TMP_USER/errorsFail"))'
+    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[errors], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/errorsFail"), error = function(e) system("touch $R_TMP_USER/errorsFail"))'
     - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
     
 .check:warnings: &warnings_r
@@ -74,7 +74,7 @@ variables:
   stage: check
   script:
     - mkdir -p $R_TMP_USER
-    - R -e '.libPaths(c(Sys.getenv("R_LIBS_CACHE"),.libPaths()));tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[warnings], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/warningsFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
+    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[warnings], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/warningsFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
     - if [ -f $R_TMP_USER/warningsFail ]; then echo "Check Warnings"; exit 1 ; else echo "No Warnings"; fi
 
 .check:notes: &notes_r
@@ -83,7 +83,7 @@ variables:
   stage: check
   script:
     - mkdir -p $R_TMP_USER
-    - R -e '.libPaths(c(Sys.getenv("R_LIBS_CACHE"),.libPaths()));tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[notes], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/notesFail"))'
+    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[notes], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/notesFail"))'
     - if [ -f $R_TMP_USER/notesFail ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
 
 .unit:tests: &unit_r
