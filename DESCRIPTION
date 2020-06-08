@@ -30,7 +30,8 @@ Imports:
     urltools,
     logging,
     openssl,
-    wicket
+    wicket,
+    tibble
 Suggests:
     roxygen2,
     knitr,
