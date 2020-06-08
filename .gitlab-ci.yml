@@ -29,7 +29,6 @@ variables:
     - chmod -R 777 $R_LIBS_CACHE
     - cp -R $R_LIBS_CACHE $R_IMG_LIB
     - rm -R $R_LIBS_CACHE
-    - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));install.packages("devtools");devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
   after_script:
     - mkdir -p  $R_LIBS_CACHE
     - chmod -R 777 $R_LIBS_CACHE
@@ -40,6 +39,7 @@ variables:
   <<: *prepare_script_r
   stage: build
   script:
+   - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));install.packages("devtools");devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
    - R -e 'devtools::build(binary = TRUE)'
 
 .check:errors: &errors_r
