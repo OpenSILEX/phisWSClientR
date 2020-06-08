@@ -49,8 +49,8 @@ variables:
   script:
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));install.packages("devtools");devtools::install_deps(dependencies = TRUE, upgrade = FALSE)'
     - R -e 'devtools::build(binary = TRUE)'
-    - cp $BUILT_PACKAGE $BUILT_PACKAGE_PATH
     - mkdir -p $BUILT_PACKAGE_DIR
+    - cp $BUILT_PACKAGE $BUILT_PACKAGE_DIR
     - chmod -R 777 $R_LIBS_CACHE
   artifacts:
     paths:
