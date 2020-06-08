@@ -15,7 +15,6 @@ variables:
   R_TMP_USER: "$CI_PROJECT_DIR/tmp"  # temporary directory
   R_IMG_LIB: "/usr/local/lib/R/site-library"  # temporary directory
   BUILT_PACKAGE: "$CI_PROJECT_DIR/../phisWSClientR_${PACKAGE_VERSION}_R_x86_64-pc-linux-gnu.tar.gz"  # temporary directory
-  BUILT_PACKAGE_ARTIFACTS: "$CI_PROJECT_DIR/.BUILT_PACKAGE"
   BUILT_PACKAGE_PATH: "$BUILT_PACKAGE_ARTIFACTS/.BUILT_PACKAGE/phisWSClientR_${PACKAGE_VERSION}_R_x86_64-pc-linux-gnu.tar.gz"
 
 # Cache R directories in between jobs
@@ -52,7 +51,7 @@ variables:
     - cp $BUILT_PACKAGE $BUILT_PACKAGE_PATH
   artifacts:
     paths:
-      - $BUILT_PACKAGE
+      - $BUILT_PACKAGE_PATH
       
 .check:errors: &errors_r
   <<: *prepare_script_r
