@@ -141,40 +141,41 @@ checkErrors:3.4:
   <<: *errors_r
   needs:
     - job: "buildBinary:3.4"
-      artifacts: true
 
 checkWarnings:3.4:
   <<: *with_r34
   <<: *warnings_r
   needs:
     - job: "buildBinary:3.4"
-      artifacts: true
 
 checkNotes:3.4:
   <<: *with_r34
   <<: *notes_r
   needs:
     - job: "buildBinary:3.4"
-      artifacts: true
 
 test_unit:3.4:
   <<: *with_r34
   <<: *unit_r
-  needs: ["checkErrors:3.4"]
+  needs:
+    - job: "checkErrors:3.4"
  
 install_local:3.4:
   <<: *with_r34
   <<: *install_local_r
-  needs: ["checkErrors:3.4"]
+  needs:
+    - job: "checkErrors:3.4"
  
 code_coverage:3.4:
   <<: *with_r34
   <<: *coverage_r
-  needs: ["checkErrors:3.4"]
- 
+  needs:
+    - job: "checkErrors:3.4"
+    
 build_vignette_r:3.4:
   <<: *with_r34
   <<: *build_vignette_r
-  needs: ["checkErrors:3.4"]
+  needs:
+    - job: "checkErrors:3.4"
  
  
