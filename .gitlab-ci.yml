@@ -36,7 +36,9 @@ variables:
   stage: build
   script:
     - R -e 'devtools::build(binary = TRUE)'
-
+    - mkdir -p $BUILT_PACKAGE_DIR
+    - cp $BUILT_PACKAGE $BUILT_PACKAGE_DIR
+    - chmod -R 777 $BUILT_PACKAGE_PATH
   artifacts:
     paths:
       - $BUILT_PACKAGE_PATH
