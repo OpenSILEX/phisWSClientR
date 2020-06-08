@@ -15,6 +15,8 @@ variables:
   R_TMP_USER: "$CI_PROJECT_DIR/tmp"  # temporary directory
   R_IMG_LIB: "/usr/local/lib/R/site-library"  # temporary directory
   BUILT_PACKAGE: "$CI_PROJECT_DIR/../phisWSClientR_${PACKAGE_VERSION}_R_x86_64-pc-linux-gnu.tar.gz"  # temporary directory
+  BUILT_PACKAGE_ARTIFACTS: "$CI_PROJECT_DIR/.BUILT_PACKAGE"
+  BUILT_PACKAGE_PATH: "$BUILT_PACKAGE_ARTIFACTS/$BUILT_PACKAGE"
 
 # Cache R directories in between jobs
 .cache_dependencies: &cache_dependencies
@@ -31,6 +33,7 @@ variables:
     - chmod -R 777 $R_LIBS_CACHE
     - echo "Number of files in $R_LIBS_CACHE:$(ls -1 $R_LIBS_CACHE | wc -l)"
     - cp -R $R_LIBS_CACHE $R_IMG_LIB
+    - cp $BUILT_PACKAGE $BUILT_PACKAGE_ARTIFACTS/$BUILT_PACKAGE
     - rm -R $R_LIBS_CACHE
     - echo "Number of files in $R_IMG_LIB:$(ls -1 $R_IMG_LIB | wc -l)"
   after_script:
@@ -56,7 +59,7 @@ variables:
   stage: check
   script:
     - mkdir -p $R_TMP_USER
-    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[errors], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/errorsFail"), error = function(e) system("touch $R_TMP_USER/errorsFail"))'
+    - R -e 'tryCatch(if (!identical(devtools::check_built( path = Sys.getenv("BUILT_PACKAGE_PATH") ,document = FALSE, args = "--no-tests")[errors], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/errorsFail"), error = function(e) system("touch $R_TMP_USER/errorsFail"))'
     - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
     
 .check:warnings: &warnings_r
@@ -64,7 +67,7 @@ variables:
   stage: check
   script:
     - mkdir -p $R_TMP_USER
-    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[warnings], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/warningsFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
+    - R -e 'tryCatch(if (!identical(devtools::check_built(path = Sys.getenv("BUILT_PACKAGE_PATH") ,document = FALSE, args = "--no-tests")[warnings], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/warningsFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
     - if [ -f $R_TMP_USER/warningsFail ]; then echo "Check Warnings"; exit 1 ; else echo "No Warnings"; fi
 
 .check:notes: &notes_r
@@ -73,7 +76,7 @@ variables:
   stage: check
   script:
     - mkdir -p $R_TMP_USER
-    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[notes], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/notesFail"))'
+    - R -e 'tryCatch(if (!identical(devtools::check_built(path = Sys.getenv("BUILT_PACKAGE_PATH") ,document = FALSE, args = "--no-tests")[notes], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/notesFail"))'
     - if [ -f $R_TMP_USER/notesFail ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
 
 .unit:tests: &unit_r
