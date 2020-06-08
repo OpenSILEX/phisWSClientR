@@ -126,36 +126,36 @@ buildBinary:3.4:
 checkErrors:3.4:
   <<: *with_r34
   <<: *errors_r
-  needs: "buildBinary:3.4"
+  needs: ["buildBinary:3.4"]
 
 checkWarnings:3.4:
   <<: *with_r34
   <<: *warnings_r
-  needs: "buildBinary:3.4"
+  needs: ["buildBinary:3.4"]
 
 checkNotes:3.4:
   <<: *with_r34
   <<: *notes_r
-  needs: "buildBinary:3.4"
+  needs: ["buildBinary:3.4"]
 
 test_unit:3.4:
   <<: *with_r34
   <<: *unit_r
-  needs: "checkErrors:3.4"
+  needs: ["checkErrors:3.4"]
  
 install_local:3.4:
   <<: *with_r34
   <<: *install_local_r
-  needs: "checkErrors:3.4"
+  needs: ["checkErrors:3.4"]
  
 code_coverage:3.4:
   <<: *with_r34
   <<: *coverage_r
-  needs: "checkErrors:3.4"
+  needs: ["checkErrors:3.4"]
  
 build_vignette_r:3.4:
   <<: *with_r34
   <<: *build_vignette_r
-  needs: "checkErrors:3.4"
+  needs: ["checkErrors:3.4"]
  
  
