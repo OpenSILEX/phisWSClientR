@@ -2,9 +2,7 @@
 stages:
   - build
   - check
-  - document
   - test
-  - deploy
 
 # define system environment variables
 variables:
@@ -142,12 +140,6 @@ install_local:3.4:
 code_coverage:3.4:
   <<: *with_r34
   <<: *coverage_r
-  needs:
-    - job: "checkErrors:3.4"
-    
-build_vignette_r:3.4:
-  <<: *with_r34
-  <<: *build_vignette_r
   needs:
     - job: "checkErrors:3.4"
  
