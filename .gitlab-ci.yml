@@ -15,7 +15,7 @@ variables:
   R_TMP_USER: "$CI_PROJECT_DIR/tmp"  # temporary directory
   R_IMG_LIB: "/usr/local/lib/R/site-library"  # temporary directory
   BUILT_PACKAGE: "$CI_PROJECT_DIR/../phisWSClientR_${PACKAGE_VERSION}_R_x86_64-pc-linux-gnu.tar.gz"  # temporary directory
-  : "$CI_PROJECT_DIR/.built"
+  BUILT_PACKAGE_DIR: "$CI_PROJECT_DIR/.built"
   BUILT_PACKAGE_PATH: "$CI_PROJECT_DIR/.built/phisWSClientR_${PACKAGE_VERSION}_R_x86_64-pc-linux-gnu.tar.gz"
   SET_R_LIB: '.libPaths(c(Sys.getenv("R_LIBS_CACHE"),.libPaths()))'
 
