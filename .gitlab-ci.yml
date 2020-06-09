@@ -15,7 +15,7 @@ variables:
   R_TMP_USER: "$CI_PROJECT_DIR/tmp"  # temporary directory
   R_IMG_LIB: "/usr/local/lib/R/site-library"  # temporary directory
   BUILT_PACKAGE: "$CI_PROJECT_DIR/../phisWSClientR_${PACKAGE_VERSION}_R_x86_64-pc-linux-gnu.tar.gz"  # temporary directory
-  BUILT_PACKAGE_DIR: "$CI_PROJECT_DIR/.built"
+  : "$CI_PROJECT_DIR/.built"
   BUILT_PACKAGE_PATH: "$CI_PROJECT_DIR/.built/phisWSClientR_${PACKAGE_VERSION}_R_x86_64-pc-linux-gnu.tar.gz"
   SET_R_LIB: '.libPaths(c(Sys.getenv("R_LIBS_CACHE"),.libPaths()))'
 
@@ -29,6 +29,8 @@ variables:
 .prepare_script_r: &prepare_script_r
   <<: *cache_dependencies
   image: $IMAGE_TAG
+  before_script:
+    - if [ -d "$BUILT_PACKAGE_DIR" ]; then rm -R $BUILT_PACKAGE_DIR; fi
     
 # create an archive 
 .build:binary: &build_r
@@ -67,9 +69,7 @@ variables:
   when: manual
   stage: test
   script:
-    - mkdir -p $R_TMP_USER
-    - R -e 'if (any(as.data.frame(devtools::test())[failed] > 0)) system("touch $R_TMP_USER/testsFail")
-    - if [ -f $R_TMP_USER/testsFail ]; then echo "Check Tests"; exit 1 ; else echo "Tests passed"; fi    
+    - R -e 'devtools::test(stop_on_failure = TRUE)'
 
 .install:locally: &install_local_r
   <<: *prepare_script_r
@@ -85,14 +85,6 @@ variables:
   script:
     - R -e 'covr::codecov()'
 
-.build:vignette: &build_vignette_r
-  <<: *prepare_script_r
-  stage: document
-  script:
-    - mkdir -p $R_TMP_USER
-    - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[errors], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/errorsFail"), error = function(e) system("touch $R_TMP_USER/errorsFail"))'
-    - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
-  
 .with_r34: &with_r34
   variables: 
    IMAGE_TAG: "registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:3.4.4"
