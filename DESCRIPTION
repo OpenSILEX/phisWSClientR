@@ -1,6 +1,6 @@
 Package: phisWSClientR
 Title: PHIS WS client R
-Version: 2.4.0
+Version: 2.4.1
 Authors@R: c(person("Pascal", "Neveu", email = "pascal.neveu@inra.fr", role = "aut"),
     person("Anne", "Tireau", email = "anne.tireau@inra.fr", role = "aut"),
     person("Arnaud", "Charleroy", email = "arnaud.charleroy@inra.fr", role = "aut"),
@@ -14,7 +14,7 @@ Description: a set of functions to connect R to the phenomeapi web service in Op
    with specific login as well as private access if the user has an account on an instance of the PHIS system information.
 Depends:
     R (>= 3.2.0),
-    opensilexWSClientR (>= 1.1.0),
+    opensilexWSClientR (>= 1.1.1),
     phisWSClientRTools
 License: GPL-3 | file LICENSE
 LazyData: TRUE
