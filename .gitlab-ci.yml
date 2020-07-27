@@ -42,7 +42,16 @@ variables:
   artifacts:
     paths:
       - $BUILT_PACKAGE_PATH
-      
+
+# create an docker image 
+build:image:  
+  stage: build
+  script:
+    - docker build -t $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse  --tag=registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:3.4.4 --build-arg CODE_VERSION=3.4.4  .
+    - docker push $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:3.4.4
+  rules:
+    - when: manual
+
 .check:errors: &errors_r
   <<: *prepare_script_r
   stage: check
