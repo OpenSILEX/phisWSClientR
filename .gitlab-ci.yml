@@ -62,8 +62,14 @@ build:image:
   <<: *prepare_script_r
   stage: check
   script:
-    - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = c("error","warning"))'
+    - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = c("error"))'
  
+.check:warnings: &warnings_r
+  <<: *prepare_script_r
+  stage: check
+  script:
+    - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = c("warning"))'
+   
 .check:notes: &notes_r
   <<: *prepare_script_r
   allow_failure: true
@@ -115,7 +121,13 @@ build:image:
 buildBinary:3.4:
   <<: *with_r34
   <<: *build_r
-
+  
+checkWarnings:3.4:
+  <<: *with_r34
+  <<: *warnings_r
+  needs:
+    - job: "buildBinary:3.4"
+    
 checkErrors:3.4:
   <<: *with_r34
   <<: *errors_r
