@@ -95,19 +95,23 @@ postData <- function(data){
 ##' \donttest{
 ##' connectToPHISWS(apiID="ws_private", url =
 ##' "http://www.opensilex.org/openSilexAPI/rest/",
-##' username="guest@opensilex.org", password="guest") data = data.frame(
-##' provenanceUri = c(
+##' username="guest@opensilex.org", password="guest") 
+##' data = data.frame(
+##'  provenanceUri = c(
 ##' "http://www.phenome-fppn.fr/test/id/provenance/1569422784579",
 ##' "http://www.phenome-fppn.fr/test/id/provenance/1569422784579",
 ##' "http://www.phenome-fppn.fr/test/id/provenance/1569422784579",
-##' "http://www.phenome-fppn.fr/test/id/provenance/1569422784579"), variableUri
-##' = c( "http://www.phenome-fppn.fr/test/id/variables/v027",
+##' "http://www.phenome-fppn.fr/test/id/provenance/1569422784579"), 
+##'  variableUri = c( "http://www.phenome-fppn.fr/test/id/variables/v027",
 ##' "http://www.phenome-fppn.fr/test/id/variables/v027",
 ##' "http://www.phenome-fppn.fr/test/id/variables/v027",
-##' "http://www.phenome-fppn.fr/test/id/variables/v027"), date = c(
+##' "http://www.phenome-fppn.fr/test/id/variables/v027"), 
+##'  date = c(
 ##' "2017-06-15T10:45:00+0200", "2017-06-15T10:46:00+0200",
-##' "2017-06-15T11:47:00+0200", "2017-06-15T11:48:00+0200"), value = c(1111.3,
-##' 1010, 3030, 4040) ) postSensorData( data )
+##' "2017-06-15T11:47:00+0200", "2017-06-15T11:48:00+0200"), 
+##' value = c(1111.3,
+##' 1010, 3030, 4040) ) 
+##' postSensorData( data )
 ##'
 ##' }
 ##' @export
