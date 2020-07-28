@@ -118,8 +118,7 @@ postData <- function(data){
 postSensorData <- function(data ){
   if(sum(c("provenanceUri", "variableUri", "date", "value")%in%names(data))!=4 ) stop(" You should name the columns after the arguments provenanceUri, variableUri, date, value")
    data[,"objectUri"] <- NULL
-   print(head(data))
-  Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("DATA", configWS)),
+   Response <- opensilexWSClientR::postResponseFromWS(resource = paste0(get("DATA", configWS)),
                                                      attributes = data, wsVersion = 2)
   return(Response)
 }
