@@ -1,6 +1,6 @@
-ARG  CODE_VERSION=latest
+ARG  R_VERSION=latest
 
-FROM rocker/tidyverse:${CODE_VERSION}
+FROM rocker/tidyverse:${R_VERSION}
 
 ENV R_REPOS http://cloud.R-project.org/
 
