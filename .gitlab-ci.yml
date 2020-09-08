@@ -26,7 +26,7 @@ variables:
 
 .prepare_script_r: &prepare_script_r
   <<: *cache_dependencies
-  image: $IMAGE_TAG
+  image: $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$IMAGE_TAG
   before_script:
     - if [ -d "$BUILT_PACKAGE_DIR" ]; then rm -R $BUILT_PACKAGE_DIR; fi
     
@@ -52,11 +52,12 @@ build:image:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
+    - if [ -z "$BUILD_IMAGE_VERSION" ]; then echo "Missing BUILD_IMAGE_VERSION variable"; exit 1; fi 
     - docker info
-    - docker build -t $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse  --tag=registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:3.4.4 --build-arg R_VERSION=3.4.4  .
-    - docker push $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:3.4.4
+    - docker build -t $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse  --tag=registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$BUILD_IMAGE_VERSION --build-arg R_VERSION=$BUILD_IMAGE_VERSION  .
+    - docker push $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$BUILD_IMAGE_VERSION
   rules:
-    - when: manual
+    - if: '$BUILD_IMAGE == "true"'
 
 .check:errors: &errors_r
   <<: *prepare_script_r
@@ -100,7 +101,7 @@ build:image:
 
 .with_r34: &with_r34
   variables: 
-   IMAGE_TAG: "registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:3.4.4"
+   IMAGE_TAG: "3.4.4"
 
 .with_r35: &with_r35
   variables: 
@@ -114,10 +115,9 @@ build:image:
 
 .with_r40: &with_r40
   variables: 
-   R_VERSION: "4.0.0"
+   R_VERSION: "4.0.2"
    R_LIBS_USER: "$R_LIBS_CACHE/4.0.0"
-
-
+   
 buildBinary:3.4:
   <<: *with_r34
   <<: *build_r
@@ -158,4 +158,122 @@ code_coverage:3.4:
   needs:
     - job: "checkErrors:3.4"
  
+buildBinary:3.5:
+  <<: *with_r35
+  <<: *build_r
+  
+checkWarnings:3.5:
+  <<: *with_r35
+  <<: *warnings_r
+  needs:
+    - job: "buildBinary:3.5"
+    
+checkErrors:3.5:
+  <<: *with_r35
+  <<: *errors_r
+  needs:
+    - job: "buildBinary:3.5"
+
+checkNotes:3.5:
+  <<: *with_r35
+  <<: *notes_r
+  needs:
+    - job: "buildBinary:3.5"
+
+test_unit:3.5:
+  <<: *with_r35
+  <<: *unit_r
+  needs:
+    - job: "checkErrors:3.5"
  
+install_local:3.5:
+  <<: *with_r35
+  <<: *install_local_r
+  needs:
+    - job: "checkErrors:3.5"
+ 
+code_coverage:3.5:
+  <<: *with_r35
+  <<: *coverage_r
+  needs:
+    - job: "checkErrors:3.5"
+
+buildBinary:3.6:
+  <<: *with_r36
+  <<: *build_r
+  
+checkWarnings:3.6:
+  <<: *with_r36
+  <<: *warnings_r
+  needs:
+    - job: "buildBinary:3.6"
+    
+checkErrors:3.6:
+  <<: *with_r36
+  <<: *errors_r
+  needs:
+    - job: "buildBinary:3.6"
+
+checkNotes:3.6:
+  <<: *with_r36
+  <<: *notes_r
+  needs:
+    - job: "buildBinary:3.6"
+
+test_unit:3.6:
+  <<: *with_r36
+  <<: *unit_r
+  needs:
+    - job: "checkErrors:3.6"
+ 
+install_local:3.6:
+  <<: *with_r36
+  <<: *install_local_r
+  needs:
+    - job: "checkErrors:3.6"
+ 
+code_coverage:3.6:
+  <<: *with_r36
+  <<: *coverage_r
+  needs:
+    - job: "checkErrors:3.6"
+
+buildBinary:4.0:
+  <<: *with_r40
+  <<: *build_r
+  
+checkWarnings:4.0:
+  <<: *with_r40
+  <<: *warnings_r
+  needs:
+    - job: "buildBinary:4.0"
+    
+checkErrors:4.0:
+  <<: *with_r40
+  <<: *errors_r
+  needs:
+    - job: "buildBinary:4.0"
+
+checkNotes:4.0:
+  <<: *with_r40
+  <<: *notes_r
+  needs:
+    - job: "buildBinary:4.0"
+
+test_unit:4.0:
+  <<: *with_r40
+  <<: *unit_r
+  needs:
+    - job: "checkErrors:4.0"
+ 
+install_local:4.0:
+  <<: *with_r40
+  <<: *install_local_r
+  needs:
+    - job: "checkErrors:4.0"
+ 
+code_coverage:4.0:
+  <<: *with_r40
+  <<: *coverage_r
+  needs:
+    - job: "checkErrors:4.0"
