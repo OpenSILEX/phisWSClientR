@@ -42,7 +42,8 @@ variables:
   artifacts:
     paths:
       - $BUILT_PACKAGE_PATH
-
+  except:
+    - schedules
 # create an docker image 
 .build:image: &build_image
   image: docker:19.03.12
