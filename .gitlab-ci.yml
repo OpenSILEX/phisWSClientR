@@ -42,6 +42,8 @@ variables:
   artifacts:
     paths:
       - $BUILT_PACKAGE_PATH
+  rules:
+    - if: '$BUILD_IMAGES != "true"'
 
 # create an docker image 
 .build:image: &build_image
@@ -56,26 +58,35 @@ variables:
     - docker info
     - docker build -t $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse  --tag=registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$IMAGE_TAG --build-arg R_VERSION=$IMAGE_TAG  .
     - docker push $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$IMAGE_TAG
-
+  rules:
+    - if: '$BUILD_IMAGES == "true"'
 
 .check:errors: &errors_r
   <<: *prepare_script_r
   stage: check
   script:
     - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = c("error"))'
+  rules:
+    - if: '$BUILD_IMAGES != "true"'
  
 .check:warnings: &warnings_r
   <<: *prepare_script_r
   stage: check
   script:
     - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = c("warning"))'
-   
+  rules:
+    - if: '$BUILD_IMAGES != "true"'
+
+
 .check:notes: &notes_r
   <<: *prepare_script_r
   allow_failure: true
   stage: check
   script:
     - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = c("note"))'
+  rules:
+    - if: '$BUILD_IMAGES != "true"'
+
 
 .unit:tests: &unit_r
   <<: *prepare_script_r
@@ -83,12 +94,18 @@ variables:
   stage: test
   script:
     - R -e 'devtools::test(stop_on_failure = TRUE)'
+  rules:
+    - if: '$BUILD_IMAGES != "true"'
+
 
 .install:locally: &install_local_r
   <<: *prepare_script_r
   stage: test
   script:
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install(build_vignettes=TRUE,dependencies = TRUE)'
+  rules:
+    - if: '$BUILD_IMAGES != "true"'
+
 
 .code:coverage: &coverage_r
   <<: *prepare_script_r
@@ -97,7 +114,9 @@ variables:
   stage: test
   script:
     - R -e 'covr::codecov()'
-
+  rules:
+    - if: '$BUILD_IMAGES != "true"'
+    
 .with_r34: &with_r34
   variables: 
    IMAGE_TAG: "3.4.4"
@@ -118,27 +137,18 @@ variables:
 buildImage:3.4:
   <<: *with_r34
   <<: *build_image
-  rules:
-    -  when: manual
 
 buildImage:3.5:
   <<: *with_r35
   <<: *build_image
-  rules:
-    -  when: manual
 
 buildImage:3.6:
   <<: *with_r36
   <<: *build_image
-  rules:
-    -  when: manual
 
 buildImage:4.0:
   <<: *with_r40
   <<: *build_image
-  rules:
-    -  when: manual
-
 
 buildBinary:3.4:
   <<: *with_r34
