@@ -114,11 +114,30 @@ variables:
   variables: 
    IMAGE_TAG: "4.0.2"
 
+
 buildImage:3.4:
   <<: *with_r34
   <<: *build_image
   rules:
-    - when: manual
+    -  when: manual
+
+buildImage:3.5:
+  <<: *with_r35
+  <<: *build_image
+  rules:
+    -  when: manual
+
+buildImage:3.6:
+  <<: *with_r36
+  <<: *build_image
+  rules:
+    -  when: manual
+
+buildImage:4.0:
+  <<: *with_r40
+  <<: *build_image
+  rules:
+    -  when: manual
 
 
 buildBinary:3.4:
