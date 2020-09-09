@@ -119,7 +119,7 @@ buildImage:3.4:
   <<: *build_image
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
-          when: manual
+      when: manual
 
 
 buildBinary:3.4:
