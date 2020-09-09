@@ -66,17 +66,12 @@ variables:
   stage: check
   script:
     - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = c("error"))'
-  rules:
-    - if: '$BUILD_IMAGES != "true"'
  
 .check:warnings: &warnings_r
   <<: *prepare_script_r
   stage: check
   script:
     - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = c("warning"))'
-  rules:
-    - if: '$BUILD_IMAGES != "true"'
-
 
 .check:notes: &notes_r
   <<: *prepare_script_r
@@ -84,8 +79,6 @@ variables:
   stage: check
   script:
     - R -e 'devtools::check(document = FALSE, args = "--no-tests", error_on = c("note"))'
-  rules:
-    - if: '$BUILD_IMAGES != "true"'
 
 
 .unit:tests: &unit_r
@@ -94,8 +87,6 @@ variables:
   stage: test
   script:
     - R -e 'devtools::test(stop_on_failure = TRUE)'
-  rules:
-    - if: '$BUILD_IMAGES != "true"'
 
 
 .install:locally: &install_local_r
@@ -103,8 +94,6 @@ variables:
   stage: test
   script:
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install(build_vignettes=TRUE,dependencies = TRUE)'
-  rules:
-    - if: '$BUILD_IMAGES != "true"'
 
 
 .code:coverage: &coverage_r
