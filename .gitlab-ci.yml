@@ -44,7 +44,7 @@ variables:
       - $BUILT_PACKAGE_PATH
 
 # create an docker image 
-build:image:
+.build:image: &build_image
   image: docker:19.03.12
   stage: build
   services:
@@ -52,12 +52,11 @@ build:image:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
-    - if [ -z "$BUILD_IMAGE_VERSION" ]; then echo "Missing BUILD_IMAGE_VERSION variable"; exit 1; fi 
+    - if [ -z "$IMAGE_TAG" ]; then echo "Missing IMAGE_TAG variable"; exit 1; fi 
     - docker info
-    - docker build -t $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse  --tag=registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$BUILD_IMAGE_VERSION --build-arg R_VERSION=$BUILD_IMAGE_VERSION  .
-    - docker push $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$BUILD_IMAGE_VERSION
-  rules:
-    - if: '$BUILD_IMAGE == "true"'
+    - docker build -t $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse  --tag=registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$IMAGE_TAG --build-arg R_VERSION=$IMAGE_TAG  .
+    - docker push $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$IMAGE_TAG
+
 
 .check:errors: &errors_r
   <<: *prepare_script_r
@@ -114,7 +113,15 @@ build:image:
 .with_r40: &with_r40
   variables: 
    IMAGE_TAG: "4.0.2"
-   
+
+buildImage:3.4:
+  <<: *with_r34
+  <<: *build_image
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+          when: manual
+
+
 buildBinary:3.4:
   <<: *with_r34
   <<: *build_r
