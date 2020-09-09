@@ -44,6 +44,7 @@ variables:
       - $BUILT_PACKAGE_PATH
   except:
     - schedules
+
 # create an docker image 
 .build:image: &build_image
   image: docker:19.03.12
@@ -57,9 +58,8 @@ variables:
     - docker info
     - docker build -t $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse  --tag=registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$IMAGE_TAG --build-arg R_VERSION=$IMAGE_TAG  .
     - docker push $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$IMAGE_TAG
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-
+  only:
+    - schedules
 .check:errors: &errors_r
   <<: *prepare_script_r
   stage: check
