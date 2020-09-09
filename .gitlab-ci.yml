@@ -58,8 +58,7 @@ variables:
     - docker info
     - docker build -t $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse  --tag=registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$IMAGE_TAG --build-arg R_VERSION=$IMAGE_TAG  .
     - docker push $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$IMAGE_TAG
-  only:
-    - schedules
+
 .check:errors: &errors_r
   <<: *prepare_script_r
   stage: check
@@ -123,23 +122,33 @@ variables:
 buildImage:3.4:
   <<: *with_r34
   <<: *build_image
+  only:
+    - schedules
 
 buildImage:3.5:
   <<: *with_r35
   <<: *build_image
-
+  only:
+    - schedules
+    
 buildImage:3.6:
   <<: *with_r36
   <<: *build_image
-
+  only:
+    - schedules
+    
 buildImage:4.0:
   <<: *with_r40
   <<: *build_image
-
+  only:
+    - schedules
+    
 buildBinary:3.4:
   <<: *with_r34
   <<: *build_r
-  
+  except:
+    - schedules
+      
 checkWarnings:3.4:
   <<: *with_r34
   <<: *warnings_r
@@ -179,7 +188,9 @@ code_coverage:3.4:
 buildBinary:3.5:
   <<: *with_r35
   <<: *build_r
-  
+  except:
+    - schedules
+      
 checkWarnings:3.5:
   <<: *with_r35
   <<: *warnings_r
@@ -219,7 +230,9 @@ code_coverage:3.5:
 buildBinary:3.6:
   <<: *with_r36
   <<: *build_r
-  
+  except:
+    - schedules
+
 checkWarnings:3.6:
   <<: *with_r36
   <<: *warnings_r
@@ -259,7 +272,9 @@ code_coverage:3.6:
 buildBinary:4.0:
   <<: *with_r40
   <<: *build_r
-  
+  except:
+    - schedules
+      
 checkWarnings:4.0:
   <<: *with_r40
   <<: *warnings_r
