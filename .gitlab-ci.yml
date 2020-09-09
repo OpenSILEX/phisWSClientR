@@ -6,7 +6,7 @@ stages:
 
 # define system environment variables
 variables:
-  PACKAGE_VERSION: "2.4.1"
+  PACKAGE_VERSION: "2.4.2"
   R_REPOS: "http://cloud.R-project.org/"
   R_LIBS_CACHE : "$CI_PROJECT_DIR/.cache/install_deps/$R_VERSION" # dependencies cache
   R_ENVIRON : "$CI_PROJECT_DIR/.Renviron" # R environment cache
