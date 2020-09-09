@@ -58,8 +58,6 @@ variables:
     - docker info
     - docker build -t $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse  --tag=registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$IMAGE_TAG --build-arg R_VERSION=$IMAGE_TAG  .
     - docker push $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/phiswsclientr/r-tidyverse:$IMAGE_TAG
-  rules:
-    - if: '$BUILD_IMAGES == "true"'
 
 .check:errors: &errors_r
   <<: *prepare_script_r
@@ -124,19 +122,23 @@ variables:
 buildImage:3.4:
   <<: *with_r34
   <<: *build_image
+  when: manual
 
 buildImage:3.5:
   <<: *with_r35
   <<: *build_image
-
+  when: manual
+  
 buildImage:3.6:
   <<: *with_r36
   <<: *build_image
-
+  when: manual
+  
 buildImage:4.0:
   <<: *with_r40
   <<: *build_image
-
+  when: manual
+  
 buildBinary:3.4:
   <<: *with_r34
   <<: *build_r
