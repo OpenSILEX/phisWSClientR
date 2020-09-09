@@ -103,8 +103,6 @@ variables:
   stage: test
   script:
     - R -e 'covr::codecov()'
-  rules:
-    - if: '$BUILD_IMAGES != "true"'
     
 .with_r34: &with_r34
   variables: 
