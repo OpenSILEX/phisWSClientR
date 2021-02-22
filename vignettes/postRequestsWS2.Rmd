@@ -194,10 +194,16 @@ Takes a data as input
   response <- postScientificObjects(expDesign)
 ```
 
-<!-- ## Sensors	
+ ## Sensors	
 
-```{r postSensors}
-postSensors(rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
+```{r postSensor}
+postSensor(rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
+            label = "Sensor_label",
+            brand = "Sensor_brand",model = "Sensor_model",serialNumber = "",
+            inServiceDate = "2017-06-15",dateOfPurchase = "2017-06-15",
+            dateOfLastCalibration = "2017-06-15",personInCharge = "admin@opensilex.org"
+)
+postSensor(rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
             label = "Sensor_label",
             brand = "Sensor_brand",model = "Sensor_model",serialNumber = "",
             inServiceDate = "2017-06-15",dateOfPurchase = "2017-06-15",
@@ -205,6 +211,28 @@ postSensors(rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
 )
 ``` 
 
+```{r postSensors}
+sensorList = data.frame(
+  rdfType = c(
+    "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
+    "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
+    "http://www.opensilex.org/vocabulary/oeso#Spectrometer"),
+  label = c("Sensor_label", "Sensor_label2", "Sensor_label3"),
+  brand = c("Sensor_brand", "Sensor_brand2", "Sensor_brand3"),
+  inServiceDate = c("2017-06-15", "2017-06-15", "2017-06-15"), 
+  dateOfPurchase = c("2017-06-15", "2017-06-15", "2017-06-15"),
+  personInCharge = c(
+     "admin@opensilex.org",
+     "admin@opensilex.org",
+     "admin@opensilex.org"
+   ),
+  stringsAsFactors = FALSE
+  ) 
+  r<- postSensors(sensorList)
+  r$success
+  r$metadata 
+``` 
+<!--
  ## Traits
 
 ```{r postTraits}
@@ -216,6 +244,8 @@ postSensors(rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
                    seeAlso = "http://www.cropontology.org/ontology/CO_715/")
                    )
 ```
+
+
 ## Methods	
 
 ```{r postMethods}
