@@ -4,17 +4,9 @@
 \alias{getData}
 \title{getData}
 \usage{
-getData(
-  variableUri = "",
-  objectUri = "",
-  objectLabel = "",
-  provenanceUri = "",
-  provenanceLabel = "",
-  startDate = "",
-  endDate = "",
-  page = NULL,
-  pageSize = NULL
-)
+getData(variableUri = "", objectUri = "", objectLabel = "",
+  provenanceUri = "", provenanceLabel = "", startDate = "",
+  endDate = "", page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{variableUri}{character, search by the uri of a variable (NOT optional). You can access the list of variables through \code{\link{getVariables2}} function.}

@@ -4,42 +4,25 @@
 \alias{postSensors}
 \title{postSensors}
 \usage{
-postSensors(
-  rdfType,
-  label,
-  brand,
-  model,
-  serialNumber,
-  inServiceDate,
-  dateOfPurchase,
-  dateOfLastCalibration,
-  personInCharge
-)
+postSensors(sensorList)
 }
 \arguments{
-\item{rdfType}{character, the rdfType of the sensor ex: http://www.opensilex.org/vocabulary/oeso#Spectrometer}
-
-\item{label}{character, give the label of this sensor}
-
-\item{brand}{character, the brand of the sensor}
-
-\item{model}{character, the model of the sensor}
-
-\item{serialNumber}{character, the serial number of the sensor}
-
-\item{inServiceDate}{character, date which the sensor has been in service. Format "AAAA-MM-DD"}
-
-\item{dateOfPurchase}{character, date which the sensor has been purchased. Format "AAAA-MM-DD"}
-
-\item{dateOfLastCalibration}{character, date which the sensor has been last calibrated. Format "AAAA-MM-DD"}
-
-\item{personInCharge}{the mail of the person in charge of this sensor}
+\item{sensorList}{a dataframe containing the following columns
+rdfType character, the rdfType of the sensor ex: http://www.opensilex.org/vocabulary/oeso#Spectrometer
+label character, give the label of this sensor
+brand character, the brand of the sensor
+model character, the model of the sensor
+serialNumber character, the serial number of the sensor
+inServiceDate character, date which the sensor has been in service. Format "AAAA-MM-DD"
+dateOfPurchase character, date which the sensor has been purchased. Format "AAAA-MM-DD"
+dateOfLastCalibration character, date which the sensor has been last calibrated. Format "AAAA-MM-DD"
+personInCharge the mail of the person in charge of this sensor}
 }
 \value{
 WSResponse object
 }
 \description{
-send a sensor to the web service
+send a sensor list to the web service
 }
 \details{
 You have to execute the \code{\link{connectToPHISWS}} function first to have access to the web
@@ -50,18 +33,31 @@ service
 connectToPHISWS(apiID="ws_private",
                url = "http://www.opensilex.org/openSilexAPI/rest/",
                username="guest@opensilex.org",
-               password="guest")
-postSensors(rdfType = "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
-            label = "Sensor_label",
-            brand = "Sensor_brand",model = "Sensor_model",serialNumber = "",
-            inServiceDate = "2017-06-15",dateOfPurchase = "2017-06-15",
-            dateOfLastCalibration = "2017-06-15",personInCharge = "admin@opensilex.org"
-)
-   }
+               password="guest") 
+sensorList = data.frame(
+  rdfType = c(
+    "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
+    "http://www.opensilex.org/vocabulary/oeso#Spectrometer",
+    "http://www.opensilex.org/vocabulary/oeso#Spectrometer"),
+  label = c("Sensor_label", "Sensor_label2", "Sensor_label3"),
+  brand = c("Sensor_brand", "Sensor_brand2", "Sensor_brand3"),
+  inServiceDate = c("2017-06-15", "2017-06-15", "2017-06-15"), 
+  dateOfPurchase = c("2017-06-15", "2017-06-15", "2017-06-15"),
+  personInCharge = c(
+    "admin@opensilex.org",
+    "admin@opensilex.org",
+    "admin@opensilex.org",
+  ),
+  stringsAsFactors = FALSE
+) 
+r<- postSensors(sensorList)
+r$success
+r$metadata 
+}
 }
 \seealso{
 http://docs.brapi.apiary.io/#introduction/url-structure
 
-You have to install the opensilexWSClientR before running any 
+You have to install the opensilexWSClientR before running any
          request on PHIS web service.
 }

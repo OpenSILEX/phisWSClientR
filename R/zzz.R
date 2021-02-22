@@ -68,6 +68,7 @@ configWS<-new.env(emptyenv())
   assign("RADIOMETRIC_TARGETS", "radiometricTargets", configWS)
   assign("METHODS", "methods", configWS)
   assign("PROVENANCES", "provenances", configWS)
+  assign("URI", "uri", configWS)
   
   # commun
   assign("VARIABLES", "variables", configWS)

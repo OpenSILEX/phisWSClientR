@@ -4,14 +4,8 @@
 \alias{getScientificObjects}
 \title{getScientificObjects}
 \usage{
-getScientificObjects(
-  uri = "",
-  experiment = "",
-  alias = "",
-  rdfType = "",
-  page = NULL,
-  pageSize = NULL
-)
+getScientificObjects(uri = "", experiment = "", alias = "",
+  rdfType = "", page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{uri}{character, search by the uri of an annotation (optional)}

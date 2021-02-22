@@ -4,14 +4,8 @@
 \alias{getInfrastructures}
 \title{getInfrastructures}
 \usage{
-getInfrastructures(
-  uri = "",
-  rdfType = "",
-  label = "",
-  language = "en",
-  page = NULL,
-  pageSize = NULL
-)
+getInfrastructures(uri = "", rdfType = "", label = "",
+  language = "en", page = NULL, pageSize = NULL)
 }
 \arguments{
 \item{uri}{character, search by the uri of an infrastructure (optional)}

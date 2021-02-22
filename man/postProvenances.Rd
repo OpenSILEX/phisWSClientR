@@ -33,6 +33,7 @@ service
     prov = ProvenanceDTO$new(
       label = "insertionProvenance_label",
       comment = "comment my provenance",
+      experiments = list("http://opensilex.org/experiment/maug")),
       metadata = ObjectDTO$new(list(meta1 = "15", meta2 = "owner1"))
     )
     response <- postProvenances(list(prov))
