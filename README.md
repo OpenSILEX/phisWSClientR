@@ -1,6 +1,8 @@
 # phisWSClientR
 
-PHIS client R
+ ![alt](https://shields.io/badge/R%20tested%20versions-3.4%20--%204.0.2-blue)
+
+PHIS client R 
 
 A set of functions to connect R to the phenomeapi web service in OpenSILEX PHIS. You can retrieve phenotypic data from the greenhouse platforms (GET imagery, environment, watering and weighing) or the field platforms. Public access is allowed with specific login as well as private access if the user has an account on an instance of the PHIS system information.
 
